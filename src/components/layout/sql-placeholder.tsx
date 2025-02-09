@@ -39,6 +39,7 @@ const SqlPlaceholder = () => {
 				<CardContent>
 					<div className="mb-4">
 						<FunctionTextarea
+							className="font-code"
 							placeholder="Paste SQL script with ? placeholders"
 							value={sqlQuery}
 							onChange={setSqlQuery}
@@ -46,6 +47,7 @@ const SqlPlaceholder = () => {
 					</div>
 					<div className="mb-4">
 						<FunctionTextarea
+							className="font-code"
 							placeholder="Paste parameter list"
 							value={paramText}
 							onChange={setParamText}
@@ -57,7 +59,7 @@ const SqlPlaceholder = () => {
 			{filledQuery && (
 				<Card className="mt-4 border-none shadow-none">
 					<CardContent>
-						<FunctionTextarea value={filledQuery} readOnly />
+						<FunctionTextarea className="font-code" value={filledQuery} readOnly />
 					</CardContent>
 				</Card>
 			)}

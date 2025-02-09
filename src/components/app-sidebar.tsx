@@ -8,7 +8,7 @@ import {
 	SidebarMenuButton,
 	SidebarMenuItem
 } from "@/components/ui/sidebar"
-import { Calendar, Home, Inbox, Search, Settings } from "lucide-react"
+import { Home, Inbox } from "lucide-react"
 import BrandLogo from "./layout/brand/logo"
 
 const items = [
@@ -21,21 +21,6 @@ const items = [
 		title: "SQL Placeholder",
 		url: "/features/sql-placeholder",
 		icon: Inbox
-	},
-	{
-		title: "Calendar",
-		url: "#",
-		icon: Calendar
-	},
-	{
-		title: "Search",
-		url: "#",
-		icon: Search
-	},
-	{
-		title: "Settings",
-		url: "#",
-		icon: Settings
 	}
 ]
 

@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils"
 import type { Metadata } from "next"
 import { Geist, Geist_Mono, JetBrains_Mono } from "next/font/google"
 import "./globals.css"
+
 const fontCode = JetBrains_Mono({ variable: "--font-code", subsets: ["latin"] })
 const fontSans = Geist({ variable: "--font-sans", subsets: ["latin"] })
 const fontMono = Geist_Mono({ variable: "--font-mono", subsets: ["latin"] })

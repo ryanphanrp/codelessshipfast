@@ -86,3 +86,14 @@ body {
 		@apply bg-background text-foreground;
 	}
 }
+
+code {
+	@apply font-code;
+	@apply text-sm !leading-loose;
+}
+
+code {
+	counter-reset: step;
+	counter-increment: step 0;
+	font-size: 14px;
+}
