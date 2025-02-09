@@ -9,6 +9,7 @@ import {
 	SidebarMenuItem
 } from "@/components/ui/sidebar"
 import { Calendar, Home, Inbox, Search, Settings } from "lucide-react"
+import BrandLogo from "./layout/brand/logo"
 
 const items = [
 	{
@@ -17,8 +18,8 @@ const items = [
 		icon: Home
 	},
 	{
-		title: "Features",
-		url: "/features",
+		title: "SQL Placeholder",
+		url: "/features/sql-placeholder",
 		icon: Inbox
 	},
 	{
@@ -43,8 +44,8 @@ export function AppSidebar() {
 		<Sidebar>
 			<SidebarContent>
 				<SidebarGroup>
-					<SidebarGroupLabel>
-						<h1 className="my-8 font-bold text-2xl">CodelessShipFast</h1>
+					<SidebarGroupLabel className="py-10">
+						<BrandLogo />
 					</SidebarGroupLabel>
 					<SidebarGroupContent>
 						<SidebarMenu>

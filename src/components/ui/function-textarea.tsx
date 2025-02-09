@@ -1,3 +1,4 @@
+import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard"
 import { ClipboardCopy, ClipboardPaste } from "lucide-react"
 import { Button } from "./button"
 import { Textarea } from "./textarea"
@@ -17,13 +18,15 @@ const FunctionTextarea = ({
 	readOnly,
 	className
 }: FunctionTextareaProps) => {
+	const [copy, isCopied] = useCopyToClipboard()
+
 	const handlePaste = async () => {
 		const text = await navigator.clipboard.readText()
 		onChange?.(text)
 	}
 
 	const handleCopy = async () => {
-		await navigator.clipboard.writeText(value)
+		copy(value).then(() => console.info("Text copied!"))
 	}
 
 	return (
