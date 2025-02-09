@@ -8,8 +8,8 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { cn } from "@/lib/utils"
 import { useTheme } from "next-themes"
-import { Button } from "../ui/button"
 import { Icons } from "../icons"
+import { Button } from "../ui/button"
 
 interface ThemeSwitcherProps {
 	className?: string
