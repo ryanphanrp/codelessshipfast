@@ -1,8 +1,7 @@
-import { ClipboardCopy, ClipboardPaste } from "lucide-react";
-import { Button } from "./button";
-import { Textarea } from "./textarea";
 import { useClipboard } from "@/hooks/use-clipboard";
+import { Button } from "./button";
 import { toast } from "./sonner";
+import { Textarea } from "./textarea";
 
 interface FunctionTextareaProps {
   value: string;

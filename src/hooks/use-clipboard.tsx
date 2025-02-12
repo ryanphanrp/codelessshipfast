@@ -1,13 +1,12 @@
-import { useCallback, useState } from "react";
+import { useCallback, useState } from "react"
 
 export interface ClipboardState {
-  success: boolean;
-  error: string | null;
+	success: boolean
+	error: string | null
 }
 
 const isClipboardAvailable =
-  typeof navigator !== "undefined" &&
-  typeof navigator.clipboard !== "undefined";
+	typeof navigator !== "undefined" && typeof navigator.clipboard !== "undefined"
 
 /**
  * `useClipboard` provides functionality to copy to and paste from the clipboard.
@@ -17,53 +16,53 @@ const isClipboardAvailable =
  */
 
 function useClipboard() {
-  const [state, setState] = useState<ClipboardState>({
-    success: false,
-    error: null,
-  });
+	const [state, setState] = useState<ClipboardState>({
+		success: false,
+		error: null
+	})
 
-  const copyToClipboard = useCallback(async (text: string) => {
-    if (!isClipboardAvailable) {
-      setState({ success: false, error: "Clipboard is not available" });
-      return;
-    }
+	const copyToClipboard = useCallback(async (text: string) => {
+		if (!isClipboardAvailable) {
+			setState({ success: false, error: "Clipboard is not available" })
+			return
+		}
 
-    if (!text.trim()) {
-      setState({
-        success: false,
-        error: "Cannot copy empty or whitespace text",
-      });
-      return;
-    }
+		if (!text.trim()) {
+			setState({
+				success: false,
+				error: "Cannot copy empty or whitespace text"
+			})
+			return
+		}
 
-    try {
-      await navigator.clipboard.writeText(text);
-      setState({ success: true, error: null });
-    } catch (error) {
-      setState({ success: false, error: "Failed to copy" });
-    }
-  }, []);
+		try {
+			await navigator.clipboard.writeText(text)
+			setState({ success: true, error: null })
+		} catch (error) {
+			setState({ success: false, error: "Failed to copy" })
+		}
+	}, [])
 
-  const pasteFromClipboard = useCallback(async () => {
-    if (!isClipboardAvailable) {
-      setState({ success: false, error: "Clipboard is not available" });
-      return;
-    }
+	const pasteFromClipboard = useCallback(async () => {
+		if (!isClipboardAvailable) {
+			setState({ success: false, error: "Clipboard is not available" })
+			return
+		}
 
-    try {
-      const text = await navigator.clipboard.readText();
-      if (!text.trim()) {
-        return "";
-      }
-      setState({ success: true, error: null });
-      return text;
-    } catch (error) {
-      setState({ success: false, error: "Failed to paste" });
-      return "";
-    }
-  }, []);
+		try {
+			const text = await navigator.clipboard.readText()
+			if (!text.trim()) {
+				return ""
+			}
+			setState({ success: true, error: null })
+			return text
+		} catch (error) {
+			setState({ success: false, error: "Failed to paste" })
+			return ""
+		}
+	}, [])
 
-  return { copyToClipboard, pasteFromClipboard, state };
+	return { copyToClipboard, pasteFromClipboard, state }
 }
 
-export { useClipboard };
+export { useClipboard }
