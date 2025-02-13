@@ -1,9 +1,10 @@
 "use client"
 
+import { Button } from "@shadui/button"
+import { Card, CardContent } from "@shadui/card"
+import FunctionTextarea from "@shadui/function-textarea"
 import { useState } from "react"
-import { Button } from "../ui/button"
-import { Card, CardContent } from "../ui/card"
-import FunctionTextarea from "../ui/function-textarea"
+import { formatParam } from "./sql-formatter"
 
 const SqlPlaceholder = () => {
 	const [sqlQuery, setSqlQuery] = useState(
@@ -11,13 +12,6 @@ const SqlPlaceholder = () => {
 	)
 	const [paramText, setParamText] = useState("")
 	const [filledQuery, setFilledQuery] = useState("")
-
-	const formatParam = (param: string) => {
-		if (param === "null") return "NULL"
-		if (param === "true") return "1"
-		if (param === "false") return "0"
-		return `'${param}'`
-	}
 
 	const fillQuery = () => {
 		const params = paramText

@@ -7,9 +7,9 @@ import {
 	DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu"
 import { cn } from "@/lib/utils"
+import { Button } from "@shadui/button"
 import { useTheme } from "next-themes"
 import { Icons } from "../icons"
-import { Button } from "../ui/button"
 
 interface ThemeSwitcherProps {
 	className?: string

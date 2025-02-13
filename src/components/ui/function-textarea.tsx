@@ -37,7 +37,7 @@ const FunctionTextarea = ({
         placeholder={placeholder}
         value={value}
         onChange={(e) => onChange?.(e.target.value)}
-        className={`h-40 w-full ${className}`}
+        className={`h-40 w-full font-code ${className}`}
         readOnly={readOnly}
       />
       <div className="absolute top-2 right-2 flex">
