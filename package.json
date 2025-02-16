@@ -17,7 +17,7 @@
 		"up:lib": "taze major -r -w -f"
 	},
 	"dependencies": {
-		"@hookform/resolvers": "^3.10.0",
+		"@hookform/resolvers": "^4.1.0",
 		"@radix-ui/react-checkbox": "^1.1.4",
 		"@radix-ui/react-dialog": "^1.1.6",
 		"@radix-ui/react-dropdown-menu": "^2.1.6",
@@ -32,7 +32,7 @@
 		"@radix-ui/react-tooltip": "^1.1.8",
 		"class-variance-authority": "^0.7.1",
 		"clsx": "^2.1.1",
-		"cmdk": "^1.0.0",
+		"cmdk": "^1.0.4",
 		"lucide-react": "^0.475.0",
 		"next": "15.1.6",
 		"next-themes": "^0.4.4",
@@ -43,21 +43,21 @@
 		"sonner": "^1.7.4",
 		"tailwind-merge": "^3.0.1",
 		"tailwindcss-animate": "^1.0.7",
-		"zod": "^3.24.1"
+		"zod": "^3.24.2"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^1.9.4",
 		"@commitlint/cli": "^19.7.1",
 		"@commitlint/config-conventional": "^19.7.1",
 		"@total-typescript/ts-reset": "^0.6.1",
-		"@types/node": "^20",
-		"@types/react": "^19",
-		"@types/react-dom": "^19",
+		"@types/node": "^20.17.19",
+		"@types/react": "^19.0.9",
+		"@types/react-dom": "^19.0.3",
 		"husky": "^9.1.7",
-		"postcss": "^8",
+		"postcss": "^8.5.2",
 		"rimraf": "^6.0.1",
-		"tailwindcss": "^3.4.1",
-		"taze": "^18.4.0",
-		"typescript": "^5"
+		"tailwindcss": "^4.0.6",
+		"taze": "^18.5.0",
+		"typescript": "^5.7.3"
 	}
 }
