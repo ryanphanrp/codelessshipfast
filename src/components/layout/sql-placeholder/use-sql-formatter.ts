@@ -63,7 +63,7 @@ function formatParam(param: string, customRules: FormatRules = {}) {
   return customRules[param] ? customRules[param](param) : rules.default(param);
 }
 
-function extractBindings(log: string): string[] {
+export function extractBindings(log: string): string[] {
   if (!log) return [];
 
   const regex = /binding parameter \[(\d+)\] as \[\w+\] - \[(.*?)\]/g;
@@ -78,7 +78,7 @@ function extractBindings(log: string): string[] {
   return bindings;
 }
 
-function replaceQueryParams(query: string, params: string[], customRules?: FormatRules): string {
+export function replaceQueryParams(query: string, params: string[], customRules?: FormatRules): string {
   if (!query) return '';
 
   let index = 0;
