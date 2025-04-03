@@ -1,4 +1,4 @@
-import RecordProtobuf from "@/components/layout/record-protobuf"
+import { RecordProtobuf } from "@/components/layout/record-protobuf"
 
 export default function Features() {
 	return (

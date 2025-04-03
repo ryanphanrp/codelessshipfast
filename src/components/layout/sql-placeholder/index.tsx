@@ -1,7 +1,7 @@
 "use client"
 
-import FunctionTextarea from "@/components/layout/sql-placeholder/function-textarea"
 import { Button } from "@/components/ui/button"
+import FunctionTextarea from "@/components/ui/function-textarea"
 import { useClipboard } from "@/hooks/use-clipboard"
 import { Card, CardContent } from "@shadui/card"
 import { useState } from "react"

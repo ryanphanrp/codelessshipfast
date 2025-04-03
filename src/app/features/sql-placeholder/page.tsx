@@ -1,4 +1,4 @@
-import SqlPlaceholder from "@/components/layout/sql-placeholder";
+import SqlPlaceholder from "@/components/layout/sql-placeholder"
 
 export default function Features() {
 	return (
