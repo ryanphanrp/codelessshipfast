@@ -26,7 +26,10 @@ const items = [
 
 export function AppSidebar() {
 	return (
-		<Sidebar>
+		<Sidebar
+			variant="inset"
+			collapsible="icon"
+			className="z-0 block border-r border-r-primary bg-white">
 			<SidebarContent>
 				<SidebarGroup>
 					<SidebarGroupLabel className="py-10">

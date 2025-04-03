@@ -1,47 +1,36 @@
-import { AppSidebar } from "@/components/app-sidebar";
-import { DesignSystemProvider } from "@/components/provider/design-system";
-import siteConfig from "@/config/site";
-import { cn } from "@/lib/utils";
-import { SidebarTrigger } from "@shadui/sidebar";
-import type { Metadata } from "next";
-import { Geist, Geist_Mono, JetBrains_Mono } from "next/font/google";
-import "./globals.css";
+import { DesignSystemProvider } from "@/components/provider/design-system"
+import { applicationFonts } from "@/config/fonts"
+import siteConfig from "@/config/site"
+import { cn } from "@/lib/utils"
+import "@/styles/globals.css"
+import type { Metadata, Viewport } from "next"
 
-const fontCode = JetBrains_Mono({
-  variable: "--font-code",
-  subsets: ["latin"],
-});
-const fontSans = Geist({ variable: "--font-sans", subsets: ["latin"] });
-const fontMono = Geist_Mono({ variable: "--font-mono", subsets: ["latin"] });
+export const viewport: Viewport = {
+	width: "device-width",
+	initialScale: 1,
+	themeColor: [
+		{ media: "(prefers-color-scheme: light)", color: "white" },
+		{ media: "(prefers-color-scheme: dark)", color: "black" }
+	]
+}
 
 export const metadata: Metadata = {
-  title: siteConfig.name,
-  description: siteConfig.description,
-};
+	title: siteConfig.title,
+	applicationName: siteConfig.applicationName,
+	description: siteConfig.description,
+	authors: [{ name: siteConfig.fullName }]
+}
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  return (
-    <html lang="en">
-      <body
-        className={cn(
-          fontSans.variable,
-          fontMono.variable,
-          fontCode.variable,
-          "antialiased",
-        )}
-      >
-        <DesignSystemProvider>
-          <AppSidebar />
-          <main className="w-full">
-            <SidebarTrigger />
-            {children}
-          </main>
-        </DesignSystemProvider>
-      </body>
-    </html>
-  );
+interface RootLayoutProps {
+	children: React.ReactNode
+}
+
+export default function RootLayout({ children }: Readonly<RootLayoutProps>) {
+	return (
+		<html lang="en">
+			<body className={cn(...applicationFonts, "antialiased")}>
+				<DesignSystemProvider>{children}</DesignSystemProvider>
+			</body>
+		</html>
+	)
 }

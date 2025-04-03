@@ -1,0 +1,288 @@
+@import "./themes.css";
+
+@theme inline {
+	--text-2xs: 0.625rem;
+	--text-2xs--line-height: 0.875rem;
+
+	--font-base: var(--font-base), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+		"Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+	--font-heading: var(--font-heading), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+		"Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+	--font-mono: var(--font-mono), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+		"Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+	--font-code: var(--font-code), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+		"Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+	--font-handwriting: var(--font-handwriting), ui-sans-serif, system-ui, sans-serif,
+		"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+	--font-serif: var(--font-serif), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+		"Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+	--color-border: var(--border);
+	--color-input: var(--input);
+	--color-ring: var(--ring);
+	--color-background: var(--background);
+	--color-foreground: var(--foreground);
+
+	--color-primary: var(--primary);
+	--color-primary-foreground: var(--primary-foreground);
+
+	--color-secondary: var(--secondary);
+	--color-secondary-foreground: var(--secondary-foreground);
+
+	--color-destructive: var(--destructive);
+	--color-destructive-foreground: var(--destructive-foreground);
+
+	--color-muted: var(--muted);
+	--color-muted-foreground: var(--muted-foreground);
+
+	--color-accent: var(--accent);
+	--color-accent-foreground: var(--accent-foreground);
+
+	--color-popover: var(--popover);
+	--color-popover-foreground: var(--popover-foreground);
+
+	--color-card: var(--card);
+	--color-card-foreground: var(--card-foreground);
+
+	--radius: var(--radius);
+	--radius-primary: var(--radius-primary);
+
+	--animate-accordion-down: accordion-down 0.2s ease-out;
+	--animate-accordion-up: accordion-up 0.2s ease-out;
+	--animate-shine: shine 8s ease-in-out infinite;
+	--animate-scale-in: scale-in 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+	--animate-fade-in: fade-in 0.2s ease-out forwards;
+	--animate-scale-in-fade: scale-in-fade 0.2s ease-out forwards;
+	--animate-slide-up-fade: slide-up-fade 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+	--animate-slide-right-fade: slide-right-fade 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+	--animate-slide-down-fade: slide-down-fade 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+	--animate-slide-left-fade: slide-left-fade 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+	--animate-slide-in-from-right: slide-in-from-right 0.2s ease;
+	--animate-slide-out-to-right: slide-out-to-right 0.2s ease;
+	--animate-enter-from-right: enter-from-right 0.15s ease;
+	--animate-enter-from-left: enter-from-left 0.15s ease;
+	--animate-exit-to-right: exit-to-right 0.15s ease;
+	--animate-exit-to-left: exit-to-left 0.15s ease;
+	--animate-scale-in-content: scale-in-content 0.2s ease;
+	--animate-scale-out-content: scale-out-content 0.2s ease;
+	--animate-wiggle: wiggle 0.75s infinite;
+	--animate-spinner: spinner 1.2s linear infinite;
+	--animate-blink: blink 1.4s infinite both;
+	--animate-pulse: pulse 1s linear infinite alternate;
+
+	@keyframes accordion-down {
+		from {
+			height: 0;
+		}
+		to {
+			height: var(--radix-accordion-content-height);
+		}
+	}
+	@keyframes accordion-up {
+		from {
+			height: var(--radix-accordion-content-height);
+		}
+		to {
+			height: 0;
+		}
+	}
+	@keyframes shine {
+		from {
+			background-position: 200% 0;
+		}
+		to {
+			background-position: -200% 0;
+		}
+	}
+	@keyframes scale-in {
+		0% {
+			transform: scale(0.95);
+		}
+		100% {
+			transform: scale(1);
+		}
+	}
+	@keyframes fade-in {
+		0% {
+			opacity: 0;
+		}
+		100% {
+			opacity: 1;
+		}
+	}
+	@keyframes scale-in-fade {
+		0% {
+			transform: scale(0.95);
+			opacity: 0;
+		}
+		100% {
+			transform: scale(1);
+			opacity: 1;
+		}
+	}
+	@keyframes slide-up-fade {
+		0% {
+			opacity: 0;
+			transform: translateY(var(--offset, 2px));
+		}
+		100% {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+	@keyframes slide-right-fade {
+		0% {
+			opacity: 0;
+			transform: translateX(var(--offset, -2px));
+		}
+		100% {
+			opacity: 1;
+			transform: translateX(0);
+		}
+	}
+	@keyframes slide-down-fade {
+		0% {
+			opacity: 0;
+			transform: translateY(var(--offset, -2px));
+		}
+		100% {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+	@keyframes slide-left-fade {
+		0% {
+			opacity: 0;
+			transform: translateX(var(--offset, 2px));
+		}
+		100% {
+			opacity: 1;
+			transform: translateX(0);
+		}
+	}
+	@keyframes slide-in-from-right {
+		0% {
+			transform: translateX(100%);
+		}
+		100% {
+			transform: translateX(0);
+		}
+	}
+	@keyframes slide-out-to-right {
+		0% {
+			transform: translateX(0);
+		}
+		100% {
+			transform: translateX(100%);
+		}
+	}
+	@keyframes enter-from-right {
+		0% {
+			transform: translateX(200px);
+			opacity: 0;
+		}
+		100% {
+			transform: translateX(0);
+			opacity: 1;
+		}
+	}
+	@keyframes enter-from-left {
+		0% {
+			transform: translateX(-200px);
+			opacity: 0;
+		}
+		100% {
+			transform: translateX(0);
+			opacity: 1;
+		}
+	}
+	@keyframes exit-to-right {
+		0% {
+			transform: translateX(0);
+			opacity: 1;
+		}
+		100% {
+			transform: translateX(200px);
+			opacity: 0;
+		}
+	}
+	@keyframes exit-to-left {
+		0% {
+			transform: translateX(0);
+			opacity: 1;
+		}
+		100% {
+			transform: translateX(-200px);
+			opacity: 0;
+		}
+	}
+	@keyframes scale-in-content {
+		0% {
+			transform: rotateX(-30deg) scale(0.9);
+			opacity: 0;
+		}
+		100% {
+			transform: rotateX(0deg) scale(1);
+			opacity: 1;
+		}
+	}
+	@keyframes scale-out-content {
+		0% {
+			transform: rotateX(0deg) scale(1);
+			opacity: 1;
+		}
+		100% {
+			transform: rotateX(-10deg) scale(0.95);
+			opacity: 0;
+		}
+	}
+	@keyframes wiggle {
+		0%,
+		100% {
+			transform: translateX(0%);
+			transform-origin: 50% 50%;
+		}
+		15% {
+			transform: translateX(-4px) rotate(-4deg);
+		}
+		30% {
+			transform: translateX(6px) rotate(4deg);
+		}
+		45% {
+			transform: translateX(-6px) rotate(-2.4deg);
+		}
+		60% {
+			transform: translateX(2px) rotate(1.6deg);
+		}
+		75% {
+			transform: translateX(-1px) rotate(-0.8deg);
+		}
+	}
+	@keyframes spinner {
+		0% {
+			opacity: 1;
+		}
+		100% {
+			opacity: 0;
+		}
+	}
+	@keyframes blink {
+		0% {
+			opacity: 0.2;
+		}
+		20% {
+			opacity: 1;
+		}
+		100% {
+			opacity: 0.2;
+		}
+	}
+	@keyframes pulse {
+		from {
+			opacity: 0;
+		}
+		to {
+			opacity: 1;
+		}
+	}
+}

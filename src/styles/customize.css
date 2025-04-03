@@ -1,0 +1,50 @@
+:root {
+	--sh-class: #2d5e9d;
+	--sh-identifier: #354150;
+	--sh-sign: #8996a3;
+	--sh-string: #007f7a;
+	--sh-keyword: #e02518;
+	--sh-comment: #a19595;
+	--sh-jsxliterals: #6266d1;
+	--sh-property: #e25a1c;
+	--sh-entity: #e25a1c;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--sh-class: #4c97f8;
+		--sh-identifier: white;
+		--sh-keyword: #f47067;
+		--sh-string: #0fa295;
+	}
+	html {
+		color-scheme: dark;
+	}
+}
+
+/* Firefox */
+* {
+	scrollbar-width: thin;
+	scrollbar-color: var(--secondary) var(--primary);
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+	width: 10px;
+}
+
+*::-webkit-scrollbar-track {
+	background: var(--primary);
+	border-radius: 15px;
+}
+
+*::-webkit-scrollbar-thumb {
+	background-color: var(--secondary);
+	border-radius: 15px;
+	border: 3px solid var(--primary);
+}
+
+*::selection {
+	background: #95a5ac40;
+	color: #485a74;
+}
