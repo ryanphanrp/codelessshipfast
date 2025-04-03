@@ -1,7 +1,7 @@
 import { Toaster } from "@/components/ui/sonner"
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { ThemeProviderProps } from "next-themes"
-import { AppSidebar } from "../app-sidebar"
+import { AppSidebar } from "../layout/sidebar/app-sidebar"
 import { SidebarProvider, SidebarTrigger } from "../ui/sidebar"
 import { ThemeProvider } from "./theme"
 

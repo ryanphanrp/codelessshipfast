@@ -1,3 +1,5 @@
+"use client"
+
 import {
 	Sidebar,
 	SidebarContent,
@@ -8,9 +10,11 @@ import {
 	SidebarMenuButton,
 	SidebarMenuItem
 } from "@/components/ui/sidebar"
-import { Home, Inbox } from "lucide-react"
-import BrandLogo from "./layout/brand/logo"
-
+import { cn } from "@/lib/utils"
+import { Home, Rabbit, ScrollText } from "lucide-react"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
+import BrandLogo from "../brand/logo"
 const items = [
 	{
 		title: "Home",
@@ -20,11 +24,23 @@ const items = [
 	{
 		title: "SQL Placeholder",
 		url: "/features/sql-placeholder",
-		icon: Inbox
+		icon: ScrollText
+	},
+	{
+		title: "Record to Protobuf",
+		url: "/features/record-protobuf",
+		icon: Rabbit
 	}
 ]
 
 export function AppSidebar() {
+	const pathname = usePathname()
+	const isActive = (url: string) => {
+		console.log("pathname", pathname, "url", url)
+		console.log("isActive", pathname === url)
+		return pathname === url
+	}
+
 	return (
 		<Sidebar
 			variant="inset"
@@ -40,10 +56,15 @@ export function AppSidebar() {
 							{items.map((item) => (
 								<SidebarMenuItem key={item.title}>
 									<SidebarMenuButton asChild>
-										<a href={item.url}>
+										<Link
+											className={cn(
+												"flex items-center gap-2",
+												isActive(item.url) && "bg-muted font-bold text-cyan-700"
+											)}
+											href={item.url}>
 											<item.icon />
 											<span>{item.title}</span>
-										</a>
+										</Link>
 									</SidebarMenuButton>
 								</SidebarMenuItem>
 							))}
