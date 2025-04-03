@@ -1,0 +1,124 @@
+---
+description: Standards for data fetching in Next.js applications using Supabase and React Server Components
+globs: 
+alwaysApply: false
+---
+# Data Fetching Standards
+
+## Supabase Integration
+- Use proper Supabase client initialization
+- Implement proper error handling
+- Use proper TypeScript types
+- Follow security best practices
+- Use proper caching strategies
+
+## Server Components
+```typescript
+// Example 1: Basic data fetching in a Server Component
+async function UserProfile({ userId }: { userId: string }) {
+  const { data: user, error } = await supabase
+    .from('users')
+    .select('*')
+    .eq('id', userId)
+    .single()
+
+  if (error) {
+    throw new Error(`Failed to fetch user: ${error.message}`)
+  }
+
+  if (!user) {
+    notFound()
+  }
+
+  return (
+    <div>
+      <h1>{user.name}</h1>
+      <p>{user.email}</p>
+    </div>
+  )
+}
+```
+
+// Example 2: Data fetching with Suspense pattern
+```typescript
+import { Suspense } from 'react'
+import { getTransactions } from '@/utils/transactions'
+
+export default async function Page({ accountId }: { accountId: string }) {
+  // NOTE: not awaited, will start here and await on the client
+  const transactionsPromise = getTransactions(accountId)
+
+  return (
+    <div>
+      <h1>Transactions</h1>
+      <Suspense fallback={<p>Loading Transactions...</p>}>
+        <TransactionsList transactionsPromise={transactionsPromise} />
+      </Suspense>
+    </div>
+  )
+}
+```
+then apply code, use `use` hook:
+```typescript
+// Client Component
+"use client";
+
+import { use } from 'react';
+import type { Transaction } from '@/types';
+
+function TransactionsList({ transactionsPromise }) {
+  // NOTE: this will resume the promise from the server.
+  // It will suspend until the data is available.
+  const transactions = use(transactionsPromise);
+
+  return transactions.map((transaction) => (
+    <div key={transaction.id} className="p-4 border-b">
+      <p>{transaction.description}</p>
+      <p>{transaction.amount}</p>
+    </div>
+  ));
+}
+```
+
+### RSC Data Fetching Best Practices
+- Use Suspense for loading states
+- Pass promises directly to child components for parallel data fetching
+- Don't await data unnecessarily - let React handle the suspense
+- Provide meaningful loading fallbacks
+- Keep loading states close to where data is used
+- Use streaming for better UX
+- Handle errors at appropriate boundaries
+
+## Error Handling
+- Use proper error boundaries
+- Implement proper loading states
+- Handle network errors
+- Handle validation errors
+- Implement proper retry logic
+
+## Caching
+- Use proper caching strategies
+- Implement proper revalidation
+- Use proper cache invalidation
+- Follow performance best practices
+- Use proper stale-while-revalidate
+
+## Security
+- Use proper authentication
+- Implement proper authorization
+- Follow security best practices
+- Use proper input validation
+- Implement proper rate limiting
+
+## Best Practices
+- Use proper TypeScript types
+- Implement proper error handling
+- Use proper loading states
+- Follow performance best practices
+- Use proper caching strategies
+- Implement proper retry logic
+- Follow security best practices
+- use `use` for get data from promise
+
+
+

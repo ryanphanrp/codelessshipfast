@@ -1,0 +1,42 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# General Coding Standards
+
+## TypeScript Standards
+- Use TypeScript for all code files
+- Enable strict mode in tsconfig.json
+- Use interfaces over types when possible
+- Always define proper return types for functions
+- Use proper type imports/exports
+
+## Component Structure
+- Use functional components with TypeScript interfaces
+- Place types and interfaces at the end of the file
+- Export components as named exports
+- Break down components into smaller, reusable parts
+- Use proper prop typing with interfaces
+
+## File Naming
+- Use kebab-case for file names (e.g., auth-button.tsx)
+- Use PascalCase for component names
+- Use descriptive names that indicate functionality
+- Add appropriate extensions: .tsx for components, .ts for utilities
+
+## Code Organization
+- Group related code together
+- Use meaningful directory structure
+- Keep files focused and single-purpose
+- Implement proper code splitting
+- Use lazy loading for large components
+
+## Best Practices
+- Write self-documenting code
+- Use meaningful variable names
+- Implement proper error handling
+- Add TypeScript documentation where needed
+- Follow the DRY principle
+- Implement proper testing
+- Use proper linting and formatting 

@@ -1,0 +1,85 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# UI Component Standards
+
+## Tailwind CSS
+- Use Tailwind CSS utility classes
+- Follow mobile-first approach
+- Use proper responsive design
+- Implement proper dark mode
+- Use proper color schemes
+- Follow accessibility guidelines
+
+## Shadcn UI
+- Use Shadcn UI components when available
+- Follow component composition patterns
+- Implement proper theming
+- Use proper variants
+- Follow accessibility guidelines
+
+## Component Structure
+```typescript
+// Button.tsx
+export interface ButtonProps {
+  variant?: 'primary' | 'secondary'
+  size?: 'sm' | 'md' | 'lg'
+  children: React.ReactNode
+}
+
+export function Button({
+  variant = 'primary',
+  size = 'md',
+  children
+}: ButtonProps) {
+  return (
+    <button
+      className={cn(
+        'rounded-md font-medium transition-colors',
+        {
+          'bg-primary text-white': variant === 'primary',
+          'bg-secondary text-gray-900': variant === 'secondary',
+          'px-3 py-1.5 text-sm': size === 'sm',
+          'px-4 py-2 text-base': size === 'md',
+          'px-6 py-3 text-lg': size === 'lg'
+        }
+      )}
+    >
+      {children}
+    </button>
+  )
+}
+```
+
+## Best Practices
+- Use proper component composition
+- Implement proper prop types
+- Use proper state management
+- Follow accessibility guidelines
+- Use proper error boundaries
+- Implement proper loading states
+- Use proper animations
+- Follow responsive design principles
+
+## Form Components
+- Use proper form validation
+- Implement proper error handling
+- Use proper loading states
+- Follow accessibility guidelines
+- Use proper keyboard navigation
+
+## Layout Components
+- Use proper grid systems
+- Implement proper spacing
+- Use proper container widths
+- Follow responsive design principles
+- Use proper z-index management
+
+## Animation
+- Use proper transition classes
+- Implement proper motion
+- Use proper loading states
+- Follow accessibility guidelines
+- Use proper performance optimization 

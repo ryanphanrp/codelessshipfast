@@ -1,0 +1,54 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Next.js App Router Standards
+
+## Server Components
+- Use React Server Components (RSC) by default
+- Only add 'use client' when necessary
+- Keep client components small and focused
+- Use proper data fetching patterns
+
+## File Structure
+```
+app/
+  layout.tsx       # Root layout
+  page.tsx         # Home page
+  (auth)/         # Auth group
+    layout.tsx    # Auth layout
+    login/       # Login route
+      page.tsx   # Login page
+  api/           # API routes
+    route.ts     # API handlers
+```
+
+## Data Fetching
+- Use Server Components for data fetching
+- Implement proper caching strategies
+- Use proper error handling
+- Implement loading states
+- Use proper revalidation
+
+## Routing
+- Use dynamic routes appropriately
+- Implement proper loading states
+- Handle errors with error.tsx
+- Use proper navigation methods
+- Implement proper middleware
+
+## Server Actions
+- Use server actions for form submissions
+- Implement proper validation
+- Handle errors appropriately
+- Use proper TypeScript types
+- Implement proper security measures
+
+## Best Practices
+- Use proper metadata
+- Implement proper SEO
+- Use proper image optimization
+- Implement proper caching
+- Use proper error boundaries
+- Follow security best practices 
