@@ -14,7 +14,9 @@ export function RecordProtobuf() {
 		handleClean,
 		handleConvert,
 		handleRawConvert,
-		handleDownload
+		handleDownload,
+		handleChuanHoa,
+		handleSapxepproto
 	} = useProtobufConverter()
 
 	return (
@@ -29,8 +31,18 @@ export function RecordProtobuf() {
 						onChange={(e) => setJavaCode(e)}
 					/>
 					<div className="flex gap-2">
-						<Button onClick={handleClean}>Clean</Button>
-						<Button onClick={handleRawConvert}>Convert</Button>
+						<Button size="sm" className="px-6" onClick={handleClean}>
+							Clean
+						</Button>
+						<Button size="sm" className="px-6" onClick={handleRawConvert}>
+							Convert
+						</Button>
+						<Button size="sm" className="px-6" onClick={handleChuanHoa}>
+							Chuẩn hóa
+						</Button>
+						<Button size="sm" className="px-6" onClick={handleSapxepproto}>
+							Sắp xếp
+						</Button>
 					</div>
 				</CardContent>
 			</Card>

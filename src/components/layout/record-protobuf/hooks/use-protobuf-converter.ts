@@ -1,7 +1,11 @@
 import { useState } from "react"
 import { toast } from "sonner"
-import { cleanJavaRecord, convertJavaRecordToProto } from "../protobuf-convert"
-
+import {
+	cleanJavaRecord,
+	convertInterfaceToNewFormat,
+	convertJavaRecordToProto,
+	normalizeProtoFieldOrder
+} from "../utils/protobuf-convert"
 
 export function useProtobufConverter() {
 	const [javaCode, setJavaCode] = useState("")
@@ -53,6 +57,36 @@ export function useProtobufConverter() {
 		}
 	}
 
+	const handleChuanHoa = () => {
+		if (!javaCode.trim()) {
+			toast.error("Vui lòng nhập Java interface.")
+			return
+		}
+
+		try {
+			const proto = convertInterfaceToNewFormat(javaCode)
+			setProtoCode(proto)
+			toast.success("Chuyển đổi Interface thành công!")
+		} catch (error: unknown) {
+			toast.error(error instanceof Error ? error.message : "An error occurred")
+		}
+	}
+
+	const handleSapxepproto = () => {
+		if (!javaCode.trim()) {
+			toast.error("Vui lòng nhập Java interface.")
+			return
+		}
+
+		try {
+			const proto = normalizeProtoFieldOrder(javaCode)
+			setProtoCode(proto)
+			toast.success("Chuyển đổi Interface thành công!")
+		} catch (error: unknown) {
+			toast.error(error instanceof Error ? error.message : "An error occurred")
+		}
+	}
+
 	const handleDownload = () => {
 		const blob = new Blob([protoCode], { type: "text/plain" })
 		const url = URL.createObjectURL(blob)
@@ -73,6 +107,8 @@ export function useProtobufConverter() {
 		handleClean,
 		handleConvert,
 		handleRawConvert,
-		handleDownload
+		handleDownload,
+		handleChuanHoa,
+		handleSapxepproto
 	}
 }
