@@ -3,6 +3,7 @@ import { cn } from "@/lib/utils"
 import { Button } from "@shadui/button"
 import { toast } from "@shadui/sonner"
 import { Textarea } from "@shadui/textarea"
+import { ClipboardList, Copy } from "lucide-react"
 
 interface FunctionTextareaProps {
 	value: string
@@ -33,22 +34,33 @@ const FunctionTextarea = ({
 	}
 
 	return (
-		<div className="relative">
+		<div className="relative flex h-full flex-col">
 			<Textarea
 				placeholder={placeholder}
 				value={value}
 				onChange={(e) => onChange?.(e.target.value)}
-				className={cn("h-40 w-full font-code text-sm", className)}
+				className={cn(
+					"min-h-[200px] w-full flex-1 resize-none rounded-md border font-code text-sm shadow-none",
+					className
+				)}
 				readOnly={readOnly}
 			/>
-			<div className="absolute top-2 right-2 flex">
+			<div className="absolute top-1 right-1 flex gap-1">
 				{!readOnly && (
-					<Button onClick={handlePaste} size="xs" className="mx-1 px-2.5 py-2 font-semibold ">
-						Paste
+					<Button
+						size="icon"
+						className="bg-transparent text-primary shadow-none transition duration-300 ease-in-out hover:scale-110 hover:bg-transparent hover:text-cyan-700"
+						onClick={handlePaste}
+						title="Paste">
+						<ClipboardList className="size-5" />
 					</Button>
 				)}
-				<Button onClick={handleCopy} size="xs" className="mx-1 px-2.5 py-2 font-semibold">
-					Copy
+				<Button
+					size="icon"
+					className="bg-transparent text-primary shadow-none transition duration-300 ease-in-out hover:scale-110 hover:bg-transparent hover:text-cyan-700"
+					onClick={handleCopy}
+					title="Copy">
+					<Copy className="size-5" />
 				</Button>
 			</div>
 		</div>

@@ -3,87 +3,55 @@ import { toast } from "sonner"
 import {
 	cleanJavaRecord,
 	convertInterfaceToNewFormat,
+	convertJavaInterfaceToProto,
 	convertJavaRecordToProto,
 	normalizeProtoFieldOrder
 } from "../utils/protobuf-convert"
+
+type ProtoType = "record" | "interface" | "standardize" | "sort" | "clean" | "oldInterface"
 
 export function useProtobufConverter() {
 	const [javaCode, setJavaCode] = useState("")
 	const [cleanedJava, setCleanedJava] = useState("")
 	const [protoCode, setProtoCode] = useState("")
 
-	const handleClean = () => {
+	const validateInput = (msg: string) => {
 		if (!javaCode.trim()) {
-			toast.error("Please enter Java record code")
-			return
+			toast.error(msg)
+			return false
 		}
-
-		try {
-			const cleaned = cleanJavaRecord(javaCode)
-			setCleanedJava(cleaned)
-			toast.success("Java record cleaned successfully!")
-		} catch (error: unknown) {
-			toast.error(error instanceof Error ? error.message : "An error occurred")
-		}
+		return true
 	}
 
-	const handleConvert = () => {
-		if (!cleanedJava.trim()) {
-			toast.error("Please clean the Java record first")
-			return
-		}
+	const handleConvert = (type: ProtoType) => {
+		if (!validateInput("Please enter Java code.")) return
 
 		try {
-			const proto = convertJavaRecordToProto(cleanedJava)
+			let proto = ""
+
+			switch (type) {
+				case "clean":
+					proto = cleanJavaRecord(javaCode)
+					break
+				case "record":
+					proto = convertJavaRecordToProto(javaCode)
+					break
+				case "interface":
+					proto = convertJavaInterfaceToProto(javaCode)
+					break
+				case "standardize":
+					proto = convertInterfaceToNewFormat(javaCode)
+					break
+				case "sort":
+					proto = normalizeProtoFieldOrder(javaCode)
+					break
+			}
+
 			setProtoCode(proto)
 			toast.success("Conversion successful!")
 		} catch (error: unknown) {
-			toast.error(error instanceof Error ? error.message : "An error occurred")
-		}
-	}
-
-	const handleRawConvert = () => {
-		if (!javaCode.trim()) {
-			toast.error("Please enter Java record code")
-			return
-		}
-
-		try {
-			const proto = convertJavaRecordToProto(javaCode)
-			setProtoCode(proto)
-			toast.success("Conversion successful!")
-		} catch (error: unknown) {
-			toast.error(error instanceof Error ? error.message : "An error occurred")
-		}
-	}
-
-	const handleChuanHoa = () => {
-		if (!javaCode.trim()) {
-			toast.error("Vui lòng nhập Java interface.")
-			return
-		}
-
-		try {
-			const proto = convertInterfaceToNewFormat(javaCode)
-			setProtoCode(proto)
-			toast.success("Chuyển đổi Interface thành công!")
-		} catch (error: unknown) {
-			toast.error(error instanceof Error ? error.message : "An error occurred")
-		}
-	}
-
-	const handleSapxepproto = () => {
-		if (!javaCode.trim()) {
-			toast.error("Vui lòng nhập Java interface.")
-			return
-		}
-
-		try {
-			const proto = normalizeProtoFieldOrder(javaCode)
-			setProtoCode(proto)
-			toast.success("Chuyển đổi Interface thành công!")
-		} catch (error: unknown) {
-			toast.error(error instanceof Error ? error.message : "An error occurred")
+			const errorMessage = error instanceof Error ? error.message : "An unexpected error occurred"
+			toast.error(errorMessage)
 		}
 	}
 
@@ -104,11 +72,7 @@ export function useProtobufConverter() {
 		setJavaCode,
 		cleanedJava,
 		protoCode,
-		handleClean,
 		handleConvert,
-		handleRawConvert,
-		handleDownload,
-		handleChuanHoa,
-		handleSapxepproto
+		handleDownload
 	}
 }

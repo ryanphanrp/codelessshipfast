@@ -111,7 +111,6 @@ message ${recordName} {
 }`
 }
 
-// Hàm chuẩn hóa lại số thứ tự của các fields trong proto
 function normalizeProtoFieldOrder(protoCode: string) {
 	// Tìm tất cả các message trong proto
 	const regex = /message\s+(\w+)\s*\{([\s\S]*?)\}/g
@@ -143,29 +142,80 @@ function normalizeProtoFieldOrder(protoCode: string) {
 }
 
 function convertInterfaceToNewFormat(javaInterface: string) {
-	// Tìm kiếm các phương thức getter trong interface
-	const regex = /(\w+)\s+(\w+)\(\);/g
-	let match
-	let fields = []
-
-	// Tìm tất cả các phương thức getter trong interface
-	while ((match = regex.exec(javaInterface)) !== null) {
-		const type = match[1]
-		const name = match[2]
-
-		// Tạo method mới với default getter
-		fields.push(`
-		${type} ${name}();
-		default ${type} get${name.charAt(0).toUpperCase() + name.slice(1)}() {
-			return ${name}();
-		}`)
+	// Validate input
+	if (!javaInterface?.trim()) {
+		throw new Error("Input code cannot be empty")
 	}
-	// Create interface with new methods
-	const interfaceMatch = javaInterface.match(/interface\s+(\w+)/)
-	if (!interfaceMatch) throw new Error("Invalid interface format")
 
-	const interfaceName = interfaceMatch[1]
+	// Extract interface name and content
+	const interfaceMatch = javaInterface.match(/interface\s+(\w+)\s*\{([\s\S]*?)\}/)
+	if (!interfaceMatch) {
+		throw new Error("Invalid interface format")
+	}
+
+	const [, interfaceName, interfaceContent] = interfaceMatch
+
+	// Split content into lines and process
+	const lines = interfaceContent
+		.split("\n")
+		.map((line) => line.trim())
+		.filter(Boolean)
+
+	// Extract all method declarations
+	const methodRegex = /(\w+)\s+(\w+)\(\);/
+	const methods = lines
+		.map((line) => {
+			const match = line.match(methodRegex)
+			if (!match) return null
+			return {
+				type: match[1],
+				name: match[2],
+				fullDeclaration: line
+			}
+		})
+		.filter((m): m is { type: string; name: string; fullDeclaration: string } => m !== null)
+
+	// Generate new format for each method
+	const newMethods = methods.map((method) => {
+		const { type, name } = method
+		return `  ${type} ${name}();
+	default ${type} get${name.charAt(0).toUpperCase() + name.slice(1)}() {
+		return ${name}();
+	}`
+	})
+
+	// Reconstruct the interface
 	return `public interface ${interfaceName} {
+${newMethods.join("\n\n")}
+}`
+}
+
+function convertJavaInterfaceToProto(javaCode: string) {
+	const regex = /interface\s+(\w+)\s*\{([\s\S]*?)\}/
+	const match = javaCode.match(regex)
+	if (!match) throw new Error("Không tìm thấy interface hợp lệ")
+
+	const interfaceName = match[1].replace(/^I/, "") // Xóa tiền tố 'I'
+	const body = match[2].trim()
+
+	const methodLines = body
+		.split("\n")
+		.map((line) => line.trim())
+		.filter(Boolean)
+
+	const fields = methodLines
+		.map((line, index) => {
+			const match = line.match(/(\w+)\s+(\w+)\(\);/)
+			if (!match) return null
+			const type = convertType(match[1])
+			const name = match[2]
+			return `${type} ${name} = ${index + 1};`
+		})
+		.filter(Boolean)
+
+	return `syntax = "proto3";
+
+message ${interfaceName} {
   ${fields.join("\n  ")}
 }`
 }
@@ -173,6 +223,7 @@ function convertInterfaceToNewFormat(javaInterface: string) {
 export {
 	cleanJavaRecord,
 	convertInterfaceToNewFormat,
+	convertJavaInterfaceToProto,
 	convertJavaRecordToProto,
 	normalizeProtoFieldOrder
 }
