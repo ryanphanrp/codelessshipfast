@@ -112,30 +112,47 @@ message ${recordName} {
 }
 
 function normalizeProtoFieldOrder(protoCode: string) {
-	// Tìm tất cả các message trong proto
-	const regex = /message\s+(\w+)\s*\{([\s\S]*?)\}/g
-	let match
+	// Validate input
+	if (!protoCode?.trim()) {
+		throw new Error("Input code cannot be empty")
+	}
+
+	// Find all message blocks
+	const regex = /message\s+(\w+)\s*\{([^}]+)\}/g
 	let normalizedProto = protoCode
 
-	// Lặp qua các message và chuẩn hóa lại từng message
-	while ((match = regex.exec(protoCode)) !== null) {
-		const messageName = match[1]
-		let fields = match[2]
-			.split("\n")
-			.map((line) => line.trim())
-			.filter(Boolean)
+	// Process each message block
+	while (true) {
+		const match = regex.exec(protoCode)
+		if (!match) break
 
-		// Chỉ sửa lại số thứ tự của các field mà không thay đổi thứ tự các field
-		let newProto = `message ${messageName} {`
-		fields.forEach((field, index) => {
-			// Cập nhật lại số thứ tự của field, bắt đầu từ 1
-			const fieldParts = field.split("=")
-			newProto += `\n  ${fieldParts[0]} = ${index + 1};` // Cập nhật lại số thứ tự
+		const [fullMatch, messageName, messageContent] = match
+
+		// Process fields while preserving blank lines
+		const lines = messageContent.split("\n")
+		const processedLines = lines.map((line) => {
+			const trimmed = line.trim()
+			if (!trimmed) {
+				// Preserve blank lines
+				return line
+			}
+			if (!trimmed.includes("=")) {
+				// Keep non-field lines unchanged
+				return line
+			}
+
+			// Update field numbers while preserving indentation
+			const leadingSpaces = line.match(/^\s*/)?.[0] || ""
+			const [fieldDef] = trimmed.split("=")
+			const fieldNumber = lines.filter((l) => l.trim() && l.includes("=")).indexOf(line) + 1
+			return `${leadingSpaces}${fieldDef.trim()} = ${fieldNumber};`
 		})
-		newProto += "\n}"
 
-		// Thay thế lại message trong protoCode
-		normalizedProto = normalizedProto.replace(match[0], newProto)
+		// Create new message block preserving original structure
+		const newMessage = `message ${messageName} {${processedLines.join("\n")}}`
+
+		// Replace old message block with new one
+		normalizedProto = normalizedProto.replace(fullMatch, newMessage)
 	}
 
 	return normalizedProto
