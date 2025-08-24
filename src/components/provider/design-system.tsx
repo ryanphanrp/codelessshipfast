@@ -11,7 +11,12 @@ export const DesignSystemProvider = ({
 	children,
 	...properties
 }: DesignSystemProviderProperties) => (
-	<ThemeProvider attribute="class" enableSystem disableTransitionOnChange {...properties}>
+	<ThemeProvider
+		defaultTheme="light"
+		attribute="class"
+		enableSystem
+		disableTransitionOnChange
+		{...properties}>
 		<Toaster richColors position="top-right" />
 		<TooltipProvider>
 			<SidebarProvider>

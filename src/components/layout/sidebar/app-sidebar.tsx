@@ -1,8 +1,10 @@
 "use client"
 
+import { ThemeSwitcher } from "@/components/provider/theme-switcher"
 import {
 	Sidebar,
 	SidebarContent,
+	SidebarFooter,
 	SidebarGroup,
 	SidebarGroupContent,
 	SidebarGroupLabel,
@@ -45,13 +47,13 @@ export function AppSidebar() {
 		<Sidebar
 			variant="inset"
 			collapsible="icon"
-			className="z-0 block border-r border-r-primary bg-white">
+			className="z-0 block border-sidebar-border border-r bg-sidebar-background">
 			<SidebarContent>
 				<SidebarGroup>
 					<SidebarGroupLabel className="py-10">
 						<BrandLogo />
 					</SidebarGroupLabel>
-					<SidebarGroupContent>
+					<SidebarGroupContent className="mt-4">
 						<SidebarMenu>
 							{items.map((item) => (
 								<SidebarMenuItem key={item.title}>
@@ -59,7 +61,7 @@ export function AppSidebar() {
 										<Link
 											className={cn(
 												"flex items-center gap-2",
-												isActive(item.url) && "bg-muted font-bold text-cyan-700"
+												isActive(item.url) && "bg-zinc-100 font-bold text-zinc-900"
 											)}
 											href={item.url}>
 											<item.icon />
@@ -72,6 +74,12 @@ export function AppSidebar() {
 					</SidebarGroupContent>
 				</SidebarGroup>
 			</SidebarContent>
+			<SidebarFooter>
+				<div className="flex items-center justify-between px-2 py-2">
+					<span className="font-medium text-sidebar-foreground/70 text-xs">Theme</span>
+					<ThemeSwitcher />
+				</div>
+			</SidebarFooter>
 		</Sidebar>
 	)
 }

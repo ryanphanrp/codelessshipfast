@@ -14,9 +14,8 @@
 }
 
 body {
-	background: linear-gradient(180deg, hsla(0, 0%, 100%, 0) 0, #fff 50vh), fixed 0 0 / 20px 20px
-		radial-gradient(#d1d1d1 1px, transparent 0), fixed 10px 10px / 20px 20px
-		radial-gradient(#d1d1d1 1px, transparent 0);
+	background-color: hsl(var(--background));
+	color: hsl(var(--foreground));
 }
 
 @utility container {
@@ -31,7 +30,7 @@ body {
 }
 
 .text-description {
-	@apply text-zinc-700;
+	@apply text-muted-foreground;
 }
 
 .highlight-underline {

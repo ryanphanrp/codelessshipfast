@@ -11,59 +11,74 @@ export function RecordProtobuf({ className }: { className?: string }) {
 		useProtobufConverter()
 
 	return (
-		<div className={cn("flex h-dvh flex-col", className)}>
-			<div className="mb-4 font-bold text-xl">Java Record to gRPC Converter</div>
-
-			<div className="buttons">
-				<div className="flex flex-wrap gap-2">
-					<Button size="sm" onClick={() => handleConvert("clean")}>
-						Clean
-					</Button>
-					<Button size="sm" onClick={() => handleConvert("record")}>
-						Convert Record
-					</Button>
-					<Button size="sm" onClick={() => handleConvert("interface")}>
-						Convert Interface
-					</Button>
-					<Button size="sm" onClick={() => handleConvert("standardize")}>
-						Standardize
-					</Button>
-					<Button size="sm" onClick={() => handleConvert("sort")}>
-						Sort
-					</Button>
-				</div>
+		<div className={cn("container mx-auto max-w-7xl space-y-6 p-6", className)}>
+			<div>
+				<h1 className="font-bold text-2xl tracking-tight">Java Record to gRPC Converter</h1>
+				<p className="text-muted-foreground">Convert Java record classes to Protocol Buffer definitions</p>
 			</div>
-			<div className="flex flex-1 gap-4">
-				<Card className="mt-2 flex w-1/2 border-none shadow-none">
-					<CardContent className=" flex flex-1 flex-col gap-4">
-						<FunctionTextarea
-							placeholder="Enter Java 17 record class..."
-							value={javaCode}
-							className="!text-xs"
-							onChange={setJavaCode}
-						/>
+
+			<div className="flex flex-wrap gap-2">
+				<Button size="sm" onClick={() => handleConvert("clean")}>
+					Clean
+				</Button>
+				<Button size="sm" variant="outline" onClick={() => handleConvert("record")}>
+					Convert Record
+				</Button>
+				<Button size="sm" variant="outline" onClick={() => handleConvert("interface")}>
+					Convert Interface
+				</Button>
+				<Button size="sm" variant="outline" onClick={() => handleConvert("standardize")}>
+					Standardize
+				</Button>
+				<Button size="sm" variant="outline" onClick={() => handleConvert("sort")}>
+					Sort
+				</Button>
+			</div>
+
+			<div className="grid min-h-[600px] grid-cols-1 gap-6 lg:grid-cols-2">
+				<Card className="flex flex-col">
+					<CardContent className="flex-1 p-6">
+						<div className="flex h-full flex-col space-y-2">
+							<label className="font-medium text-sm">Java Record Input</label>
+							<FunctionTextarea
+								placeholder="Enter Java 17 record class..."
+								value={javaCode}
+								className="min-h-[500px] flex-1 font-mono text-sm"
+								onChange={setJavaCode}
+							/>
+						</div>
 					</CardContent>
 				</Card>
 
-				<div className="flex w-1/2 flex-col gap-4">
+				<div className="space-y-6">
 					{cleanedJava && (
-						<Card className="flex flex-1 border-none shadow-none">
-							<CardContent className="flex flex-1 flex-col gap-4">
-								<div className="flex-1">
-									<FunctionTextarea className="!text-xs" value={cleanedJava} readOnly />
+						<Card className="flex flex-col">
+							<CardContent className="flex-1 p-6">
+								<div className="flex h-full flex-col space-y-4">
+									<label className="font-medium text-sm">Cleaned Java</label>
+									<FunctionTextarea 
+										className="min-h-[200px] flex-1 font-mono text-sm" 
+										value={cleanedJava} 
+										readOnly 
+									/>
+									<Button onClick={() => handleConvert("record")}>Convert to Proto</Button>
 								</div>
-								<Button onClick={() => handleConvert("record")}>Convert</Button>
 							</CardContent>
 						</Card>
 					)}
 
 					{protoCode && (
-						<Card className="mt-2 flex flex-1 border-none shadow-none">
-							<CardContent className="flex flex-1 flex-col gap-4">
-								<div className="flex-1">
-									<FunctionTextarea className="!text-xs" value={protoCode} readOnly />
+						<Card className="flex flex-col">
+							<CardContent className="flex-1 p-6">
+								<div className="flex h-full flex-col space-y-4">
+									<label className="font-medium text-sm">Protocol Buffer Definition</label>
+									<FunctionTextarea 
+										className="min-h-[200px] flex-1 font-mono text-sm" 
+										value={protoCode} 
+										readOnly 
+									/>
+									<Button onClick={handleDownload}>Download .proto</Button>
 								</div>
-								<Button onClick={handleDownload}>Download .proto</Button>
 							</CardContent>
 						</Card>
 					)}

@@ -1,10 +1,14 @@
 const Dashboard = () => {
 	return (
-		<div className="flex flex-col items-center justify-center py-4">
-			<h1 className="font-mono font-semibold text-3xl">Dashboard</h1>
-			<p className="my-2">
-				Welcome to the dashboard. This is where you can manage your account and settings.
-			</p>
+		<div className="container mx-auto max-w-4xl p-6">
+			<div className="space-y-6">
+				<div className="space-y-2">
+					<h1 className="font-bold text-3xl tracking-tight">Dashboard</h1>
+					<p className="text-muted-foreground">
+						Welcome to the dashboard. This is where you can manage your account and settings.
+					</p>
+				</div>
+			</div>
 		</div>
 	)
 }

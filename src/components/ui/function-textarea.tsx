@@ -1,8 +1,8 @@
 import { useClipboard } from "@/hooks/use-clipboard"
 import { cn } from "@/lib/utils"
-import { Button } from "@shadui/button"
-import { toast } from "@shadui/sonner"
-import { Textarea } from "@shadui/textarea"
+import { Button } from "@/components/ui/button"
+import { toast } from "sonner"
+import { Textarea } from "@/components/ui/textarea"
 import { ClipboardList, Copy } from "lucide-react"
 
 interface FunctionTextareaProps {
@@ -49,18 +49,20 @@ const FunctionTextarea = ({
 				{!readOnly && (
 					<Button
 						size="icon"
-						className="bg-transparent text-primary shadow-none transition duration-300 ease-in-out hover:scale-110 hover:bg-transparent hover:text-cyan-700"
+						variant="ghost"
+						className="size-6 text-muted-foreground hover:text-foreground"
 						onClick={handlePaste}
 						title="Paste">
-						<ClipboardList className="size-5" />
+						<ClipboardList className="h-4 w-4" />
 					</Button>
 				)}
 				<Button
 					size="icon"
-					className="bg-transparent text-primary shadow-none transition duration-300 ease-in-out hover:scale-110 hover:bg-transparent hover:text-cyan-700"
+					variant="ghost"
+					className="size-6 text-muted-foreground hover:text-foreground"
 					onClick={handleCopy}
 					title="Copy">
-					<Copy className="size-5" />
+					<Copy className="h-4 w-4" />
 				</Button>
 			</div>
 		</div>

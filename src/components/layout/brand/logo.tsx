@@ -1,6 +1,7 @@
 import siteConfig from "@/config/site"
 import { cn } from "@/lib/utils"
 import { Homemade_Apple } from "next/font/google"
+import Image from "next/image"
 
 const homemadeApple = Homemade_Apple({
 	weight: "400",
@@ -9,8 +10,9 @@ const homemadeApple = Homemade_Apple({
 
 const BrandLogo = () => {
 	return (
-		<div className={cn(homemadeApple.className, "font-semibold text-2xl text-orange-600")}>
-			{siteConfig.name}
+		<div className={cn("flex flex-col justify-center gap-2")}>
+			<Image src="/pepe.svg" alt="logo" width={60} height={60} />
+			<div className={cn("font-semibold text-primary text-xl")}>{siteConfig.name}</div>
 		</div>
 	)
 }
