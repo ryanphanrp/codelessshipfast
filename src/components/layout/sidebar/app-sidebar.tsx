@@ -13,7 +13,7 @@ import {
 	SidebarMenuItem
 } from "@/components/ui/sidebar"
 import { cn } from "@/lib/utils"
-import { Home, Rabbit, ScrollText } from "lucide-react"
+import { Home, Rabbit, ScrollText, Settings2 } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import BrandLogo from "../brand/logo"
@@ -32,6 +32,11 @@ const items = [
 		title: "Record to Protobuf",
 		url: "/features/record-protobuf",
 		icon: Rabbit
+	},
+	{
+		title: "Properties Converter",
+		url: "/features/properties-converter",
+		icon: Settings2
 	}
 ]
 
