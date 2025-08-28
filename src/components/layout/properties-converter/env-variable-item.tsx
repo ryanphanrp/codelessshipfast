@@ -1,8 +1,9 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import { useClipboard } from "@/hooks/use-clipboard"
-import { Copy } from "lucide-react"
+import { Check, Copy } from "lucide-react"
 import { useState } from "react"
 
 interface EnvVariableItemProps {
@@ -12,75 +13,104 @@ interface EnvVariableItemProps {
 
 export function EnvVariableItem({ envKey, envValue }: EnvVariableItemProps) {
 	const { copyToClipboard } = useClipboard()
-	const [hoveredElement, setHoveredElement] = useState<'key' | 'value' | null>(null)
+	const [copiedItem, setCopiedItem] = useState<'key' | 'value' | 'full' | null>(null)
 
-	const handleCopyKey = () => {
-		copyToClipboard(envKey)
-	}
-
-	const handleCopyValue = () => {
-		copyToClipboard(envValue)
-	}
-
-	const handleCopyFull = () => {
-		copyToClipboard(`${envKey}=${envValue}`)
+	const handleCopy = (type: 'key' | 'value' | 'full') => {
+		let textToCopy = ''
+		switch (type) {
+			case 'key':
+				textToCopy = envKey
+				break
+			case 'value':
+				textToCopy = envValue
+				break
+			case 'full':
+				textToCopy = `${envKey}=${envValue}`
+				break
+		}
+		
+		copyToClipboard(textToCopy)
+		setCopiedItem(type)
+		setTimeout(() => setCopiedItem(null), 2000)
 	}
 
 	return (
-		<div className="group flex items-center gap-2 rounded border p-2 hover:bg-gray-50 dark:hover:bg-gray-800/50">
-			<div className="flex-1 font-mono text-sm">
-				<span 
-					className="relative cursor-pointer rounded px-1 font-semibold text-blue-600 transition-colors hover:bg-blue-100 dark:hover:bg-blue-900/30"
-					onMouseEnter={() => setHoveredElement('key')}
-					onMouseLeave={() => setHoveredElement(null)}
-					onClick={handleCopyKey}
-					title="Click to copy key">
-					{envKey}
-					{hoveredElement === 'key' && (
-						<Button
-							variant="ghost"
-							size="sm"
-							className="-top-1 -right-1 absolute h-5 w-5 bg-blue-100 p-0 hover:bg-blue-200 dark:bg-blue-900 dark:hover:bg-blue-800"
-							onClick={(e) => {
-								e.stopPropagation()
-								handleCopyKey()
-							}}>
-							<Copy className="h-3 w-3" />
-						</Button>
-					)}
-				</span>
-				<span className="mx-2">=</span>
-				<span 
-					className="relative cursor-pointer rounded px-1 text-green-600 transition-colors hover:bg-green-100 dark:hover:bg-green-900/30"
-					onMouseEnter={() => setHoveredElement('value')}
-					onMouseLeave={() => setHoveredElement(null)}
-					onClick={handleCopyValue}
-					title="Click to copy value">
-					{envValue || '""'}
-					{hoveredElement === 'value' && (
-						<Button
-							variant="ghost"
-							size="sm"
-							className="-top-1 -right-1 absolute h-5 w-5 bg-green-100 p-0 hover:bg-green-200 dark:bg-green-900 dark:hover:bg-green-800"
-							onClick={(e) => {
-								e.stopPropagation()
-								handleCopyValue()
-							}}>
-							<Copy className="h-3 w-3" />
-						</Button>
-					)}
-				</span>
+		<TooltipProvider>
+			<div className="group flex items-center gap-2 rounded-lg border bg-card p-3 transition-colors hover:bg-accent/50">
+				{/* Key-Value Display */}
+				<div className="flex-1 font-mono text-sm">
+					<span className="font-semibold text-blue-600 dark:text-blue-400">
+						{envKey}
+					</span>
+					<span className="mx-2 text-muted-foreground">=</span>
+					<span className="text-green-600 dark:text-green-400">
+						{envValue || '""'}
+					</span>
+				</div>
+
+				{/* Copy Buttons Group */}
+				<div className="flex gap-1 opacity-0 transition-opacity group-hover:opacity-100">
+					{/* Copy Key Button */}
+					<Tooltip>
+						<TooltipTrigger asChild>
+							<Button
+								variant="outline"
+								size="sm"
+								onClick={() => handleCopy('key')}
+								className="h-7 w-7 p-0 text-blue-600 hover:bg-blue-100 dark:text-blue-400 dark:hover:bg-blue-900/30">
+								{copiedItem === 'key' ? (
+									<Check className="h-3.5 w-3.5" />
+								) : (
+									<Copy className="h-3.5 w-3.5" />
+								)}
+							</Button>
+						</TooltipTrigger>
+						<TooltipContent>
+							<p>Copy key</p>
+						</TooltipContent>
+					</Tooltip>
+
+					{/* Copy Value Button */}
+					<Tooltip>
+						<TooltipTrigger asChild>
+							<Button
+								variant="outline"
+								size="sm"
+								onClick={() => handleCopy('value')}
+								className="h-7 w-7 p-0 text-green-600 hover:bg-green-100 dark:text-green-400 dark:hover:bg-green-900/30">
+								{copiedItem === 'value' ? (
+									<Check className="h-3.5 w-3.5" />
+								) : (
+									<Copy className="h-3.5 w-3.5" />
+								)}
+							</Button>
+						</TooltipTrigger>
+						<TooltipContent>
+							<p>Copy value</p>
+						</TooltipContent>
+					</Tooltip>
+
+					{/* Copy Full Line Button */}
+					<Tooltip>
+						<TooltipTrigger asChild>
+							<Button
+								variant="outline"
+								size="sm"
+								onClick={() => handleCopy('full')}
+								className="h-7 px-2 text-muted-foreground hover:bg-accent">
+								{copiedItem === 'full' ? (
+									<Check className="h-3.5 w-3.5" />
+								) : (
+									<Copy className="h-3.5 w-3.5" />
+								)}
+							</Button>
+						</TooltipTrigger>
+						<TooltipContent>
+							<p>Copy full line</p>
+						</TooltipContent>
+					</Tooltip>
+				</div>
 			</div>
-			<div className="opacity-0 transition-opacity group-hover:opacity-100">
-				<Button
-					variant="ghost"
-					size="sm"
-					onClick={handleCopyFull}
-					className="h-6 px-2"
-					title="Copy full env variable">
-					<Copy className="h-3 w-3" />
-				</Button>
-			</div>
-		</div>
+		</TooltipProvider>
 	)
 }

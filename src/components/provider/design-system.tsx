@@ -14,7 +14,7 @@ export const DesignSystemProvider = ({
 	<ThemeProvider
 		defaultTheme="light"
 		attribute="class"
-		enableSystem
+		enableSystem={false}
 		disableTransitionOnChange
 		{...properties}>
 		<Toaster richColors position="top-right" />
