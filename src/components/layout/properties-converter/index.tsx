@@ -416,7 +416,7 @@ export default function PropertiesConverter() {
 										<Textarea
 											value={output}
 											readOnly
-											className="min-h-[350px] font-mono text-sm bg-muted/50"
+											className="min-h-[350px] bg-muted/50 font-mono text-sm"
 										/>
 									)
 								) : (
