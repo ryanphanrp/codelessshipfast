@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import FunctionTextarea from "@/components/ui/function-textarea"
 import { useClipboard } from "@/hooks/use-clipboard"
+import { handleError } from "@/lib/shared"
 import { useState } from "react"
 import { splitSQLAndLog } from "./formatter-utilities"
 import { extractBindings, replaceQueryParams, useFormattedSQL } from "./use-sql-formatter"
@@ -32,7 +33,7 @@ const SqlPlaceholder = () => {
 			const result = replaceQueryParams(sql, bindings)
 			setFilledQuery(result)
 		} catch (err) {
-			console.error("Failed to read clipboard:", err)
+			handleError(err, { action: "paste-clipboard", component: "sql-placeholder" })
 		}
 	}
 
@@ -47,7 +48,7 @@ const SqlPlaceholder = () => {
 								className="min-h-[120px] font-mono text-sm"
 								placeholder="Paste SQL script with ? placeholders"
 								value={sqlQuery}
-								onChange={setSqlQuery}
+								onChange={(e) => setSqlQuery(e.target.value)}
 							/>
 						</div>
 						<div className="space-y-2">
@@ -56,7 +57,7 @@ const SqlPlaceholder = () => {
 								className="min-h-[120px] font-mono text-sm"
 								placeholder="Paste parameter list"
 								value={paramText}
-								onChange={setParamText}
+								onChange={(e) => setParamText(e.target.value)}
 							/>
 						</div>
 					</div>

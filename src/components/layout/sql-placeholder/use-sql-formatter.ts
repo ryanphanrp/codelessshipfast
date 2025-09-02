@@ -1,8 +1,7 @@
+import { sqlLogger } from "@/lib/logger"
+import { formatDateTime } from "@/lib/shared"
+import type { FormatRules } from "@/types"
 import { useEffect, useState } from "react"
-
-type FormatRules = {
-	[key: string]: (param: string) => string
-}
 
 const defaultRules: FormatRules = {
 	null: () => "NULL",
@@ -15,32 +14,6 @@ const defaultRules: FormatRules = {
 const timestampRegexes = {
 	fullTimestamp: /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/,
 	isoDateTime: /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(?::\d{2})?(?:\.\d+)?(?:Z|[+-]\d{2}:?\d{2})?$/
-}
-
-function formatDateTime(dateTimeStr: string): string {
-	let date: Date
-
-	try {
-		// Parse the date string
-		date = new Date(dateTimeStr)
-
-		// Check if date is valid
-		if (isNaN(date.getTime())) {
-			return dateTimeStr
-		}
-
-		// Format to YYYY-MM-DD HH:MM:SS
-		const year = date.getFullYear()
-		const month = String(date.getMonth() + 1).padStart(2, "0")
-		const day = String(date.getDate()).padStart(2, "0")
-		const hours = String(date.getHours()).padStart(2, "0")
-		const minutes = String(date.getMinutes()).padStart(2, "0")
-		const seconds = String(date.getSeconds()).padStart(2, "0")
-
-		return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`
-	} catch (error) {
-		return dateTimeStr
-	}
 }
 
 function formatParam(param: string, customRules: FormatRules = {}) {
@@ -106,7 +79,7 @@ export function useFormattedSQL(
 				const result = replaceQueryParams(sqlQuery, bindings, customRules)
 				setFormattedSQL(result)
 			} catch (error) {
-				console.error("Error formatting SQL:", error)
+				sqlLogger.error("Error formatting SQL", error)
 				setFormattedSQL("")
 			}
 		} else {

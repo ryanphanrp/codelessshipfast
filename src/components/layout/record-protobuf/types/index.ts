@@ -1,9 +1,2 @@
-export interface JavaToProtoMapping {
-	int: string
-	long: string
-	float: string
-	double: string
-	boolean: string
-	String: string
-	[key: string]: string
-}
+// Re-export from central types
+export type { JavaToProtoMapping } from "@/types"

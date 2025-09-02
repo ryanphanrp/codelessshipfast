@@ -9,22 +9,19 @@ import {
 	SidebarGroupContent,
 	SidebarGroupLabel,
 	SidebarMenu,
+	SidebarMenuAction,
 	SidebarMenuButton,
 	SidebarMenuItem,
-	SidebarMenuAction,
 	useSidebar
 } from "@/components/ui/sidebar"
-import {
-	Tooltip,
-	TooltipContent,
-	TooltipTrigger,
-} from "@/components/ui/tooltip"
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
+import { navigationLogger } from "@/lib/logger"
 import { cn } from "@/lib/utils"
 import { Home, Rabbit, ScrollText, Settings2 } from "lucide-react"
+import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import BrandLogo from "../brand/logo"
-import Image from "next/image"
 const items = [
 	{
 		title: "Home",
@@ -52,10 +49,13 @@ export function AppSidebar() {
 	const pathname = usePathname()
 	const { state } = useSidebar()
 	const isCollapsed = state === "collapsed"
-	
+
 	const isActive = (url: string) => {
-		console.log("pathname", pathname, "url", url)
-		console.log("isActive", pathname === url)
+		navigationLogger.debug("Checking navigation state", {
+			pathname,
+			url,
+			isActive: pathname === url
+		})
 		return pathname === url
 	}
 
@@ -66,18 +66,9 @@ export function AppSidebar() {
 			className="z-0 block border-sidebar-border border-r bg-sidebar-background">
 			<SidebarContent>
 				<SidebarGroup>
-					<SidebarGroupLabel className={cn(
-						"py-10",
-						isCollapsed && "flex justify-center p-2"
-					)}>
+					<SidebarGroupLabel className={cn("py-10", isCollapsed && "flex justify-center p-2")}>
 						{isCollapsed ? (
-							<Image 
-								src="/pepe.svg" 
-								alt="logo" 
-								width={32} 
-								height={32}
-								className="mx-auto"
-							/>
+							<Image src="/pepe.svg" alt="logo" width={32} height={32} className="mx-auto" />
 						) : (
 							<BrandLogo />
 						)}
@@ -102,9 +93,7 @@ export function AppSidebar() {
 														</Link>
 													</SidebarMenuButton>
 												</TooltipTrigger>
-												<TooltipContent side="right">
-													{item.title}
-												</TooltipContent>
+												<TooltipContent side="right">{item.title}</TooltipContent>
 											</Tooltip>
 										</SidebarMenuItem>
 									)
@@ -130,10 +119,11 @@ export function AppSidebar() {
 				</SidebarGroup>
 			</SidebarContent>
 			<SidebarFooter>
-				<div className={cn(
-					"flex items-center gap-2 px-2 py-3",
-					isCollapsed ? "justify-center" : "flex-col"
-				)}>
+				<div
+					className={cn(
+						"flex items-center gap-2 px-2 py-3",
+						isCollapsed ? "justify-center" : "flex-col"
+					)}>
 					{isCollapsed ? (
 						// Show only the switch when collapsed
 						<ThemeSwitcherCompact />

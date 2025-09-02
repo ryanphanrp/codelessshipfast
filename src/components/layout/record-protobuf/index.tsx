@@ -46,7 +46,7 @@ export function RecordProtobuf({ className }: { className?: string }) {
 								placeholder="Enter Java 17 record class..."
 								value={javaCode}
 								className="min-h-[500px] flex-1 font-mono text-sm"
-								onChange={setJavaCode}
+								onChange={(e) => setJavaCode(e.target.value)}
 							/>
 						</div>
 					</CardContent>

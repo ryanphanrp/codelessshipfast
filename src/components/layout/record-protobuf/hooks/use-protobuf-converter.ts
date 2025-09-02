@@ -1,3 +1,6 @@
+import { useAsyncOperation, useFileOperations } from "@/hooks"
+import { ErrorFactory, downloadProtoFile, validateNotEmpty } from "@/lib/shared"
+import type { ProtoType } from "@/types"
 import { useState } from "react"
 import { toast } from "sonner"
 import {
@@ -8,63 +11,60 @@ import {
 	normalizeProtoFieldOrder
 } from "../utils/protobuf-convert"
 
-type ProtoType = "record" | "interface" | "standardize" | "sort" | "clean" | "oldInterface"
-
 export function useProtobufConverter() {
 	const [javaCode, setJavaCode] = useState("")
 	const [cleanedJava, setCleanedJava] = useState("")
 	const [protoCode, setProtoCode] = useState("")
 
+	const asyncOperation = useAsyncOperation()
+	const { downloadProto } = useFileOperations()
+
 	const validateInput = (msg: string) => {
-		if (!javaCode.trim()) {
-			toast.error(msg)
-			return false
+		const validation = validateNotEmpty(javaCode, "Java code")
+		if (!validation.isValid) {
+			throw ErrorFactory.validation(validation.error || msg, "javaCode", javaCode.slice(0, 50))
 		}
 		return true
 	}
 
-	const handleConvert = (type: ProtoType) => {
-		if (!validateInput("Please enter Java code.")) return
-
-		try {
-			let proto = ""
-
-			switch (type) {
-				case "clean":
-					proto = cleanJavaRecord(javaCode)
-					break
-				case "record":
-					proto = convertJavaRecordToProto(javaCode)
-					break
-				case "interface":
-					proto = convertJavaInterfaceToProto(javaCode)
-					break
-				case "standardize":
-					proto = convertInterfaceToNewFormat(javaCode)
-					break
-				case "sort":
-					proto = normalizeProtoFieldOrder(javaCode)
-					break
-			}
-
-			setProtoCode(proto)
-			toast.success("Conversion successful!")
-		} catch (error: unknown) {
-			const errorMessage = error instanceof Error ? error.message : "An unexpected error occurred"
-			toast.error(errorMessage)
+	const performConversion = (type: ProtoType): string => {
+		switch (type) {
+			case "clean":
+				return cleanJavaRecord(javaCode)
+			case "record":
+				return convertJavaRecordToProto(javaCode)
+			case "interface":
+				return convertJavaInterfaceToProto(javaCode)
+			case "standardize":
+				return convertInterfaceToNewFormat(javaCode)
+			case "sort":
+				return normalizeProtoFieldOrder(javaCode)
+			default:
+				throw ErrorFactory.validation(`Invalid conversion type: ${type}`, "type", type)
 		}
 	}
 
+	const handleConvert = (type: ProtoType) => {
+		asyncOperation.execute(
+			async () => {
+				validateInput("Please enter Java code.")
+				const result = performConversion(type)
+				setProtoCode(result)
+				return result
+			},
+			{
+				onSuccess: () => {
+					toast.success("Conversion successful!")
+				},
+				context: { conversionType: type, inputLength: javaCode.length }
+			}
+		)
+	}
+
 	const handleDownload = () => {
-		const blob = new Blob([protoCode], { type: "text/plain" })
-		const url = URL.createObjectURL(blob)
-		const link = document.createElement("a")
-		link.href = url
-		link.download = "converted.proto"
-		document.body.appendChild(link)
-		link.click()
-		document.body.removeChild(link)
-		URL.revokeObjectURL(url)
+		if (protoCode.trim()) {
+			downloadProto(protoCode, "converted.proto")
+		}
 	}
 
 	return {
@@ -73,6 +73,8 @@ export function useProtobufConverter() {
 		cleanedJava,
 		protoCode,
 		handleConvert,
-		handleDownload
+		handleDownload,
+		isConverting: asyncOperation.loading,
+		error: asyncOperation.error
 	}
 }
