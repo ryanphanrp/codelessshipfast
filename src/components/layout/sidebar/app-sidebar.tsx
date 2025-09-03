@@ -17,7 +17,7 @@ import {
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
 import { navigationLogger } from "@/lib/logger"
 import { cn } from "@/lib/utils"
-import { Home, Rabbit, ScrollText, Settings2 } from "lucide-react"
+import { Code, Home, Rabbit, ScrollText, Settings2 } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
@@ -42,6 +42,11 @@ const items = [
 		title: "Properties Converter",
 		url: "/features/properties-converter",
 		icon: Settings2
+	},
+	{
+		title: "JSON Viewer",
+		url: "/features/json-viewer",
+		icon: Code
 	}
 ]
 
