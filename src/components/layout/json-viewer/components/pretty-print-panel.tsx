@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import { Check, Copy } from "lucide-react"
 import { useState } from "react"
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
+import { oneLight } from "react-syntax-highlighter/dist/esm/styles/prism"
 
 interface PrettyPrintPanelProps {
 	input: string
@@ -80,9 +82,22 @@ export function PrettyPrintPanel({ input, output, error, isProcessing }: PrettyP
 						<span className="ml-2 text-gray-600 text-sm">Processing...</span>
 					</div>
 				) : (
-					<pre className="overflow-x-auto rounded border bg-gray-50 p-3 text-sm">
-						<code className="text-gray-800">{output}</code>
-					</pre>
+					<div className="overflow-x-auto rounded border bg-gray-50">
+						<SyntaxHighlighter
+							language="json"
+							style={oneLight}
+							showLineNumbers={true}
+							customStyle={{
+								margin: 0,
+								padding: '12px',
+								fontSize: '14px',
+								borderRadius: '6px',
+								background: '#f9fafb'
+							}}
+						>
+							{output}
+						</SyntaxHighlighter>
+					</div>
 				)}
 			</div>
 		</div>

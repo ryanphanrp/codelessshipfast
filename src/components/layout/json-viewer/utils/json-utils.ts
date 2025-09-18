@@ -73,34 +73,42 @@ export function jsonToTree(jsonString: string): JsonNode[] {
  * Recursively builds tree nodes from JSON data
  */
 function buildTreeNode(key: string, value: any, path: string, depth: number): JsonNode {
-	const node: JsonNode = {
-		key: key || "root",
-		value,
-		path,
-		depth,
-		expanded: depth < 2 // Auto-expand first two levels
-	}
+	// Determine type first
+	let nodeType: "object" | "array" | "string" | "number" | "boolean" | "null"
+	let children: JsonNode[] | undefined = undefined
 
 	if (value === null) {
-		node.type = "null"
+		nodeType = "null"
 	} else if (typeof value === "boolean") {
-		node.type = "boolean"
+		nodeType = "boolean"
 	} else if (typeof value === "number") {
-		node.type = "number"
+		nodeType = "number"
 	} else if (typeof value === "string") {
-		node.type = "string"
+		nodeType = "string"
 	} else if (Array.isArray(value)) {
-		node.type = "array"
-		node.children = value.map((item, index) => {
+		nodeType = "array"
+		children = value.map((item, index) => {
 			const itemPath = path ? `${path}[${index}]` : `[${index}]`
 			return buildTreeNode(index.toString(), item, itemPath, depth + 1)
 		})
 	} else if (typeof value === "object") {
-		node.type = "object"
-		node.children = Object.entries(value).map(([k, v]) => {
+		nodeType = "object"
+		children = Object.entries(value).map(([k, v]) => {
 			const itemPath = path ? `${path}.${k}` : k
 			return buildTreeNode(k, v, itemPath, depth + 1)
 		})
+	} else {
+		nodeType = "string" // fallback
+	}
+
+	const node: JsonNode = {
+		key: key || "root",
+		value,
+		type: nodeType,
+		path,
+		depth,
+		expanded: depth < 2, // Auto-expand first two levels
+		children
 	}
 
 	return node

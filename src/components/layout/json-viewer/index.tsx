@@ -7,6 +7,13 @@ import { MinifyPanel } from "./components/minify-panel"
 import { PrettyPrintPanel } from "./components/pretty-print-panel"
 import { TreeViewPanel } from "./components/tree-view-panel"
 import { ValidationPanel } from "./components/validation-panel"
+import { SchemaGeneratorPanel } from "./components/schema-generator-panel"
+import { JsonPathPanel } from "./components/jsonpath-panel"
+import { StatsPanel } from "./components/stats-panel"
+import { JsonDiffPanel } from "./components/json-diff-panel"
+import { FlattenerPanel } from "./components/flattener-panel"
+import { VisualizerPanel } from "./components/visualizer-panel"
+import { JsonEditor } from "./components/json-editor"
 import { getExamples } from "./constants/examples"
 import { useJsonViewer } from "./hooks/use-json-viewer"
 
@@ -33,6 +40,10 @@ export default function JsonViewer() {
 
 	const examples = getExamples(mode)
 
+	// Modes that don't need the main Process button (self-contained)
+	const selfContainedModes = ['diff', 'visualize', 'schema', 'jsonpath', 'stats', 'flatten']
+	const needsProcessButton = !selfContainedModes.includes(mode)
+
 	return (
 		<div className="container mx-auto space-y-6 p-6">
 			<ConversionHeader
@@ -41,8 +52,14 @@ export default function JsonViewer() {
 			/>
 
 			<JsonViewerTabs mode={mode} onModeChange={handleModeChange}>
-				<div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-					{/* Input Panel */}
+				<div className={`grid gap-6 ${
+					// Full width for complex panels
+					mode === 'diff' || mode === 'visualize' || mode === 'stats' 
+						? 'grid-cols-1' 
+						: 'grid-cols-1 lg:grid-cols-2'
+				}`}>
+					{/* Input Panel - hidden for fully self-contained panels */}
+					{!(mode === 'diff' || mode === 'visualize') && (
 					<div className="space-y-4">
 						<div className="rounded-lg border bg-white">
 							<div className="flex items-center justify-between border-b bg-gray-50 p-3">
@@ -74,25 +91,40 @@ export default function JsonViewer() {
 										disabled={!input}>
 										Clear
 									</button>
-									<button
-										onClick={processJson}
-										className="rounded bg-blue-600 px-3 py-1 text-white text-xs hover:bg-blue-700 disabled:opacity-50"
-										disabled={!input.trim() || isProcessing}>
-										{isProcessing ? "Processing..." : "Process"}
-									</button>
+									{needsProcessButton && (
+										<button
+											onClick={processJson}
+											className="rounded bg-blue-600 px-3 py-1 text-white text-xs hover:bg-blue-700 disabled:opacity-50"
+											disabled={!input.trim() || isProcessing}>
+											{isProcessing ? "Processing..." : "Process"}
+										</button>
+									)}
+									{!needsProcessButton && (
+										<span className="text-xs text-gray-500">
+											{mode === 'schema' || mode === 'jsonpath' || mode === 'stats' || mode === 'flatten' ? 'Processes automatically' : 'Self-contained panel'}
+										</span>
+									)}
+									{mode === 'validate' && (
+										<span className="text-xs text-green-600">
+											Real-time validation
+										</span>
+									)}
 								</div>
 							</div>
 							<div className="p-4">
-								<textarea
+								<JsonEditor
 									value={input}
-									onChange={(e) => setInput(e.target.value)}
+									onChange={setInput}
 									placeholder="Paste your JSON here..."
-									className="h-64 w-full resize-none rounded border p-3 font-mono text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+									height="16rem"
 									disabled={isProcessing}
+									theme="light"
+									showLineNumbers={true}
 								/>
 							</div>
 						</div>
 					</div>
+					)}
 
 					{/* Output Panel */}
 					<div className="space-y-4">
@@ -118,9 +150,57 @@ export default function JsonViewer() {
 							<TreeViewPanel treeData={treeData} onToggleNode={toggleNode} />
 						)}
 
-						{mode === "validate" && (
-							<ValidationPanel validationResult={validationResult} input={input} />
-						)}
+					{mode === "validate" && (
+						<ValidationPanel validationResult={validationResult} input={input} />
+					)}
+
+					{mode === "schema" && (
+						<SchemaGeneratorPanel 
+							input={input}
+							error={error}
+							isProcessing={isProcessing}
+						/>
+					)}
+
+					{mode === "jsonpath" && (
+						<JsonPathPanel 
+							input={input}
+							error={error}
+							isProcessing={isProcessing}
+						/>
+					)}
+
+					{mode === "stats" && (
+						<StatsPanel 
+							input={input}
+							error={error}
+							isProcessing={isProcessing}
+						/>
+					)}
+
+					{mode === "diff" && (
+						<JsonDiffPanel 
+							input={input}
+							error={error}
+							isProcessing={isProcessing}
+						/>
+					)}
+
+					{mode === "flatten" && (
+						<FlattenerPanel 
+							input={input}
+							error={error}
+							isProcessing={isProcessing}
+						/>
+					)}
+
+					{mode === "visualize" && (
+						<VisualizerPanel 
+							input={input}
+							error={error}
+							isProcessing={isProcessing}
+						/>
+					)}
 					</div>
 				</div>
 			</JsonViewerTabs>

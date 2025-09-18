@@ -1,9 +1,11 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
+import { cn } from "@/lib/utils"
 import { Check, Copy, Minimize2 } from "lucide-react"
 import { useState } from "react"
-
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
+import { oneLight } from "react-syntax-highlighter/dist/esm/styles/prism"
 interface MinifyPanelProps {
 	input: string
 	output: string
@@ -110,9 +112,23 @@ export function MinifyPanel({ input, output, error, isProcessing }: MinifyPanelP
 						<span className="ml-2 text-gray-600 text-sm">Minifying...</span>
 					</div>
 				) : (
-					<pre className="overflow-x-auto rounded border bg-gray-50 p-3 text-sm">
-						<code className="break-all text-gray-800">{output}</code>
-					</pre>
+					<div className="overflow-x-auto rounded border bg-gray-50">
+						<SyntaxHighlighter
+							language="json"
+							style={oneLight}
+							showLineNumbers={false}
+							wrapLongLines={true}
+							customStyle={{
+								margin: 0,
+								padding: '12px',
+								fontSize: '14px',
+								borderRadius: '6px',
+								background: '#f9fafb'
+							}}
+						>
+							{output}
+						</SyntaxHighlighter>
+					</div>
 				)}
 			</div>
 		</div>

@@ -10,7 +10,17 @@ export type ConversionMode =
 	| "properties-to-yaml"
 
 // JSON Viewer types
-export type JsonViewerMode = "pretty-print" | "minify" | "tree-view" | "validate"
+export type JsonViewerMode = 
+	| "pretty-print" 
+	| "minify" 
+	| "tree-view" 
+	| "validate" 
+	| "schema" 
+	| "jsonpath" 
+	| "diff" 
+	| "stats" 
+	| "flatten" 
+	| "visualize"
 
 export interface ConversionResult {
 	success: boolean
