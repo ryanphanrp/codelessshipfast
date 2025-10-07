@@ -147,10 +147,10 @@ export function JsonDiffPanel({ input, error, isProcessing }: JsonDiffPanelProps
 
 	const getDiffIcon = (type: JsonDiffItem['type']) => {
 		switch (type) {
-			case 'added': return <span className="text-green-600 font-bold">+</span>
-			case 'removed': return <span className="text-red-600 font-bold">-</span>
-			case 'modified': return <span className="text-blue-600 font-bold">~</span>
-			default: return <span className="text-gray-400 font-bold">=</span>
+			case 'added': return <span className="font-bold text-green-600">+</span>
+			case 'removed': return <span className="font-bold text-red-600">-</span>
+			case 'modified': return <span className="font-bold text-blue-600">~</span>
+			default: return <span className="font-bold text-gray-400">=</span>
 		}
 	}
 
@@ -166,7 +166,7 @@ export function JsonDiffPanel({ input, error, isProcessing }: JsonDiffPanelProps
 	return (
 		<div className="space-y-4">
 			{/* Input Section */}
-			<div className="grid md:grid-cols-2 gap-4">
+			<div className="grid gap-4 md:grid-cols-2">
 				{/* Left JSON */}
 				<Card>
 					<CardHeader>
@@ -216,7 +216,7 @@ export function JsonDiffPanel({ input, error, isProcessing }: JsonDiffPanelProps
 								disabled={!leftJson.trim() || !rightJson.trim() || isComparing}
 								size="sm"
 							>
-								<GitCompare className="h-4 w-4 mr-2" />
+								<GitCompare className="mr-2 h-4 w-4" />
 								{isComparing ? "Comparing..." : "Compare"}
 							</Button>
 							
@@ -266,7 +266,7 @@ export function JsonDiffPanel({ input, error, isProcessing }: JsonDiffPanelProps
 				<Card>
 					<CardContent className="pt-6">
 						<div className="text-red-600 text-sm">
-							<p className="font-medium mb-2">Comparison Error:</p>
+							<p className="mb-2 font-medium">Comparison Error:</p>
 							<p>{comparisonError}</p>
 						</div>
 					</CardContent>
@@ -279,25 +279,25 @@ export function JsonDiffPanel({ input, error, isProcessing }: JsonDiffPanelProps
 							<CardTitle className="text-sm">Comparison Summary</CardTitle>
 						</CardHeader>
 						<CardContent>
-							<div className="grid grid-cols-2 md:grid-cols-5 gap-4 text-sm">
+							<div className="grid grid-cols-2 gap-4 text-sm md:grid-cols-5">
 								<div className="text-center">
-									<div className="text-2xl font-bold text-green-600">{summary.added}</div>
+									<div className="font-bold text-2xl text-green-600">{summary.added}</div>
 									<div className="text-muted-foreground">Added</div>
 								</div>
 								<div className="text-center">
-									<div className="text-2xl font-bold text-red-600">{summary.removed}</div>
+									<div className="font-bold text-2xl text-red-600">{summary.removed}</div>
 									<div className="text-muted-foreground">Removed</div>
 								</div>
 								<div className="text-center">
-									<div className="text-2xl font-bold text-blue-600">{summary.modified}</div>
+									<div className="font-bold text-2xl text-blue-600">{summary.modified}</div>
 									<div className="text-muted-foreground">Modified</div>
 								</div>
 								<div className="text-center">
-									<div className="text-2xl font-bold text-gray-600">{summary.unchanged}</div>
+									<div className="font-bold text-2xl text-gray-600">{summary.unchanged}</div>
 									<div className="text-muted-foreground">Unchanged</div>
 								</div>
 								<div className="text-center">
-									<div className="text-2xl font-bold text-purple-600">{similarityScore}%</div>
+									<div className="font-bold text-2xl text-purple-600">{similarityScore}%</div>
 									<div className="text-muted-foreground">Similar</div>
 								</div>
 							</div>
@@ -321,51 +321,51 @@ export function JsonDiffPanel({ input, error, isProcessing }: JsonDiffPanelProps
 						</CardHeader>
 						<CardContent>
 							{viewMode === "split" ? (
-								<div className="space-y-2 max-h-96 overflow-y-auto">
+								<div className="max-h-96 space-y-2 overflow-y-auto">
 									{filteredDifferences.map((diff, index) => (
-										<div key={index} className={`border rounded p-3 ${getDiffColor(diff.type)}`}>
+										<div key={index} className={`rounded border p-3 ${getDiffColor(diff.type)}`}>
 											<div className="flex items-start gap-3">
-												<div className="flex-shrink-0 mt-1">
+												<div className="mt-1 flex-shrink-0">
 													{getDiffIcon(diff.type)}
 												</div>
-												<div className="flex-1 min-w-0">
-													<div className="font-mono text-xs text-muted-foreground mb-1">
+												<div className="min-w-0 flex-1">
+													<div className="mb-1 font-mono text-muted-foreground text-xs">
 														{diff.path}
 													</div>
 													{diff.type === 'added' && (
 														<div className="text-sm">
-															<span className="text-green-700 font-medium">Added: </span>
-															<code className="bg-white px-1 rounded">
+															<span className="font-medium text-green-700">Added: </span>
+															<code className="rounded bg-white px-1">
 																{JSON.stringify(diff.newValue)}
 															</code>
 														</div>
 													)}
 													{diff.type === 'removed' && (
 														<div className="text-sm">
-															<span className="text-red-700 font-medium">Removed: </span>
-															<code className="bg-white px-1 rounded">
+															<span className="font-medium text-red-700">Removed: </span>
+															<code className="rounded bg-white px-1">
 																{JSON.stringify(diff.oldValue)}
 															</code>
 														</div>
 													)}
 													{diff.type === 'modified' && (
-														<div className="text-sm space-y-1">
+														<div className="space-y-1 text-sm">
 															<div>
-																<span className="text-red-700 font-medium">From: </span>
-																<code className="bg-white px-1 rounded">
+																<span className="font-medium text-red-700">From: </span>
+																<code className="rounded bg-white px-1">
 																	{JSON.stringify(diff.oldValue)}
 																</code>
 															</div>
 															<div>
-																<span className="text-green-700 font-medium">To: </span>
-																<code className="bg-white px-1 rounded">
+																<span className="font-medium text-green-700">To: </span>
+																<code className="rounded bg-white px-1">
 																	{JSON.stringify(diff.newValue)}
 																</code>
 															</div>
 														</div>
 													)}
 													{diff.message && (
-														<div className="text-xs text-muted-foreground mt-1">
+														<div className="mt-1 text-muted-foreground text-xs">
 															{diff.message}
 														</div>
 													)}
@@ -375,8 +375,8 @@ export function JsonDiffPanel({ input, error, isProcessing }: JsonDiffPanelProps
 									))}
 								</div>
 							) : (
-								<div className="bg-background border rounded">
-									<pre className="p-4 text-sm overflow-auto max-h-96 whitespace-pre">
+								<div className="rounded border bg-background">
+									<pre className="max-h-96 overflow-auto whitespace-pre p-4 text-sm">
 										<code>{generateUnifiedDiff(filteredDifferences)}</code>
 									</pre>
 								</div>
@@ -410,7 +410,7 @@ export function JsonDiffPanel({ input, error, isProcessing }: JsonDiffPanelProps
 			) : (
 				<Card>
 					<CardContent className="pt-6">
-						<div className="flex items-center justify-center h-32 text-muted-foreground">
+						<div className="flex h-32 items-center justify-center text-muted-foreground">
 							Enter JSON in both fields to compare
 						</div>
 					</CardContent>
@@ -420,20 +420,20 @@ export function JsonDiffPanel({ input, error, isProcessing }: JsonDiffPanelProps
 			{/* Help Text */}
 			<Card>
 				<CardContent className="pt-6">
-					<div className="text-sm text-muted-foreground space-y-2">
+					<div className="space-y-2 text-muted-foreground text-sm">
 						<h4 className="font-medium text-foreground">JSON Comparison Guide</h4>
-						<div className="grid md:grid-cols-2 gap-4">
+						<div className="grid gap-4 md:grid-cols-2">
 							<div>
-								<h5 className="font-medium mb-2">Change Types:</h5>
+								<h5 className="mb-2 font-medium">Change Types:</h5>
 								<ul className="space-y-1 text-xs">
-									<li><span className="text-green-600 font-bold">+</span> Added - New properties or array items</li>
-									<li><span className="text-red-600 font-bold">-</span> Removed - Deleted properties or array items</li>
-									<li><span className="text-blue-600 font-bold">~</span> Modified - Changed values</li>
-									<li><span className="text-gray-400 font-bold">=</span> Unchanged - Identical values</li>
+									<li><span className="font-bold text-green-600">+</span> Added - New properties or array items</li>
+									<li><span className="font-bold text-red-600">-</span> Removed - Deleted properties or array items</li>
+									<li><span className="font-bold text-blue-600">~</span> Modified - Changed values</li>
+									<li><span className="font-bold text-gray-400">=</span> Unchanged - Identical values</li>
 								</ul>
 							</div>
 							<div>
-								<h5 className="font-medium mb-2">Features:</h5>
+								<h5 className="mb-2 font-medium">Features:</h5>
 								<ul className="space-y-1 text-xs">
 									<li>• Deep object and array comparison</li>
 									<li>• Multiple export formats (JSON, CSV, Unified Diff)</li>

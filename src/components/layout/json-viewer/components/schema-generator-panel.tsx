@@ -124,7 +124,7 @@ export function SchemaGeneratorPanel({ input, error, isProcessing }: SchemaGener
 								checked={options.required}
 								onCheckedChange={(checked) => handleOptionChange('required', !!checked)}
 							/>
-							<label htmlFor="required" className="text-sm font-medium">
+							<label htmlFor="required" className="font-medium text-sm">
 								Mark fields as required
 							</label>
 						</div>
@@ -135,7 +135,7 @@ export function SchemaGeneratorPanel({ input, error, isProcessing }: SchemaGener
 								checked={options.additionalProperties}
 								onCheckedChange={(checked) => handleOptionChange('additionalProperties', !!checked)}
 							/>
-							<label htmlFor="additionalProperties" className="text-sm font-medium">
+							<label htmlFor="additionalProperties" className="font-medium text-sm">
 								Allow additional properties
 							</label>
 						</div>
@@ -146,7 +146,7 @@ export function SchemaGeneratorPanel({ input, error, isProcessing }: SchemaGener
 								checked={options.generateExamples}
 								onCheckedChange={(checked) => handleOptionChange('generateExamples', !!checked)}
 							/>
-							<label htmlFor="generateExamples" className="text-sm font-medium">
+							<label htmlFor="generateExamples" className="font-medium text-sm">
 								Include examples
 							</label>
 						</div>
@@ -157,7 +157,7 @@ export function SchemaGeneratorPanel({ input, error, isProcessing }: SchemaGener
 								checked={options.generateDescriptions}
 								onCheckedChange={(checked) => handleOptionChange('generateDescriptions', !!checked)}
 							/>
-							<label htmlFor="generateDescriptions" className="text-sm font-medium">
+							<label htmlFor="generateDescriptions" className="font-medium text-sm">
 								Generate descriptions
 							</label>
 						</div>
@@ -174,12 +174,12 @@ export function SchemaGeneratorPanel({ input, error, isProcessing }: SchemaGener
 							{validationResult && (
 								validationResult.valid ? (
 									<Badge variant="default" className="bg-green-500">
-										<CheckCircle className="h-3 w-3 mr-1" />
+										<CheckCircle className="mr-1 h-3 w-3" />
 										Valid
 									</Badge>
 								) : (
 									<Badge variant="destructive">
-										<AlertCircle className="h-3 w-3 mr-1" />
+										<AlertCircle className="mr-1 h-3 w-3" />
 										Invalid
 									</Badge>
 								)
@@ -215,13 +215,13 @@ export function SchemaGeneratorPanel({ input, error, isProcessing }: SchemaGener
 				
 				<CardContent>
 					{error || isProcessing ? (
-						<div className="flex items-center justify-center h-32 text-muted-foreground">
+						<div className="flex h-32 items-center justify-center text-muted-foreground">
 							{isProcessing ? "Generating schema..." : "Enter valid JSON to generate schema"}
 						</div>
 					) : validationResult && !validationResult.valid ? (
 						<div className="space-y-2">
-							<p className="text-sm text-red-600">Schema validation failed:</p>
-							<ul className="list-disc list-inside text-sm text-red-600">
+							<p className="text-red-600 text-sm">Schema validation failed:</p>
+							<ul className="list-inside list-disc text-red-600 text-sm">
 								{validationResult.errors.map((error, index) => (
 									<li key={index}>{error}</li>
 								))}
@@ -231,8 +231,8 @@ export function SchemaGeneratorPanel({ input, error, isProcessing }: SchemaGener
 						<div className="space-y-4">
 							{/* Schema Statistics */}
 							{stats && (
-								<div className="bg-muted rounded-lg p-3">
-									<div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+								<div className="rounded-lg bg-muted p-3">
+									<div className="grid grid-cols-2 gap-4 text-sm md:grid-cols-4">
 										<div>
 											<span className="font-medium">Properties:</span>
 											<div className="text-muted-foreground">{stats.totalProperties}</div>
@@ -262,14 +262,14 @@ export function SchemaGeneratorPanel({ input, error, isProcessing }: SchemaGener
 							<Separator />
 							
 							{/* Schema Content */}
-							<div className="bg-background border rounded-lg">
-								<pre className="p-4 text-sm overflow-auto max-h-96 whitespace-pre-wrap">
+							<div className="rounded-lg border bg-background">
+								<pre className="max-h-96 overflow-auto whitespace-pre-wrap p-4 text-sm">
 									<code>{schemaString}</code>
 								</pre>
 							</div>
 						</div>
 					) : (
-						<div className="flex items-center justify-center h-32 text-muted-foreground">
+						<div className="flex h-32 items-center justify-center text-muted-foreground">
 							Enter valid JSON to generate schema
 						</div>
 					)}
@@ -279,13 +279,13 @@ export function SchemaGeneratorPanel({ input, error, isProcessing }: SchemaGener
 			{/* Help Text */}
 			<Card>
 				<CardContent className="pt-6">
-					<div className="text-sm text-muted-foreground space-y-2">
+					<div className="space-y-2 text-muted-foreground text-sm">
 						<h4 className="font-medium text-foreground">About JSON Schema Generation</h4>
 						<p>
 							This tool generates JSON Schema Draft 2020-12 from your input JSON data. 
 							The schema describes the structure, data types, and constraints of your JSON.
 						</p>
-						<ul className="list-disc list-inside space-y-1 ml-2">
+						<ul className="ml-2 list-inside list-disc space-y-1">
 							<li><strong>Required Fields:</strong> Marks all non-null fields as required in the schema</li>
 							<li><strong>Additional Properties:</strong> Controls whether objects can have properties not defined in the schema</li>
 							<li><strong>Examples:</strong> Includes example values from your data in the schema</li>

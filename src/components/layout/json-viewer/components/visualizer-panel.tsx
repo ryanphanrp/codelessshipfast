@@ -212,10 +212,10 @@ export function VisualizerPanel({ input, error, isProcessing }: VisualizerPanelP
 					</CardTitle>
 				</CardHeader>
 				<CardContent className="space-y-4">
-					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+					<div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
 						{/* Layout Type */}
 						<div className="space-y-2">
-							<label className="text-sm font-medium">Layout</label>
+							<label className="font-medium text-sm">Layout</label>
 							<Select value={layout} onValueChange={(value: "tree" | "graph") => setLayout(value)}>
 								<SelectTrigger>
 									<SelectValue />
@@ -239,7 +239,7 @@ export function VisualizerPanel({ input, error, isProcessing }: VisualizerPanelP
 
 						{/* Max Depth */}
 						<div className="space-y-2">
-							<label className="text-sm font-medium">Max Depth</label>
+							<label className="font-medium text-sm">Max Depth</label>
 							<Select 
 								value={options.maxDepth.toString()} 
 								onValueChange={(value) => handleOptionChange("maxDepth", parseInt(value))}
@@ -259,7 +259,7 @@ export function VisualizerPanel({ input, error, isProcessing }: VisualizerPanelP
 
 						{/* Color Scheme */}
 						<div className="space-y-2">
-							<label className="text-sm font-medium">Color Scheme</label>
+							<label className="font-medium text-sm">Color Scheme</label>
 							<Select 
 								value={options.colorScheme} 
 								onValueChange={(value: "type" | "depth" | "value") => handleOptionChange("colorScheme", value)}
@@ -277,7 +277,7 @@ export function VisualizerPanel({ input, error, isProcessing }: VisualizerPanelP
 
 						{/* Node Size */}
 						<div className="space-y-2">
-							<label className="text-sm font-medium">Node Size</label>
+							<label className="font-medium text-sm">Node Size</label>
 							<Select 
 								value={options.nodeSize.toString()} 
 								onValueChange={(value) => handleOptionChange("nodeSize", parseInt(value))}
@@ -297,9 +297,9 @@ export function VisualizerPanel({ input, error, isProcessing }: VisualizerPanelP
 
 					{/* Search and Controls */}
 					<div className="flex flex-wrap items-center gap-2">
-						<div className="flex-1 min-w-[200px]">
+						<div className="min-w-[200px] flex-1">
 							<div className="relative">
-								<Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
+								<Search className="absolute top-2.5 left-2 h-4 w-4 text-muted-foreground" />
 								<Input
 									placeholder="Search nodes..."
 									value={searchTerm}
@@ -375,7 +375,7 @@ export function VisualizerPanel({ input, error, isProcessing }: VisualizerPanelP
 								size="sm"
 								onClick={() => exportVisualizationData("json")}
 							>
-								<Copy className="h-4 w-4 mr-1" />
+								<Copy className="mr-1 h-4 w-4" />
 								{copySuccess ? "Copied!" : "Copy Data"}
 							</Button>
 							<Button 
@@ -383,7 +383,7 @@ export function VisualizerPanel({ input, error, isProcessing }: VisualizerPanelP
 								size="sm"
 								onClick={() => exportVisualizationData("svg")}
 							>
-								<Download className="h-4 w-4 mr-1" />
+								<Download className="mr-1 h-4 w-4" />
 								SVG
 							</Button>
 							<Button 
@@ -391,7 +391,7 @@ export function VisualizerPanel({ input, error, isProcessing }: VisualizerPanelP
 								size="sm"
 								onClick={() => exportVisualizationData("png")}
 							>
-								<Download className="h-4 w-4 mr-1" />
+								<Download className="mr-1 h-4 w-4" />
 								PNG
 							</Button>
 						</div>
@@ -403,11 +403,11 @@ export function VisualizerPanel({ input, error, isProcessing }: VisualizerPanelP
 							<span className="text-sm">{processingError}</span>
 						</div>
 					) : !layoutData ? (
-						<div className="flex items-center justify-center h-[400px] text-muted-foreground">
+						<div className="flex h-[400px] items-center justify-center text-muted-foreground">
 							<span>Enter valid JSON to generate visualization</span>
 						</div>
 					) : (
-						<div className="border rounded-lg overflow-hidden">
+						<div className="overflow-hidden rounded-lg border">
 							<div 
 								ref={containerRef}
 								className="relative bg-background"
@@ -453,7 +453,7 @@ export function VisualizerPanel({ input, error, isProcessing }: VisualizerPanelP
 														fill={color}
 														stroke={isSelected ? "#2563eb" : isHighlighted ? "#f59e0b" : "#64748b"}
 														strokeWidth={isSelected ? 3 : isHighlighted ? 2 : 1}
-														className="cursor-pointer hover:opacity-80 transition-opacity"
+														className="cursor-pointer transition-opacity hover:opacity-80"
 														onClick={() => handleNodeClick(node)}
 													/>
 													
@@ -497,9 +497,9 @@ export function VisualizerPanel({ input, error, isProcessing }: VisualizerPanelP
 								onClick={() => toggleNodeVisibility(selectedNode.id)}
 							>
 								{hiddenNodes.has(selectedNode.id) ? (
-									<><EyeOff className="h-4 w-4 mr-1" /> Hidden</>
+									<><EyeOff className="mr-1 h-4 w-4" /> Hidden</>
 								) : (
-									<><Eye className="h-4 w-4 mr-1" /> Visible</>
+									<><Eye className="mr-1 h-4 w-4" /> Visible</>
 								)}
 							</Button>
 						</CardTitle>
@@ -509,7 +509,7 @@ export function VisualizerPanel({ input, error, isProcessing }: VisualizerPanelP
 							<div className="grid grid-cols-2 gap-4 text-sm">
 								<div>
 									<span className="font-medium">Path:</span>
-									<div className="mt-1 font-mono text-xs bg-muted p-2 rounded">
+									<div className="mt-1 rounded bg-muted p-2 font-mono text-xs">
 										{selectedNode.path}
 									</div>
 								</div>
@@ -523,7 +523,7 @@ export function VisualizerPanel({ input, error, isProcessing }: VisualizerPanelP
 							
 							<div>
 								<span className="font-medium">Value:</span>
-								<div className="mt-1 font-mono text-xs bg-muted p-2 rounded max-h-32 overflow-y-auto">
+								<div className="mt-1 max-h-32 overflow-y-auto rounded bg-muted p-2 font-mono text-xs">
 									{typeof selectedNode.value === 'string' 
 										? selectedNode.value 
 										: JSON.stringify(selectedNode.value, null, 2)

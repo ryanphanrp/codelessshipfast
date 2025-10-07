@@ -136,7 +136,7 @@ export function JsonPathPanel({ input, error, isProcessing }: JsonPathPanelProps
 
 					{/* Examples */}
 					<div className="space-y-2">
-						<h4 className="text-sm font-medium flex items-center gap-2">
+						<h4 className="flex items-center gap-2 font-medium text-sm">
 							<BookOpen className="h-3 w-3" />
 							Common Patterns
 						</h4>
@@ -146,7 +146,7 @@ export function JsonPathPanel({ input, error, isProcessing }: JsonPathPanelProps
 									key={index}
 									variant={selectedExample === example.expression ? "default" : "outline"}
 									size="sm"
-									className="h-7 text-xs font-mono"
+									className="h-7 font-mono text-xs"
 									onClick={() => handleExampleSelect(example.expression)}
 								>
 									{example.expression}
@@ -158,7 +158,7 @@ export function JsonPathPanel({ input, error, isProcessing }: JsonPathPanelProps
 					{/* Suggestions based on current JSON */}
 					{suggestions.length > 0 && (
 						<div className="space-y-2">
-							<h4 className="text-sm font-medium flex items-center gap-2">
+							<h4 className="flex items-center gap-2 font-medium text-sm">
 								<Target className="h-3 w-3" />
 								Available Paths
 							</h4>
@@ -169,7 +169,7 @@ export function JsonPathPanel({ input, error, isProcessing }: JsonPathPanelProps
 											key={index}
 											variant="ghost"
 											size="sm"
-											className="h-6 text-xs font-mono px-2"
+											className="h-6 px-2 font-mono text-xs"
 											onClick={() => handleSuggestionClick(suggestion)}
 										>
 											{suggestion}
@@ -195,7 +195,7 @@ export function JsonPathPanel({ input, error, isProcessing }: JsonPathPanelProps
 							)}
 							{evaluationError && (
 								<Badge variant="destructive">
-									<AlertCircle className="h-3 w-3 mr-1" />
+									<AlertCircle className="mr-1 h-3 w-3" />
 									Error
 								</Badge>
 							)}
@@ -230,28 +230,28 @@ export function JsonPathPanel({ input, error, isProcessing }: JsonPathPanelProps
 				
 				<CardContent>
 					{error || isProcessing ? (
-						<div className="flex items-center justify-center h-32 text-muted-foreground">
+						<div className="flex h-32 items-center justify-center text-muted-foreground">
 							{isProcessing ? "Processing..." : "Enter valid JSON to evaluate JSONPath"}
 						</div>
 					) : evaluationError ? (
 						<div className="space-y-2">
-							<p className="text-sm text-red-600">Evaluation Error:</p>
-							<div className="bg-red-50 border border-red-200 rounded p-3 text-sm text-red-700">
+							<p className="text-red-600 text-sm">Evaluation Error:</p>
+							<div className="rounded border border-red-200 bg-red-50 p-3 text-red-700 text-sm">
 								{evaluationError}
 							</div>
 						</div>
 					) : results.length > 0 ? (
 						<div className="space-y-4">
 							{/* Results Summary */}
-							<div className="bg-muted rounded-lg p-3">
-								<div className="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm">
+							<div className="rounded-lg bg-muted p-3">
+								<div className="grid grid-cols-2 gap-4 text-sm md:grid-cols-3">
 									<div>
 										<span className="font-medium">Matches:</span>
 										<div className="text-muted-foreground">{results.length}</div>
 									</div>
 									<div>
 										<span className="font-medium">Expression:</span>
-										<div className="text-muted-foreground font-mono text-xs">{expression}</div>
+										<div className="font-mono text-muted-foreground text-xs">{expression}</div>
 									</div>
 									<div>
 										<span className="font-medium">Type:</span>
@@ -265,19 +265,19 @@ export function JsonPathPanel({ input, error, isProcessing }: JsonPathPanelProps
 							<Separator />
 							
 							{/* Results List */}
-							<div className="space-y-3 max-h-96 overflow-y-auto">
+							<div className="max-h-96 space-y-3 overflow-y-auto">
 								{results.map((result, index) => (
-									<div key={index} className="border rounded-lg p-3 space-y-2">
+									<div key={index} className="space-y-2 rounded-lg border p-3">
 										<div className="flex items-center justify-between">
-											<span className="font-mono text-xs text-muted-foreground">
+											<span className="font-mono text-muted-foreground text-xs">
 												{result.path}
 											</span>
 											<Badge variant="outline" className="text-xs">
 												{typeof result.value}
 											</Badge>
 										</div>
-										<div className="bg-background border rounded p-2">
-											<pre className="text-sm whitespace-pre-wrap overflow-x-auto">
+										<div className="rounded border bg-background p-2">
+											<pre className="overflow-x-auto whitespace-pre-wrap text-sm">
 												<code>{JSON.stringify(result.value, null, 2)}</code>
 											</pre>
 										</div>
@@ -286,11 +286,11 @@ export function JsonPathPanel({ input, error, isProcessing }: JsonPathPanelProps
 							</div>
 						</div>
 					) : expression && expression !== "$" ? (
-						<div className="flex items-center justify-center h-32 text-muted-foreground">
+						<div className="flex h-32 items-center justify-center text-muted-foreground">
 							No matches found for this JSONPath expression
 						</div>
 					) : (
-						<div className="flex items-center justify-center h-32 text-muted-foreground">
+						<div className="flex h-32 items-center justify-center text-muted-foreground">
 							Enter a JSONPath expression to search the JSON data
 						</div>
 					)}
@@ -300,26 +300,26 @@ export function JsonPathPanel({ input, error, isProcessing }: JsonPathPanelProps
 			{/* Help Text */}
 			<Card>
 				<CardContent className="pt-6">
-					<div className="text-sm text-muted-foreground space-y-2">
+					<div className="space-y-2 text-muted-foreground text-sm">
 						<h4 className="font-medium text-foreground">JSONPath Syntax Guide</h4>
-						<div className="grid md:grid-cols-2 gap-4">
+						<div className="grid gap-4 md:grid-cols-2">
 							<div>
-								<h5 className="font-medium mb-2">Basic Syntax:</h5>
+								<h5 className="mb-2 font-medium">Basic Syntax:</h5>
 								<ul className="space-y-1 text-xs">
-									<li><code className="bg-muted px-1 rounded">$</code> - Root object</li>
-									<li><code className="bg-muted px-1 rounded">.property</code> - Child property</li>
-									<li><code className="bg-muted px-1 rounded">['property']</code> - Bracket notation</li>
-									<li><code className="bg-muted px-1 rounded">[0]</code> - Array index</li>
-									<li><code className="bg-muted px-1 rounded">[*]</code> - All array elements</li>
+									<li><code className="rounded bg-muted px-1">$</code> - Root object</li>
+									<li><code className="rounded bg-muted px-1">.property</code> - Child property</li>
+									<li><code className="rounded bg-muted px-1">['property']</code> - Bracket notation</li>
+									<li><code className="rounded bg-muted px-1">[0]</code> - Array index</li>
+									<li><code className="rounded bg-muted px-1">[*]</code> - All array elements</li>
 								</ul>
 							</div>
 							<div>
-								<h5 className="font-medium mb-2">Advanced Features:</h5>
+								<h5 className="mb-2 font-medium">Advanced Features:</h5>
 								<ul className="space-y-1 text-xs">
-									<li><code className="bg-muted px-1 rounded">..*</code> - Recursive descent</li>
-									<li><code className="bg-muted px-1 rounded">[0,1]</code> - Multiple indices</li>
-									<li><code className="bg-muted px-1 rounded">[start:end]</code> - Array slice</li>
-									<li><code className="bg-muted px-1 rounded">?(@.price &gt; 10)</code> - Filter expression</li>
+									<li><code className="rounded bg-muted px-1">..*</code> - Recursive descent</li>
+									<li><code className="rounded bg-muted px-1">[0,1]</code> - Multiple indices</li>
+									<li><code className="rounded bg-muted px-1">[start:end]</code> - Array slice</li>
+									<li><code className="rounded bg-muted px-1">?(@.price &gt; 10)</code> - Filter expression</li>
 								</ul>
 							</div>
 						</div>

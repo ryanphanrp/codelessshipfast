@@ -88,7 +88,7 @@ export function StatsPanel({ input, error, isProcessing }: StatsPanelProps) {
 
 	if (error || isProcessing) {
 		return (
-			<div className="flex items-center justify-center h-96 text-muted-foreground">
+			<div className="flex h-96 items-center justify-center text-muted-foreground">
 				{isProcessing ? "Analyzing JSON structure..." : "Enter valid JSON to see statistics"}
 			</div>
 		)
@@ -99,7 +99,7 @@ export function StatsPanel({ input, error, isProcessing }: StatsPanelProps) {
 			<Card>
 				<CardContent className="pt-6">
 					<div className="text-red-600 text-sm">
-						<p className="font-medium mb-2">Analysis Error:</p>
+						<p className="mb-2 font-medium">Analysis Error:</p>
 						<p>{analysisError}</p>
 					</div>
 				</CardContent>
@@ -109,7 +109,7 @@ export function StatsPanel({ input, error, isProcessing }: StatsPanelProps) {
 
 	if (!stats) {
 		return (
-			<div className="flex items-center justify-center h-96 text-muted-foreground">
+			<div className="flex h-96 items-center justify-center text-muted-foreground">
 				Enter valid JSON to analyze its structure and performance characteristics
 			</div>
 		)
@@ -133,12 +133,12 @@ export function StatsPanel({ input, error, isProcessing }: StatsPanelProps) {
 	return (
 		<div className="space-y-4">
 			{/* Overview Cards */}
-			<div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+			<div className="grid grid-cols-2 gap-4 md:grid-cols-4">
 				<Card>
 					<CardContent className="pt-6">
 						<div className="text-center">
-							<div className="text-2xl font-bold text-blue-600">{stats.totalNodes}</div>
-							<p className="text-xs text-muted-foreground">Total Nodes</p>
+							<div className="font-bold text-2xl text-blue-600">{stats.totalNodes}</div>
+							<p className="text-muted-foreground text-xs">Total Nodes</p>
 						</div>
 					</CardContent>
 				</Card>
@@ -146,8 +146,8 @@ export function StatsPanel({ input, error, isProcessing }: StatsPanelProps) {
 				<Card>
 					<CardContent className="pt-6">
 						<div className="text-center">
-							<div className="text-2xl font-bold text-purple-600">{stats.maxDepth}</div>
-							<p className="text-xs text-muted-foreground">Max Depth</p>
+							<div className="font-bold text-2xl text-purple-600">{stats.maxDepth}</div>
+							<p className="text-muted-foreground text-xs">Max Depth</p>
 						</div>
 					</CardContent>
 				</Card>
@@ -155,8 +155,8 @@ export function StatsPanel({ input, error, isProcessing }: StatsPanelProps) {
 				<Card>
 					<CardContent className="pt-6">
 						<div className="text-center">
-							<div className="text-2xl font-bold text-green-600">{formatBytes(stats.memoryEstimate)}</div>
-							<p className="text-xs text-muted-foreground">Memory Est.</p>
+							<div className="font-bold text-2xl text-green-600">{formatBytes(stats.memoryEstimate)}</div>
+							<p className="text-muted-foreground text-xs">Memory Est.</p>
 						</div>
 					</CardContent>
 				</Card>
@@ -164,10 +164,10 @@ export function StatsPanel({ input, error, isProcessing }: StatsPanelProps) {
 				<Card>
 					<CardContent className="pt-6">
 						<div className="text-center">
-							<div className={`text-2xl font-bold ${getComplexityColor(stats.complexityScore)}`}>
+							<div className={`font-bold text-2xl ${getComplexityColor(stats.complexityScore)}`}>
 								{stats.complexityScore}/100
 							</div>
-							<p className="text-xs text-muted-foreground">Complexity</p>
+							<p className="text-muted-foreground text-xs">Complexity</p>
 						</div>
 					</CardContent>
 				</Card>
@@ -194,8 +194,8 @@ export function StatsPanel({ input, error, isProcessing }: StatsPanelProps) {
 				<CardContent className="space-y-6">
 					{/* Structure Details */}
 					<div>
-						<h4 className="font-medium mb-3">Structure Overview</h4>
-						<div className="grid md:grid-cols-2 gap-6">
+						<h4 className="mb-3 font-medium">Structure Overview</h4>
+						<div className="grid gap-6 md:grid-cols-2">
 							<div className="space-y-3">
 								<div className="flex justify-between text-sm">
 									<span>Total Properties:</span>
@@ -242,7 +242,7 @@ export function StatsPanel({ input, error, isProcessing }: StatsPanelProps) {
 
 					{/* Data Type Distribution */}
 					<div>
-						<h4 className="font-medium mb-3">Data Type Distribution</h4>
+						<h4 className="mb-3 font-medium">Data Type Distribution</h4>
 						<div className="space-y-3">
 							{dataTypeChart.map((item, index) => (
 								<div key={index} className="space-y-2">
@@ -262,11 +262,11 @@ export function StatsPanel({ input, error, isProcessing }: StatsPanelProps) {
 					{propertyChart.length > 0 && (
 						<>
 							<div>
-								<h4 className="font-medium mb-3">Most Common Properties</h4>
+								<h4 className="mb-3 font-medium">Most Common Properties</h4>
 								<div className="space-y-2">
 									{propertyChart.map((item, index) => (
 										<div key={index} className="flex justify-between text-sm">
-											<code className="bg-muted px-2 py-1 rounded text-xs">{item.name}</code>
+											<code className="rounded bg-muted px-2 py-1 text-xs">{item.name}</code>
 											<span className="font-medium">{item.value} occurrences</span>
 										</div>
 									))}
@@ -278,48 +278,48 @@ export function StatsPanel({ input, error, isProcessing }: StatsPanelProps) {
 
 					{/* Performance Indicators */}
 					<div>
-						<h4 className="font-medium mb-3">Performance Indicators</h4>
-						<div className="grid md:grid-cols-3 gap-4">
-							<div className="text-center p-3 border rounded">
-								<div className="text-lg font-semibold">
+						<h4 className="mb-3 font-medium">Performance Indicators</h4>
+						<div className="grid gap-4 md:grid-cols-3">
+							<div className="rounded border p-3 text-center">
+								<div className="font-semibold text-lg">
 									{stats.parseTime < 10 ? (
-										<CheckCircle className="h-5 w-5 mx-auto text-green-600" />
+										<CheckCircle className="mx-auto h-5 w-5 text-green-600" />
 									) : stats.parseTime < 100 ? (
-										<AlertTriangle className="h-5 w-5 mx-auto text-yellow-600" />
+										<AlertTriangle className="mx-auto h-5 w-5 text-yellow-600" />
 									) : (
-										<AlertTriangle className="h-5 w-5 mx-auto text-red-600" />
+										<AlertTriangle className="mx-auto h-5 w-5 text-red-600" />
 									)}
 								</div>
-								<p className="text-xs text-muted-foreground mt-1">Parse Speed</p>
-								<p className="text-xs font-medium">{stats.parseTime}ms</p>
+								<p className="mt-1 text-muted-foreground text-xs">Parse Speed</p>
+								<p className="font-medium text-xs">{stats.parseTime}ms</p>
 							</div>
 							
-							<div className="text-center p-3 border rounded">
-								<div className="text-lg font-semibold">
+							<div className="rounded border p-3 text-center">
+								<div className="font-semibold text-lg">
 									{stats.maxDepth <= 5 ? (
-										<CheckCircle className="h-5 w-5 mx-auto text-green-600" />
+										<CheckCircle className="mx-auto h-5 w-5 text-green-600" />
 									) : stats.maxDepth <= 10 ? (
-										<AlertTriangle className="h-5 w-5 mx-auto text-yellow-600" />
+										<AlertTriangle className="mx-auto h-5 w-5 text-yellow-600" />
 									) : (
-										<AlertTriangle className="h-5 w-5 mx-auto text-red-600" />
+										<AlertTriangle className="mx-auto h-5 w-5 text-red-600" />
 									)}
 								</div>
-								<p className="text-xs text-muted-foreground mt-1">Nesting Depth</p>
-								<p className="text-xs font-medium">{stats.maxDepth} levels</p>
+								<p className="mt-1 text-muted-foreground text-xs">Nesting Depth</p>
+								<p className="font-medium text-xs">{stats.maxDepth} levels</p>
 							</div>
 							
-							<div className="text-center p-3 border rounded">
-								<div className="text-lg font-semibold">
+							<div className="rounded border p-3 text-center">
+								<div className="font-semibold text-lg">
 									{stats.memoryEstimate < 1024 * 1024 ? (
-										<CheckCircle className="h-5 w-5 mx-auto text-green-600" />
+										<CheckCircle className="mx-auto h-5 w-5 text-green-600" />
 									) : stats.memoryEstimate < 10 * 1024 * 1024 ? (
-										<AlertTriangle className="h-5 w-5 mx-auto text-yellow-600" />
+										<AlertTriangle className="mx-auto h-5 w-5 text-yellow-600" />
 									) : (
-										<AlertTriangle className="h-5 w-5 mx-auto text-red-600" />
+										<AlertTriangle className="mx-auto h-5 w-5 text-red-600" />
 									)}
 								</div>
-								<p className="text-xs text-muted-foreground mt-1">Memory Usage</p>
-								<p className="text-xs font-medium">{formatBytes(stats.memoryEstimate)}</p>
+								<p className="mt-1 text-muted-foreground text-xs">Memory Usage</p>
+								<p className="font-medium text-xs">{formatBytes(stats.memoryEstimate)}</p>
 							</div>
 						</div>
 					</div>
@@ -338,8 +338,8 @@ export function StatsPanel({ input, error, isProcessing }: StatsPanelProps) {
 					<CardContent>
 						<div className="space-y-3">
 							{suggestions.map((suggestion, index) => (
-								<div key={index} className="flex items-start gap-3 p-3 bg-muted rounded-lg">
-									<div className="flex-shrink-0 mt-0.5">
+								<div key={index} className="flex items-start gap-3 rounded-lg bg-muted p-3">
+									<div className="mt-0.5 flex-shrink-0">
 										{suggestion.includes("well-optimized") ? (
 											<CheckCircle className="h-4 w-4 text-green-600" />
 										) : (
@@ -377,11 +377,11 @@ export function StatsPanel({ input, error, isProcessing }: StatsPanelProps) {
 			{/* Help Text */}
 			<Card>
 				<CardContent className="pt-6">
-					<div className="text-sm text-muted-foreground space-y-2">
+					<div className="space-y-2 text-muted-foreground text-sm">
 						<h4 className="font-medium text-foreground">Analysis Metrics</h4>
-						<div className="grid md:grid-cols-2 gap-4">
+						<div className="grid gap-4 md:grid-cols-2">
 							<div>
-								<h5 className="font-medium mb-2">Structure Metrics:</h5>
+								<h5 className="mb-2 font-medium">Structure Metrics:</h5>
 								<ul className="space-y-1 text-xs">
 									<li><strong>Total Nodes:</strong> Count of all JSON elements</li>
 									<li><strong>Max Depth:</strong> Deepest nesting level</li>
@@ -390,7 +390,7 @@ export function StatsPanel({ input, error, isProcessing }: StatsPanelProps) {
 								</ul>
 							</div>
 							<div>
-								<h5 className="font-medium mb-2">Performance Metrics:</h5>
+								<h5 className="mb-2 font-medium">Performance Metrics:</h5>
 								<ul className="space-y-1 text-xs">
 									<li><strong>Parse Time:</strong> JSON parsing duration</li>
 									<li><strong>Memory Est:</strong> Approximate memory usage</li>

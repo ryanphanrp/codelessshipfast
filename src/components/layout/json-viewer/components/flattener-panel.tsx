@@ -212,19 +212,19 @@ export function FlattenerPanel({ input, error, isProcessing }: FlattenerPanelPro
 					<Tabs value={mode} onValueChange={(v) => handleModeChange(v as typeof mode)}>
 						<TabsList className="grid w-full grid-cols-2">
 							<TabsTrigger value="flatten" className="text-sm">
-								<UnfoldHorizontal className="h-3 w-3 mr-2" />
+								<UnfoldHorizontal className="mr-2 h-3 w-3" />
 								Flatten
 							</TabsTrigger>
 							<TabsTrigger value="unflatten" className="text-sm">
-								<FoldHorizontal className="h-3 w-3 mr-2" />
+								<FoldHorizontal className="mr-2 h-3 w-3" />
 								Unflatten
 							</TabsTrigger>
 						</TabsList>
 					</Tabs>
 
-					<div className="grid md:grid-cols-3 gap-4">
+					<div className="grid gap-4 md:grid-cols-3">
 						<div className="space-y-2">
-							<label className="text-sm font-medium">Separator</label>
+							<label className="font-medium text-sm">Separator</label>
 							<Select
 								value={options.separator}
 								onValueChange={(value) => handleOptionChange("separator", value)}
@@ -242,7 +242,7 @@ export function FlattenerPanel({ input, error, isProcessing }: FlattenerPanelPro
 						</div>
 
 						<div className="space-y-2">
-							<label className="text-sm font-medium">Array Notation</label>
+							<label className="font-medium text-sm">Array Notation</label>
 							<Select
 								value={options.arrayNotation}
 								onValueChange={(value) => handleOptionChange("arrayNotation", value as "bracket" | "dot")}
@@ -258,7 +258,7 @@ export function FlattenerPanel({ input, error, isProcessing }: FlattenerPanelPro
 						</div>
 
 						<div className="space-y-2">
-							<label className="text-sm font-medium">Options</label>
+							<label className="font-medium text-sm">Options</label>
 							<div className="flex items-center space-x-2">
 								<Checkbox
 									id="preserveArrays"
@@ -317,7 +317,7 @@ export function FlattenerPanel({ input, error, isProcessing }: FlattenerPanelPro
 							)}
 							{processingError && (
 								<Badge variant="destructive">
-									<AlertTriangle className="h-3 w-3 mr-1" />
+									<AlertTriangle className="mr-1 h-3 w-3" />
 									Error
 								</Badge>
 							)}
@@ -355,13 +355,13 @@ export function FlattenerPanel({ input, error, isProcessing }: FlattenerPanelPro
 				</CardHeader>
 				<CardContent>
 					{error || isProcessing ? (
-						<div className="flex items-center justify-center h-32 text-muted-foreground">
+						<div className="flex h-32 items-center justify-center text-muted-foreground">
 							{isProcessing ? "Processing..." : "Enter valid JSON to flatten/unflatten"}
 						</div>
 					) : processingError ? (
 						<div className="space-y-2">
-							<p className="text-sm text-red-600">Processing Error:</p>
-							<div className="bg-red-50 border border-red-200 rounded p-3 text-sm text-red-700">
+							<p className="text-red-600 text-sm">Processing Error:</p>
+							<div className="rounded border border-red-200 bg-red-50 p-3 text-red-700 text-sm">
 								{processingError}
 							</div>
 						</div>
@@ -370,8 +370,8 @@ export function FlattenerPanel({ input, error, isProcessing }: FlattenerPanelPro
 							{/* Preview */}
 							{mode === "flatten" && input && (
 								<div>
-									<h4 className="font-medium mb-2 text-sm">Structure Comparison</h4>
-									<div className="grid md:grid-cols-2 gap-4 text-sm">
+									<h4 className="mb-2 font-medium text-sm">Structure Comparison</h4>
+									<div className="grid gap-4 text-sm md:grid-cols-2">
 										<div>
 											<span className="text-muted-foreground">Original depth:</span>
 											<span className="ml-2 font-medium">
@@ -400,14 +400,14 @@ export function FlattenerPanel({ input, error, isProcessing }: FlattenerPanelPro
 							<Separator />
 							
 			{/* Result Display */}
-							<div className="bg-background border rounded-lg">
-								<pre className="p-4 text-sm overflow-auto max-h-96 whitespace-pre-wrap">
+							<div className="rounded-lg border bg-background">
+								<pre className="max-h-96 overflow-auto whitespace-pre-wrap p-4 text-sm">
 									<code>{mode === "flatten" ? flattened : unflattened}</code>
 								</pre>
 							</div>
 						</div>
 					) : (
-						<div className="flex items-center justify-center h-32 text-muted-foreground">
+						<div className="flex h-32 items-center justify-center text-muted-foreground">
 							{mode === "flatten" ? "Enter JSON to flatten" : "Generate flattened data first to unflatten"}
 						</div>
 					)}
@@ -417,11 +417,11 @@ export function FlattenerPanel({ input, error, isProcessing }: FlattenerPanelPro
 			{/* Help Text */}
 			<Card>
 				<CardContent className="pt-6">
-					<div className="text-sm text-muted-foreground space-y-2">
+					<div className="space-y-2 text-muted-foreground text-sm">
 						<h4 className="font-medium text-foreground">JSON Flattening Guide</h4>
-						<div className="grid md:grid-cols-2 gap-4">
+						<div className="grid gap-4 md:grid-cols-2">
 							<div>
-								<h5 className="font-medium mb-2">Flattening Options:</h5>
+								<h5 className="mb-2 font-medium">Flattening Options:</h5>
 								<ul className="space-y-1 text-xs">
 									<li><strong>Separator:</strong> Character used to join nested keys</li>
 									<li><strong>Array Notation:</strong> How array indices are represented</li>
@@ -429,7 +429,7 @@ export function FlattenerPanel({ input, error, isProcessing }: FlattenerPanelPro
 								</ul>
 							</div>
 							<div>
-								<h5 className="font-medium mb-2">Use Cases:</h5>
+								<h5 className="mb-2 font-medium">Use Cases:</h5>
 								<ul className="space-y-1 text-xs">
 									<li>• Convert nested JSON for CSV export</li>
 									<li>• Simplify data structures for processing</li>

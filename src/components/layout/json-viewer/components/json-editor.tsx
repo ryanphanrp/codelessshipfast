@@ -145,7 +145,7 @@ export function JsonEditor({
 				{/* Syntax Highlighter Background */}
 				{value && !isFocused && (
 					<div 
-						className="absolute inset-0 pointer-events-none overflow-hidden"
+						className="pointer-events-none absolute inset-0 overflow-hidden"
 						style={{ height }}
 					>
 						<SyntaxHighlighter
@@ -190,8 +190,8 @@ export function JsonEditor({
 					spellCheck={false}
 					className={cn(
 						"w-full resize-none rounded-md border p-3 font-mono text-sm transition-colors",
-						"focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent",
-						"disabled:opacity-50 disabled:cursor-not-allowed",
+						"focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500",
+						"disabled:cursor-not-allowed disabled:opacity-50",
 						// Make textarea transparent when not focused to show syntax highlighting
 						isFocused ? "bg-white text-gray-900" : "bg-transparent text-transparent caret-gray-900",
 						!isValidJson() && "border-red-300 focus:ring-red-500",
@@ -207,7 +207,7 @@ export function JsonEditor({
 
 			{/* Validation indicator */}
 			{value.trim() && (
-				<div className="absolute -top-2 right-2 z-10">
+				<div className="-top-2 absolute right-2 z-10">
 					<div
 						className={cn(
 							"h-2 w-2 rounded-full",
@@ -219,8 +219,8 @@ export function JsonEditor({
 			)}
 
 			{/* Format hint */}
-			<div className="absolute bottom-2 right-2 z-10">
-				<div className="text-xs text-gray-400 bg-white/80 px-2 py-1 rounded">
+			<div className="absolute right-2 bottom-2 z-10">
+				<div className="rounded bg-white/80 px-2 py-1 text-gray-400 text-xs">
 					{(navigator.platform.includes('Mac') ? 'Cmd' : 'Ctrl') + '+F to format'}
 				</div>
 			</div>
