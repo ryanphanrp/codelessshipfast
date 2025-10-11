@@ -1,25 +1,38 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Checkbox } from "@/components/ui/checkbox"
+import {
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+	SelectValue
+} from "@/components/ui/select"
 import { Separator } from "@/components/ui/separator"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Copy, Download, UnfoldHorizontal, FoldHorizontal, CheckCircle, AlertTriangle } from "lucide-react"
-import { 
-	flattenJson, 
-	unflattenJson, 
+import {
+	AlertTriangle,
+	CheckCircle,
+	Copy,
+	Download,
+	FoldHorizontal,
+	UnfoldHorizontal
+} from "lucide-react"
+import { useEffect, useState } from "react"
+import type { FlattenOptions } from "../types"
+import {
+	FLATTEN_EXAMPLES,
 	convertToCSV,
+	flattenJson,
 	generateFlattenPreview,
 	generateUnflattenPreview,
-	validateFlattenedData,
 	suggestOptimalOptions,
-	FLATTEN_EXAMPLES
+	unflattenJson,
+	validateFlattenedData
 } from "../utils/json-flattener"
-import type { FlattenOptions } from "../types"
 
 interface FlattenerPanelProps {
 	input: string
@@ -76,15 +89,15 @@ export function FlattenerPanel({ input, error, isProcessing }: FlattenerPanelPro
 		if (newMode === "unflatten") {
 			// Initialize with flattened data if available
 			if (flattened) {
-		try {
-			const parsed = JSON.parse(flattened)
-			if (typeof parsed !== 'object' || parsed === null || Array.isArray(parsed)) {
-				setProcessingError('Invalid JSON: must be an object')
-				return
-			}
-			const validation = validateFlattenedData(parsed as Record<string, any>)
-			if (validation.valid) {
-				const result = unflattenJson(parsed as Record<string, any>, options)
+				try {
+					const parsed = JSON.parse(flattened)
+					if (typeof parsed !== "object" || parsed === null || Array.isArray(parsed)) {
+						setProcessingError("Invalid JSON: must be an object")
+						return
+					}
+					const validation = validateFlattenedData(parsed as Record<string, any>)
+					if (validation.valid) {
+						const result = unflattenJson(parsed as Record<string, any>, options)
 						setUnflattened(JSON.stringify(result, null, 2))
 					} else {
 						setProcessingError(`Validation failed: ${validation.errors.join(", ")}`)
@@ -97,7 +110,7 @@ export function FlattenerPanel({ input, error, isProcessing }: FlattenerPanelPro
 	}
 
 	const handleOptionChange = (key: keyof FlattenOptions, value: any) => {
-		setOptions(prev => ({
+		setOptions((prev) => ({
 			...prev,
 			[key]: value
 		}))
@@ -105,20 +118,20 @@ export function FlattenerPanel({ input, error, isProcessing }: FlattenerPanelPro
 
 	const processUnflatten = () => {
 		if (flattened) {
-		try {
-			const parsed = JSON.parse(flattened)
-			if (typeof parsed !== 'object' || parsed === null || Array.isArray(parsed)) {
-				setProcessingError('Invalid JSON: must be an object')
-				return
-			}
-			const validation = validateFlattenedData(parsed as Record<string, any>)
-			
-			if (!validation.valid) {
-				setProcessingError(`Validation failed: ${validation.errors.join(", ")}`)
-				return
-			}
+			try {
+				const parsed = JSON.parse(flattened)
+				if (typeof parsed !== "object" || parsed === null || Array.isArray(parsed)) {
+					setProcessingError("Invalid JSON: must be an object")
+					return
+				}
+				const validation = validateFlattenedData(parsed as Record<string, any>)
 
-			const result = unflattenJson(parsed as Record<string, any>, options)
+				if (!validation.valid) {
+					setProcessingError(`Validation failed: ${validation.errors.join(", ")}`)
+					return
+				}
+
+				const result = unflattenJson(parsed as Record<string, any>, options)
 				setUnflattened(JSON.stringify(result, null, 2))
 				setProcessingError(null)
 			} catch (err) {
@@ -148,14 +161,14 @@ export function FlattenerPanel({ input, error, isProcessing }: FlattenerPanelPro
 			filename = `${mode === "flatten" ? "flattened" : "unflattened"}.json`
 			mimeType = "application/json"
 		} else {
-		try {
-			const parsed = JSON.parse(flattened)
-			if (typeof parsed !== 'object' || parsed === null || Array.isArray(parsed)) {
-				return
-			}
-			content = convertToCSV(parsed as Record<string, any>)
-			filename = "flattened.csv"
-			mimeType = "text/csv"
+			try {
+				const parsed = JSON.parse(flattened)
+				if (typeof parsed !== "object" || parsed === null || Array.isArray(parsed)) {
+					return
+				}
+				content = convertToCSV(parsed as Record<string, any>)
+				filename = "flattened.csv"
+				mimeType = "text/csv"
 			} catch {
 				return
 			}
@@ -189,7 +202,7 @@ export function FlattenerPanel({ input, error, isProcessing }: FlattenerPanelPro
 	const getResultCount = () => {
 		try {
 			const parsed = JSON.parse(mode === "flatten" ? flattened : unflattened)
-			if (typeof parsed === 'object' && parsed !== null && !Array.isArray(parsed)) {
+			if (typeof parsed === "object" && parsed !== null && !Array.isArray(parsed)) {
 				return mode === "flatten" ? Object.keys(parsed).length : "N/A"
 			}
 			return 0
@@ -204,7 +217,11 @@ export function FlattenerPanel({ input, error, isProcessing }: FlattenerPanelPro
 			<Card>
 				<CardHeader>
 					<CardTitle className="flex items-center gap-2 text-sm">
-						{mode === "flatten" ? <UnfoldHorizontal className="h-4 w-4" /> : <FoldHorizontal className="h-4 w-4" />}
+						{mode === "flatten" ? (
+							<UnfoldHorizontal className="h-4 w-4" />
+						) : (
+							<FoldHorizontal className="h-4 w-4" />
+						)}
 						Flatten/Unflatten Options
 					</CardTitle>
 				</CardHeader>
@@ -227,8 +244,7 @@ export function FlattenerPanel({ input, error, isProcessing }: FlattenerPanelPro
 							<label className="font-medium text-sm">Separator</label>
 							<Select
 								value={options.separator}
-								onValueChange={(value) => handleOptionChange("separator", value)}
-							>
+								onValueChange={(value) => handleOptionChange("separator", value)}>
 								<SelectTrigger>
 									<SelectValue />
 								</SelectTrigger>
@@ -245,8 +261,9 @@ export function FlattenerPanel({ input, error, isProcessing }: FlattenerPanelPro
 							<label className="font-medium text-sm">Array Notation</label>
 							<Select
 								value={options.arrayNotation}
-								onValueChange={(value) => handleOptionChange("arrayNotation", value as "bracket" | "dot")}
-							>
+								onValueChange={(value) =>
+									handleOptionChange("arrayNotation", value as "bracket" | "dot")
+								}>
 								<SelectTrigger>
 									<SelectValue />
 								</SelectTrigger>
@@ -294,8 +311,7 @@ export function FlattenerPanel({ input, error, isProcessing }: FlattenerPanelPro
 									variant={selectedExample === key ? "default" : "outline"}
 									size="sm"
 									onClick={() => loadExample(key)}
-									className="text-xs"
-								>
+									className="text-xs">
 									{example.name}
 								</Button>
 							))}
@@ -322,22 +338,20 @@ export function FlattenerPanel({ input, error, isProcessing }: FlattenerPanelPro
 								</Badge>
 							)}
 						</CardTitle>
-						
+
 						<div className="flex gap-2">
 							<Button
 								variant="outline"
 								size="sm"
 								onClick={copyResult}
-								disabled={!(mode === "flatten" ? flattened : unflattened)}
-							>
+								disabled={!(mode === "flatten" ? flattened : unflattened)}>
 								{copySuccess ? <CheckCircle className="h-3 w-3" /> : <Copy className="h-3 w-3" />}
 							</Button>
 							<Button
 								variant="outline"
 								size="sm"
 								onClick={() => downloadResult("json")}
-								disabled={!flattened}
-							>
+								disabled={!flattened}>
 								<Download className="h-3 w-3" />
 							</Button>
 							{mode === "flatten" && (
@@ -345,8 +359,7 @@ export function FlattenerPanel({ input, error, isProcessing }: FlattenerPanelPro
 									variant="outline"
 									size="sm"
 									onClick={() => downloadResult("csv")}
-									disabled={!flattened}
-								>
+									disabled={!flattened}>
 									CSV
 								</Button>
 							)}
@@ -396,10 +409,10 @@ export function FlattenerPanel({ input, error, isProcessing }: FlattenerPanelPro
 									</div>
 								</div>
 							)}
-							
+
 							<Separator />
-							
-			{/* Result Display */}
+
+							{/* Result Display */}
 							<div className="rounded-lg border bg-background">
 								<pre className="max-h-96 overflow-auto whitespace-pre-wrap p-4 text-sm">
 									<code>{mode === "flatten" ? flattened : unflattened}</code>
@@ -408,7 +421,9 @@ export function FlattenerPanel({ input, error, isProcessing }: FlattenerPanelPro
 						</div>
 					) : (
 						<div className="flex h-32 items-center justify-center text-muted-foreground">
-							{mode === "flatten" ? "Enter JSON to flatten" : "Generate flattened data first to unflatten"}
+							{mode === "flatten"
+								? "Enter JSON to flatten"
+								: "Generate flattened data first to unflatten"}
 						</div>
 					)}
 				</CardContent>
@@ -423,9 +438,15 @@ export function FlattenerPanel({ input, error, isProcessing }: FlattenerPanelPro
 							<div>
 								<h5 className="mb-2 font-medium">Flattening Options:</h5>
 								<ul className="space-y-1 text-xs">
-									<li><strong>Separator:</strong> Character used to join nested keys</li>
-									<li><strong>Array Notation:</strong> How array indices are represented</li>
-									<li><strong>Preserve Arrays:</strong> Keep arrays as-is instead of flattening</li>
+									<li>
+										<strong>Separator:</strong> Character used to join nested keys
+									</li>
+									<li>
+										<strong>Array Notation:</strong> How array indices are represented
+									</li>
+									<li>
+										<strong>Preserve Arrays:</strong> Keep arrays as-is instead of flattening
+									</li>
 								</ul>
 							</div>
 							<div>

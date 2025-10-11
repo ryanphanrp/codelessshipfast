@@ -18,7 +18,8 @@ export default function Page() {
 					<div className="space-y-2">
 						<h3 className="font-medium text-lg">Appearance</h3>
 						<p className="text-muted-foreground text-sm">
-							Customize the appearance of the app. Automatically switch between day and night themes.
+							Customize the appearance of the app. Automatically switch between day and night
+							themes.
 						</p>
 					</div>
 					<div className="grid grid-cols-3 gap-4">

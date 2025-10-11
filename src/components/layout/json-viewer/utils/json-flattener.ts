@@ -1,7 +1,7 @@
 import type { FlattenOptions } from "../types"
 
 export function flattenJson(
-	json: any, 
+	json: any,
 	options: FlattenOptions = { separator: ".", arrayNotation: "bracket", preserveArrays: false }
 ): Record<string, any> {
 	const { separator, arrayNotation, preserveArrays } = options
@@ -18,17 +18,14 @@ export function flattenJson(
 				flattened[prefix] = obj
 			} else {
 				obj.forEach((item, index) => {
-					const key = arrayNotation === "bracket" 
-						? `${prefix}[${index}]`
-						: `${prefix}${separator}${index}`
+					const key =
+						arrayNotation === "bracket" ? `${prefix}[${index}]` : `${prefix}${separator}${index}`
 					flatten(item, key)
 				})
 			}
 		} else if (typeof obj === "object") {
-			Object.keys(obj).forEach(key => {
-				const newKey = prefix 
-					? `${prefix}${separator}${key}`
-					: key
+			Object.keys(obj).forEach((key) => {
+				const newKey = prefix ? `${prefix}${separator}${key}` : key
 				flatten(obj[key], newKey)
 			})
 		} else {
@@ -41,31 +38,31 @@ export function flattenJson(
 }
 
 export function unflattenJson(
-	flattened: Record<string, any>, 
+	flattened: Record<string, any>,
 	options: FlattenOptions = { separator: ".", arrayNotation: "bracket", preserveArrays: false }
 ): any {
 	const { separator, arrayNotation } = options
 	const result: any = {}
 
-	Object.keys(flattened).forEach(key => {
+	Object.keys(flattened).forEach((key) => {
 		const value = flattened[key]
 		const keys = parseKey(key, separator, arrayNotation)
-		
+
 		let current = result
-		
+
 		for (let i = 0; i < keys.length - 1; i++) {
 			const currentKey = keys[i]
 			const nextKey = keys[i + 1]
-			
+
 			if (!(currentKey in current)) {
 				// Determine if next level should be array or object
 				const isNextArray = typeof nextKey === "number"
 				current[currentKey] = isNextArray ? [] : {}
 			}
-			
+
 			current = current[currentKey]
 		}
-		
+
 		current[keys[keys.length - 1]] = value
 	})
 
@@ -74,11 +71,11 @@ export function unflattenJson(
 
 function parseKey(key: string, separator: string, arrayNotation: string): Array<string | number> {
 	const keys: Array<string | number> = []
-	
+
 	if (arrayNotation === "bracket") {
 		// Handle keys like "a.b[0].c[1].d"
 		const parts = key.split(separator)
-		
+
 		for (const part of parts) {
 			const bracketMatch = part.match(/^(.+?)\[(\d+)\]$/)
 			if (bracketMatch) {
@@ -91,7 +88,7 @@ function parseKey(key: string, separator: string, arrayNotation: string): Array<
 	} else {
 		// Handle keys like "a.b.0.c.1.d"
 		const parts = key.split(separator)
-		
+
 		for (const part of parts) {
 			const asNumber = parseInt(part, 10)
 			if (!isNaN(asNumber) && asNumber.toString() === part) {
@@ -101,13 +98,13 @@ function parseKey(key: string, separator: string, arrayNotation: string): Array<
 			}
 		}
 	}
-	
+
 	return keys
 }
 
 export function convertToCSV(flattened: Record<string, any>): string {
 	const entries = Object.entries(flattened)
-	
+
 	if (entries.length === 0) {
 		return ""
 	}
@@ -120,30 +117,30 @@ export function convertToCSV(flattened: Record<string, any>): string {
 	])
 
 	const csvContent = [headers, ...rows]
-		.map(row => row.map(cell => `"${cell?.toString().replace(/"/g, '""') || ""}"`).join(","))
+		.map((row) => row.map((cell) => `"${cell?.toString().replace(/"/g, '""') || ""}"`).join(","))
 		.join("\n")
 
 	return csvContent
 }
 
 export function convertFromCSV(csv: string): Record<string, any> {
-	const lines = csv.split("\n").filter(line => line.trim())
-	
+	const lines = csv.split("\n").filter((line) => line.trim())
+
 	if (lines.length < 2) {
 		throw new Error("Invalid CSV format")
 	}
 
 	const flattened: Record<string, any> = {}
-	
+
 	// Skip header row
 	for (let i = 1; i < lines.length; i++) {
 		const line = lines[i]
 		const [key, valueStr, type] = parseCSVLine(line)
-		
+
 		if (!key) continue
 
 		let value: any
-		
+
 		try {
 			if (valueStr === "null") {
 				value = null
@@ -161,7 +158,7 @@ export function convertFromCSV(csv: string): Record<string, any> {
 		} catch {
 			value = valueStr // Fallback to string if parsing fails
 		}
-		
+
 		flattened[key] = value
 	}
 
@@ -176,7 +173,7 @@ function parseCSVLine(line: string): [string, string, string] {
 
 	while (i < line.length) {
 		const char = line[i]
-		
+
 		if (char === '"') {
 			if (inQuotes && line[i + 1] === '"') {
 				current += '"'
@@ -185,7 +182,7 @@ function parseCSVLine(line: string): [string, string, string] {
 				inQuotes = !inQuotes
 				i++
 			}
-		} else if (char === ',' && !inQuotes) {
+		} else if (char === "," && !inQuotes) {
 			result.push(current)
 			current = ""
 			i++
@@ -194,13 +191,16 @@ function parseCSVLine(line: string): [string, string, string] {
 			i++
 		}
 	}
-	
+
 	result.push(current)
-	
+
 	return [result[0] || "", result[1] || "", result[2] || ""]
 }
 
-export function generateFlattenPreview(json: any, options: FlattenOptions): {
+export function generateFlattenPreview(
+	json: any,
+	options: FlattenOptions
+): {
 	original: string
 	flattened: string
 	count: number
@@ -215,7 +215,10 @@ export function generateFlattenPreview(json: any, options: FlattenOptions): {
 	}
 }
 
-export function generateUnflattenPreview(flattened: Record<string, any>, options: FlattenOptions): {
+export function generateUnflattenPreview(
+	flattened: Record<string, any>,
+	options: FlattenOptions
+): {
 	flattened: string
 	unflattened: string
 	success: boolean
@@ -223,7 +226,7 @@ export function generateUnflattenPreview(flattened: Record<string, any>, options
 } {
 	try {
 		const unflattened = unflattenJson(flattened, options)
-		
+
 		return {
 			flattened: JSON.stringify(flattened, null, 2),
 			unflattened: JSON.stringify(unflattened, null, 2),
@@ -251,7 +254,7 @@ export function validateFlattenedData(flattened: Record<string, any>): {
 		warnings.push("No data to unflatten")
 	}
 
-	Object.keys(flattened).forEach(key => {
+	Object.keys(flattened).forEach((key) => {
 		if (!key || key.trim() === "") {
 			errors.push("Empty key found")
 		}
@@ -279,12 +282,12 @@ export function suggestOptimalOptions(json: any): FlattenOptions {
 
 	function analyze(obj: any, depth = 0): void {
 		maxDepth = Math.max(maxDepth, depth)
-		
+
 		if (Array.isArray(obj)) {
 			hasArrays = true
-			obj.forEach(item => analyze(item, depth + 1))
+			obj.forEach((item) => analyze(item, depth + 1))
 		} else if (typeof obj === "object" && obj !== null) {
-			Object.values(obj).forEach(value => analyze(value, depth + 1))
+			Object.values(obj).forEach((value) => analyze(value, depth + 1))
 		}
 	}
 
@@ -347,7 +350,7 @@ export const FLATTEN_EXAMPLES = {
 						country: "USA",
 						coordinates: {
 							lat: 40.7128,
-							lng: -74.0060
+							lng: -74.006
 						}
 					}
 				}

@@ -22,10 +22,10 @@ export function PropertyLineItem({ line, lineNumber }: PropertyLineItemProps) {
 	}
 
 	// Parse the line to separate key and value
-	const separatorIndex = line.indexOf('=')
+	const separatorIndex = line.indexOf("=")
 	const hasValue = separatorIndex > -1
 	const key = hasValue ? line.substring(0, separatorIndex).trim() : line.trim()
-	const value = hasValue ? line.substring(separatorIndex + 1).trim() : ''
+	const value = hasValue ? line.substring(separatorIndex + 1).trim() : ""
 
 	// Don't render empty lines
 	if (!line.trim()) return null
@@ -42,13 +42,9 @@ export function PropertyLineItem({ line, lineNumber }: PropertyLineItemProps) {
 				<div className="flex-1 font-mono text-sm">
 					{hasValue ? (
 						<>
-							<span className="font-semibold text-blue-600 dark:text-blue-400">
-								{key}
-							</span>
+							<span className="font-semibold text-blue-600 dark:text-blue-400">{key}</span>
 							<span className="mx-1 text-muted-foreground">=</span>
-							<span className="text-green-600 dark:text-green-400">
-								{value || '""'}
-							</span>
+							<span className="text-green-600 dark:text-green-400">{value || '""'}</span>
 						</>
 					) : (
 						<span className="text-foreground">{line}</span>
@@ -59,11 +55,7 @@ export function PropertyLineItem({ line, lineNumber }: PropertyLineItemProps) {
 				<div className="opacity-0 transition-opacity group-hover:opacity-100">
 					<Tooltip>
 						<TooltipTrigger asChild>
-							<Button
-								variant="outline"
-								size="sm"
-								onClick={handleCopy}
-								className="h-7 w-7 p-0">
+							<Button variant="outline" size="sm" onClick={handleCopy} className="h-7 w-7 p-0">
 								{copied ? (
 									<Check className="h-3.5 w-3.5 text-green-600" />
 								) : (

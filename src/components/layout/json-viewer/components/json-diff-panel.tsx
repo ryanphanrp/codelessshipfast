@@ -1,23 +1,23 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
-import { Copy, Download, GitCompare, Eye, EyeOff, RotateCcw, CheckCircle } from "lucide-react"
-import { JsonEditor } from "./json-editor"
-import { 
-	compareJson, 
-	generateDiffSummary, 
-	filterDifferences,
-	generateUnifiedDiff,
-	exportDiffAsJson,
-	exportDiffAsCsv,
-	calculateSimilarityScore
-} from "../utils/json-diff"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { CheckCircle, Copy, Download, Eye, EyeOff, GitCompare, RotateCcw } from "lucide-react"
+import { useEffect, useState } from "react"
 import type { JsonDiffItem } from "../types"
+import {
+	calculateSimilarityScore,
+	compareJson,
+	exportDiffAsCsv,
+	exportDiffAsJson,
+	filterDifferences,
+	generateDiffSummary,
+	generateUnifiedDiff
+} from "../utils/json-diff"
+import { JsonEditor } from "./json-editor"
 
 interface JsonDiffPanelProps {
 	input: string
@@ -56,7 +56,7 @@ export function JsonDiffPanel({ input, error, isProcessing }: JsonDiffPanelProps
 		try {
 			const leftParsed = JSON.parse(leftJson)
 			const rightParsed = JSON.parse(rightJson)
-			
+
 			const diffResults = compareJson(leftParsed, rightParsed)
 			setDifferences(diffResults)
 		} catch (err) {
@@ -73,7 +73,7 @@ export function JsonDiffPanel({ input, error, isProcessing }: JsonDiffPanelProps
 			const debounceTimer = setTimeout(() => {
 				performComparison()
 			}, 500)
-			
+
 			return () => clearTimeout(debounceTimer)
 		}
 	}, [leftJson, rightJson])
@@ -82,18 +82,18 @@ export function JsonDiffPanel({ input, error, isProcessing }: JsonDiffPanelProps
 	const summary = generateDiffSummary(differences)
 	const similarityScore = calculateSimilarityScore(differences)
 
-	const copyResults = async (format: 'json' | 'unified' | 'csv') => {
+	const copyResults = async (format: "json" | "unified" | "csv") => {
 		if (differences.length === 0) return
 
 		let content = ""
 		switch (format) {
-			case 'json':
+			case "json":
 				content = exportDiffAsJson(filteredDifferences)
 				break
-			case 'unified':
+			case "unified":
 				content = generateUnifiedDiff(filteredDifferences)
 				break
-			case 'csv':
+			case "csv":
 				content = exportDiffAsCsv(filteredDifferences)
 				break
 		}
@@ -103,7 +103,7 @@ export function JsonDiffPanel({ input, error, isProcessing }: JsonDiffPanelProps
 		setTimeout(() => setCopySuccess(false), 2000)
 	}
 
-	const downloadResults = (format: 'json' | 'unified' | 'csv') => {
+	const downloadResults = (format: "json" | "unified" | "csv") => {
 		if (differences.length === 0) return
 
 		let content = ""
@@ -111,26 +111,26 @@ export function JsonDiffPanel({ input, error, isProcessing }: JsonDiffPanelProps
 		let mimeType = ""
 
 		switch (format) {
-			case 'json':
+			case "json":
 				content = exportDiffAsJson(filteredDifferences)
-				filename = 'json-diff.json'
-				mimeType = 'application/json'
+				filename = "json-diff.json"
+				mimeType = "application/json"
 				break
-			case 'unified':
+			case "unified":
 				content = generateUnifiedDiff(filteredDifferences)
-				filename = 'json-diff.txt'
-				mimeType = 'text/plain'
+				filename = "json-diff.txt"
+				mimeType = "text/plain"
 				break
-			case 'csv':
+			case "csv":
 				content = exportDiffAsCsv(filteredDifferences)
-				filename = 'json-diff.csv'
-				mimeType = 'text/csv'
+				filename = "json-diff.csv"
+				mimeType = "text/csv"
 				break
 		}
 
 		const blob = new Blob([content], { type: mimeType })
 		const url = URL.createObjectURL(blob)
-		const a = document.createElement('a')
+		const a = document.createElement("a")
 		a.href = url
 		a.download = filename
 		document.body.appendChild(a)
@@ -145,21 +145,29 @@ export function JsonDiffPanel({ input, error, isProcessing }: JsonDiffPanelProps
 		setRightJson(temp)
 	}
 
-	const getDiffIcon = (type: JsonDiffItem['type']) => {
+	const getDiffIcon = (type: JsonDiffItem["type"]) => {
 		switch (type) {
-			case 'added': return <span className="font-bold text-green-600">+</span>
-			case 'removed': return <span className="font-bold text-red-600">-</span>
-			case 'modified': return <span className="font-bold text-blue-600">~</span>
-			default: return <span className="font-bold text-gray-400">=</span>
+			case "added":
+				return <span className="font-bold text-green-600">+</span>
+			case "removed":
+				return <span className="font-bold text-red-600">-</span>
+			case "modified":
+				return <span className="font-bold text-blue-600">~</span>
+			default:
+				return <span className="font-bold text-gray-400">=</span>
 		}
 	}
 
-	const getDiffColor = (type: JsonDiffItem['type']) => {
+	const getDiffColor = (type: JsonDiffItem["type"]) => {
 		switch (type) {
-			case 'added': return 'bg-green-50 border-green-200'
-			case 'removed': return 'bg-red-50 border-red-200'
-			case 'modified': return 'bg-blue-50 border-blue-200'
-			default: return 'bg-gray-50 border-gray-200'
+			case "added":
+				return "bg-green-50 border-green-200"
+			case "removed":
+				return "bg-red-50 border-red-200"
+			case "modified":
+				return "bg-blue-50 border-blue-200"
+			default:
+				return "bg-gray-50 border-gray-200"
 		}
 	}
 
@@ -214,26 +222,20 @@ export function JsonDiffPanel({ input, error, isProcessing }: JsonDiffPanelProps
 							<Button
 								onClick={performComparison}
 								disabled={!leftJson.trim() || !rightJson.trim() || isComparing}
-								size="sm"
-							>
+								size="sm">
 								<GitCompare className="mr-2 h-4 w-4" />
 								{isComparing ? "Comparing..." : "Compare"}
-							</Button>
-							
-							<Button
-								variant="outline"
-								onClick={swapJsonInputs}
-								disabled={!leftJson.trim() && !rightJson.trim()}
-								size="sm"
-							>
-								<RotateCcw className="h-4 w-4" />
 							</Button>
 
 							<Button
 								variant="outline"
-								onClick={() => setShowUnchanged(!showUnchanged)}
-								size="sm"
-							>
+								onClick={swapJsonInputs}
+								disabled={!leftJson.trim() && !rightJson.trim()}
+								size="sm">
+								<RotateCcw className="h-4 w-4" />
+							</Button>
+
+							<Button variant="outline" onClick={() => setShowUnchanged(!showUnchanged)} size="sm">
 								{showUnchanged ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
 								{showUnchanged ? "Hide" : "Show"} Unchanged
 							</Button>
@@ -241,18 +243,10 @@ export function JsonDiffPanel({ input, error, isProcessing }: JsonDiffPanelProps
 
 						{differences.length > 0 && (
 							<div className="flex items-center gap-2">
-								<Button
-									variant="outline"
-									size="sm"
-									onClick={() => copyResults('json')}
-								>
+								<Button variant="outline" size="sm" onClick={() => copyResults("json")}>
 									{copySuccess ? <CheckCircle className="h-3 w-3" /> : <Copy className="h-3 w-3" />}
 								</Button>
-								<Button
-									variant="outline" 
-									size="sm"
-									onClick={() => downloadResults('json')}
-								>
+								<Button variant="outline" size="sm" onClick={() => downloadResults("json")}>
 									<Download className="h-3 w-3" />
 								</Button>
 							</div>
@@ -313,8 +307,12 @@ export function JsonDiffPanel({ input, error, isProcessing }: JsonDiffPanelProps
 								</CardTitle>
 								<Tabs value={viewMode} onValueChange={(v) => setViewMode(v as typeof viewMode)}>
 									<TabsList className="h-8">
-										<TabsTrigger value="split" className="text-xs">Split</TabsTrigger>
-										<TabsTrigger value="unified" className="text-xs">Unified</TabsTrigger>
+										<TabsTrigger value="split" className="text-xs">
+											Split
+										</TabsTrigger>
+										<TabsTrigger value="unified" className="text-xs">
+											Unified
+										</TabsTrigger>
 									</TabsList>
 								</Tabs>
 							</div>
@@ -325,14 +323,12 @@ export function JsonDiffPanel({ input, error, isProcessing }: JsonDiffPanelProps
 									{filteredDifferences.map((diff, index) => (
 										<div key={index} className={`rounded border p-3 ${getDiffColor(diff.type)}`}>
 											<div className="flex items-start gap-3">
-												<div className="mt-1 flex-shrink-0">
-													{getDiffIcon(diff.type)}
-												</div>
+												<div className="mt-1 flex-shrink-0">{getDiffIcon(diff.type)}</div>
 												<div className="min-w-0 flex-1">
 													<div className="mb-1 font-mono text-muted-foreground text-xs">
 														{diff.path}
 													</div>
-													{diff.type === 'added' && (
+													{diff.type === "added" && (
 														<div className="text-sm">
 															<span className="font-medium text-green-700">Added: </span>
 															<code className="rounded bg-white px-1">
@@ -340,7 +336,7 @@ export function JsonDiffPanel({ input, error, isProcessing }: JsonDiffPanelProps
 															</code>
 														</div>
 													)}
-													{diff.type === 'removed' && (
+													{diff.type === "removed" && (
 														<div className="text-sm">
 															<span className="font-medium text-red-700">Removed: </span>
 															<code className="rounded bg-white px-1">
@@ -348,7 +344,7 @@ export function JsonDiffPanel({ input, error, isProcessing }: JsonDiffPanelProps
 															</code>
 														</div>
 													)}
-													{diff.type === 'modified' && (
+													{diff.type === "modified" && (
 														<div className="space-y-1 text-sm">
 															<div>
 																<span className="font-medium text-red-700">From: </span>
@@ -365,9 +361,7 @@ export function JsonDiffPanel({ input, error, isProcessing }: JsonDiffPanelProps
 														</div>
 													)}
 													{diff.message && (
-														<div className="mt-1 text-muted-foreground text-xs">
-															{diff.message}
-														</div>
+														<div className="mt-1 text-muted-foreground text-xs">{diff.message}</div>
 													)}
 												</div>
 											</div>
@@ -391,16 +385,16 @@ export function JsonDiffPanel({ input, error, isProcessing }: JsonDiffPanelProps
 						</CardHeader>
 						<CardContent>
 							<div className="flex flex-wrap gap-2">
-								<Button variant="outline" size="sm" onClick={() => downloadResults('json')}>
+								<Button variant="outline" size="sm" onClick={() => downloadResults("json")}>
 									Export JSON
 								</Button>
-								<Button variant="outline" size="sm" onClick={() => downloadResults('unified')}>
+								<Button variant="outline" size="sm" onClick={() => downloadResults("unified")}>
 									Export Unified Diff
 								</Button>
-								<Button variant="outline" size="sm" onClick={() => downloadResults('csv')}>
+								<Button variant="outline" size="sm" onClick={() => downloadResults("csv")}>
 									Export CSV
 								</Button>
-								<Button variant="outline" size="sm" onClick={() => copyResults('unified')}>
+								<Button variant="outline" size="sm" onClick={() => copyResults("unified")}>
 									Copy Unified Diff
 								</Button>
 							</div>
@@ -426,10 +420,20 @@ export function JsonDiffPanel({ input, error, isProcessing }: JsonDiffPanelProps
 							<div>
 								<h5 className="mb-2 font-medium">Change Types:</h5>
 								<ul className="space-y-1 text-xs">
-									<li><span className="font-bold text-green-600">+</span> Added - New properties or array items</li>
-									<li><span className="font-bold text-red-600">-</span> Removed - Deleted properties or array items</li>
-									<li><span className="font-bold text-blue-600">~</span> Modified - Changed values</li>
-									<li><span className="font-bold text-gray-400">=</span> Unchanged - Identical values</li>
+									<li>
+										<span className="font-bold text-green-600">+</span> Added - New properties or
+										array items
+									</li>
+									<li>
+										<span className="font-bold text-red-600">-</span> Removed - Deleted properties
+										or array items
+									</li>
+									<li>
+										<span className="font-bold text-blue-600">~</span> Modified - Changed values
+									</li>
+									<li>
+										<span className="font-bold text-gray-400">=</span> Unchanged - Identical values
+									</li>
 								</ul>
 							</div>
 							<div>

@@ -1,21 +1,21 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
 import { Separator } from "@/components/ui/separator"
-import { Copy, Download, BarChart3, AlertTriangle, CheckCircle, TrendingUp } from "lucide-react"
-import { 
-	analyzeJsonStats, 
-	generateStatsReport, 
+import { AlertTriangle, BarChart3, CheckCircle, Copy, Download, TrendingUp } from "lucide-react"
+import { useEffect, useState } from "react"
+import type { JsonStats } from "../types"
+import {
+	analyzeJsonStats,
 	formatBytes,
-	getOptimizationSuggestions,
+	generateStatsReport,
 	getDataTypeChart,
+	getOptimizationSuggestions,
 	getPropertyFrequencyChart
 } from "../utils/json-stats"
-import type { JsonStats } from "../types"
 
 interface StatsPanelProps {
 	input: string
@@ -35,7 +35,7 @@ export function StatsPanel({ input, error, isProcessing }: StatsPanelProps) {
 				const parsedJson = JSON.parse(input)
 				const analyzedStats = analyzeJsonStats(parsedJson)
 				const optimizationSuggestions = getOptimizationSuggestions(analyzedStats)
-				
+
 				setStats(analyzedStats)
 				setSuggestions(optimizationSuggestions)
 				setAnalysisError(null)
@@ -59,11 +59,11 @@ export function StatsPanel({ input, error, isProcessing }: StatsPanelProps) {
 	const downloadReport = () => {
 		if (stats) {
 			const report = generateStatsReport(stats)
-			const blob = new Blob([report], { type: 'text/plain' })
+			const blob = new Blob([report], { type: "text/plain" })
 			const url = URL.createObjectURL(blob)
-			const a = document.createElement('a')
+			const a = document.createElement("a")
 			a.href = url
-			a.download = 'json-analysis-report.txt'
+			a.download = "json-analysis-report.txt"
 			document.body.appendChild(a)
 			a.click()
 			document.body.removeChild(a)
@@ -74,11 +74,11 @@ export function StatsPanel({ input, error, isProcessing }: StatsPanelProps) {
 	const downloadStatsJson = () => {
 		if (stats) {
 			const jsonString = JSON.stringify(stats, null, 2)
-			const blob = new Blob([jsonString], { type: 'application/json' })
+			const blob = new Blob([jsonString], { type: "application/json" })
 			const url = URL.createObjectURL(blob)
-			const a = document.createElement('a')
+			const a = document.createElement("a")
 			a.href = url
-			a.download = 'json-stats.json'
+			a.download = "json-stats.json"
 			document.body.appendChild(a)
 			a.click()
 			document.body.removeChild(a)
@@ -117,7 +117,7 @@ export function StatsPanel({ input, error, isProcessing }: StatsPanelProps) {
 
 	const dataTypeChart = getDataTypeChart(stats)
 	const propertyChart = getPropertyFrequencyChart(stats, 10)
-	
+
 	const getComplexityColor = (score: number) => {
 		if (score <= 30) return "text-green-600"
 		if (score <= 60) return "text-yellow-600"
@@ -142,7 +142,7 @@ export function StatsPanel({ input, error, isProcessing }: StatsPanelProps) {
 						</div>
 					</CardContent>
 				</Card>
-				
+
 				<Card>
 					<CardContent className="pt-6">
 						<div className="text-center">
@@ -151,16 +151,18 @@ export function StatsPanel({ input, error, isProcessing }: StatsPanelProps) {
 						</div>
 					</CardContent>
 				</Card>
-				
+
 				<Card>
 					<CardContent className="pt-6">
 						<div className="text-center">
-							<div className="font-bold text-2xl text-green-600">{formatBytes(stats.memoryEstimate)}</div>
+							<div className="font-bold text-2xl text-green-600">
+								{formatBytes(stats.memoryEstimate)}
+							</div>
 							<p className="text-muted-foreground text-xs">Memory Est.</p>
 						</div>
 					</CardContent>
 				</Card>
-				
+
 				<Card>
 					<CardContent className="pt-6">
 						<div className="text-center">
@@ -248,7 +250,9 @@ export function StatsPanel({ input, error, isProcessing }: StatsPanelProps) {
 								<div key={index} className="space-y-2">
 									<div className="flex justify-between text-sm">
 										<span className="capitalize">{item.name}:</span>
-										<span className="font-medium">{item.value} ({item.percentage}%)</span>
+										<span className="font-medium">
+											{item.value} ({item.percentage}%)
+										</span>
 									</div>
 									<Progress value={item.percentage} className="h-2" />
 								</div>
@@ -293,7 +297,7 @@ export function StatsPanel({ input, error, isProcessing }: StatsPanelProps) {
 								<p className="mt-1 text-muted-foreground text-xs">Parse Speed</p>
 								<p className="font-medium text-xs">{stats.parseTime}ms</p>
 							</div>
-							
+
 							<div className="rounded border p-3 text-center">
 								<div className="font-semibold text-lg">
 									{stats.maxDepth <= 5 ? (
@@ -307,7 +311,7 @@ export function StatsPanel({ input, error, isProcessing }: StatsPanelProps) {
 								<p className="mt-1 text-muted-foreground text-xs">Nesting Depth</p>
 								<p className="font-medium text-xs">{stats.maxDepth} levels</p>
 							</div>
-							
+
 							<div className="rounded border p-3 text-center">
 								<div className="font-semibold text-lg">
 									{stats.memoryEstimate < 1024 * 1024 ? (
@@ -383,19 +387,35 @@ export function StatsPanel({ input, error, isProcessing }: StatsPanelProps) {
 							<div>
 								<h5 className="mb-2 font-medium">Structure Metrics:</h5>
 								<ul className="space-y-1 text-xs">
-									<li><strong>Total Nodes:</strong> Count of all JSON elements</li>
-									<li><strong>Max Depth:</strong> Deepest nesting level</li>
-									<li><strong>Properties:</strong> Total object properties</li>
-									<li><strong>Arrays:</strong> Total array count and average size</li>
+									<li>
+										<strong>Total Nodes:</strong> Count of all JSON elements
+									</li>
+									<li>
+										<strong>Max Depth:</strong> Deepest nesting level
+									</li>
+									<li>
+										<strong>Properties:</strong> Total object properties
+									</li>
+									<li>
+										<strong>Arrays:</strong> Total array count and average size
+									</li>
 								</ul>
 							</div>
 							<div>
 								<h5 className="mb-2 font-medium">Performance Metrics:</h5>
 								<ul className="space-y-1 text-xs">
-									<li><strong>Parse Time:</strong> JSON parsing duration</li>
-									<li><strong>Memory Est:</strong> Approximate memory usage</li>
-									<li><strong>Complexity:</strong> Overall structural complexity (0-100)</li>
-									<li><strong>Data Types:</strong> Distribution of value types</li>
+									<li>
+										<strong>Parse Time:</strong> JSON parsing duration
+									</li>
+									<li>
+										<strong>Memory Est:</strong> Approximate memory usage
+									</li>
+									<li>
+										<strong>Complexity:</strong> Overall structural complexity (0-100)
+									</li>
+									<li>
+										<strong>Data Types:</strong> Distribution of value types
+									</li>
 								</ul>
 							</div>
 						</div>

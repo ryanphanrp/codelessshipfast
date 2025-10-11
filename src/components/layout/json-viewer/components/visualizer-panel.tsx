@@ -1,37 +1,43 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
+import {
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+	SelectValue
+} from "@/components/ui/select"
 import { Separator } from "@/components/ui/separator"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { 
-	Download, 
-	Search, 
-	ZoomIn, 
-	ZoomOut, 
-	RotateCcw, 
-	Maximize2, 
-	Eye, 
+import {
+	Copy,
+	Download,
+	Eye,
 	EyeOff,
-	TreePine,
+	Maximize2,
 	Network,
-	Copy
+	RotateCcw,
+	Search,
+	TreePine,
+	ZoomIn,
+	ZoomOut
 } from "lucide-react"
-import { 
-	generateVisualizationNodes,
-	createTreeLayout,
-	createGraphLayout,
-	searchNodes,
-	exportVisualization,
-	getNodeColor,
+import { useEffect, useRef, useState } from "react"
+import type { VisualizationLayout, VisualizationNode, VisualizationOptions } from "../types"
+import {
+	VISUALIZATION_EXAMPLES,
 	calculateLayoutMetrics,
-	VISUALIZATION_EXAMPLES
+	createGraphLayout,
+	createTreeLayout,
+	exportVisualization,
+	generateVisualizationNodes,
+	getNodeColor,
+	searchNodes
 } from "../utils/json-visualizer"
-import type { VisualizationNode, VisualizationLayout, VisualizationOptions } from "../types"
 
 interface VisualizerPanelProps {
 	input: string
@@ -99,25 +105,25 @@ export function VisualizerPanel({ input, error, isProcessing }: VisualizerPanelP
 	useEffect(() => {
 		if (searchTerm.trim()) {
 			const matches = searchNodes(visualization, searchTerm)
-			setHighlightedNodes(new Set(matches.map(node => node.id)))
+			setHighlightedNodes(new Set(matches.map((node) => node.id)))
 		} else {
 			setHighlightedNodes(new Set())
 		}
 	}, [searchTerm, visualization])
 
 	const handleOptionChange = (key: keyof VisualizationOptions, value: any) => {
-		setOptions(prev => ({
+		setOptions((prev) => ({
 			...prev,
 			[key]: value
 		}))
 	}
 
 	const handleZoomIn = () => {
-		setZoom(prev => Math.min(prev * 1.2, 3))
+		setZoom((prev) => Math.min(prev * 1.2, 3))
 	}
 
 	const handleZoomOut = () => {
-		setZoom(prev => Math.max(prev / 1.2, 0.1))
+		setZoom((prev) => Math.max(prev / 1.2, 0.1))
 	}
 
 	const handleReset = () => {
@@ -129,7 +135,7 @@ export function VisualizerPanel({ input, error, isProcessing }: VisualizerPanelP
 	}
 
 	const toggleNodeVisibility = (nodeId: string) => {
-		setHiddenNodes(prev => {
+		setHiddenNodes((prev) => {
 			const newSet = new Set(prev)
 			if (newSet.has(nodeId)) {
 				newSet.delete(nodeId)
@@ -149,15 +155,15 @@ export function VisualizerPanel({ input, error, isProcessing }: VisualizerPanelP
 
 		try {
 			const result = await exportVisualization(svgRef.current, layoutData, format)
-			
+
 			if (format === "json") {
 				await navigator.clipboard.writeText(result as string)
 				setCopySuccess(true)
 				setTimeout(() => setCopySuccess(false), 2000)
 			} else {
 				// For SVG/PNG, create download
-				const blob = new Blob([result as string], { 
-					type: format === "svg" ? "image/svg+xml" : "image/png" 
+				const blob = new Blob([result as string], {
+					type: format === "svg" ? "image/svg+xml" : "image/png"
 				})
 				const url = URL.createObjectURL(blob)
 				const a = document.createElement("a")
@@ -189,7 +195,7 @@ export function VisualizerPanel({ input, error, isProcessing }: VisualizerPanelP
 
 	const getNodeStats = () => {
 		if (!layoutData) return { total: 0, visible: 0, hidden: 0 }
-		
+
 		const total = layoutData.nodes.length
 		const hidden = hiddenNodes.size
 		return {
@@ -240,15 +246,14 @@ export function VisualizerPanel({ input, error, isProcessing }: VisualizerPanelP
 						{/* Max Depth */}
 						<div className="space-y-2">
 							<label className="font-medium text-sm">Max Depth</label>
-							<Select 
-								value={options.maxDepth.toString()} 
-								onValueChange={(value) => handleOptionChange("maxDepth", parseInt(value))}
-							>
+							<Select
+								value={options.maxDepth.toString()}
+								onValueChange={(value) => handleOptionChange("maxDepth", parseInt(value))}>
 								<SelectTrigger>
 									<SelectValue />
 								</SelectTrigger>
 								<SelectContent>
-									{[3, 4, 5, 6, 7, 8, 10].map(depth => (
+									{[3, 4, 5, 6, 7, 8, 10].map((depth) => (
 										<SelectItem key={depth} value={depth.toString()}>
 											{depth} levels
 										</SelectItem>
@@ -260,10 +265,11 @@ export function VisualizerPanel({ input, error, isProcessing }: VisualizerPanelP
 						{/* Color Scheme */}
 						<div className="space-y-2">
 							<label className="font-medium text-sm">Color Scheme</label>
-							<Select 
-								value={options.colorScheme} 
-								onValueChange={(value: "type" | "depth" | "value") => handleOptionChange("colorScheme", value)}
-							>
+							<Select
+								value={options.colorScheme}
+								onValueChange={(value: "type" | "depth" | "value") =>
+									handleOptionChange("colorScheme", value)
+								}>
 								<SelectTrigger>
 									<SelectValue />
 								</SelectTrigger>
@@ -278,10 +284,9 @@ export function VisualizerPanel({ input, error, isProcessing }: VisualizerPanelP
 						{/* Node Size */}
 						<div className="space-y-2">
 							<label className="font-medium text-sm">Node Size</label>
-							<Select 
-								value={options.nodeSize.toString()} 
-								onValueChange={(value) => handleOptionChange("nodeSize", parseInt(value))}
-							>
+							<Select
+								value={options.nodeSize.toString()}
+								onValueChange={(value) => handleOptionChange("nodeSize", parseInt(value))}>
 								<SelectTrigger>
 									<SelectValue />
 								</SelectTrigger>
@@ -308,7 +313,7 @@ export function VisualizerPanel({ input, error, isProcessing }: VisualizerPanelP
 								/>
 							</div>
 						</div>
-						
+
 						<div className="flex items-center gap-1">
 							<Button variant="outline" size="sm" onClick={handleZoomIn}>
 								<ZoomIn className="h-4 w-4" />
@@ -341,19 +346,11 @@ export function VisualizerPanel({ input, error, isProcessing }: VisualizerPanelP
 							<Badge variant="outline">
 								Nodes: {getNodeStats().visible}/{getNodeStats().total}
 							</Badge>
-							<Badge variant="outline">
-								Edges: {metrics.edges}
-							</Badge>
-							<Badge variant="outline">
-								Max Depth: {metrics.maxDepth}
-							</Badge>
-							<Badge variant="outline">
-								Zoom: {Math.round(zoom * 100)}%
-							</Badge>
+							<Badge variant="outline">Edges: {metrics.edges}</Badge>
+							<Badge variant="outline">Max Depth: {metrics.maxDepth}</Badge>
+							<Badge variant="outline">Zoom: {Math.round(zoom * 100)}%</Badge>
 							{highlightedNodes.size > 0 && (
-								<Badge variant="default">
-									Found: {highlightedNodes.size}
-								</Badge>
+								<Badge variant="default">Found: {highlightedNodes.size}</Badge>
 							)}
 						</div>
 					)}
@@ -368,29 +365,17 @@ export function VisualizerPanel({ input, error, isProcessing }: VisualizerPanelP
 							<Maximize2 className="h-4 w-4" />
 							Visualization
 						</CardTitle>
-						
+
 						<div className="flex items-center gap-1">
-							<Button 
-								variant="outline" 
-								size="sm"
-								onClick={() => exportVisualizationData("json")}
-							>
+							<Button variant="outline" size="sm" onClick={() => exportVisualizationData("json")}>
 								<Copy className="mr-1 h-4 w-4" />
 								{copySuccess ? "Copied!" : "Copy Data"}
 							</Button>
-							<Button 
-								variant="outline" 
-								size="sm"
-								onClick={() => exportVisualizationData("svg")}
-							>
+							<Button variant="outline" size="sm" onClick={() => exportVisualizationData("svg")}>
 								<Download className="mr-1 h-4 w-4" />
 								SVG
 							</Button>
-							<Button 
-								variant="outline" 
-								size="sm"
-								onClick={() => exportVisualizationData("png")}
-							>
+							<Button variant="outline" size="sm" onClick={() => exportVisualizationData("png")}>
 								<Download className="mr-1 h-4 w-4" />
 								PNG
 							</Button>
@@ -408,21 +393,25 @@ export function VisualizerPanel({ input, error, isProcessing }: VisualizerPanelP
 						</div>
 					) : (
 						<div className="overflow-hidden rounded-lg border">
-							<div 
+							<div
 								ref={containerRef}
 								className="relative bg-background"
-								style={{ height: "500px" }}
-							>
+								style={{ height: "500px" }}>
 								<svg
 									ref={svgRef}
 									width="100%"
 									height="100%"
 									viewBox={`${pan.x} ${pan.y} ${800 / zoom} ${500 / zoom}`}
-									className="cursor-move"
-								>
+									className="cursor-move">
 									{/* Render edges first */}
 									{layoutData.edges
-										.filter(edge => edge.x1 !== undefined && edge.y1 !== undefined && edge.x2 !== undefined && edge.y2 !== undefined)
+										.filter(
+											(edge) =>
+												edge.x1 !== undefined &&
+												edge.y1 !== undefined &&
+												edge.x2 !== undefined &&
+												edge.y2 !== undefined
+										)
 										.map((edge) => (
 											<line
 												key={`${edge.source}-${edge.target}`}
@@ -438,12 +427,15 @@ export function VisualizerPanel({ input, error, isProcessing }: VisualizerPanelP
 
 									{/* Render nodes */}
 									{layoutData.nodes
-										.filter(node => !hiddenNodes.has(node.id) && node.x !== undefined && node.y !== undefined)
+										.filter(
+											(node) =>
+												!hiddenNodes.has(node.id) && node.x !== undefined && node.y !== undefined
+										)
 										.map((node) => {
 											const isHighlighted = highlightedNodes.has(node.id)
 											const isSelected = selectedNode?.id === node.id
 											const color = getNodeColor(node, options.colorScheme)
-											
+
 											return (
 												<g key={node.id}>
 													<circle
@@ -456,7 +448,7 @@ export function VisualizerPanel({ input, error, isProcessing }: VisualizerPanelP
 														className="cursor-pointer transition-opacity hover:opacity-80"
 														onClick={() => handleNodeClick(node)}
 													/>
-													
+
 													{options.showLabels && (
 														<text
 															x={node.x!}
@@ -464,12 +456,10 @@ export function VisualizerPanel({ input, error, isProcessing }: VisualizerPanelP
 															textAnchor="middle"
 															fontSize="10"
 															fill="currentColor"
-															className="pointer-events-none select-none"
-														>
-															{node.label.length > 12 
-																? `${node.label.substring(0, 12)}...` 
-																: node.label
-															}
+															className="pointer-events-none select-none">
+															{node.label.length > 12
+																? `${node.label.substring(0, 12)}...`
+																: node.label}
 														</text>
 													)}
 												</g>
@@ -494,12 +484,15 @@ export function VisualizerPanel({ input, error, isProcessing }: VisualizerPanelP
 							<Button
 								variant="ghost"
 								size="sm"
-								onClick={() => toggleNodeVisibility(selectedNode.id)}
-							>
+								onClick={() => toggleNodeVisibility(selectedNode.id)}>
 								{hiddenNodes.has(selectedNode.id) ? (
-									<><EyeOff className="mr-1 h-4 w-4" /> Hidden</>
+									<>
+										<EyeOff className="mr-1 h-4 w-4" /> Hidden
+									</>
 								) : (
-									<><Eye className="mr-1 h-4 w-4" /> Visible</>
+									<>
+										<Eye className="mr-1 h-4 w-4" /> Visible
+									</>
 								)}
 							</Button>
 						</CardTitle>
@@ -520,29 +513,22 @@ export function VisualizerPanel({ input, error, isProcessing }: VisualizerPanelP
 									</Badge>
 								</div>
 							</div>
-							
+
 							<div>
 								<span className="font-medium">Value:</span>
 								<div className="mt-1 max-h-32 overflow-y-auto rounded bg-muted p-2 font-mono text-xs">
-									{typeof selectedNode.value === 'string' 
-										? selectedNode.value 
-										: JSON.stringify(selectedNode.value, null, 2)
-									}
+									{typeof selectedNode.value === "string"
+										? selectedNode.value
+										: JSON.stringify(selectedNode.value, null, 2)}
 								</div>
 							</div>
 
 							<div className="flex flex-wrap gap-2">
-								<Badge variant="secondary">
-									Depth: {selectedNode.depth}
-								</Badge>
+								<Badge variant="secondary">Depth: {selectedNode.depth}</Badge>
 								{selectedNode.children && (
-									<Badge variant="secondary">
-										Children: {selectedNode.children.length}
-									</Badge>
+									<Badge variant="secondary">Children: {selectedNode.children.length}</Badge>
 								)}
-								<Badge variant="secondary">
-									Size: {selectedNode.size}
-								</Badge>
+								<Badge variant="secondary">Size: {selectedNode.size}</Badge>
 							</div>
 						</div>
 					</CardContent>

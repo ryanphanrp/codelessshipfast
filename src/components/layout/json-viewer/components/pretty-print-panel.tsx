@@ -89,12 +89,11 @@ export function PrettyPrintPanel({ input, output, error, isProcessing }: PrettyP
 							showLineNumbers={true}
 							customStyle={{
 								margin: 0,
-								padding: '12px',
-								fontSize: '14px',
-								borderRadius: '6px',
-								background: '#f9fafb'
-							}}
-						>
+								padding: "12px",
+								fontSize: "14px",
+								borderRadius: "6px",
+								background: "#f9fafb"
+							}}>
 							{output}
 						</SyntaxHighlighter>
 					</div>

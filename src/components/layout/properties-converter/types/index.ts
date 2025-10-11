@@ -1,4 +1,9 @@
-export type ConversionMode = 'yaml-to-env' | 'spring-to-env' | 'yaml-to-properties' | 'properties-to-yaml'
+export type ConversionMode =
+	| "yaml-to-env"
+	| "spring-to-env"
+	| "yaml-to-properties"
+	| "properties-to-yaml"
+	| "yaml-to-k8s-env"
 
 export interface ConversionResult {
 	success: boolean

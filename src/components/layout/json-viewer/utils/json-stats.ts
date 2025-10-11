@@ -2,7 +2,7 @@ import type { JsonStats } from "../types"
 
 export function analyzeJsonStats(json: any): JsonStats {
 	const startTime = performance.now()
-	
+
 	let totalNodes = 0
 	let maxDepth = 0
 	let totalProperties = 0
@@ -27,7 +27,7 @@ export function analyzeJsonStats(json: any): JsonStats {
 		if (Array.isArray(obj)) {
 			totalArrays++
 			arrayLengths.push(obj.length)
-			
+
 			obj.forEach((item, index) => {
 				analyze(item, depth + 1)
 			})
@@ -35,7 +35,7 @@ export function analyzeJsonStats(json: any): JsonStats {
 			const keys = Object.keys(obj)
 			totalProperties += keys.length
 
-			keys.forEach(key => {
+			keys.forEach((key) => {
 				propertyFrequency[key] = (propertyFrequency[key] || 0) + 1
 				analyze(obj[key], depth + 1)
 			})
@@ -47,9 +47,10 @@ export function analyzeJsonStats(json: any): JsonStats {
 	analyze(json)
 
 	const parseTime = performance.now() - startTime
-	const averageArrayLength = arrayLengths.length > 0 
-		? arrayLengths.reduce((sum, len) => sum + len, 0) / arrayLengths.length 
-		: 0
+	const averageArrayLength =
+		arrayLengths.length > 0
+			? arrayLengths.reduce((sum, len) => sum + len, 0) / arrayLengths.length
+			: 0
 
 	const memoryEstimate = estimateMemoryUsage(json)
 	const complexityScore = calculateComplexityScore({
@@ -102,10 +103,10 @@ function estimateMemoryUsage(obj: any): number {
 			size += value.length * 2 + 16 // UTF-16 encoding + overhead
 		} else if (Array.isArray(value)) {
 			size += 24 // Array object overhead
-			value.forEach(item => calculateSize(item))
+			value.forEach((item) => calculateSize(item))
 		} else if (typeof value === "object") {
 			size += 24 // Object overhead
-			Object.keys(value).forEach(key => {
+			Object.keys(value).forEach((key) => {
 				size += key.length * 2 + 16 // Key string
 				calculateSize(value[key])
 			})
@@ -126,7 +127,7 @@ function calculateComplexityScore(stats: {
 	const depthWeight = Math.min(stats.maxDepth * 10, 50) // Max 50 points
 	const nodeWeight = Math.min(stats.totalNodes / 100, 30) // Max 30 points
 	const structureWeight = Math.min((stats.totalArrays + stats.totalProperties) / 50, 20) // Max 20 points
-	
+
 	return Math.round(depthWeight + nodeWeight + structureWeight)
 }
 
@@ -145,7 +146,7 @@ Structure:
 Data Types:
 ${Object.entries(stats.dataTypes)
 	.map(([type, count]) => `- ${type}: ${count} (${((count / stats.totalNodes) * 100).toFixed(1)}%)`)
-	.join('\n')}
+	.join("\n")}
 
 Arrays:
 - Average Length: ${stats.averageArrayLength}
@@ -157,20 +158,20 @@ Performance:
 
 Most Common Properties:
 ${Object.entries(stats.propertyFrequency)
-	.sort(([,a], [,b]) => b - a)
+	.sort(([, a], [, b]) => b - a)
 	.slice(0, 10)
 	.map(([prop, count]) => `- ${prop}: ${count}`)
-	.join('\n')}
+	.join("\n")}
 `.trim()
 }
 
 export function formatBytes(bytes: number): string {
-	if (bytes === 0) return '0 Bytes'
-	
+	if (bytes === 0) return "0 Bytes"
+
 	const k = 1024
-	const sizes = ['Bytes', 'KB', 'MB', 'GB']
+	const sizes = ["Bytes", "KB", "MB", "GB"]
 	const i = Math.floor(Math.log(bytes) / Math.log(k))
-	
+
 	return `${parseFloat((bytes / Math.pow(k, i)).toFixed(2))} ${sizes[i]}`
 }
 
@@ -181,7 +182,8 @@ export function getOptimizationSuggestions(stats: JsonStats): string[] {
 		suggestions.push("Consider flattening deeply nested structures (depth > 10)")
 	}
 
-	if (stats.memoryEstimate > 1024 * 1024) { // > 1MB
+	if (stats.memoryEstimate > 1024 * 1024) {
+		// > 1MB
 		suggestions.push("Large JSON size detected. Consider pagination or data chunking")
 	}
 
@@ -210,7 +212,10 @@ export function getOptimizationSuggestions(stats: JsonStats): string[] {
 	return suggestions
 }
 
-export function compareStats(stats1: JsonStats, stats2: JsonStats): {
+export function compareStats(
+	stats1: JsonStats,
+	stats2: JsonStats
+): {
 	nodes: number
 	depth: number
 	properties: number
@@ -228,17 +233,24 @@ export function compareStats(stats1: JsonStats, stats2: JsonStats): {
 	}
 }
 
-export function getDataTypeChart(stats: JsonStats): Array<{ name: string; value: number; percentage: number }> {
-	return Object.entries(stats.dataTypes).map(([type, count]) => ({
-		name: type,
-		value: count,
-		percentage: Math.round((count / stats.totalNodes) * 100)
-	})).sort((a, b) => b.value - a.value)
+export function getDataTypeChart(
+	stats: JsonStats
+): Array<{ name: string; value: number; percentage: number }> {
+	return Object.entries(stats.dataTypes)
+		.map(([type, count]) => ({
+			name: type,
+			value: count,
+			percentage: Math.round((count / stats.totalNodes) * 100)
+		}))
+		.sort((a, b) => b.value - a.value)
 }
 
-export function getPropertyFrequencyChart(stats: JsonStats, limit = 10): Array<{ name: string; value: number }> {
+export function getPropertyFrequencyChart(
+	stats: JsonStats,
+	limit = 10
+): Array<{ name: string; value: number }> {
 	return Object.entries(stats.propertyFrequency)
-		.sort(([,a], [,b]) => b - a)
+		.sort(([, a], [, b]) => b - a)
 		.slice(0, limit)
 		.map(([prop, count]) => ({
 			name: prop,

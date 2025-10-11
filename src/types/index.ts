@@ -8,18 +8,19 @@ export type ConversionMode =
 	| "spring-to-env"
 	| "yaml-to-properties"
 	| "properties-to-yaml"
+	| "yaml-to-k8s-env"
 
 // JSON Viewer types
-export type JsonViewerMode = 
-	| "pretty-print" 
-	| "minify" 
-	| "tree-view" 
-	| "validate" 
-	| "schema" 
-	| "jsonpath" 
-	| "diff" 
-	| "stats" 
-	| "flatten" 
+export type JsonViewerMode =
+	| "pretty-print"
+	| "minify"
+	| "tree-view"
+	| "validate"
+	| "schema"
+	| "jsonpath"
+	| "diff"
+	| "stats"
+	| "flatten"
 	| "visualize"
 
 export interface ConversionResult {

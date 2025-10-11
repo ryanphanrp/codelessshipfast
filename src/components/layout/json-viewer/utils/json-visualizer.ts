@@ -1,12 +1,12 @@
-import type { 
-	VisualizationData, 
-	VisualNode, 
+import type {
+	LayoutMetrics,
 	VisualEdge,
-	VisualizationNode,
+	VisualNode,
+	VisualizationData,
 	VisualizationEdge,
 	VisualizationLayout,
-	VisualizationOptions,
-	LayoutMetrics
+	VisualizationNode,
+	VisualizationOptions
 } from "../types"
 
 export function generateVisualizationData(json: any, rootLabel = "root"): VisualizationData {
@@ -19,9 +19,9 @@ export function generateVisualizationData(json: any, rootLabel = "root"): Visual
 	}
 
 	function processValue(
-		value: any, 
-		parentId: string | null, 
-		label: string, 
+		value: any,
+		parentId: string | null,
+		label: string,
 		depth: number = 0
 	): string {
 		const nodeId = generateId()
@@ -51,7 +51,7 @@ export function generateVisualizationData(json: any, rootLabel = "root"): Visual
 			})
 
 			// Add this node as child to parent
-			const parentNode = nodes.find(n => n.id === parentId)
+			const parentNode = nodes.find((n) => n.id === parentId)
 			if (parentNode) {
 				parentNode.children = parentNode.children || []
 				parentNode.children.push(nodeId)
@@ -90,22 +90,24 @@ function getValueType(value: any): string {
 	return "unknown"
 }
 
-function getNodeType(value: any): VisualNode['type'] {
+function getNodeType(value: any): VisualNode["type"] {
 	if (Array.isArray(value)) return "array"
 	if (typeof value === "object" && value !== null) return "object"
 	return "value"
 }
 
 function isPrimitive(value: any): boolean {
-	return value === null || 
-		   value === undefined || 
-		   typeof value === "string" || 
-		   typeof value === "number" || 
-		   typeof value === "boolean"
+	return (
+		value === null ||
+		value === undefined ||
+		typeof value === "string" ||
+		typeof value === "number" ||
+		typeof value === "boolean"
+	)
 }
 
 export function filterNodes(
-	data: VisualizationData, 
+	data: VisualizationData,
 	options: {
 		searchQuery?: string
 		filterType?: string
@@ -120,48 +122,48 @@ export function filterNodes(
 	if (searchQuery && searchQuery.trim()) {
 		const query = searchQuery.toLowerCase()
 		const matchingNodeIds = new Set<string>()
-		
+
 		// Find nodes that match the search query
-		filteredNodes.forEach(node => {
-			const matches = 
+		filteredNodes.forEach((node) => {
+			const matches =
 				node.label.toLowerCase().includes(query) ||
 				(node.value && String(node.value).toLowerCase().includes(query)) ||
 				(node.dataType && node.dataType.toLowerCase().includes(query))
-			
+
 			if (matches) {
 				// Include the matching node and all its ancestors and descendants
 				addNodeAndRelatives(node.id, data, matchingNodeIds)
 			}
 		})
 
-		filteredNodes = filteredNodes.filter(node => matchingNodeIds.has(node.id))
-		filteredEdges = filteredEdges.filter(edge => 
-			matchingNodeIds.has(edge.source) && matchingNodeIds.has(edge.target)
+		filteredNodes = filteredNodes.filter((node) => matchingNodeIds.has(node.id))
+		filteredEdges = filteredEdges.filter(
+			(edge) => matchingNodeIds.has(edge.source) && matchingNodeIds.has(edge.target)
 		)
 	}
 
 	// Filter by data type
 	if (filterType && filterType !== "all") {
 		const matchingNodeIds = new Set<string>()
-		
-		filteredNodes.forEach(node => {
+
+		filteredNodes.forEach((node) => {
 			if (node.dataType === filterType) {
 				addNodeAndRelatives(node.id, data, matchingNodeIds)
 			}
 		})
 
-		filteredNodes = filteredNodes.filter(node => matchingNodeIds.has(node.id))
-		filteredEdges = filteredEdges.filter(edge => 
-			matchingNodeIds.has(edge.source) && matchingNodeIds.has(edge.target)
+		filteredNodes = filteredNodes.filter((node) => matchingNodeIds.has(node.id))
+		filteredEdges = filteredEdges.filter(
+			(edge) => matchingNodeIds.has(edge.source) && matchingNodeIds.has(edge.target)
 		)
 	}
 
 	// Filter by depth
 	if (maxDepth !== undefined) {
-		filteredNodes = filteredNodes.filter(node => node.depth <= maxDepth)
-		filteredEdges = filteredEdges.filter(edge => {
-			const sourceNode = filteredNodes.find(n => n.id === edge.source)
-			const targetNode = filteredNodes.find(n => n.id === edge.target)
+		filteredNodes = filteredNodes.filter((node) => node.depth <= maxDepth)
+		filteredEdges = filteredEdges.filter((edge) => {
+			const sourceNode = filteredNodes.find((n) => n.id === edge.source)
+			const targetNode = filteredNodes.find((n) => n.id === edge.target)
 			return sourceNode && targetNode
 		})
 	}
@@ -173,13 +175,13 @@ export function filterNodes(
 }
 
 function addNodeAndRelatives(
-	nodeId: string, 
-	data: VisualizationData, 
+	nodeId: string,
+	data: VisualizationData,
 	resultSet: Set<string>
 ): void {
 	if (resultSet.has(nodeId)) return
 
-	const node = data.nodes.find(n => n.id === nodeId)
+	const node = data.nodes.find((n) => n.id === nodeId)
 	if (!node) return
 
 	resultSet.add(nodeId)
@@ -188,14 +190,14 @@ function addNodeAndRelatives(
 	let current = node
 	while (current.parent) {
 		resultSet.add(current.parent)
-		current = data.nodes.find(n => n.id === current.parent)!
+		current = data.nodes.find((n) => n.id === current.parent)!
 	}
 
 	// Add descendants
 	function addDescendants(currentNodeId: string): void {
-		const currentNode = data.nodes.find(n => n.id === currentNodeId)
+		const currentNode = data.nodes.find((n) => n.id === currentNodeId)
 		if (currentNode?.children) {
-			currentNode.children.forEach(childId => {
+			currentNode.children.forEach((childId) => {
 				resultSet.add(childId)
 				addDescendants(childId)
 			})
@@ -232,13 +234,13 @@ export function calculateNodePositions(
 }
 
 function calculateTreeLayout(nodes: VisualNode[], width: number, height: number): void {
-	const root = nodes.find(node => !node.parent)
+	const root = nodes.find((node) => !node.parent)
 	if (!root) return
 
 	const levels: VisualNode[][] = []
-	
+
 	// Group nodes by depth
-	nodes.forEach(node => {
+	nodes.forEach((node) => {
 		if (!levels[node.depth]) {
 			levels[node.depth] = []
 		}
@@ -249,7 +251,7 @@ function calculateTreeLayout(nodes: VisualNode[], width: number, height: number)
 	levels.forEach((levelNodes, depth) => {
 		const y = (height / (levels.length + 1)) * (depth + 1)
 		const spacing = width / (levelNodes.length + 1)
-		
+
 		levelNodes.forEach((node, index) => {
 			const x = spacing * (index + 1)
 			// Add position to node (in a real implementation, you'd extend the interface)
@@ -264,33 +266,32 @@ function calculateRadialLayout(nodes: VisualNode[], width: number, height: numbe
 	const centerY = height / 2
 	const maxRadius = Math.min(width, height) / 2 - 50
 
-	const root = nodes.find(node => !node.parent)
-	if (!root) return
-
-	// Position root at center
+	const root = nodes.find((node) => !node.parent)
+	if (!root) return // Position root at center
 	;(root as any).x = centerX
 	;(root as any).y = centerY
 
 	// Group nodes by depth (excluding root)
 	const levels: VisualNode[][] = []
-	nodes.filter(node => node.parent).forEach(node => {
-		const adjustedDepth = node.depth - 1 // Adjust since root is at center
-		if (!levels[adjustedDepth]) {
-			levels[adjustedDepth] = []
-		}
-		levels[adjustedDepth].push(node)
-	})
+	nodes
+		.filter((node) => node.parent)
+		.forEach((node) => {
+			const adjustedDepth = node.depth - 1 // Adjust since root is at center
+			if (!levels[adjustedDepth]) {
+				levels[adjustedDepth] = []
+			}
+			levels[adjustedDepth].push(node)
+		})
 
 	// Position nodes in concentric circles
 	levels.forEach((levelNodes, levelIndex) => {
 		const radius = (maxRadius / levels.length) * (levelIndex + 1)
 		const angleStep = (2 * Math.PI) / levelNodes.length
-		
+
 		levelNodes.forEach((node, index) => {
 			const angle = angleStep * index
 			const x = centerX + radius * Math.cos(angle)
 			const y = centerY + radius * Math.sin(angle)
-			
 			;(node as any).x = x
 			;(node as any).y = y
 		})
@@ -298,16 +299,16 @@ function calculateRadialLayout(nodes: VisualNode[], width: number, height: numbe
 }
 
 function calculateForceLayout(
-	nodes: VisualNode[], 
-	edges: VisualEdge[], 
-	width: number, 
+	nodes: VisualNode[],
+	edges: VisualEdge[],
+	width: number,
 	height: number
 ): void {
 	// Simple force-directed layout simulation
 	// In a real implementation, you'd use a proper physics engine or library like D3-force
-	
+
 	// Initialize random positions
-	nodes.forEach(node => {
+	nodes.forEach((node) => {
 		;(node as any).x = Math.random() * width
 		;(node as any).y = Math.random() * height
 		;(node as any).vx = 0
@@ -317,12 +318,12 @@ function calculateForceLayout(
 	// Run simulation for a fixed number of iterations
 	for (let i = 0; i < 100; i++) {
 		// Apply forces
-		nodes.forEach(node => {
+		nodes.forEach((node) => {
 			let fx = 0
 			let fy = 0
 
 			// Repulsion from other nodes
-			nodes.forEach(other => {
+			nodes.forEach((other) => {
 				if (node.id !== other.id) {
 					const dx = (node as any).x - (other as any).x
 					const dy = (node as any).y - (other as any).y
@@ -334,9 +335,9 @@ function calculateForceLayout(
 			})
 
 			// Attraction along edges
-			edges.forEach(edge => {
+			edges.forEach((edge) => {
 				if (edge.source === node.id) {
-					const target = nodes.find(n => n.id === edge.target)
+					const target = nodes.find((n) => n.id === edge.target)
 					if (target) {
 						const dx = (target as any).x - (node as any).x
 						const dy = (target as any).y - (node as any).y
@@ -362,16 +363,16 @@ function calculateForceLayout(
 }
 
 export function exportVisualizationData(
-	data: VisualizationData, 
+	data: VisualizationData,
 	format: "json" | "csv" | "dot"
 ): string {
 	switch (format) {
 		case "json":
 			return JSON.stringify(data, null, 2)
-		
+
 		case "csv":
 			const headers = ["ID", "Label", "Type", "DataType", "Value", "Parent", "Depth"]
-			const rows = data.nodes.map(node => [
+			const rows = data.nodes.map((node) => [
 				node.id,
 				node.label,
 				node.type,
@@ -381,30 +382,30 @@ export function exportVisualizationData(
 				node.depth.toString()
 			])
 			return [headers, ...rows]
-				.map(row => row.map(cell => `"${cell.replace(/"/g, '""')}"`).join(","))
+				.map((row) => row.map((cell) => `"${cell.replace(/"/g, '""')}"`).join(","))
 				.join("\n")
-		
+
 		case "dot":
 			// GraphViz DOT format
 			let dot = "digraph JsonStructure {\n"
 			dot += "  rankdir=TB;\n"
 			dot += "  node [shape=box];\n\n"
-			
-			data.nodes.forEach(node => {
-				const dataType = node.dataType || 'unknown'
+
+			data.nodes.forEach((node) => {
+				const dataType = node.dataType || "unknown"
 				const color = getOriginalNodeColor(dataType)
 				dot += `  "${node.id}" [label="${node.label}\\n(${dataType})" fillcolor="${color}" style=filled];\n`
 			})
-			
+
 			dot += "\n"
-			
-			data.edges.forEach(edge => {
+
+			data.edges.forEach((edge) => {
 				dot += `  "${edge.source}" -> "${edge.target}";\n`
 			})
-			
+
 			dot += "}\n"
 			return dot
-		
+
 		default:
 			throw new Error(`Unsupported format: ${format}`)
 	}
@@ -433,9 +434,9 @@ export function getVisualizationStats(data: VisualizationData): {
 	const nodesByDataType: Record<string, number> = {}
 	let maxDepth = 0
 
-	data.nodes.forEach(node => {
+	data.nodes.forEach((node) => {
 		nodesByType[node.type] = (nodesByType[node.type] || 0) + 1
-		const dataType = node.dataType || 'unknown'
+		const dataType = node.dataType || "unknown"
 		nodesByDataType[dataType] = (nodesByDataType[dataType] || 0) + 1
 		maxDepth = Math.max(maxDepth, node.depth)
 	})
@@ -449,7 +450,10 @@ export function getVisualizationStats(data: VisualizationData): {
 }
 
 // Enhanced functions for new visualizer panel
-export function generateVisualizationNodes(json: any, options: VisualizationOptions): VisualizationNode[] {
+export function generateVisualizationNodes(
+	json: any,
+	options: VisualizationOptions
+): VisualizationNode[] {
 	const data = generateVisualizationData(json)
 	return data.nodes.map((node, index) => ({
 		...node,
@@ -459,7 +463,7 @@ export function generateVisualizationNodes(json: any, options: VisualizationOpti
 }
 
 function calculateNodeSize(node: VisualNode, options: VisualizationOptions): number {
-	if (node.type === 'object' || node.type === 'array') {
+	if (node.type === "object" || node.type === "array") {
 		return options.nodeSize * 1.5
 	}
 	return options.nodeSize
@@ -468,18 +472,18 @@ function calculateNodeSize(node: VisualNode, options: VisualizationOptions): num
 function generateNodePath(node: VisualNode, allNodes: VisualNode[]): string {
 	const path: string[] = []
 	let current = node
-	
+
 	while (current) {
 		path.unshift(current.label)
 		if (!current.parent) break
-		current = allNodes.find(n => n.id === current.parent)!
+		current = allNodes.find((n) => n.id === current.parent)!
 	}
-	
-	return path.join('.')
+
+	return path.join(".")
 }
 
 export function createTreeLayout(
-	nodes: VisualizationNode[], 
+	nodes: VisualizationNode[],
 	options: VisualizationOptions
 ): VisualizationLayout {
 	const width = 800
@@ -491,9 +495,9 @@ export function createTreeLayout(
 
 	// Generate edges with positions
 	const layoutEdges: VisualizationEdge[] = []
-	layoutNodes.forEach(node => {
+	layoutNodes.forEach((node) => {
 		if (node.parent) {
-			const parentNode = layoutNodes.find(n => n.id === node.parent)
+			const parentNode = layoutNodes.find((n) => n.id === node.parent)
 			if (parentNode) {
 				layoutEdges.push({
 					id: `edge_${node.parent}_${node.id}`,
@@ -517,7 +521,7 @@ export function createTreeLayout(
 }
 
 export function createGraphLayout(
-	nodes: VisualizationNode[], 
+	nodes: VisualizationNode[],
 	options: VisualizationOptions
 ): VisualizationLayout {
 	const width = 800
@@ -526,7 +530,7 @@ export function createGraphLayout(
 
 	// Use existing force layout calculation
 	const edges: VisualEdge[] = []
-	layoutNodes.forEach(node => {
+	layoutNodes.forEach((node) => {
 		if (node.parent) {
 			edges.push({
 				id: `edge_${node.parent}_${node.id}`,
@@ -540,9 +544,9 @@ export function createGraphLayout(
 
 	// Generate edges with positions
 	const layoutEdges: VisualizationEdge[] = []
-	layoutNodes.forEach(node => {
+	layoutNodes.forEach((node) => {
 		if (node.parent) {
-			const parentNode = layoutNodes.find(n => n.id === node.parent)
+			const parentNode = layoutNodes.find((n) => n.id === node.parent)
 			if (parentNode) {
 				layoutEdges.push({
 					id: `edge_${node.parent}_${node.id}`,
@@ -567,77 +571,78 @@ export function createGraphLayout(
 
 export function searchNodes(nodes: VisualizationNode[], query: string): VisualizationNode[] {
 	const searchTerm = query.toLowerCase()
-	return nodes.filter(node => 
-		node.label.toLowerCase().includes(searchTerm) ||
-		(node.value && String(node.value).toLowerCase().includes(searchTerm)) ||
-		(node.dataType && node.dataType.toLowerCase().includes(searchTerm)) ||
-		(node.path && node.path.toLowerCase().includes(searchTerm))
+	return nodes.filter(
+		(node) =>
+			node.label.toLowerCase().includes(searchTerm) ||
+			(node.value && String(node.value).toLowerCase().includes(searchTerm)) ||
+			(node.dataType && node.dataType.toLowerCase().includes(searchTerm)) ||
+			(node.path && node.path.toLowerCase().includes(searchTerm))
 	)
 }
 
 export async function exportVisualization(
 	svgElement: SVGSVGElement,
 	layout: VisualizationLayout,
-	format: 'svg' | 'png' | 'json'
+	format: "svg" | "png" | "json"
 ): Promise<string> {
 	switch (format) {
-		case 'json':
+		case "json":
 			return JSON.stringify(layout, null, 2)
-		
-		case 'svg':
+
+		case "svg":
 			// Return SVG as string
 			const serializer = new XMLSerializer()
 			return serializer.serializeToString(svgElement)
-		
-		case 'png':
+
+		case "png":
 			// For PNG, we'd need to convert SVG to canvas then to PNG
 			// This is a simplified version - in practice you'd use a library
-			return 'PNG export not fully implemented in demo'
-		
+			return "PNG export not fully implemented in demo"
+
 		default:
 			throw new Error(`Unsupported format: ${format}`)
 	}
 }
 
 export function getNodeColor(
-	node: VisualizationNode, 
-	colorScheme: 'type' | 'depth' | 'value'
+	node: VisualizationNode,
+	colorScheme: "type" | "depth" | "value"
 ): string {
 	switch (colorScheme) {
-		case 'type':
+		case "type":
 			const typeColors: Record<string, string> = {
-				object: '#3b82f6',
-				array: '#8b5cf6',
-				property: '#10b981',
-				value: '#f59e0b'
+				object: "#3b82f6",
+				array: "#8b5cf6",
+				property: "#10b981",
+				value: "#f59e0b"
 			}
-			return typeColors[node.type] || '#6b7280'
-		
-		case 'depth':
+			return typeColors[node.type] || "#6b7280"
+
+		case "depth":
 			const intensity = Math.min(node.depth * 40, 200)
 			return `hsl(220, 80%, ${80 - intensity / 4}%)`
-		
-		case 'value':
-			if (!node.dataType) return '#6b7280'
+
+		case "value":
+			if (!node.dataType) return "#6b7280"
 			const valueColors: Record<string, string> = {
-				string: '#10b981',
-				number: '#f59e0b',
-				integer: '#f59e0b',
-				boolean: '#ef4444',
-				null: '#6b7280',
-				array: '#8b5cf6',
-				object: '#3b82f6'
+				string: "#10b981",
+				number: "#f59e0b",
+				integer: "#f59e0b",
+				boolean: "#ef4444",
+				null: "#6b7280",
+				array: "#8b5cf6",
+				object: "#3b82f6"
 			}
-			return valueColors[node.dataType] || '#6b7280'
-		
+			return valueColors[node.dataType] || "#6b7280"
+
 		default:
-			return '#6b7280'
+			return "#6b7280"
 	}
 }
 
 export function calculateLayoutMetrics(layout: VisualizationLayout): LayoutMetrics {
-	const maxDepth = Math.max(...layout.nodes.map(n => n.depth))
-	
+	const maxDepth = Math.max(...layout.nodes.map((n) => n.depth))
+
 	return {
 		totalNodes: layout.nodes.length,
 		visibleNodes: layout.nodes.length,
@@ -650,35 +655,35 @@ export function calculateLayoutMetrics(layout: VisualizationLayout): LayoutMetri
 // Sample visualization examples
 export const VISUALIZATION_EXAMPLES = {
 	simple: {
-		name: 'Simple Object',
+		name: "Simple Object",
 		data: {
-			name: 'John Doe',
+			name: "John Doe",
 			age: 30,
-			city: 'New York'
+			city: "New York"
 		}
 	},
 	nested: {
-		name: 'Nested Object',
+		name: "Nested Object",
 		data: {
 			user: {
 				profile: {
-					name: 'John Doe',
+					name: "John Doe",
 					age: 30
 				},
 				preferences: {
-					theme: 'dark',
+					theme: "dark",
 					notifications: true
 				}
 			}
 		}
 	},
 	array: {
-		name: 'Array Example',
+		name: "Array Example",
 		data: {
 			items: [
-				{ id: 1, name: 'Item 1' },
-				{ id: 2, name: 'Item 2' },
-				{ id: 3, name: 'Item 3' }
+				{ id: 1, name: "Item 1" },
+				{ id: 2, name: "Item 2" },
+				{ id: 3, name: "Item 3" }
 			]
 		}
 	}

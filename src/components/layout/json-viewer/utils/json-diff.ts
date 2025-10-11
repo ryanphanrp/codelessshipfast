@@ -104,7 +104,11 @@ export function compareJson(left: any, right: any, path = "$"): JsonDiffItem[] {
 		}
 	}
 
-	function compareObjects(leftObj: Record<string, any>, rightObj: Record<string, any>, currentPath: string): void {
+	function compareObjects(
+		leftObj: Record<string, any>,
+		rightObj: Record<string, any>,
+		currentPath: string
+	): void {
 		const leftKeys = Object.keys(leftObj)
 		const rightKeys = Object.keys(rightObj)
 		const allKeys = new Set([...leftKeys, ...rightKeys])
@@ -151,7 +155,7 @@ export function generateDiffSummary(differences: JsonDiffItem[]): {
 		unchanged: 0
 	}
 
-	differences.forEach(diff => {
+	differences.forEach((diff) => {
 		summary[diff.type]++
 	})
 
@@ -165,13 +169,13 @@ export function filterDifferences(
 	if (showUnchanged) {
 		return differences
 	}
-	return differences.filter(diff => diff.type !== "unchanged")
+	return differences.filter((diff) => diff.type !== "unchanged")
 }
 
 export function generateUnifiedDiff(differences: JsonDiffItem[]): string {
 	let output = ""
-	
-	differences.forEach(diff => {
+
+	differences.forEach((diff) => {
 		switch (diff.type) {
 			case "added":
 				output += `+ ${diff.path}: ${JSON.stringify(diff.newValue)}\n`
@@ -200,7 +204,7 @@ export function exportDiffAsJson(differences: JsonDiffItem[]): string {
 
 export function exportDiffAsCsv(differences: JsonDiffItem[]): string {
 	const headers = ["Type", "Path", "Old Value", "New Value", "Message"]
-	const rows = differences.map(diff => [
+	const rows = differences.map((diff) => [
 		diff.type,
 		diff.path,
 		diff.oldValue !== undefined ? JSON.stringify(diff.oldValue) : "",
@@ -209,7 +213,7 @@ export function exportDiffAsCsv(differences: JsonDiffItem[]): string {
 	])
 
 	const csvContent = [headers, ...rows]
-		.map(row => row.map(cell => `"${cell?.toString().replace(/"/g, '""') || ""}"`).join(","))
+		.map((row) => row.map((cell) => `"${cell?.toString().replace(/"/g, '""') || ""}"`).join(","))
 		.join("\n")
 
 	return csvContent
@@ -217,27 +221,32 @@ export function exportDiffAsCsv(differences: JsonDiffItem[]): string {
 
 export function findDeepDifferences(differences: JsonDiffItem[]): JsonDiffItem[] {
 	// Filter for differences that are deeply nested (more than 3 levels)
-	return differences.filter(diff => {
+	return differences.filter((diff) => {
 		const pathDepth = diff.path.split(/[.\[]/).length - 1
 		return pathDepth > 3
 	})
 }
 
-export function groupDifferencesByType(differences: JsonDiffItem[]): Record<string, JsonDiffItem[]> {
-	return differences.reduce((groups, diff) => {
-		if (!groups[diff.type]) {
-			groups[diff.type] = []
-		}
-		groups[diff.type].push(diff)
-		return groups
-	}, {} as Record<string, JsonDiffItem[]>)
+export function groupDifferencesByType(
+	differences: JsonDiffItem[]
+): Record<string, JsonDiffItem[]> {
+	return differences.reduce(
+		(groups, diff) => {
+			if (!groups[diff.type]) {
+				groups[diff.type] = []
+			}
+			groups[diff.type].push(diff)
+			return groups
+		},
+		{} as Record<string, JsonDiffItem[]>
+	)
 }
 
 export function calculateSimilarityScore(differences: JsonDiffItem[]): number {
 	const totalNodes = differences.length
 	if (totalNodes === 0) return 100
 
-	const unchangedCount = differences.filter(diff => diff.type === "unchanged").length
+	const unchangedCount = differences.filter((diff) => diff.type === "unchanged").length
 	return Math.round((unchangedCount / totalNodes) * 100)
 }
 
@@ -246,7 +255,7 @@ export function highlightDifferences(jsonString: string, differences: JsonDiffIt
 	// In production, you'd want to properly parse and highlight the JSON
 	let highlighted = jsonString
 
-	differences.forEach(diff => {
+	differences.forEach((diff) => {
 		if (diff.type !== "unchanged") {
 			// Simple highlighting - this would need to be enhanced for production use
 			const pathSegments = diff.path.split(".")

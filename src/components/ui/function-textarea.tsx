@@ -35,7 +35,11 @@ const FunctionTextarea = ({
 			} as React.ChangeEvent<HTMLTextAreaElement>
 			onChange(syntheticEvent)
 		}
-		toast.info("Pasted.")
+		if (text.trim()) {
+			toast.info("Pasted.")
+		} else {
+			toast.warning("Clipboard is empty or contains only invalid content.")
+		}
 	}
 
 	const handleCopy = async () => {

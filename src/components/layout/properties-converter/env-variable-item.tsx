@@ -13,22 +13,31 @@ interface EnvVariableItemProps {
 
 export function EnvVariableItem({ envKey, envValue }: EnvVariableItemProps) {
 	const { copyToClipboard } = useClipboard()
-	const [copiedItem, setCopiedItem] = useState<'key' | 'value' | 'full' | null>(null)
+	const [copiedItem, setCopiedItem] = useState<"key" | "value" | "full" | null>(null)
 
-	const handleCopy = (type: 'key' | 'value' | 'full') => {
-		let textToCopy = ''
+	const handleCopy = (type: "key" | "value" | "full") => {
+		let textToCopy = ""
 		switch (type) {
-			case 'key':
+			case "key":
+				// Sanitize key before copying
 				textToCopy = envKey
+					.replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g, "") // Remove control characters
+					.trim()
 				break
-			case 'value':
+			case "value":
+				// Sanitize value before copying
 				textToCopy = envValue
+					.replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g, "") // Remove control characters
+					.trim()
 				break
-			case 'full':
-				textToCopy = `${envKey}=${envValue}`
+			case "full":
+				// Sanitize both key and value for full line
+				const sanitizedKey = envKey.replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g, "").trim()
+				const sanitizedValue = envValue.replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g, "").trim()
+				textToCopy = `${sanitizedKey}=${sanitizedValue}`
 				break
 		}
-		
+
 		copyToClipboard(textToCopy)
 		setCopiedItem(type)
 		setTimeout(() => setCopiedItem(null), 2000)
@@ -39,13 +48,9 @@ export function EnvVariableItem({ envKey, envValue }: EnvVariableItemProps) {
 			<div className="group flex items-center gap-2 rounded-lg border bg-card p-3 transition-colors hover:bg-accent/50">
 				{/* Key-Value Display */}
 				<div className="flex-1 font-mono text-sm">
-					<span className="font-semibold text-blue-600 dark:text-blue-400">
-						{envKey}
-					</span>
+					<span className="font-semibold text-blue-600 dark:text-blue-400">{envKey}</span>
 					<span className="mx-2 text-muted-foreground">=</span>
-					<span className="text-green-600 dark:text-green-400">
-						{envValue || '""'}
-					</span>
+					<span className="text-green-600 dark:text-green-400">{envValue || '""'}</span>
 				</div>
 
 				{/* Copy Buttons Group */}
@@ -56,9 +61,9 @@ export function EnvVariableItem({ envKey, envValue }: EnvVariableItemProps) {
 							<Button
 								variant="outline"
 								size="sm"
-								onClick={() => handleCopy('key')}
+								onClick={() => handleCopy("key")}
 								className="h-7 w-7 p-0 text-blue-600 hover:bg-blue-100 dark:text-blue-400 dark:hover:bg-blue-900/30">
-								{copiedItem === 'key' ? (
+								{copiedItem === "key" ? (
 									<Check className="h-3.5 w-3.5" />
 								) : (
 									<Copy className="h-3.5 w-3.5" />
@@ -76,9 +81,9 @@ export function EnvVariableItem({ envKey, envValue }: EnvVariableItemProps) {
 							<Button
 								variant="outline"
 								size="sm"
-								onClick={() => handleCopy('value')}
+								onClick={() => handleCopy("value")}
 								className="h-7 w-7 p-0 text-green-600 hover:bg-green-100 dark:text-green-400 dark:hover:bg-green-900/30">
-								{copiedItem === 'value' ? (
+								{copiedItem === "value" ? (
 									<Check className="h-3.5 w-3.5" />
 								) : (
 									<Copy className="h-3.5 w-3.5" />
@@ -96,9 +101,9 @@ export function EnvVariableItem({ envKey, envValue }: EnvVariableItemProps) {
 							<Button
 								variant="outline"
 								size="sm"
-								onClick={() => handleCopy('full')}
+								onClick={() => handleCopy("full")}
 								className="h-7 px-2 text-muted-foreground hover:bg-accent">
-								{copiedItem === 'full' ? (
+								{copiedItem === "full" ? (
 									<Check className="h-3.5 w-3.5" />
 								) : (
 									<Copy className="h-3.5 w-3.5" />

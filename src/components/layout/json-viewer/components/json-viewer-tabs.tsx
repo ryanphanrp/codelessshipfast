@@ -1,25 +1,20 @@
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
 import { Badge } from "@/components/ui/badge"
-import {
-	Tooltip,
-	TooltipContent,
-	TooltipProvider,
-	TooltipTrigger,
-} from "@/components/ui/tooltip"
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import type { JsonViewerMode } from "@/types"
 import {
-	Code,
-	FileText,
-	TreePine,
-	CheckCircle,
-	FileCode2,
-	Search,
-	GitCompare,
 	BarChart3,
-	UnfoldHorizontal,
+	CheckCircle,
+	Code,
+	FileCode2,
+	FileText,
+	GitCompare,
+	Info,
 	Network,
-	Info
+	Search,
+	TreePine,
+	UnfoldHorizontal
 } from "lucide-react"
 
 interface JsonViewerTabsProps {
@@ -32,7 +27,7 @@ interface TabConfig {
 	value: JsonViewerMode
 	label: string
 	icon: React.ComponentType<{ className?: string }>
-	category: 'format' | 'analyze' | 'visualize'
+	category: "format" | "analyze" | "visualize"
 	badge?: string
 	description: string
 }
@@ -40,107 +35,107 @@ interface TabConfig {
 const TAB_CONFIGS: TabConfig[] = [
 	// Format category
 	{
-		value: 'pretty-print',
-		label: 'Pretty',
+		value: "pretty-print",
+		label: "Pretty",
 		icon: Code,
-		category: 'format',
-		description: 'Format JSON with proper indentation and line breaks'
+		category: "format",
+		description: "Format JSON with proper indentation and line breaks"
 	},
 	{
-		value: 'minify',
-		label: 'Minify',
+		value: "minify",
+		label: "Minify",
 		icon: FileText,
-		category: 'format',
-		description: 'Compress JSON by removing whitespace and formatting'
+		category: "format",
+		description: "Compress JSON by removing whitespace and formatting"
 	},
 	{
-		value: 'tree-view',
-		label: 'Tree',
+		value: "tree-view",
+		label: "Tree",
 		icon: TreePine,
-		category: 'format',
-		description: 'Interactive collapsible tree view of JSON structure'
+		category: "format",
+		description: "Interactive collapsible tree view of JSON structure"
 	},
 	{
-		value: 'flatten',
-		label: 'Flatten',
+		value: "flatten",
+		label: "Flatten",
 		icon: UnfoldHorizontal,
-		category: 'format',
-		description: 'Convert nested JSON to flat key-value pairs'
+		category: "format",
+		description: "Convert nested JSON to flat key-value pairs"
 	},
 
 	// Analyze category
 	{
-		value: 'validate',
-		label: 'Validate',
+		value: "validate",
+		label: "Validate",
 		icon: CheckCircle,
-		category: 'analyze',
-		description: 'Real-time JSON validation with error highlighting'
+		category: "analyze",
+		description: "Real-time JSON validation with error highlighting"
 	},
 	{
-		value: 'schema',
-		label: 'Schema',
+		value: "schema",
+		label: "Schema",
 		icon: FileCode2,
-		category: 'analyze',
-		badge: 'New',
-		description: 'Generate JSON schema from sample data'
+		category: "analyze",
+		badge: "New",
+		description: "Generate JSON schema from sample data"
 	},
 	{
-		value: 'jsonpath',
-		label: 'JSONPath',
+		value: "jsonpath",
+		label: "JSONPath",
 		icon: Search,
-		category: 'analyze',
-		badge: 'New',
-		description: 'Query JSON data using JSONPath expressions'
+		category: "analyze",
+		badge: "New",
+		description: "Query JSON data using JSONPath expressions"
 	},
 	{
-		value: 'stats',
-		label: 'Stats',
+		value: "stats",
+		label: "Stats",
 		icon: BarChart3,
-		category: 'analyze',
-		badge: 'New',
-		description: 'Analyze JSON structure and generate statistics'
+		category: "analyze",
+		badge: "New",
+		description: "Analyze JSON structure and generate statistics"
 	},
 
 	// Visualize category
 	{
-		value: 'diff',
-		label: 'Diff',
+		value: "diff",
+		label: "Diff",
 		icon: GitCompare,
-		category: 'visualize',
-		badge: 'New',
-		description: 'Compare two JSON files and show differences'
+		category: "visualize",
+		badge: "New",
+		description: "Compare two JSON files and show differences"
 	},
 	{
-		value: 'visualize',
-		label: 'Visualize',
+		value: "visualize",
+		label: "Visualize",
 		icon: Network,
-		category: 'visualize',
-		badge: 'New',
-		description: 'Interactive graph visualization of JSON data'
+		category: "visualize",
+		badge: "New",
+		description: "Interactive graph visualization of JSON data"
 	}
 ]
 
 const CATEGORY_COLORS = {
-	format: 'bg-blue-50 text-blue-700 border-blue-200',
-	analyze: 'bg-green-50 text-green-700 border-green-200',
-	visualize: 'bg-purple-50 text-purple-700 border-purple-200'
+	format: "bg-blue-50 text-blue-700 border-blue-200",
+	analyze: "bg-green-50 text-green-700 border-green-200",
+	visualize: "bg-purple-50 text-purple-700 border-purple-200"
 }
 
 const CATEGORY_INFO = {
 	format: {
-		name: 'Format',
-		description: 'Structure and organize JSON data',
-		color: 'bg-blue-500'
+		name: "Format",
+		description: "Structure and organize JSON data",
+		color: "bg-blue-500"
 	},
 	analyze: {
-		name: 'Analyze',
-		description: 'Inspect and understand JSON structure',
-		color: 'bg-green-500'
+		name: "Analyze",
+		description: "Inspect and understand JSON structure",
+		color: "bg-green-500"
 	},
 	visualize: {
-		name: 'Visualize',
-		description: 'Compare and visualize JSON data',
-		color: 'bg-purple-500'
+		name: "Visualize",
+		description: "Compare and visualize JSON data",
+		color: "bg-purple-500"
 	}
 }
 
@@ -150,25 +145,29 @@ export function JsonViewerTabs({ mode, onModeChange, children }: JsonViewerTabsP
 	}
 
 	const handleKeyDown = (event: React.KeyboardEvent) => {
-		if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+		if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
 			event.preventDefault()
-			const currentIndex = TAB_CONFIGS.findIndex(tab => tab.value === mode)
-			const nextIndex = event.key === 'ArrowLeft'
-				? Math.max(0, currentIndex - 1)
-				: Math.min(TAB_CONFIGS.length - 1, currentIndex + 1)
+			const currentIndex = TAB_CONFIGS.findIndex((tab) => tab.value === mode)
+			const nextIndex =
+				event.key === "ArrowLeft"
+					? Math.max(0, currentIndex - 1)
+					: Math.min(TAB_CONFIGS.length - 1, currentIndex + 1)
 
 			onModeChange(TAB_CONFIGS[nextIndex].value)
 		}
 	}
 
 	// Group tabs by category
-	const groupedTabs = TAB_CONFIGS.reduce((acc, tab) => {
-		if (!acc[tab.category]) {
-			acc[tab.category] = []
-		}
-		acc[tab.category].push(tab)
-		return acc
-	}, {} as Record<string, TabConfig[]>)
+	const groupedTabs = TAB_CONFIGS.reduce(
+		(acc, tab) => {
+			if (!acc[tab.category]) {
+				acc[tab.category] = []
+			}
+			acc[tab.category].push(tab)
+			return acc
+		},
+		{} as Record<string, TabConfig[]>
+	)
 
 	return (
 		<TooltipProvider delayDuration={300}>
@@ -205,13 +204,14 @@ export function JsonViewerTabs({ mode, onModeChange, children }: JsonViewerTabsP
 														<TooltipTrigger asChild>
 															<TabsTrigger
 																value={tab.value}
-																className={`group relative flex h-10 items-center justify-center gap-2 rounded-none border-transparent border-b-2 bg-transparent px-3 py-2 font-medium text-sm transition-all hover:bg-muted/50 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring data-[state=active]:border-primary data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm${index > 0 ? 'ml-1' : ''}
+																className={`group relative flex h-10 items-center justify-center gap-2 rounded-none border-transparent border-b-2 bg-transparent px-3 py-2 font-medium text-sm transition-all hover:bg-muted/50 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring data-[state=active]:border-primary data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm${index > 0 ? "ml-1" : ""}
 																`}
-																onKeyDown={handleKeyDown}
-															>
+																onKeyDown={handleKeyDown}>
 																{/* Category indicator */}
-																<div className={`-top-0.5 -translate-x-1/2 absolute left-1/2 h-0.5 w-6 rounded-full opacity-0 transition-opacity group-data-[state=active]:opacity-100${categoryInfo.color}
-																`} />
+																<div
+																	className={`-top-0.5 -translate-x-1/2 absolute left-1/2 h-0.5 w-6 rounded-full opacity-0 transition-opacity group-data-[state=active]:opacity-100${categoryInfo.color}
+																`}
+																/>
 
 																<Icon className="h-4 w-4" />
 																<span className="hidden sm:inline">{tab.label}</span>
@@ -219,8 +219,7 @@ export function JsonViewerTabs({ mode, onModeChange, children }: JsonViewerTabsP
 																{tab.badge && (
 																	<Badge
 																		variant="secondary"
-																		className="ml-1 h-4 px-1.5 text-[10px]"
-																	>
+																		className="ml-1 h-4 px-1.5 text-[10px]">
 																		{tab.badge}
 																	</Badge>
 																)}

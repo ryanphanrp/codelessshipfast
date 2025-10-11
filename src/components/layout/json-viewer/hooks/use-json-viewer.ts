@@ -1,5 +1,5 @@
 import type { JsonViewerMode } from "@/types"
-import { useCallback, useState, useEffect } from "react"
+import { useCallback, useEffect, useState } from "react"
 import type { JsonNode, JsonValidationResult } from "../types"
 import {
 	jsonToTree,
@@ -97,7 +97,7 @@ export function useJsonViewer() {
 
 	// Auto-process for validation mode (real-time feedback)
 	useEffect(() => {
-		if (mode === 'validate' && input.trim()) {
+		if (mode === "validate" && input.trim()) {
 			const timeoutId = setTimeout(() => {
 				processJson()
 			}, 500) // Debounce for 500ms

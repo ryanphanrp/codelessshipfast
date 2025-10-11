@@ -1,6 +1,7 @@
 import { ErrorFactory, propertyKeyToEnvVar } from "@/lib/shared"
-import type { ConversionMode, ConversionResult } from "@/types"
+import type { ConversionResult } from "@/types"
 import yaml from "js-yaml"
+import type { ConversionMode } from "../types"
 
 /**
  * Flatten nested object to dot notation
@@ -267,6 +268,93 @@ export function convertPropertiesToYaml(input: string): string {
 }
 
 /**
+ * Convert YAML to Kubernetes environment variables format
+ */
+export function convertYamlToK8sEnv(input: string): string {
+	try {
+		// Check if input looks like Java properties format (contains = and no YAML structure)
+		const isPropertiesFormat = input
+			.trim()
+			.split("\n")
+			.some(
+				(line) =>
+					line.trim() &&
+					!line.trim().startsWith("#") &&
+					!line.trim().startsWith("//") &&
+					line.includes("=") &&
+					!line.includes(":")
+			)
+
+		// Try to parse as YAML first
+		let parsed: any
+		try {
+			parsed = yaml.load(input)
+			// If YAML parsing returns a string and we detected properties format, try properties parser
+			if (typeof parsed === "string" && isPropertiesFormat) {
+				parsed = parsePropertiesFormat(input)
+			}
+		} catch {
+			// If YAML parsing fails, try parsing as Java properties format
+			parsed = parsePropertiesFormat(input)
+		}
+
+		if (!parsed || typeof parsed !== "object") {
+			throw ErrorFactory.validation(
+				"Invalid input format - expected YAML or properties format",
+				"input",
+				input.slice(0, 50)
+			)
+		}
+
+		const flattened = flattenObject(parsed)
+		const k8sEnvVars: string[] = []
+
+		for (const [key, value] of Object.entries(flattened)) {
+			const envKey = propertyKeyToEnvVar(key)
+
+			// Validate K8s environment variable naming rules
+			if (!isValidK8sEnvName(envKey)) {
+				throw ErrorFactory.validation(
+					`Invalid Kubernetes environment variable name: ${envKey}. Must match pattern [A-Za-z_][A-Za-z0-9_]* and be max 63 characters.`,
+					"env_name",
+					envKey
+				)
+			}
+
+			const envValue = value?.toString() || ""
+			// Format as YAML array with name and value
+			k8sEnvVars.push(`- name: ${envKey}\n  value: '${envValue}'`)
+		}
+
+		return k8sEnvVars.join("\n")
+	} catch (error) {
+		if (error instanceof Error && error.message.includes("Validation Error")) {
+			throw error // Re-throw AppError instances
+		}
+		throw ErrorFactory.conversion(
+			`YAML to K8s environment variables conversion failed: ${error instanceof Error ? error.message : "Unknown error"}`,
+			input.slice(0, 100),
+			"yaml-to-k8s-env"
+		)
+	}
+}
+
+/**
+ * Validate Kubernetes environment variable name according to K8s naming rules
+ * Must match pattern [A-Za-z_][A-Za-z0-9_]* and be max 63 characters
+ */
+function isValidK8sEnvName(name: string): boolean {
+	// Check length constraint (max 63 characters)
+	if (name.length > 63) {
+		return false
+	}
+
+	// Check naming pattern: starts with letter or underscore, followed by letters, numbers, or underscores
+	const k8sNamePattern = /^[A-Za-z_][A-Za-z0-9_]*$/
+	return k8sNamePattern.test(name)
+}
+
+/**
  * Main conversion function that handles all modes
  */
 export function convertProperties(input: string, mode: ConversionMode): string {
@@ -283,6 +371,8 @@ export function convertProperties(input: string, mode: ConversionMode): string {
 			return convertYamlToProperties(input)
 		case "properties-to-yaml":
 			return convertPropertiesToYaml(input)
+		case "yaml-to-k8s-env":
+			return convertYamlToK8sEnv(input)
 		default:
 			throw ErrorFactory.validation(`Invalid conversion mode: ${mode}`, "mode", mode)
 	}

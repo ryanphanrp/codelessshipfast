@@ -106,7 +106,7 @@ export interface JsonPathState {
 
 // Diff comparison types
 export interface JsonDiffItem {
-	type: 'added' | 'removed' | 'modified' | 'unchanged'
+	type: "added" | "removed" | "modified" | "unchanged"
 	path: string
 	oldValue?: any
 	newValue?: any
@@ -117,7 +117,7 @@ export interface JsonDiffState {
 	leftJson: string
 	rightJson: string
 	diff: JsonDiffItem[]
-	viewMode: 'unified' | 'split'
+	viewMode: "unified" | "split"
 	isComparing: boolean
 	error?: string
 }
@@ -140,7 +140,7 @@ export interface JsonStats {
 // Flattener types
 export interface FlattenOptions {
 	separator: string
-	arrayNotation: 'bracket' | 'dot'
+	arrayNotation: "bracket" | "dot"
 	preserveArrays: boolean
 }
 
@@ -148,7 +148,7 @@ export interface FlattenState {
 	original: string
 	flattened: string
 	options: FlattenOptions
-	mode: 'flatten' | 'unflatten'
+	mode: "flatten" | "unflatten"
 	isProcessing: boolean
 	error?: string
 }
@@ -157,7 +157,7 @@ export interface FlattenState {
 export interface VisualNode {
 	id: string
 	label: string
-	type: 'object' | 'array' | 'property' | 'value'
+	type: "object" | "array" | "property" | "value"
 	dataType?: string
 	value?: any
 	children?: string[]
@@ -180,7 +180,7 @@ export interface VisualizationData {
 
 export interface VisualizerState {
 	data: VisualizationData
-	layout: 'tree' | 'radial' | 'force'
+	layout: "tree" | "radial" | "force"
 	zoomLevel: number
 	selectedNode?: string
 	filterType?: string
@@ -213,7 +213,7 @@ export interface VisualizationOptions {
 	maxDepth: number
 	nodeSize: number
 	showLabels: boolean
-	colorScheme: 'type' | 'depth' | 'value'
+	colorScheme: "type" | "depth" | "value"
 	compactMode: boolean
 }
 

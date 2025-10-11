@@ -35,8 +35,23 @@ function useClipboard() {
 			return
 		}
 
+		// Input sanitization - remove potentially dangerous content
+		const sanitizedText = text
+			.replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g, "") // Remove control characters
+			.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, "") // Remove script tags
+			.replace(/javascript:/gi, "") // Remove javascript: URLs
+			.trim()
+
+		if (!sanitizedText) {
+			setState({
+				success: false,
+				error: "Text contained only invalid characters"
+			})
+			return
+		}
+
 		try {
-			await navigator.clipboard.writeText(text)
+			await navigator.clipboard.writeText(sanitizedText)
 			setState({ success: true, error: null })
 		} catch (error) {
 			setState({ success: false, error: "Failed to copy" })
@@ -46,7 +61,7 @@ function useClipboard() {
 	const pasteFromClipboard = useCallback(async () => {
 		if (!isClipboardAvailable) {
 			setState({ success: false, error: "Clipboard is not available" })
-			return
+			return ""
 		}
 
 		try {
@@ -54,8 +69,24 @@ function useClipboard() {
 			if (!text.trim()) {
 				return ""
 			}
+
+			// Input sanitization for pasted content
+			const sanitizedText = text
+				.replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g, "") // Remove control characters
+				.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, "") // Remove script tags
+				.replace(/javascript:/gi, "") // Remove javascript: URLs
+				.trim()
+
+			if (!sanitizedText) {
+				setState({
+					success: false,
+					error: "Clipboard content contained only invalid characters"
+				})
+				return ""
+			}
+
 			setState({ success: true, error: null })
-			return text
+			return sanitizedText
 		} catch (error) {
 			setState({ success: false, error: "Failed to paste" })
 			return ""

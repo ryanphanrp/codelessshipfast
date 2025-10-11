@@ -120,12 +120,11 @@ export function MinifyPanel({ input, output, error, isProcessing }: MinifyPanelP
 							wrapLongLines={true}
 							customStyle={{
 								margin: 0,
-								padding: '12px',
-								fontSize: '14px',
-								borderRadius: '6px',
-								background: '#f9fafb'
-							}}
-						>
+								padding: "12px",
+								fontSize: "14px",
+								borderRadius: "6px",
+								background: "#f9fafb"
+							}}>
 							{output}
 						</SyntaxHighlighter>
 					</div>

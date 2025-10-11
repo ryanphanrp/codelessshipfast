@@ -1,9 +1,6 @@
 import type { JsonSchema, SchemaGeneratorOptions } from "../types"
 
-export function generateJsonSchema(
-	json: any,
-	options: SchemaGeneratorOptions = {}
-): JsonSchema {
+export function generateJsonSchema(json: any, options: SchemaGeneratorOptions = {}): JsonSchema {
 	const {
 		required = false,
 		additionalProperties = true,
@@ -38,11 +35,11 @@ export function generateJsonSchema(
 
 		if (Array.isArray(value)) {
 			if (value.length > 0) {
-				const itemTypes = new Set(value.map(item => JSON.stringify(generateSchemaForValue(item))))
+				const itemTypes = new Set(value.map((item) => JSON.stringify(generateSchemaForValue(item))))
 				if (itemTypes.size === 1) {
 					schema.items = generateSchemaForValue(value[0])
 				} else {
-					schema.items = Array.from(itemTypes).map(type => JSON.parse(type) as JsonSchema)
+					schema.items = Array.from(itemTypes).map((type) => JSON.parse(type) as JsonSchema)
 				}
 			}
 			schema.minItems = 0

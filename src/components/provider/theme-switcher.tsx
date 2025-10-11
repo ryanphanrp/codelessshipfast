@@ -3,8 +3,8 @@
 import { Switch } from "@/components/ui/switch"
 import { cn } from "@/lib/utils"
 import { useTheme } from "next-themes"
-import { Icons } from "../icons"
 import { useEffect, useState } from "react"
+import { Icons } from "../icons"
 
 interface ThemeSwitcherProps {
 	className?: string
@@ -37,20 +37,24 @@ export const ThemeSwitcher = ({ className }: ThemeSwitcherProps) => {
 
 	return (
 		<div className={cn("flex items-center gap-2", className)}>
-			<Icons.sun className={cn(
-				"h-4 w-4 transition-colors",
-				!isDark ? "text-yellow-500" : "text-muted-foreground"
-			)} />
+			<Icons.sun
+				className={cn(
+					"h-4 w-4 transition-colors",
+					!isDark ? "text-yellow-500" : "text-muted-foreground"
+				)}
+			/>
 			<Switch
 				checked={isDark}
 				onCheckedChange={handleToggle}
 				className="data-[state=checked]:bg-primary"
 				aria-label="Toggle theme"
 			/>
-			<Icons.moon className={cn(
-				"h-4 w-4 transition-colors",
-				isDark ? "text-blue-500" : "text-muted-foreground"
-			)} />
+			<Icons.moon
+				className={cn(
+					"h-4 w-4 transition-colors",
+					isDark ? "text-blue-500" : "text-muted-foreground"
+				)}
+			/>
 		</div>
 	)
 }

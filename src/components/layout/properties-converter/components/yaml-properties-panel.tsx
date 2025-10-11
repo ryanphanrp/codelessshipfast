@@ -1,7 +1,7 @@
 import { useClipboard } from "@/hooks/use-clipboard"
 import type { ClipboardState, ConversionMode, ExampleItem } from "@/types"
 import { ArrowLeftRight } from "lucide-react"
-import { useState } from "react"
+import { useCallback, useMemo } from "react"
 import { InputPanel } from "./input-panel"
 import { OutputPanel } from "./output-panel"
 
@@ -60,14 +60,27 @@ export function YamlPropertiesPanel({
 		onClearOutput()
 	}
 
-	const propertyLines = output ? output.split("\n").filter((line) => line.trim()) : []
+	const propertyLines = useMemo(() => {
+		return output ? output.split("\n").filter((line) => line.trim()) : []
+	}, [output])
 
-	const inputTitle = mode === "yaml-to-properties" ? "YAML Input" : "Properties Input"
-	const outputTitle = mode === "yaml-to-properties" ? "Properties Output" : "YAML Output"
-	const inputPlaceholder =
-		mode === "yaml-to-properties"
-			? "Paste your YAML configuration here..."
-			: "Paste your properties configuration here..."
+	const inputTitle = useMemo(
+		() => (mode === "yaml-to-properties" ? "YAML Input" : "Properties Input"),
+		[mode]
+	)
+
+	const outputTitle = useMemo(
+		() => (mode === "yaml-to-properties" ? "Properties Output" : "YAML Output"),
+		[mode]
+	)
+
+	const inputPlaceholder = useMemo(
+		() =>
+			mode === "yaml-to-properties"
+				? "Paste your YAML configuration here..."
+				: "Paste your properties configuration here...",
+		[mode]
+	)
 
 	return (
 		<div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-2">

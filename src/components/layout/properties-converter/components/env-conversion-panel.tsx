@@ -1,6 +1,6 @@
 import { useClipboard } from "@/hooks/use-clipboard"
 import type { ClipboardState, ConversionMode, EnvVariable, ExampleItem } from "@/types"
-import { useState } from "react"
+import { useCallback, useMemo } from "react"
 import { InputPanel } from "./input-panel"
 import { OutputPanel } from "./output-panel"
 
@@ -48,29 +48,88 @@ export function EnvConversionPanel({
 		copyToClipboard(output)
 	}
 
-	const parseEnvVariables = (output: string) => {
+	const parseEnvVariables = useCallback((output: string, mode: ConversionMode): EnvVariable[] => {
 		if (!output.trim()) return []
 
-		return output
-			.split("\n")
-			.filter((line) => line.trim())
-			.map((line) => {
-				const [key, ...valueParts] = line.split("=")
-				return {
-					key: key.trim(),
-					value: valueParts.join("=").trim()
+		if (mode === "yaml-to-k8s-env") {
+			// Parse K8s YAML format: - name: KEY\n  value: 'value'
+			const variables: EnvVariable[] = []
+			const lines = output.split("\n")
+
+			for (let i = 0; i < lines.length; i++) {
+				const line = lines[i].trim()
+				if (line.startsWith("- name:")) {
+					const key = line.replace("- name:", "").trim()
+					const nextLine = lines[i + 1]?.trim()
+					let value = ""
+
+					if (nextLine && nextLine.startsWith("value:")) {
+						value = nextLine
+							.replace("value:", "")
+							.trim()
+							.replace(/^['"]|['"]$/g, "")
+					}
+
+					variables.push({ key, value })
 				}
-			})
-	}
+			}
 
-	const envVariables = parseEnvVariables(output)
+			return variables
+		} else {
+			// Parse regular ENV format: KEY=value
+			return output
+				.split("\n")
+				.filter((line) => line.trim())
+				.map((line) => {
+					const [key, ...valueParts] = line.split("=")
+					return {
+						key: key.trim(),
+						value: valueParts.join("=").trim()
+					}
+				})
+		}
+	}, [])
 
-	const inputTitle =
-		mode === "yaml-to-env" ? "YAML/Properties Input" : "Spring/@Value/Property Keys"
-	const inputPlaceholder =
-		mode === "yaml-to-env"
-			? "Paste your YAML or properties here..."
-			: "Paste @Value annotations or property keys (e.g., abc.efg.makeNow)..."
+	const envVariables = useMemo(
+		() => parseEnvVariables(output, mode),
+		[output, mode, parseEnvVariables]
+	)
+
+	const inputTitle = useMemo(() => {
+		switch (mode) {
+			case "yaml-to-env":
+				return "YAML/Properties Input"
+			case "spring-to-env":
+				return "Spring/@Value/Property Keys"
+			case "yaml-to-k8s-env":
+				return "YAML/Properties Input (K8s Mode)"
+			default:
+				return "Input"
+		}
+	}, [mode])
+
+	const inputPlaceholder = useMemo(() => {
+		switch (mode) {
+			case "yaml-to-env":
+				return "Paste your YAML or properties here..."
+			case "spring-to-env":
+				return "Paste @Value annotations or property keys (e.g., abc.efg.makeNow)..."
+			case "yaml-to-k8s-env":
+				return "YAML input converted to K8s environment format..."
+			default:
+				return "Paste your input here..."
+		}
+	}, [mode])
+
+	const outputTitle = useMemo(() => {
+		const count = envVariables.length
+		switch (mode) {
+			case "yaml-to-k8s-env":
+				return `K8s Environment Variables (${count})`
+			default:
+				return `Environment Variables (${count})`
+		}
+	}, [mode, envVariables.length])
 
 	return (
 		<div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-2">
@@ -91,7 +150,7 @@ export function EnvConversionPanel({
 			/>
 
 			<OutputPanel
-				title={`Environment Variables (${envVariables.length})`}
+				title={outputTitle}
 				content={output}
 				error={error}
 				isConverting={isConverting}
