@@ -61,7 +61,7 @@ const SqlPlaceholder = () => {
             <div className="space-y-2">
               <label className="font-medium text-sm">Parameters</label>
               <FunctionTextarea
-                className="min-h-[120px] font-mono text-sm"
+                className="min-h-[120px]  font-mono text-sm"
                 placeholder="Paste parameter list"
                 value={paramText}
                 onChange={(e) => setParamText(e.target.value)}

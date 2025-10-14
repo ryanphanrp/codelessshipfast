@@ -54,7 +54,7 @@ const FunctionTextarea = ({
         value={value}
         onChange={onChange}
         className={cn(
-          "min-h-[200px] w-full flex-1 border-gray-600 resize-none rounded-md border font-code text-sm shadow-none",
+          "min-h-[200px] w-full flex-1 resize-none rounded-md border font-code text-sm shadow-none",
           className,
         )}
         readOnly={readOnly}
@@ -66,7 +66,7 @@ const FunctionTextarea = ({
             size="icon"
             variant="ghost"
             className={cn(
-              "size-6 text-muted-foreground hover:text-foreground",
+              "size-10 text-muted-foreground hover:text-foreground",
               wrapLines && "text-primary",
             )}
             onClick={() => setWrapLines(!wrapLines)}
@@ -75,9 +75,9 @@ const FunctionTextarea = ({
             }
           >
             {wrapLines ? (
-              <ScrollText className="h-4 w-4" />
+              <ScrollText className="size-10" />
             ) : (
-              <WrapText className="h-4 w-4" />
+              <WrapText className="size-10" />
             )}
           </Button>
         )}
@@ -85,21 +85,21 @@ const FunctionTextarea = ({
           <Button
             size="icon"
             variant="ghost"
-            className="size-6 text-muted-foreground hover:text-foreground"
+            className="size-10 text-muted-foreground hover:text-foreground"
             onClick={handlePaste}
             title="Paste"
           >
-            <ClipboardList className="h-4 w-4" />
+            <ClipboardList className="size-10" />
           </Button>
         )}
         <Button
           size="icon"
           variant="ghost"
-          className="size-6 text-muted-foreground hover:text-foreground"
+          className="size-10 text-muted-foreground hover:text-foreground"
           onClick={handleCopy}
           title="Copy"
         >
-          <Copy className="h-4 w-4" />
+          <Copy className="size-10" />
         </Button>
       </div>
     </div>
