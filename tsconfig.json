@@ -20,7 +20,8 @@
     ],
     "paths": {
       "@/*": ["./src/*"],
-      "@shadui/*": ["./src/components/ui/*"]
+      "@shadui/*": ["./src/components/ui/*"],
+      "@hexta/*": ["./src/components/hexta-ui/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
