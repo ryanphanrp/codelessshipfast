@@ -20,7 +20,7 @@ import {
 	ModalHeader,
 	ModalTitle,
 	ModalTrigger
-} from "@hexta"
+} from "@/components/hexta-ui"
 import { Sparkles, Zap, Shield, Rocket } from "lucide-react"
 
 export default function ComponentsDemo() {

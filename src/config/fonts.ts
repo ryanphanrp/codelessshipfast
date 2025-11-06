@@ -1,34 +1,31 @@
-import { Fira_Code, Geist, Homemade_Apple, JetBrains_Mono, Work_Sans } from "next/font/google"
+// Using CSS fallback fonts instead of Google Fonts to avoid network dependency
+// This allows builds to succeed in restricted network environments
 
-const fontBase = Work_Sans({
-	subsets: ["latin"],
-	weight: "400",
+// CSS font class names for fallback fonts
+const fontBase = {
+	className: "font-sans",
 	variable: "--font-base"
-})
+}
 
-const fontHandwriting = Homemade_Apple({
-	subsets: ["latin"],
-	weight: "400",
+const fontHandwriting = {
+	className: "font-serif",
 	variable: "--font-handwriting"
-})
+}
 
-const fontMono = JetBrains_Mono({
-	subsets: ["latin"],
-	weight: "500",
+const fontMono = {
+	className: "font-mono",
 	variable: "--font-mono"
-})
+}
 
-const fontCode = Fira_Code({
-	subsets: ["latin"],
-	weight: "500",
+const fontCode = {
+	className: "font-mono",
 	variable: "--font-code"
-})
+}
 
-const fontSans = Geist({
-	subsets: ["latin"],
-	weight: "400",
+const fontSans = {
+	className: "font-sans",
 	variable: "--font-sans"
-})
+}
 
 const applicationFonts = [
 	fontBase.className,

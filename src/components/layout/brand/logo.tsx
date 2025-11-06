@@ -1,12 +1,6 @@
 import siteConfig from "@/config/site"
 import { cn } from "@/lib/utils"
-import { Homemade_Apple } from "next/font/google"
 import Image from "next/image"
-
-const homemadeApple = Homemade_Apple({
-	weight: "400",
-	subsets: ["latin"]
-})
 
 const BrandLogo = () => {
 	return (
