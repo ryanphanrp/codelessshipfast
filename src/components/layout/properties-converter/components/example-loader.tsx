@@ -1,10 +1,10 @@
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/hexta-ui"
 import {
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuItem,
 	DropdownMenuTrigger
-} from "@/components/ui/dropdown-menu"
+} from "@/components/hexta-ui"
 import type { ExampleItem } from "@/types"
 import { ChevronDown } from "lucide-react"
 import { memo, useCallback } from "react"

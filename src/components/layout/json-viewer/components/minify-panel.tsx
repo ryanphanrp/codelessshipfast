@@ -1,6 +1,6 @@
 "use client"
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/hexta-ui"
 import { cn } from "@/lib/utils"
 import { Check, Copy, Minimize2 } from "lucide-react"
 import { useState } from "react"

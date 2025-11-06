@@ -1,10 +1,10 @@
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/hexta-ui"
 import {
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuItem,
 	DropdownMenuTrigger
-} from "@/components/ui/dropdown-menu"
+} from "@/components/hexta-ui"
 import type { ClipboardState } from "@/types"
 import { ChevronDown, ClipboardPaste, Copy, Trash2 } from "lucide-react"
 import { memo, useCallback } from "react"

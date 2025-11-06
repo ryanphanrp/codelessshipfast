@@ -49,12 +49,111 @@ export {
 // Layout Components
 export { Tabs, TabsContent, TabsList, TabsTrigger } from "./tabs"
 export { Separator } from "./separator"
+export {
+	Dialog,
+	DialogClose,
+	DialogContent,
+	DialogDescription,
+	DialogFooter,
+	DialogHeader,
+	DialogOverlay,
+	DialogPortal,
+	DialogTitle,
+	DialogTrigger
+} from "./dialog"
+export {
+	DropdownMenu,
+	DropdownMenuCheckboxItem,
+	DropdownMenuContent,
+	DropdownMenuGroup,
+	DropdownMenuItem,
+	DropdownMenuLabel,
+	DropdownMenuPortal,
+	DropdownMenuRadioGroup,
+	DropdownMenuRadioItem,
+	DropdownMenuSeparator,
+	DropdownMenuShortcut,
+	DropdownMenuSub,
+	DropdownMenuSubContent,
+	DropdownMenuSubTrigger,
+	DropdownMenuTrigger
+} from "./dropdown-menu"
+export {
+	Sheet,
+	SheetClose,
+	SheetContent,
+	SheetDescription,
+	SheetFooter,
+	SheetHeader,
+	SheetOverlay,
+	SheetPortal,
+	SheetTitle,
+	SheetTrigger
+} from "./sheet"
+export { Badge, badgeVariants, type BadgeProps } from "./badge"
+export { ScrollArea, ScrollBar } from "./scroll-area"
 
 // Feedback Components
 export { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "./tooltip"
 export { Progress } from "./progress"
 export { Slider } from "./slider"
 export { Skeleton } from "./skeleton"
+
+// Additional Layout Components
+export {
+	Popover,
+	PopoverAnchor,
+	PopoverContent,
+	PopoverTrigger
+} from "./popover"
+export {
+	Command,
+	CommandDialog,
+	CommandEmpty,
+	CommandGroup,
+	CommandInput,
+	CommandItem,
+	CommandList,
+	CommandSeparator,
+	CommandShortcut
+} from "./command"
+export {
+	type CarouselApi,
+	Carousel,
+	CarouselContent,
+	CarouselItem,
+	CarouselNext,
+	CarouselPrevious
+} from "./carousel"
+
+// Form Components
+export {
+	Form,
+	FormControl,
+	FormDescription,
+	FormField,
+	FormItem,
+	FormLabel,
+	FormMessage,
+	useFormField
+} from "./form"
+
+// Toast Components
+export {
+	Toast,
+	ToastAction,
+	type ToastActionElement,
+	ToastClose,
+	ToastDescription,
+	ToastProvider,
+	type ToastProps,
+	ToastTitle,
+	ToastViewport
+} from "./toast"
+export { Toaster } from "./toaster"
+
+// Custom Components
+export { default as FunctionTextarea } from "./function-textarea"
 
 // Re-export commonly used types
 export type { VariantProps } from "class-variance-authority"

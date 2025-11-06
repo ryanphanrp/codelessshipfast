@@ -14,7 +14,7 @@ import {
 	SidebarMenuItem,
 	useSidebar
 } from "@/components/ui/sidebar"
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/hexta-ui"
 import { navigationLogger } from "@/lib/logger"
 import { cn } from "@/lib/utils"
 import { Code, Home, Rabbit, ScrollText, Settings2 } from "lucide-react"

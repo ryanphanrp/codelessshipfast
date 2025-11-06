@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/hexta-ui"
 import { Cloud, Loader2 } from "lucide-react"
 
 interface K8sConversionButtonProps {

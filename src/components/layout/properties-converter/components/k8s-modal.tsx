@@ -1,6 +1,6 @@
 "use client"
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/hexta-ui"
 import { Check, Copy, X } from "lucide-react"
 import { useCallback, useEffect, useRef, useState } from "react"
 

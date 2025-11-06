@@ -1,5 +1,5 @@
-import { Toaster } from "@/components/ui/sonner"
-import { TooltipProvider } from "@/components/ui/tooltip"
+import { Toaster as SonnerToaster } from "@/components/ui/sonner"
+import { TooltipProvider } from "@/components/hexta-ui"
 import { ThemeProviderProps } from "next-themes"
 import { AppSidebar } from "../layout/sidebar/app-sidebar"
 import { SidebarProvider, SidebarTrigger } from "../ui/sidebar"
@@ -17,7 +17,7 @@ export const DesignSystemProvider = ({
 		enableSystem={false}
 		disableTransitionOnChange
 		{...properties}>
-		<Toaster richColors position="top-right" />
+		<SonnerToaster richColors position="top-right" />
 		<TooltipProvider>
 			<SidebarProvider>
 				<AppSidebar />

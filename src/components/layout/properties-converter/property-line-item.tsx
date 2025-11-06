@@ -1,7 +1,7 @@
 "use client"
 
-import { Button } from "@/components/ui/button"
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
+import { Button } from "@/components/hexta-ui"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/hexta-ui"
 import { useClipboard } from "@/hooks/use-clipboard"
 import { Check, Copy } from "lucide-react"
 import { useState } from "react"
