@@ -155,5 +155,39 @@ export { Toaster } from "./toaster"
 // Custom Components
 export { default as FunctionTextarea } from "./function-textarea"
 
+// Sidebar Components
+export {
+	Sidebar,
+	SidebarContent,
+	SidebarFooter,
+	SidebarGroup,
+	SidebarGroupAction,
+	SidebarGroupContent,
+	SidebarGroupLabel,
+	SidebarHeader,
+	SidebarInput,
+	SidebarInset,
+	SidebarMenu,
+	SidebarMenuAction,
+	SidebarMenuBadge,
+	SidebarMenuButton,
+	SidebarMenuItem,
+	SidebarMenuSkeleton,
+	SidebarMenuSub,
+	SidebarMenuSubButton,
+	SidebarMenuSubItem,
+	SidebarProvider,
+	SidebarRail,
+	SidebarSeparator,
+	SidebarTrigger,
+	useSidebar
+} from "./sidebar"
+
+// Sonner Toast
+export { toast, Toaster as SonnerToaster } from "./sonner"
+
+// Resizable Panels
+export { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "./resizable"
+
 // Re-export commonly used types
 export type { VariantProps } from "class-variance-authority"
