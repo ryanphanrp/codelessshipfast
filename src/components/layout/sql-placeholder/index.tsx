@@ -1,7 +1,7 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { Button } from "@/components/hexta-ui";
+import { Card, CardContent, CardFooter } from "@/components/hexta-ui";
 import FunctionTextarea from "@/components/ui/function-textarea";
 import { useClipboard } from "@/hooks/use-clipboard";
 import { handleError } from "@/lib/shared";
@@ -72,14 +72,14 @@ const SqlPlaceholder = () => {
         <CardFooter>
           <div className="flex flex-wrap gap-2">
             <Button
-              size="xs"
+              size="sm"
               className="cursor-pointer px-6"
               onClick={handlePasteFromClipboard}
             >
               Paste then fill SQL
             </Button>
             <Button
-              size="xs"
+              size="sm"
               className="cursor-pointer px-6"
               variant="outline"
               onClick={fillQuery}

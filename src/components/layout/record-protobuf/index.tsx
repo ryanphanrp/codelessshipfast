@@ -1,7 +1,7 @@
 "use client"
 
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
+import { Button } from "@/components/hexta-ui"
+import { Card, CardContent } from "@/components/hexta-ui"
 import FunctionTextarea from "@/components/ui/function-textarea"
 import { cn } from "@/lib/utils"
 import { useProtobufConverter } from "./hooks/use-protobuf-converter"

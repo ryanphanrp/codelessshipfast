@@ -1,18 +1,18 @@
 "use client"
 
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Checkbox } from "@/components/ui/checkbox"
+import { Badge } from "@/components/hexta-ui"
+import { Button } from "@/components/hexta-ui"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/hexta-ui"
+import { Checkbox } from "@/components/hexta-ui"
 import {
 	Select,
 	SelectContent,
 	SelectItem,
 	SelectTrigger,
 	SelectValue
-} from "@/components/ui/select"
-import { Separator } from "@/components/ui/separator"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+} from "@/components/hexta-ui"
+import { Separator } from "@/components/hexta-ui"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/hexta-ui"
 import {
 	AlertTriangle,
 	CheckCircle,

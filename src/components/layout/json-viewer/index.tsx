@@ -8,8 +8,8 @@ import {
 	SelectItem,
 	SelectTrigger,
 	SelectValue
-} from "@/components/ui/select"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+} from "@/components/hexta-ui"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/hexta-ui"
 import type { JsonViewerMode } from "@/types"
 import { ConversionHeader } from "../properties-converter/components/conversion-header"
 import { FlattenerPanel } from "./components/flattener-panel"

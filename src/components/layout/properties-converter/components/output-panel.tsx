@@ -1,6 +1,6 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/hexta-ui";
 import FunctionTextarea from "@/components/ui/function-textarea";
-import { ScrollArea } from "@/components/ui/scroll-area";
+import { ScrollArea } from "@/components/hexta-ui";
 import type { EnvVariable } from "@/types";
 import { FileText } from "lucide-react";
 import { memo, useMemo } from "react";

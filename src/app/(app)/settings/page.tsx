@@ -1,6 +1,6 @@
 "use client"
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/hexta-ui"
 import { useTheme } from "next-themes"
 
 export default function Page() {

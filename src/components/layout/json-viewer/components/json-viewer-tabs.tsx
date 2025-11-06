@@ -1,7 +1,7 @@
-import { Badge } from "@/components/ui/badge"
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
+import { Badge } from "@/components/hexta-ui"
+import { ScrollArea, ScrollBar } from "@/components/hexta-ui"
+import { Tabs, TabsList, TabsTrigger } from "@/components/hexta-ui"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/hexta-ui"
 import type { JsonViewerMode } from "@/types"
 import {
 	BarChart3,

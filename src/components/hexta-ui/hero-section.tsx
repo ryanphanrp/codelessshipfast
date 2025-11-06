@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { AnimatedButton } from "./animated-button"
-import { Badge } from "@/components/ui/badge"
+import { Badge } from "@/components/hexta-ui"
 import { ArrowRight, Sparkles } from "lucide-react"
 
 interface HeroSectionProps {

@@ -1,5 +1,5 @@
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/hexta-ui";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/hexta-ui";
 import FunctionTextarea from "@/components/ui/function-textarea";
 import type { ClipboardState, ExampleItem } from "@/types";
 import { ArrowRight, FileText, Play } from "lucide-react";

@@ -1,5 +1,5 @@
 import { type LucideIcon } from "lucide-react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/hexta-ui"
 import { cn } from "@/lib/utils"
 
 interface FeatureCardProps {

@@ -1,4 +1,4 @@
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Tabs, TabsList, TabsTrigger } from "@/components/hexta-ui"
 import type { ConversionMode } from "@/types"
 
 interface ConversionTabsProps {

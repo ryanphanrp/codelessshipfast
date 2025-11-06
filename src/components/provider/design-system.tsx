@@ -1,5 +1,5 @@
 import { Toaster } from "@/components/ui/sonner"
-import { TooltipProvider } from "@/components/ui/tooltip"
+import { TooltipProvider } from "@/components/hexta-ui"
 import { ThemeProviderProps } from "next-themes"
 import { AppSidebar } from "../layout/sidebar/app-sidebar"
 import { SidebarProvider, SidebarTrigger } from "../ui/sidebar"

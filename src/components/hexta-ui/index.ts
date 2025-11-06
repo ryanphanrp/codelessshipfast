@@ -49,6 +49,49 @@ export {
 // Layout Components
 export { Tabs, TabsContent, TabsList, TabsTrigger } from "./tabs"
 export { Separator } from "./separator"
+export {
+	Dialog,
+	DialogClose,
+	DialogContent,
+	DialogDescription,
+	DialogFooter,
+	DialogHeader,
+	DialogOverlay,
+	DialogPortal,
+	DialogTitle,
+	DialogTrigger
+} from "./dialog"
+export {
+	DropdownMenu,
+	DropdownMenuCheckboxItem,
+	DropdownMenuContent,
+	DropdownMenuGroup,
+	DropdownMenuItem,
+	DropdownMenuLabel,
+	DropdownMenuPortal,
+	DropdownMenuRadioGroup,
+	DropdownMenuRadioItem,
+	DropdownMenuSeparator,
+	DropdownMenuShortcut,
+	DropdownMenuSub,
+	DropdownMenuSubContent,
+	DropdownMenuSubTrigger,
+	DropdownMenuTrigger
+} from "./dropdown-menu"
+export {
+	Sheet,
+	SheetClose,
+	SheetContent,
+	SheetDescription,
+	SheetFooter,
+	SheetHeader,
+	SheetOverlay,
+	SheetPortal,
+	SheetTitle,
+	SheetTrigger
+} from "./sheet"
+export { Badge, badgeVariants, type BadgeProps } from "./badge"
+export { ScrollArea, ScrollBar } from "./scroll-area"
 
 // Feedback Components
 export { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "./tooltip"
