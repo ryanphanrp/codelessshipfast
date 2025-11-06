@@ -18,6 +18,8 @@
 		"test:run": "vitest run",
 		"test:coverage": "vitest run --coverage",
 		"ui:add": "bunx --bun shadcn@latest add",
+		"hexta:add": "bunx hexta-ui add",
+		"hexta:list": "bunx hexta-ui list",
 		"up:lib": "taze major -r -w -f -i"
 	},
 	"dependencies": {
