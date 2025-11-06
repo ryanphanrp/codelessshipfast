@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/hexta-ui";
-import FunctionTextarea from "@/components/ui/function-textarea";
+import { FunctionTextarea } from "@/components/hexta-ui";
 import { ScrollArea } from "@/components/hexta-ui";
 import type { EnvVariable } from "@/types";
 import { FileText } from "lucide-react";

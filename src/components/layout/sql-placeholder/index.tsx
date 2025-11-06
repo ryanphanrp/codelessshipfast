@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/hexta-ui";
 import { Card, CardContent, CardFooter } from "@/components/hexta-ui";
-import FunctionTextarea from "@/components/ui/function-textarea";
+import { FunctionTextarea } from "@/components/hexta-ui";
 import { useClipboard } from "@/hooks/use-clipboard";
 import { handleError } from "@/lib/shared";
 import { useState } from "react";

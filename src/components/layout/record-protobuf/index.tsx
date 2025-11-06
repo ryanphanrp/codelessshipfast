@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/hexta-ui"
 import { Card, CardContent } from "@/components/hexta-ui"
-import FunctionTextarea from "@/components/ui/function-textarea"
+import { FunctionTextarea } from "@/components/hexta-ui"
 import { cn } from "@/lib/utils"
 import { useProtobufConverter } from "./hooks/use-protobuf-converter"
 

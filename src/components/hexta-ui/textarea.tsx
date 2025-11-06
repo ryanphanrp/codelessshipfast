@@ -3,10 +3,12 @@
 import * as React from "react"
 import { cn } from "@/lib/utils"
 
-export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {}
+export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+	wrapLines?: boolean
+}
 
 const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
-	({ className, ...props }, ref) => {
+	({ className, wrapLines = false, ...props }, ref) => {
 		return (
 			<textarea
 				className={cn(
@@ -14,6 +16,12 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
 					className
 				)}
 				ref={ref}
+				style={{
+					whiteSpace: wrapLines ? "pre-wrap" : "pre",
+					wordWrap: wrapLines ? "break-word" : "normal",
+					overflowWrap: wrapLines ? "break-word" : "normal",
+					overflow: wrapLines ? "auto" : "auto"
+				}}
 				{...props}
 			/>
 		)

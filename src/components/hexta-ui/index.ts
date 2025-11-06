@@ -99,5 +99,61 @@ export { Progress } from "./progress"
 export { Slider } from "./slider"
 export { Skeleton } from "./skeleton"
 
+// Additional Layout Components
+export {
+	Popover,
+	PopoverAnchor,
+	PopoverContent,
+	PopoverTrigger
+} from "./popover"
+export {
+	Command,
+	CommandDialog,
+	CommandEmpty,
+	CommandGroup,
+	CommandInput,
+	CommandItem,
+	CommandList,
+	CommandSeparator,
+	CommandShortcut
+} from "./command"
+export {
+	type CarouselApi,
+	Carousel,
+	CarouselContent,
+	CarouselItem,
+	CarouselNext,
+	CarouselPrevious
+} from "./carousel"
+
+// Form Components
+export {
+	Form,
+	FormControl,
+	FormDescription,
+	FormField,
+	FormItem,
+	FormLabel,
+	FormMessage,
+	useFormField
+} from "./form"
+
+// Toast Components
+export {
+	Toast,
+	ToastAction,
+	type ToastActionElement,
+	ToastClose,
+	ToastDescription,
+	ToastProvider,
+	type ToastProps,
+	ToastTitle,
+	ToastViewport
+} from "./toast"
+export { Toaster } from "./toaster"
+
+// Custom Components
+export { default as FunctionTextarea } from "./function-textarea"
+
 // Re-export commonly used types
 export type { VariantProps } from "class-variance-authority"
