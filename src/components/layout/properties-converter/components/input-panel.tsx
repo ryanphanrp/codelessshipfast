@@ -1,6 +1,6 @@
 import { Button } from "@/components/hexta-ui";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/hexta-ui";
-import { FunctionTextarea } from "@/components/hexta-ui";
+import { Textarea } from "@/components/hexta-ui";
 import type { ClipboardState, ExampleItem } from "@/types";
 import { ArrowRight, FileText, Play } from "lucide-react";
 import { memo, useCallback } from "react";
@@ -78,7 +78,7 @@ export const InputPanel = memo(function InputPanel({
         </div>
       </CardHeader>
       <CardContent className="space-y-4 p-0 shadow-none border-0">
-        <FunctionTextarea
+        <Textarea
           value={value}
           onChange={handleChange}
           placeholder={placeholder}

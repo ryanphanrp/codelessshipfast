@@ -1,54 +1,36 @@
-// ===== Original HextaUI-inspired Marketing Components =====
-export { AnimatedButton } from "./animated-button"
-export { HeroSection } from "./hero-section"
-export { FeatureCard } from "./feature-card"
+// ===== REAL HextaUI Components =====
+// All components copied from https://github.com/preetsuthar17/HextaUI
 
-// ===== HextaUI Enhanced Components (First Batch) =====
+// Core Components
+export { Button, buttonVariants } from "./button"
+export { ButtonGroup } from "./button-group"
+export { Avatar, AvatarFallback, AvatarImage } from "./avatar"
+export { Badge, badgeVariants } from "./badge"
+export { Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "./card"
+
+// Layout Components
 export { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "./accordion"
 export { Alert, AlertDescription, AlertTitle } from "./alert"
 export {
-	Modal,
-	ModalClose,
-	ModalContent,
-	ModalDescription,
-	ModalFooter,
-	ModalHeader,
-	ModalOverlay,
-	ModalPortal,
-	ModalTitle,
-	ModalTrigger
-} from "./modal"
-export { EnhancedInput } from "./enhanced-input"
-export { EnhancedBadge } from "./enhanced-badge"
-
-// ===== Complete HextaUI Component Replacement =====
-// Core Components
-export { Button, buttonVariants, type ButtonProps } from "./button"
-export { Avatar, AvatarFallback, AvatarImage } from "./avatar"
-export { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "./card"
-
-// Form Components
-export { Checkbox } from "./checkbox"
-export { Switch } from "./switch"
-export { Label } from "./label"
-export { Input, type InputProps } from "./input"
-export { Textarea, type TextareaProps } from "./textarea"
-export {
-	Select,
-	SelectContent,
-	SelectGroup,
-	SelectItem,
-	SelectLabel,
-	SelectScrollDownButton,
-	SelectScrollUpButton,
-	SelectSeparator,
-	SelectTrigger,
-	SelectValue
-} from "./select"
-
-// Layout Components
-export { Tabs, TabsContent, TabsList, TabsTrigger } from "./tabs"
+	AlertDialog,
+	AlertDialogAction,
+	AlertDialogCancel,
+	AlertDialogContent,
+	AlertDialogDescription,
+	AlertDialogFooter,
+	AlertDialogHeader,
+	AlertDialogOverlay,
+	AlertDialogPortal,
+	AlertDialogTitle,
+	AlertDialogTrigger
+} from "./alert-dialog"
+export { AspectRatio } from "./aspect-ratio"
+export { Breadcrumb, BreadcrumbEllipsis, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "./breadcrumb"
+export { Collapsible, CollapsibleContent, CollapsibleTrigger } from "./collapsible"
 export { Separator } from "./separator"
+export { Tabs, TabsContent, TabsList, TabsTrigger } from "./tabs"
+
+// Dialog & Modal Components
 export {
 	Dialog,
 	DialogClose,
@@ -61,6 +43,62 @@ export {
 	DialogTitle,
 	DialogTrigger
 } from "./dialog"
+export {
+	Drawer,
+	DrawerClose,
+	DrawerContent,
+	DrawerDescription,
+	DrawerFooter,
+	DrawerHeader,
+	DrawerOverlay,
+	DrawerPortal,
+	DrawerTitle,
+	DrawerTrigger
+} from "./drawer"
+export {
+	Sheet,
+	SheetClose,
+	SheetContent,
+	SheetDescription,
+	SheetFooter,
+	SheetHeader,
+	SheetTitle,
+	SheetTrigger
+} from "./sheet"
+
+// Menu Components
+export {
+	CommandMenu,
+	CommandMenuClose,
+	CommandMenuContent,
+	CommandMenuDescription,
+	CommandMenuEmpty,
+	CommandMenuGroup,
+	CommandMenuInput,
+	CommandMenuItem,
+	CommandMenuList,
+	CommandMenuSeparator,
+	CommandMenuTitle,
+	CommandMenuTrigger,
+	useCommandMenu
+} from "./command-menu"
+export {
+	ContextMenu,
+	ContextMenuCheckboxItem,
+	ContextMenuContent,
+	ContextMenuGroup,
+	ContextMenuItem,
+	ContextMenuLabel,
+	ContextMenuPortal,
+	ContextMenuRadioGroup,
+	ContextMenuRadioItem,
+	ContextMenuSeparator,
+	ContextMenuShortcut,
+	ContextMenuSub,
+	ContextMenuSubContent,
+	ContextMenuSubTrigger,
+	ContextMenuTrigger
+} from "./context-menu"
 export {
 	DropdownMenu,
 	DropdownMenuCheckboxItem,
@@ -79,44 +117,76 @@ export {
 	DropdownMenuTrigger
 } from "./dropdown-menu"
 export {
-	Sheet,
-	SheetClose,
-	SheetContent,
-	SheetDescription,
-	SheetFooter,
-	SheetHeader,
-	SheetOverlay,
-	SheetPortal,
-	SheetTitle,
-	SheetTrigger
-} from "./sheet"
-export { Badge, badgeVariants, type BadgeProps } from "./badge"
-export { ScrollArea, ScrollBar } from "./scroll-area"
+	Menubar,
+	MenubarCheckboxItem,
+	MenubarContent,
+	MenubarGroup,
+	MenubarItem,
+	MenubarLabel,
+	MenubarMenu,
+	MenubarPortal,
+	MenubarRadioGroup,
+	MenubarRadioItem,
+	MenubarSeparator,
+	MenubarShortcut,
+	MenubarSub,
+	MenubarSubContent,
+	MenubarSubTrigger,
+	MenubarTrigger
+} from "./menubar"
+export {
+	NavigationMenu,
+	NavigationMenuContent,
+	NavigationMenuIndicator,
+	NavigationMenuItem,
+	NavigationMenuLink,
+	NavigationMenuList,
+	NavigationMenuTrigger,
+	NavigationMenuViewport,
+	navigationMenuTriggerStyle
+} from "./navigation-menu"
+
+// Form Components
+export { Checkbox } from "./checkbox"
+export { Field, FieldDescription, FieldError, FieldLabel } from "./field"
+export { Input } from "./input"
+export { InputGroup, InputGroupText } from "./input-group"
+export { InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot } from "./input-otp"
+export { Label } from "./label"
+export { NativeSelect } from "./native-select"
+export { RadioGroup, RadioGroupItem } from "./radio-group"
+export {
+	Select,
+	SelectContent,
+	SelectGroup,
+	SelectItem,
+	SelectLabel,
+	SelectScrollDownButton,
+	SelectScrollUpButton,
+	SelectSeparator,
+	SelectTrigger,
+	SelectValue
+} from "./select"
+export { Switch } from "./switch"
+export { Textarea } from "./textarea"
 
 // Feedback Components
-export { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "./tooltip"
-export { Progress } from "./progress"
-export { Slider } from "./slider"
-export { Skeleton } from "./skeleton"
-
-// Additional Layout Components
+export { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "./empty"
+export { HoverCard, HoverCardContent, HoverCardTrigger } from "./hover-card"
 export {
 	Popover,
 	PopoverAnchor,
 	PopoverContent,
 	PopoverTrigger
 } from "./popover"
-export {
-	Command,
-	CommandDialog,
-	CommandEmpty,
-	CommandGroup,
-	CommandInput,
-	CommandItem,
-	CommandList,
-	CommandSeparator,
-	CommandShortcut
-} from "./command"
+export { Progress } from "./progress"
+export { Skeleton } from "./skeleton"
+export { Spinner } from "./spinner"
+export { Toaster } from "./sonner"
+export { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "./tooltip"
+
+// Data Display Components
+export { Calendar } from "./calendar"
 export {
 	type CarouselApi,
 	Carousel,
@@ -125,35 +195,47 @@ export {
 	CarouselNext,
 	CarouselPrevious
 } from "./carousel"
+export { Item, ItemActions, ItemContent, ItemDescription, ItemFooter, ItemGroup, ItemHeader, ItemMedia, ItemSeparator, ItemTitle } from "./item"
+export { Kbd } from "./kbd"
+export { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "./pagination"
+export { ScrollArea, ScrollBar } from "./scroll-area"
+export { Slider } from "./slider"
+export { Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow } from "./table"
+export { Tree, TreeItem, TreeProvider, treeItemVariants, treeVariants } from "./tree"
+export { VideoPlayer } from "./video-player"
 
-// Form Components
+// Sidebar Components
 export {
-	Form,
-	FormControl,
-	FormDescription,
-	FormField,
-	FormItem,
-	FormLabel,
-	FormMessage,
-	useFormField
-} from "./form"
+	Sidebar,
+	SidebarContent,
+	SidebarFooter,
+	SidebarGroup,
+	SidebarGroupAction,
+	SidebarGroupContent,
+	SidebarGroupLabel,
+	SidebarHeader,
+	SidebarInput,
+	SidebarInset,
+	SidebarMenu,
+	SidebarMenuAction,
+	SidebarMenuBadge,
+	SidebarMenuButton,
+	SidebarMenuItem,
+	SidebarMenuSkeleton,
+	SidebarMenuSub,
+	SidebarMenuSubButton,
+	SidebarMenuSubItem,
+	SidebarProvider,
+	SidebarRail,
+	SidebarSeparator,
+	SidebarTrigger,
+	useSidebar
+} from "./sidebar"
 
-// Toast Components
-export {
-	Toast,
-	ToastAction,
-	type ToastActionElement,
-	ToastClose,
-	ToastDescription,
-	ToastProvider,
-	type ToastProps,
-	ToastTitle,
-	ToastViewport
-} from "./toast"
-export { Toaster } from "./toaster"
-
-// Custom Components
-export { default as FunctionTextarea } from "./function-textarea"
+// Utility Components
+export { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "./resizable"
+export { Toggle, toggleVariants } from "./toggle"
+export { ToggleGroup, ToggleGroupItem } from "./toggle-group"
 
 // Re-export commonly used types
 export type { VariantProps } from "class-variance-authority"

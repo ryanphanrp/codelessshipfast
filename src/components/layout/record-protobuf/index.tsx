@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/hexta-ui"
 import { Card, CardContent } from "@/components/hexta-ui"
-import { FunctionTextarea } from "@/components/hexta-ui"
+import { Textarea } from "@/components/hexta-ui"
 import { cn } from "@/lib/utils"
 import { useProtobufConverter } from "./hooks/use-protobuf-converter"
 
@@ -42,7 +42,7 @@ export function RecordProtobuf({ className }: { className?: string }) {
 					<CardContent className="flex-1 px-0">
 						<div className="flex h-full flex-col space-y-2">
 							<label className="font-medium text-sm">Java Record Input</label>
-							<FunctionTextarea
+							<Textarea
 								placeholder="Enter Java 17 record class..."
 								value={javaCode}
 								className="min-h-[500px] flex-1 font-mono text-sm"
@@ -58,7 +58,7 @@ export function RecordProtobuf({ className }: { className?: string }) {
 							<CardContent className="flex-1 px-0">
 								<div className="flex h-full flex-col space-y-4">
 									<label className="font-medium text-sm">Cleaned Java</label>
-									<FunctionTextarea
+									<Textarea
 										className="min-h-[200px] flex-1 font-mono text-sm"
 										value={cleanedJava}
 										readOnly
@@ -74,7 +74,7 @@ export function RecordProtobuf({ className }: { className?: string }) {
 							<CardContent className="flex-1 px-0">
 								<div className="flex h-full flex-col space-y-4">
 									<label className="font-medium text-sm">Protocol Buffer Definition</label>
-									<FunctionTextarea
+									<Textarea
 										className="min-h-[200px] flex-1 font-mono text-sm"
 										value={protoCode}
 										readOnly

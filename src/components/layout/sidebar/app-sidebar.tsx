@@ -13,7 +13,7 @@ import {
 	SidebarMenuButton,
 	SidebarMenuItem,
 	useSidebar
-} from "@/components/ui/sidebar"
+} from "@/components/hexta-ui"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/hexta-ui"
 import { navigationLogger } from "@/lib/logger"
 import { cn } from "@/lib/utils"
