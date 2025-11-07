@@ -75,7 +75,7 @@ const Dashboard = () => {
 			<div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
 				{quickActions.map((action) => (
 					<Link key={action.href} href={action.href}>
-						<Card className="group h-full border-l-4 border-l-primary transition-all hover:border-primary/50">
+						<Card className="group h-full rounded-xl border border-l-4 border-l-primary transition-all hover:border-primary/50">
 							<CardHeader className="space-y-3 pb-4">
 								<div className="flex items-start justify-between">
 									<div
@@ -104,7 +104,7 @@ const Dashboard = () => {
 			{/* Content Grid */}
 			<div className="grid gap-6 md:grid-cols-2">
 				{/* Recent Activity */}
-				<Card className="border-l-2 border-l-primary/30">
+				<Card className="rounded-xl border border-l-2 border-l-primary/30">
 					<CardHeader>
 						<CardTitle className="flex items-center gap-2 text-xl">
 							<div className="flex size-8 items-center justify-center rounded border border-primary/20 bg-primary/5">
@@ -147,7 +147,7 @@ const Dashboard = () => {
 				</Card>
 
 				{/* Keyboard Shortcuts */}
-				<Card className="border-l-2 border-l-purple-500/30">
+				<Card className="rounded-xl border border-l-2 border-l-purple-500/30">
 					<CardHeader>
 						<CardTitle className="flex items-center gap-2 text-xl">
 							<div className="flex size-8 items-center justify-center rounded border border-purple-500/20 bg-purple-500/5">
@@ -179,7 +179,7 @@ const Dashboard = () => {
 			</div>
 
 			{/* Quick Tips */}
-			<Card className="border-l-2 border-l-cyan-500/30 bg-gradient-to-br from-background to-accent/20">
+			<Card className="rounded-xl border border-l-2 border-l-cyan-500/30 bg-gradient-to-br from-background to-accent/20">
 				<CardHeader>
 					<CardTitle className="text-xl">💡 Pro Tips</CardTitle>
 					<CardDescription>

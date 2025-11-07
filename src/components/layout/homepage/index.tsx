@@ -51,7 +51,7 @@ function HomePage() {
 				</div>
 
 				<div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-					<Card className="group relative border-l-4 border-l-primary transition-colors hover:border-primary/50">
+					<Card className="group relative rounded-xl border border-l-4 border-l-primary transition-colors hover:border-primary/50">
 						<CardContent className="pt-6">
 							<div className="mb-4 flex size-14 items-center justify-center rounded-lg border border-primary/20 bg-primary/5 transition-colors group-hover:bg-primary/10">
 								<Code2 className="size-7 text-primary" />
@@ -67,7 +67,7 @@ function HomePage() {
 						</CardContent>
 					</Card>
 
-					<Card className="group relative border-l-4 border-l-cyan-500 transition-colors hover:border-cyan-500/50">
+					<Card className="group relative rounded-xl border border-l-4 border-l-cyan-500 transition-colors hover:border-cyan-500/50">
 						<CardContent className="pt-6">
 							<div className="mb-4 flex size-14 items-center justify-center rounded-lg border border-cyan-500/20 bg-cyan-500/5 transition-colors group-hover:bg-cyan-500/10">
 								<Palette className="size-7 text-cyan-600" />
@@ -85,7 +85,7 @@ function HomePage() {
 						</CardContent>
 					</Card>
 
-					<Card className="group relative border-l-4 border-l-yellow-500 transition-colors hover:border-yellow-500/50">
+					<Card className="group relative rounded-xl border border-l-4 border-l-yellow-500 transition-colors hover:border-yellow-500/50">
 						<CardContent className="pt-6">
 							<div className="mb-4 flex size-14 items-center justify-center rounded-lg border border-yellow-500/20 bg-yellow-500/5 transition-colors group-hover:bg-yellow-500/10">
 								<Zap className="size-7 text-yellow-600" />
@@ -103,7 +103,7 @@ function HomePage() {
 						</CardContent>
 					</Card>
 
-					<Card className="group relative border-l-4 border-l-blue-500 transition-colors hover:border-blue-500/50">
+					<Card className="group relative rounded-xl border border-l-4 border-l-blue-500 transition-colors hover:border-blue-500/50">
 						<CardContent className="pt-6">
 							<div className="mb-4 flex size-14 items-center justify-center rounded-lg border border-blue-500/20 bg-blue-500/5 transition-colors group-hover:bg-blue-500/10">
 								<Shield className="size-7 text-blue-600" />
@@ -118,7 +118,7 @@ function HomePage() {
 						</CardContent>
 					</Card>
 
-					<Card className="group relative border-l-4 border-l-purple-500 transition-colors hover:border-purple-500/50">
+					<Card className="group relative rounded-xl border border-l-4 border-l-purple-500 transition-colors hover:border-purple-500/50">
 						<CardContent className="pt-6">
 							<div className="mb-4 flex size-14 items-center justify-center rounded-lg border border-purple-500/20 bg-purple-500/5 transition-colors group-hover:bg-purple-500/10">
 								<Rocket className="size-7 text-purple-600" />
@@ -133,7 +133,7 @@ function HomePage() {
 						</CardContent>
 					</Card>
 
-					<Card className="group relative border-l-4 border-l-orange-500 transition-colors hover:border-orange-500/50">
+					<Card className="group relative rounded-xl border border-l-4 border-l-orange-500 transition-colors hover:border-orange-500/50">
 						<CardContent className="pt-6">
 							<div className="mb-4 flex size-14 items-center justify-center rounded-lg border border-orange-500/20 bg-orange-500/5 transition-colors group-hover:bg-orange-500/10">
 								<Users className="size-7 text-orange-600" />
