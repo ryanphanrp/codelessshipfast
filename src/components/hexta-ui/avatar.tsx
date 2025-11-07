@@ -12,7 +12,7 @@ const Avatar = React.forwardRef<
   return (
     <AvatarPrimitive.Root
       className={cn(
-        "relative flex size-8 shrink-0 touch-manipulation overflow-hidden rounded-full focus-visible:border-ring focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50",
+        "relative flex size-8 shrink-0 touch-manipulation overflow-hidden  focus-visible:border-ring focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50",
         className
       )}
       data-slot="avatar"
@@ -50,7 +50,7 @@ const AvatarFallback = React.forwardRef<
   return (
     <AvatarPrimitive.Fallback
       className={cn(
-        "flex size-full items-center justify-center rounded-full bg-muted",
+        "flex size-full items-center justify-center  bg-muted",
         className
       )}
       data-slot="avatar-fallback"

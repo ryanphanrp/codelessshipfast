@@ -31,7 +31,7 @@ const useTree = () => {
 };
 
 const treeVariants = cva(
-  "w-full rounded-ele border border-border bg-background",
+  "w-full -ele border border-border bg-background",
   {
     variants: {
       variant: {
@@ -53,7 +53,7 @@ const treeVariants = cva(
 );
 
 const treeItemVariants = cva(
-  "group relative flex cursor-pointer select-none items-center rounded-[calc(var(--card-radius)-8px)] px-3 py-2 outline-none transition-colors motion-safe:duration-200",
+  "group relative flex cursor-pointer select-none items-center -[calc(var(--card-radius)-8px)] px-3 py-2 outline-none transition-colors motion-safe:duration-200",
   {
     variants: {
       variant: {

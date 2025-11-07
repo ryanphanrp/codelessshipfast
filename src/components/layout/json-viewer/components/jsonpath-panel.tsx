@@ -227,14 +227,14 @@ export function JsonPathPanel({ input, error, isProcessing }: JsonPathPanelProps
 					) : evaluationError ? (
 						<div className="space-y-2">
 							<p className="text-red-600 text-sm">Evaluation Error:</p>
-							<div className="rounded border border-red-200 bg-red-50 p-3 text-red-700 text-sm">
+							<div className=" border border-red-200 bg-red-50 p-3 text-red-700 text-sm">
 								{evaluationError}
 							</div>
 						</div>
 					) : results.length > 0 ? (
 						<div className="space-y-4">
 							{/* Results Summary */}
-							<div className="rounded-lg bg-muted p-3">
+							<div className=" bg-muted p-3">
 								<div className="grid grid-cols-2 gap-4 text-sm md:grid-cols-3">
 									<div>
 										<span className="font-medium">Matches:</span>
@@ -259,14 +259,14 @@ export function JsonPathPanel({ input, error, isProcessing }: JsonPathPanelProps
 							{/* Results List */}
 							<div className="max-h-96 space-y-3 overflow-y-auto">
 								{results.map((result, index) => (
-									<div key={index} className="space-y-2 rounded-lg border p-3">
+									<div key={index} className="space-y-2  border p-3">
 										<div className="flex items-center justify-between">
 											<span className="font-mono text-muted-foreground text-xs">{result.path}</span>
 											<Badge variant="outline" className="text-xs">
 												{typeof result.value}
 											</Badge>
 										</div>
-										<div className="rounded border bg-background p-2">
+										<div className=" border bg-background p-2">
 											<pre className="overflow-x-auto whitespace-pre-wrap text-sm">
 												<code>{JSON.stringify(result.value, null, 2)}</code>
 											</pre>
@@ -297,19 +297,19 @@ export function JsonPathPanel({ input, error, isProcessing }: JsonPathPanelProps
 								<h5 className="mb-2 font-medium">Basic Syntax:</h5>
 								<ul className="space-y-1 text-xs">
 									<li>
-										<code className="rounded bg-muted px-1">$</code> - Root object
+										<code className=" bg-muted px-1">$</code> - Root object
 									</li>
 									<li>
-										<code className="rounded bg-muted px-1">.property</code> - Child property
+										<code className=" bg-muted px-1">.property</code> - Child property
 									</li>
 									<li>
-										<code className="rounded bg-muted px-1">['property']</code> - Bracket notation
+										<code className=" bg-muted px-1">['property']</code> - Bracket notation
 									</li>
 									<li>
-										<code className="rounded bg-muted px-1">[0]</code> - Array index
+										<code className=" bg-muted px-1">[0]</code> - Array index
 									</li>
 									<li>
-										<code className="rounded bg-muted px-1">[*]</code> - All array elements
+										<code className=" bg-muted px-1">[*]</code> - All array elements
 									</li>
 								</ul>
 							</div>
@@ -317,16 +317,16 @@ export function JsonPathPanel({ input, error, isProcessing }: JsonPathPanelProps
 								<h5 className="mb-2 font-medium">Advanced Features:</h5>
 								<ul className="space-y-1 text-xs">
 									<li>
-										<code className="rounded bg-muted px-1">..*</code> - Recursive descent
+										<code className=" bg-muted px-1">..*</code> - Recursive descent
 									</li>
 									<li>
-										<code className="rounded bg-muted px-1">[0,1]</code> - Multiple indices
+										<code className=" bg-muted px-1">[0,1]</code> - Multiple indices
 									</li>
 									<li>
-										<code className="rounded bg-muted px-1">[start:end]</code> - Array slice
+										<code className=" bg-muted px-1">[start:end]</code> - Array slice
 									</li>
 									<li>
-										<code className="rounded bg-muted px-1">?(@.price &gt; 10)</code> - Filter
+										<code className=" bg-muted px-1">?(@.price &gt; 10)</code> - Filter
 										expression
 									</li>
 								</ul>

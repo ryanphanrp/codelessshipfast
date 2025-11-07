@@ -227,7 +227,7 @@ export function SchemaGeneratorPanel({ input, error, isProcessing }: SchemaGener
 						<div className="space-y-4">
 							{/* Schema Statistics */}
 							{stats && (
-								<div className="rounded-lg bg-muted p-3">
+								<div className=" bg-muted p-3">
 									<div className="grid grid-cols-2 gap-4 text-sm md:grid-cols-4">
 										<div>
 											<span className="font-medium">Properties:</span>
@@ -258,7 +258,7 @@ export function SchemaGeneratorPanel({ input, error, isProcessing }: SchemaGener
 							<Separator />
 
 							{/* Schema Content */}
-							<div className="rounded-lg border bg-background">
+							<div className=" border bg-background">
 								<pre className="max-h-96 overflow-auto whitespace-pre-wrap p-4 text-sm">
 									<code>{schemaString}</code>
 								</pre>

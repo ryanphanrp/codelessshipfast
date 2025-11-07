@@ -63,7 +63,7 @@ function TreeNode({ node, onToggle }: TreeNodeProps) {
 		<div className="select-none">
 			<div
 				className={cn(
-					"flex cursor-pointer items-center rounded px-2 py-1 hover:bg-gray-50",
+					"flex cursor-pointer items-center  px-2 py-1 hover:bg-gray-50",
 					node.depth === 0 && "font-medium"
 				)}
 				style={{ paddingLeft: `${node.depth * 20 + 8}px` }}
@@ -109,7 +109,7 @@ export function TreeViewPanel({ treeData, onToggleNode }: TreeViewPanelProps) {
 	}
 
 	return (
-		<div className="max-h-96 overflow-auto rounded-lg border bg-white">
+		<div className="max-h-96 overflow-auto  border bg-white">
 			<div className="p-4">
 				<div className="mb-4">
 					<h3 className="mb-2 font-medium text-gray-900 text-sm">JSON Tree View</h3>

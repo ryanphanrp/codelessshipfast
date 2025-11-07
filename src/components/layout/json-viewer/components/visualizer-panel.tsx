@@ -392,7 +392,7 @@ export function VisualizerPanel({ input, error, isProcessing }: VisualizerPanelP
 							<span>Enter valid JSON to generate visualization</span>
 						</div>
 					) : (
-						<div className="overflow-hidden rounded-lg border">
+						<div className="overflow-hidden  border">
 							<div
 								ref={containerRef}
 								className="relative bg-background"
@@ -502,7 +502,7 @@ export function VisualizerPanel({ input, error, isProcessing }: VisualizerPanelP
 							<div className="grid grid-cols-2 gap-4 text-sm">
 								<div>
 									<span className="font-medium">Path:</span>
-									<div className="mt-1 rounded bg-muted p-2 font-mono text-xs">
+									<div className="mt-1  bg-muted p-2 font-mono text-xs">
 										{selectedNode.path}
 									</div>
 								</div>
@@ -516,7 +516,7 @@ export function VisualizerPanel({ input, error, isProcessing }: VisualizerPanelP
 
 							<div>
 								<span className="font-medium">Value:</span>
-								<div className="mt-1 max-h-32 overflow-y-auto rounded bg-muted p-2 font-mono text-xs">
+								<div className="mt-1 max-h-32 overflow-y-auto  bg-muted p-2 font-mono text-xs">
 									{typeof selectedNode.value === "string"
 										? selectedNode.value
 										: JSON.stringify(selectedNode.value, null, 2)}

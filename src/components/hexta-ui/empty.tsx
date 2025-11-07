@@ -8,7 +8,7 @@ const Empty = React.forwardRef<HTMLDivElement, React.ComponentProps<"div">>(
     return (
       <div
         className={cn(
-          "flex min-w-0 flex-1 touch-manipulation flex-col items-center justify-center gap-6 text-balance rounded-lg border-dashed p-6 text-center md:p-12",
+          "flex min-w-0 flex-1 touch-manipulation flex-col items-center justify-center gap-6 text-balance  border-dashed p-6 text-center md:p-12",
           className
         )}
         data-slot="empty"
@@ -42,7 +42,7 @@ const emptyMediaVariants = cva(
     variants: {
       variant: {
         default: "bg-transparent",
-        icon: "flex size-10 shrink-0 items-center justify-center rounded-lg bg-muted text-foreground [&_svg:not([class*='size-'])]:size-6",
+        icon: "flex size-10 shrink-0 items-center justify-center  bg-muted text-foreground [&_svg:not([class*='size-'])]:size-6",
       },
     },
     defaultVariants: {

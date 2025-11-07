@@ -43,7 +43,7 @@ export function MinifyPanel({ input, output, error, isProcessing }: MinifyPanelP
 
 	if (error) {
 		return (
-			<div className="rounded-lg border border-red-200 bg-red-50 p-4">
+			<div className=" border border-red-200 bg-red-50 p-4">
 				<div className="mb-2 flex items-center space-x-2 text-red-700">
 					<span className="font-medium">Error:</span>
 					<span>{error}</span>
@@ -54,7 +54,7 @@ export function MinifyPanel({ input, output, error, isProcessing }: MinifyPanelP
 
 	if (!output && !isProcessing) {
 		return (
-			<div className="rounded-lg border bg-gray-50 p-6">
+			<div className=" border bg-gray-50 p-6">
 				<div className="text-center text-gray-500">
 					<div className="mb-2 text-lg">🔸</div>
 					<p className="font-medium">No output yet</p>
@@ -65,7 +65,7 @@ export function MinifyPanel({ input, output, error, isProcessing }: MinifyPanelP
 	}
 
 	return (
-		<div className="rounded-lg border bg-white">
+		<div className=" border bg-white">
 			<div className="flex items-center justify-between border-b bg-gray-50 p-3">
 				<div className="flex items-center space-x-2">
 					<Minimize2 className="h-4 w-4 text-gray-600" />
@@ -108,11 +108,11 @@ export function MinifyPanel({ input, output, error, isProcessing }: MinifyPanelP
 			<div className="p-4">
 				{isProcessing ? (
 					<div className="flex items-center justify-center py-8">
-						<div className="h-6 w-6 animate-spin rounded-full border-blue-600 border-b-2"></div>
+						<div className="h-6 w-6 animate-spin  border-blue-600 border-b-2"></div>
 						<span className="ml-2 text-gray-600 text-sm">Minifying...</span>
 					</div>
 				) : (
-					<div className="overflow-x-auto rounded border bg-gray-50">
+					<div className="overflow-x-auto  border bg-gray-50">
 						<SyntaxHighlighter
 							language="json"
 							style={oneLight}

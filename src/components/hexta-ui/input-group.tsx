@@ -15,7 +15,7 @@ const InputGroup = React.forwardRef<
     <div
       aria-disabled={(props as any)["data-disabled"] ? true : undefined}
       className={cn(
-        "group/input-group relative flex w-full touch-manipulation items-center rounded-md border border-input  outline-none transition-[color,box-shadow] dark:bg-input/30",
+        "group/input-group relative flex w-full touch-manipulation items-center  border border-input  outline-none transition-[color,box-shadow] dark:bg-input/30",
         "h-9 min-w-0 has-[>textarea]:h-auto",
 
         // Variants based on alignment.
@@ -41,7 +41,7 @@ const InputGroup = React.forwardRef<
 });
 
 const inputGroupAddonVariants = cva(
-  "flex h-auto cursor-text select-none items-center justify-center gap-2 py-1.5 font-medium text-muted-foreground text-sm group-data-[disabled=true]/input-group:opacity-50 [&>kbd]:rounded-[calc(var(--radius)-5px)] [&>svg:not([class*='size-'])]:size-4",
+  "flex h-auto cursor-text select-none items-center justify-center gap-2 py-1.5 font-medium text-muted-foreground text-sm group-data-[disabled=true]/input-group:opacity-50 [&>kbd]:-[calc(var(--radius)-5px)] [&>svg:not([class*='size-'])]:size-4",
   {
     variants: {
       align: {
@@ -95,10 +95,10 @@ const inputGroupButtonVariants = cva(
   {
     variants: {
       size: {
-        xs: "h-6 gap-1 rounded-[calc(var(--radius)-5px)] px-2 has-[>svg]:px-2 [&>svg:not([class*='size-'])]:size-3.5",
-        sm: "h-8 gap-1.5 rounded-md px-2.5 has-[>svg]:px-2.5",
+        xs: "h-6 gap-1 -[calc(var(--radius)-5px)] px-2 has-[>svg]:px-2 [&>svg:not([class*='size-'])]:size-3.5",
+        sm: "h-8 gap-1.5  px-2.5 has-[>svg]:px-2.5",
         "icon-xs":
-          "size-6 rounded-[calc(var(--radius)-5px)] p-0 has-[>svg]:p-0",
+          "size-6 -[calc(var(--radius)-5px)] p-0 has-[>svg]:p-0",
         "icon-sm": "size-8 p-0 has-[>svg]:p-0",
       },
     },
@@ -151,7 +151,7 @@ function InputGroupInput({
   return (
     <Input
       className={cn(
-        "flex-1 rounded-none border-0 bg-transparent-none focus-visible:ring-0 dark:bg-transparent",
+        "flex-1 -none border-0 bg-transparent-none focus-visible:ring-0 dark:bg-transparent",
         className
       )}
       data-slot="input-group-control"
@@ -167,7 +167,7 @@ function InputGroupTextarea({
   return (
     <Textarea
       className={cn(
-        "flex-1 resize-none rounded-none border-0 bg-transparent py-3-none focus-visible:ring-0 dark:bg-transparent",
+        "flex-1 resize-none -none border-0 bg-transparent py-3-none focus-visible:ring-0 dark:bg-transparent",
         className
       )}
       data-slot="input-group-control"

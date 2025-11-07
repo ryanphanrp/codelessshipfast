@@ -90,7 +90,7 @@ export function StatusIndicator({
 	if (inline) {
 		return (
 			<span className={cn("inline-flex items-center gap-1.5", className)}>
-				<span className={cn("rounded-full", sizes.dot, config.dot)} />
+				<span className={cn("", sizes.dot, config.dot)} />
 				{message && <span className={cn("font-medium", config.color)}>{message}</span>}
 			</span>
 		)
@@ -99,7 +99,7 @@ export function StatusIndicator({
 	return (
 		<div
 			className={cn(
-				"flex items-center rounded-lg border font-mono",
+				"flex items-center  border font-mono",
 				config.bg,
 				config.border,
 				config.color,
@@ -128,7 +128,7 @@ export function StatusDot({
 	return (
 		<span
 			className={cn(
-				"inline-block rounded-full",
+				"inline-block ",
 				sizes.dot,
 				config.dot,
 				className

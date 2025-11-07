@@ -45,7 +45,7 @@ export function EnvVariableItem({ envKey, envValue }: EnvVariableItemProps) {
 
 	return (
 		<TooltipProvider>
-			<div className="group flex items-center gap-2 rounded-lg border bg-card p-3 transition-colors hover:bg-accent/50">
+			<div className="group flex items-center gap-2  border bg-card p-3 transition-colors hover:bg-accent/50">
 				{/* Key-Value Display */}
 				<div className="flex-1 font-mono text-sm">
 					<span className="font-semibold text-blue-600 dark:text-blue-400">{envKey}</span>

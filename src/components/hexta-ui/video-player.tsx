@@ -15,7 +15,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 
 const videoPlayerVariants = cva(
-  "group relative w-full touch-manipulation overflow-hidden rounded-card bg-black",
+  "group relative w-full touch-manipulation overflow-hidden -card bg-black",
   {
     variants: {
       size: {
@@ -312,7 +312,7 @@ const VideoPlayer = React.forwardRef<HTMLVideoElement, VideoPlayerProps>(
             >
               <button
                 aria-label={isPlaying ? "Pause" : "Play"}
-                className="pointer-events-auto flex size-16 items-center justify-center rounded-full border border-white/30 bg-white/20 text-white backdrop-blur-sm transition-colors hover:bg-white/30 motion-safe:duration-200"
+                className="pointer-events-auto flex size-16 items-center justify-center  border border-white/30 bg-white/20 text-white backdrop-blur-sm transition-colors hover:bg-white/30 motion-safe:duration-200"
                 onClick={(e) => {
                   e.stopPropagation();
                   togglePlay();
@@ -347,7 +347,7 @@ const VideoPlayer = React.forwardRef<HTMLVideoElement, VideoPlayerProps>(
                       aria-valuemax={Math.max(0, Math.floor(duration))}
                       aria-valuemin={0}
                       aria-valuenow={Math.floor(currentTime)}
-                      className="h-1 w-full cursor-pointer appearance-none rounded-full bg-white/30 focus-visible:outline-none motion-safe:duration-200 [&::-webkit-slider-thumb]:size-3 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-white "
+                      className="h-1 w-full cursor-pointer appearance-none  bg-white/30 focus-visible:outline-none motion-safe:duration-200 [&::-webkit-slider-thumb]:size-3 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]: [&::-webkit-slider-thumb]:bg-white "
                       id="video-progress"
                       max={duration || 0}
                       min={0}
@@ -372,7 +372,7 @@ const VideoPlayer = React.forwardRef<HTMLVideoElement, VideoPlayerProps>(
                   <div className="flex items-center gap-2">
                     <button
                       aria-label="Skip back 10 seconds"
-                      className="rounded-md p-2 text-white transition-colors hover:bg-white/20"
+                      className=" p-2 text-white transition-colors hover:bg-white/20"
                       onClick={(e) => {
                         e.stopPropagation();
                         skip(-10);
@@ -383,7 +383,7 @@ const VideoPlayer = React.forwardRef<HTMLVideoElement, VideoPlayerProps>(
                     </button>
                     <button
                       aria-label={isPlaying ? "Pause" : "Play"}
-                      className="rounded-md p-2 text-white transition-colors hover:bg-white/20"
+                      className=" p-2 text-white transition-colors hover:bg-white/20"
                       onClick={(e) => {
                         e.stopPropagation();
                         togglePlay();
@@ -398,7 +398,7 @@ const VideoPlayer = React.forwardRef<HTMLVideoElement, VideoPlayerProps>(
                     </button>
                     <button
                       aria-label="Skip forward 10 seconds"
-                      className="rounded-md p-2 text-white transition-colors hover:bg-white/20"
+                      className=" p-2 text-white transition-colors hover:bg-white/20"
                       onClick={(e) => {
                         e.stopPropagation();
                         skip(10);
@@ -410,7 +410,7 @@ const VideoPlayer = React.forwardRef<HTMLVideoElement, VideoPlayerProps>(
                     <div className="group/volume flex items-center gap-2">
                       <button
                         aria-label={isMuted || volume === 0 ? "Unmute" : "Mute"}
-                        className="rounded-md p-2 text-white transition-colors hover:bg-white/20"
+                        className=" p-2 text-white transition-colors hover:bg-white/20"
                         onClick={(e) => {
                           e.stopPropagation();
                           toggleMute();
@@ -432,7 +432,7 @@ const VideoPlayer = React.forwardRef<HTMLVideoElement, VideoPlayerProps>(
                           aria-valuemax={100}
                           aria-valuemin={0}
                           aria-valuenow={Math.round(volumePct)}
-                          className="h-1 w-full cursor-pointer appearance-none rounded-full bg-white/30 focus-visible:outline-none [&::-webkit-slider-thumb]:size-2 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-white"
+                          className="h-1 w-full cursor-pointer appearance-none  bg-white/30 focus-visible:outline-none [&::-webkit-slider-thumb]:size-2 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]: [&::-webkit-slider-thumb]:bg-white"
                           id="video-volume"
                           max={1}
                           min={0}
@@ -459,7 +459,7 @@ const VideoPlayer = React.forwardRef<HTMLVideoElement, VideoPlayerProps>(
                       aria-label={
                         isFullscreen ? "Exit fullscreen" : "Enter fullscreen"
                       }
-                      className="rounded-md p-2 text-white transition-colors hover:bg-white/20"
+                      className=" p-2 text-white transition-colors hover:bg-white/20"
                       onClick={(e) => {
                         e.stopPropagation();
                         toggleFullscreen();

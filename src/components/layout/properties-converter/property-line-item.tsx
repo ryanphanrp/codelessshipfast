@@ -32,7 +32,7 @@ export function PropertyLineItem({ line, lineNumber }: PropertyLineItemProps) {
 
 	return (
 		<TooltipProvider>
-			<div className="group flex items-center gap-2 rounded-lg border bg-card px-3 py-2 transition-colors hover:bg-accent/50">
+			<div className="group flex items-center gap-2  border bg-card px-3 py-2 transition-colors hover:bg-accent/50">
 				{/* Line Number */}
 				<span className="min-w-[2rem] text-right font-mono text-muted-foreground text-xs">
 					{lineNumber}

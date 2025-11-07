@@ -270,7 +270,7 @@ export function StatsPanel({ input, error, isProcessing }: StatsPanelProps) {
 								<div className="space-y-2">
 									{propertyChart.map((item, index) => (
 										<div key={index} className="flex justify-between text-sm">
-											<code className="rounded bg-muted px-2 py-1 text-xs">{item.name}</code>
+											<code className=" bg-muted px-2 py-1 text-xs">{item.name}</code>
 											<span className="font-medium">{item.value} occurrences</span>
 										</div>
 									))}
@@ -284,7 +284,7 @@ export function StatsPanel({ input, error, isProcessing }: StatsPanelProps) {
 					<div>
 						<h4 className="mb-3 font-medium">Performance Indicators</h4>
 						<div className="grid gap-4 md:grid-cols-3">
-							<div className="rounded border p-3 text-center">
+							<div className=" border p-3 text-center">
 								<div className="font-semibold text-lg">
 									{stats.parseTime < 10 ? (
 										<CheckCircle className="mx-auto h-5 w-5 text-green-600" />
@@ -298,7 +298,7 @@ export function StatsPanel({ input, error, isProcessing }: StatsPanelProps) {
 								<p className="font-medium text-xs">{stats.parseTime}ms</p>
 							</div>
 
-							<div className="rounded border p-3 text-center">
+							<div className=" border p-3 text-center">
 								<div className="font-semibold text-lg">
 									{stats.maxDepth <= 5 ? (
 										<CheckCircle className="mx-auto h-5 w-5 text-green-600" />
@@ -312,7 +312,7 @@ export function StatsPanel({ input, error, isProcessing }: StatsPanelProps) {
 								<p className="font-medium text-xs">{stats.maxDepth} levels</p>
 							</div>
 
-							<div className="rounded border p-3 text-center">
+							<div className=" border p-3 text-center">
 								<div className="font-semibold text-lg">
 									{stats.memoryEstimate < 1024 * 1024 ? (
 										<CheckCircle className="mx-auto h-5 w-5 text-green-600" />
@@ -342,7 +342,7 @@ export function StatsPanel({ input, error, isProcessing }: StatsPanelProps) {
 					<CardContent>
 						<div className="space-y-3">
 							{suggestions.map((suggestion, index) => (
-								<div key={index} className="flex items-start gap-3 rounded-lg bg-muted p-3">
+								<div key={index} className="flex items-start gap-3  bg-muted p-3">
 									<div className="mt-0.5 flex-shrink-0">
 										{suggestion.includes("well-optimized") ? (
 											<CheckCircle className="h-4 w-4 text-green-600" />

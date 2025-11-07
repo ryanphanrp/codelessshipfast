@@ -321,7 +321,7 @@ export function JsonDiffPanel({ input, error, isProcessing }: JsonDiffPanelProps
 							{viewMode === "split" ? (
 								<div className="max-h-96 space-y-2 overflow-y-auto">
 									{filteredDifferences.map((diff, index) => (
-										<div key={index} className={`rounded border p-3 ${getDiffColor(diff.type)}`}>
+										<div key={index} className={` border p-3 ${getDiffColor(diff.type)}`}>
 											<div className="flex items-start gap-3">
 												<div className="mt-1 flex-shrink-0">{getDiffIcon(diff.type)}</div>
 												<div className="min-w-0 flex-1">
@@ -331,7 +331,7 @@ export function JsonDiffPanel({ input, error, isProcessing }: JsonDiffPanelProps
 													{diff.type === "added" && (
 														<div className="text-sm">
 															<span className="font-medium text-green-700">Added: </span>
-															<code className="rounded bg-white px-1">
+															<code className=" bg-white px-1">
 																{JSON.stringify(diff.newValue)}
 															</code>
 														</div>
@@ -339,7 +339,7 @@ export function JsonDiffPanel({ input, error, isProcessing }: JsonDiffPanelProps
 													{diff.type === "removed" && (
 														<div className="text-sm">
 															<span className="font-medium text-red-700">Removed: </span>
-															<code className="rounded bg-white px-1">
+															<code className=" bg-white px-1">
 																{JSON.stringify(diff.oldValue)}
 															</code>
 														</div>
@@ -348,13 +348,13 @@ export function JsonDiffPanel({ input, error, isProcessing }: JsonDiffPanelProps
 														<div className="space-y-1 text-sm">
 															<div>
 																<span className="font-medium text-red-700">From: </span>
-																<code className="rounded bg-white px-1">
+																<code className=" bg-white px-1">
 																	{JSON.stringify(diff.oldValue)}
 																</code>
 															</div>
 															<div>
 																<span className="font-medium text-green-700">To: </span>
-																<code className="rounded bg-white px-1">
+																<code className=" bg-white px-1">
 																	{JSON.stringify(diff.newValue)}
 																</code>
 															</div>
@@ -369,7 +369,7 @@ export function JsonDiffPanel({ input, error, isProcessing }: JsonDiffPanelProps
 									))}
 								</div>
 							) : (
-								<div className="rounded border bg-background">
+								<div className=" border bg-background">
 									<pre className="max-h-96 overflow-auto whitespace-pre p-4 text-sm">
 										<code>{generateUnifiedDiff(filteredDifferences)}</code>
 									</pre>

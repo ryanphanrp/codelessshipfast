@@ -180,7 +180,7 @@ export function JsonEditor({
 					readOnly={readOnly}
 					spellCheck={false}
 					className={cn(
-						"w-full resize-none rounded-md border p-3 font-mono text-sm transition-colors",
+						"w-full resize-none  border p-3 font-mono text-sm transition-colors",
 						"focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500",
 						"disabled:cursor-not-allowed disabled:opacity-50",
 						// Make textarea transparent when not focused to show syntax highlighting
@@ -201,7 +201,7 @@ export function JsonEditor({
 			{value.trim() && (
 				<div className="-top-2 absolute right-2 z-10">
 					<div
-						className={cn("h-2 w-2 rounded-full", isValidJson() ? "bg-green-500" : "bg-red-500")}
+						className={cn("h-2 w-2 ", isValidJson() ? "bg-green-500" : "bg-red-500")}
 						title={isValidJson() ? "Valid JSON" : "Invalid JSON"}
 					/>
 				</div>
@@ -209,7 +209,7 @@ export function JsonEditor({
 
 			{/* Format hint */}
 			<div className="absolute right-2 bottom-2 z-10">
-				<div className="rounded bg-white/80 px-2 py-1 text-gray-400 text-xs">
+				<div className=" bg-white/80 px-2 py-1 text-gray-400 text-xs">
 					{(navigator.platform.includes("Mac") ? "Cmd" : "Ctrl") + "+F to format"}
 				</div>
 			</div>
