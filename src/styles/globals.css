@@ -63,3 +63,53 @@ body {
 	-ms-overflow-style: none; /* IE and Edge */
 	scrollbar-width: none; /* Firefox */
 }
+
+/* Developer-friendly typography utilities */
+.text-mono {
+	font-family: var(--font-mono, ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace);
+}
+
+/* Keyboard key styling */
+kbd {
+	@apply inline-flex items-center justify-center rounded border border-border bg-muted px-2 py-1 font-mono text-xs font-medium;
+	box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.08);
+}
+
+/* Code blocks */
+code {
+	@apply rounded bg-muted px-1.5 py-0.5 font-mono text-sm;
+}
+
+pre code {
+	@apply bg-transparent p-0;
+}
+
+/* Status badge utility */
+.status-badge {
+	@apply inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 font-mono text-xs font-medium;
+}
+
+/* Text balance for better readability */
+.text-balance {
+	text-wrap: balance;
+}
+
+/* Improved focus states for accessibility */
+*:focus-visible {
+	@apply outline-2 outline-offset-2 outline-primary;
+}
+
+/* Better link styling */
+a {
+	@apply transition-colors;
+}
+
+/* Smooth transitions for interactive elements */
+button,
+[role="button"],
+a,
+input,
+textarea,
+select {
+	@apply transition-colors duration-200;
+}
