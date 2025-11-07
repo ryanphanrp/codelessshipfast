@@ -20,7 +20,9 @@ export const DesignSystemProvider = ({
 			<SidebarProvider>
 				<AppSidebar />
 				<SidebarTrigger />
-				{children}
+				<main className="w-[80%] mx-auto">
+					{children}
+				</main>
 			</SidebarProvider>
 		</TooltipProvider>
 	</ThemeProvider>

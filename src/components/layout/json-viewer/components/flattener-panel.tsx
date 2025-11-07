@@ -374,7 +374,7 @@ export function FlattenerPanel({ input, error, isProcessing }: FlattenerPanelPro
 					) : processingError ? (
 						<div className="space-y-2">
 							<p className="text-red-600 text-sm">Processing Error:</p>
-							<div className="rounded border border-red-200 bg-red-50 p-3 text-red-700 text-sm">
+							<div className=" border border-red-200 bg-red-50 p-3 text-red-700 text-sm">
 								{processingError}
 							</div>
 						</div>
@@ -413,7 +413,7 @@ export function FlattenerPanel({ input, error, isProcessing }: FlattenerPanelPro
 							<Separator />
 
 							{/* Result Display */}
-							<div className="rounded-lg border bg-background">
+							<div className=" border bg-background">
 								<pre className="max-h-96 overflow-auto whitespace-pre-wrap p-4 text-sm">
 									<code>{mode === "flatten" ? flattened : unflattened}</code>
 								</pre>

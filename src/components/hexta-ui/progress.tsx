@@ -13,7 +13,7 @@ const Progress = React.forwardRef<
     <ProgressPrimitive.Root
       aria-busy={typeof value === "number" && value < 100 ? true : undefined}
       className={cn(
-        "relative h-2 w-full overflow-hidden rounded-full bg-primary/20",
+        "relative h-2 w-full overflow-hidden  bg-primary/20",
         className
       )}
       data-slot="progress"

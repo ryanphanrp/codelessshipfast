@@ -55,7 +55,7 @@ export const OutputPanel = memo(function OutputPanel({
       </CardHeader>
       <CardContent className="space-y-4 p-0-none border-0">
         {error ? (
-          <div className="rounded border border-red-200 bg-red-50 p-3 text-red-600 text-sm">
+          <div className=" border border-red-200 bg-red-50 p-3 text-red-600 text-sm">
             <strong>Error:</strong> {error}
           </div>
         ) : hasContent ? (
@@ -96,7 +96,7 @@ export const OutputPanel = memo(function OutputPanel({
             )}
           </>
         ) : (
-          <div className="flex h-[350px] items-center justify-center rounded border-2 border-gray-200 border-dashed">
+          <div className="flex h-[350px] items-center justify-center  border-2 border-gray-200 border-dashed">
             <div className="text-center text-muted-foreground">
               <FileText className="mx-auto mb-2 h-8 w-8" />
               <p>Output will appear here</p>

@@ -7,7 +7,7 @@ const Card = React.forwardRef<HTMLDivElement, React.ComponentProps<"div">>(
     return (
       <div
         className={cn(
-          "flex touch-manipulation flex-col gap-6 rounded-xl border bg-card py-6 text-card-foreground ",
+          "flex touch-manipulation flex-col gap-6  border bg-card py-6 text-card-foreground ",
           className
         )}
         data-slot="card"

@@ -137,7 +137,7 @@ export function K8sModal({ isOpen, onClose, output, error, isConverting }: K8sMo
 			{/* Modal */}
 			<div
 				ref={modalRef}
-				className="relative z-10 mx-4 max-h-[80vh] w-full max-w-3xl  transform rounded-xl border border-gray-200 bg-white opacity-100  transition-all duration-300 dark:border-gray-700 dark:bg-gray-900"
+				className="relative z-10 mx-4 max-h-[80vh] w-full max-w-3xl  transform  border border-gray-200 bg-white opacity-100  transition-all duration-300 dark:border-gray-700 dark:bg-gray-900"
 				role="dialog"
 				aria-modal="true"
 				aria-labelledby="modal-title"
@@ -167,14 +167,14 @@ export function K8sModal({ isOpen, onClose, output, error, isConverting }: K8sMo
 					{isConverting ? (
 						<div className="flex items-center justify-center py-12">
 							<div className="flex items-center space-x-3">
-								<div className="h-6 w-6 animate-spin rounded-full border-blue-600 border-b-2"></div>
+								<div className="h-6 w-6 animate-spin  border-blue-600 border-b-2"></div>
 								<span className="text-gray-600 dark:text-gray-400">
 									Converting to K8s format...
 								</span>
 							</div>
 						</div>
 					) : error ? (
-						<div className="rounded-lg border border-red-200 bg-red-50 p-4 dark:border-red-800 dark:bg-red-900/20">
+						<div className=" border border-red-200 bg-red-50 p-4 dark:border-red-800 dark:bg-red-900/20">
 							<div className="flex">
 								<div className="flex-shrink-0">
 									<svg className="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
@@ -224,7 +224,7 @@ export function K8sModal({ isOpen, onClose, output, error, isConverting }: K8sMo
 								id="k8s-output"
 								value={editableOutput}
 								onChange={handleTextareaChange}
-								className="h-64 w-full resize-none rounded-lg border border-gray-300 bg-gray-50 p-4 font-mono text-sm transition-colors duration-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-800"
+								className="h-64 w-full resize-none  border border-gray-300 bg-gray-50 p-4 font-mono text-sm transition-colors duration-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-800"
 								placeholder="K8s environment variables will appear here..."
 								spellCheck={false}
 								aria-label="K8s YAML configuration editor"

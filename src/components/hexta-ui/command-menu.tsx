@@ -153,7 +153,7 @@ const CommandMenuContent = React.forwardRef<
           <div
             className={cn(
               "-translate-x-1/2 -translate-y-1/2 fixed top-[30%] left-1/2 z-50 w-[95%] max-w-2xl",
-              "rounded-card border border-border bg-background",
+              "-card border border-border bg-background",
               "overflow-hidden",
               "motion-safe:duration-200 motion-reduce:animate-none",
               className
@@ -171,7 +171,7 @@ const CommandMenuContent = React.forwardRef<
                 <CommandMenuTitle>Command Menu</CommandMenuTitle>
               </VisuallyHidden.Root>
               {children}
-              <CommandMenuClose className="absolute top-3 right-3 rounded-lg p-1.5 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+              <CommandMenuClose className="absolute top-3 right-3  p-1.5 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
                 <X size={14} />
                 <span className="sr-only">Close</span>
               </CommandMenuClose>
@@ -204,7 +204,7 @@ const CommandMenuInput = React.forwardRef<
         <Search className="size-4 shrink-0 text-muted-foreground" />
         <input
           className={cn(
-            "h-12 w-full rounded-none border-0 bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50",
+            "h-12 w-full -none border-0 bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50",
             className
           )}
           onChange={(e) => setValue(e.target.value)}
@@ -330,7 +330,7 @@ const CommandMenuItem = React.forwardRef<
     return (
       <div
         className={cn(
-          "relative flex cursor-default select-none items-center gap-2 rounded-ele px-2 py-2 text-sm outline-none transition-colors",
+          "relative flex cursor-default select-none items-center gap-2 -ele px-2 py-2 text-sm outline-none transition-colors",
           "hover:bg-accent hover:text-accent-foreground",
           isSelected && "bg-accent text-accent-foreground",
           disabled && "pointer-events-none opacity-50",

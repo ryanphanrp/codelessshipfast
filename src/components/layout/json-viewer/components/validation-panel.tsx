@@ -53,7 +53,7 @@ function ErrorDisplay({ error }: { error: ValidationError }) {
 	}
 
 	return (
-		<div className={cn("mb-2 rounded-lg border p-3", getSeverityColor(error.severity))}>
+		<div className={cn("mb-2  border p-3", getSeverityColor(error.severity))}>
 			<div className="flex items-start space-x-2">
 				{getSeverityIcon(error.severity)}
 				<div className="flex-1">
@@ -78,7 +78,7 @@ function JsonWithErrorHighlighting({
 }: { input: string; errors: ValidationError[] }) {
 	if (errors.length === 0) {
 		return (
-			<pre className="overflow-x-auto rounded border border-green-200 bg-green-50 p-3 text-sm">
+			<pre className="overflow-x-auto  border border-green-200 bg-green-50 p-3 text-sm">
 				<code className="text-green-800">{input}</code>
 			</pre>
 		)
@@ -88,7 +88,7 @@ function JsonWithErrorHighlighting({
 	// In a real implementation, you might want to add syntax highlighting
 	// and error markers at specific positions
 	return (
-		<pre className="overflow-x-auto rounded border border-red-200 bg-red-50 p-3 text-sm">
+		<pre className="overflow-x-auto  border border-red-200 bg-red-50 p-3 text-sm">
 			<code className="text-red-800">{input}</code>
 		</pre>
 	)
@@ -97,7 +97,7 @@ function JsonWithErrorHighlighting({
 export function ValidationPanel({ validationResult, input }: ValidationPanelProps) {
 	if (!validationResult) {
 		return (
-			<div className="rounded-lg border bg-gray-50 p-6">
+			<div className=" border bg-gray-50 p-6">
 				<div className="text-center text-gray-500">
 					<div className="mb-2 text-2xl">🔍</div>
 					<p className="font-medium">No validation result</p>
@@ -111,12 +111,12 @@ export function ValidationPanel({ validationResult, input }: ValidationPanelProp
 
 	return (
 		<div className="space-y-4">
-			<div className="rounded-lg border bg-white p-4">
+			<div className=" border bg-white p-4">
 				<ValidationStatus isValid={isValid} errorCount={errors.length} />
 			</div>
 
 			{!isValid && errors.length > 0 && (
-				<div className="rounded-lg border bg-white p-4">
+				<div className=" border bg-white p-4">
 					<h3 className="mb-3 font-medium text-gray-900 text-sm">Errors Found:</h3>
 					<div className="space-y-2">
 						{errors.map((error, index) => (
@@ -127,7 +127,7 @@ export function ValidationPanel({ validationResult, input }: ValidationPanelProp
 			)}
 
 			{input.trim() && (
-				<div className="rounded-lg border bg-white p-4">
+				<div className=" border bg-white p-4">
 					<h3 className="mb-3 font-medium text-gray-900 text-sm">JSON Input:</h3>
 					<JsonWithErrorHighlighting input={input} errors={errors} />
 				</div>

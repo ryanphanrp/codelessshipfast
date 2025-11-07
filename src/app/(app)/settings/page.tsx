@@ -25,15 +25,15 @@ export default function Page() {
 					<div className="grid grid-cols-3 gap-4">
 						<button
 							onClick={() => setTheme("light")}
-							className="group flex flex-col space-y-3 rounded-lg border-2 border-muted p-4 hover:border-accent">
-							<div className="space-y-2 rounded-sm bg-slate-100 p-2">
-								<div className="space-y-2 rounded-md bg-white p-2 shadow-sm">
-									<div className="h-2 w-[80px] rounded-lg bg-slate-200" />
-									<div className="h-2 w-[100px] rounded-lg bg-slate-200" />
+							className="group flex flex-col space-y-3  border-2 border-muted p-4 hover:border-accent">
+							<div className="space-y-2  bg-slate-100 p-2">
+								<div className="space-y-2  bg-white p-2 shadow-sm">
+									<div className="h-2 w-[80px]  bg-slate-200" />
+									<div className="h-2 w-[100px]  bg-slate-200" />
 								</div>
-								<div className="flex items-center space-x-2 rounded-md bg-white p-2 shadow-sm">
-									<div className="h-4 w-4 rounded-full bg-slate-200" />
-									<div className="h-2 w-[100px] rounded-lg bg-slate-200" />
+								<div className="flex items-center space-x-2  bg-white p-2 shadow-sm">
+									<div className="h-4 w-4  bg-slate-200" />
+									<div className="h-2 w-[100px]  bg-slate-200" />
 								</div>
 							</div>
 							<span className="font-medium text-sm">Light</span>
@@ -41,15 +41,15 @@ export default function Page() {
 
 						<button
 							onClick={() => setTheme("dark")}
-							className="group flex flex-col space-y-3 rounded-lg border-2 border-muted p-4 hover:border-accent">
-							<div className="space-y-2 rounded-sm bg-slate-950 p-2">
-								<div className="space-y-2 rounded-md bg-slate-800 p-2 shadow-sm">
-									<div className="h-2 w-[80px] rounded-lg bg-slate-400" />
-									<div className="h-2 w-[100px] rounded-lg bg-slate-400" />
+							className="group flex flex-col space-y-3  border-2 border-muted p-4 hover:border-accent">
+							<div className="space-y-2  bg-slate-950 p-2">
+								<div className="space-y-2  bg-slate-800 p-2 shadow-sm">
+									<div className="h-2 w-[80px]  bg-slate-400" />
+									<div className="h-2 w-[100px]  bg-slate-400" />
 								</div>
-								<div className="flex items-center space-x-2 rounded-md bg-slate-800 p-2 shadow-sm">
-									<div className="h-4 w-4 rounded-full bg-slate-400" />
-									<div className="h-2 w-[100px] rounded-lg bg-slate-400" />
+								<div className="flex items-center space-x-2  bg-slate-800 p-2 shadow-sm">
+									<div className="h-4 w-4  bg-slate-400" />
+									<div className="h-2 w-[100px]  bg-slate-400" />
 								</div>
 							</div>
 							<span className="font-medium text-sm">Dark</span>
@@ -57,15 +57,15 @@ export default function Page() {
 
 						<button
 							onClick={() => setTheme("system")}
-							className="group flex flex-col space-y-3 rounded-lg border-2 border-muted p-4 hover:border-accent">
-							<div className="space-y-2 rounded-sm bg-gradient-to-r from-slate-100 to-slate-950 p-2">
-								<div className="space-y-2 rounded-md bg-slate-300 p-2 shadow-sm">
-									<div className="h-2 w-[80px] rounded-lg bg-slate-400" />
-									<div className="h-2 w-[100px] rounded-lg bg-slate-400" />
+							className="group flex flex-col space-y-3  border-2 border-muted p-4 hover:border-accent">
+							<div className="space-y-2  bg-gradient-to-r from-slate-100 to-slate-950 p-2">
+								<div className="space-y-2  bg-slate-300 p-2 shadow-sm">
+									<div className="h-2 w-[80px]  bg-slate-400" />
+									<div className="h-2 w-[100px]  bg-slate-400" />
 								</div>
-								<div className="flex items-center space-x-2 rounded-md bg-slate-300 p-2 shadow-sm">
-									<div className="h-4 w-4 rounded-full bg-slate-400" />
-									<div className="h-2 w-[100px] rounded-lg bg-slate-400" />
+								<div className="flex items-center space-x-2  bg-slate-300 p-2 shadow-sm">
+									<div className="h-4 w-4  bg-slate-400" />
+									<div className="h-2 w-[100px]  bg-slate-400" />
 								</div>
 							</div>
 							<span className="font-medium text-sm">System</span>

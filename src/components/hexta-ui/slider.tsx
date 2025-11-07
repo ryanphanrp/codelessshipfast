@@ -40,7 +40,7 @@ const Slider = React.forwardRef<
     >
       <SliderPrimitive.Track
         className={cn(
-          "relative grow overflow-hidden rounded-full bg-muted data-[orientation=horizontal]:h-1.5 data-[orientation=vertical]:h-full data-[orientation=horizontal]:w-full data-[orientation=vertical]:w-1.5"
+          "relative grow overflow-hidden  bg-muted data-[orientation=horizontal]:h-1.5 data-[orientation=vertical]:h-full data-[orientation=horizontal]:w-full data-[orientation=vertical]:w-1.5"
         )}
         data-slot="slider-track"
       >
@@ -53,7 +53,7 @@ const Slider = React.forwardRef<
       </SliderPrimitive.Track>
       {Array.from({ length: _values.length }, (_, index) => (
         <SliderPrimitive.Thumb
-          className="block size-4 shrink-0 touch-manipulation rounded-full border border-primary bg-white p-2  ring-ring/50 transition-[color,box-shadow] hover:ring-4 focus-visible:outline-hidden focus-visible:ring-4 disabled:pointer-events-none data-disabled:opacity-50"
+          className="block size-4 shrink-0 touch-manipulation  border border-primary bg-white p-2  ring-ring/50 transition-[color,box-shadow] hover:ring-4 focus-visible:outline-hidden focus-visible:ring-4 disabled:pointer-events-none data-disabled:opacity-50"
           data-slot="slider-thumb"
           key={index}
         />

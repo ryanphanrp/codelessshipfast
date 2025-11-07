@@ -139,16 +139,16 @@ export default function JsonViewer() {
 				{/* Input Panel - hidden for fully self-contained panels */}
 				{!(mode === "diff" || mode === "visualize") && (
 					<div className="space-y-6">
-						<div className="overflow-hidden rounded-xl border bg-card ">
+						<div className="overflow-hidden  border bg-card ">
 							<div className="flex flex-col gap-4 border-b bg-muted/30 p-4 sm:flex-row sm:items-center sm:justify-between sm:gap-2 sm:p-4">
 								<div className="flex items-center gap-2">
-									<div className="h-2 w-2 rounded-full bg-blue-500" />
+									<div className="h-2 w-2  bg-blue-500" />
 									<h3 className="font-semibold text-base text-foreground">JSON Input</h3>
 								</div>
 								<div className="flex flex-wrap items-center gap-2">
 									{examples.length > 0 && (
 										<select
-											className="rounded-md border border-input bg-background px-3 py-1.5 text-sm  transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+											className=" border border-input bg-background px-3 py-1.5 text-sm  transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
 											onChange={(e) => {
 												const example = examples.find((ex) => ex.label === e.target.value)
 												if (example) {
@@ -168,27 +168,27 @@ export default function JsonViewer() {
 									)}
 									<button
 										onClick={pasteFromClipboard}
-										className="inline-flex items-center justify-center rounded-md border border-input bg-background px-3 py-1.5 font-medium text-foreground text-sm  transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+										className="inline-flex items-center justify-center  border border-input bg-background px-3 py-1.5 font-medium text-foreground text-sm  transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
 										title="Paste from clipboard">
 										📋 Paste
 									</button>
 									<button
 										onClick={clearInput}
-										className="inline-flex items-center justify-center rounded-md border border-input bg-background px-3 py-1.5 font-medium text-foreground text-sm  transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
+										className="inline-flex items-center justify-center  border border-input bg-background px-3 py-1.5 font-medium text-foreground text-sm  transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
 										disabled={!input}>
 										Clear
 									</button>
 									{needsProcessButton && (
 										<button
 											onClick={processJson}
-											className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-1.5 font-medium text-primary-foreground text-sm transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
+											className="inline-flex items-center justify-center  bg-primary px-4 py-1.5 font-medium text-primary-foreground text-sm transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
 											disabled={!input.trim() || isProcessing}>
 											{isProcessing ? "Processing..." : "Process"}
 										</button>
 									)}
 									{!needsProcessButton && (
 										<div className="flex items-center gap-1 text-muted-foreground text-xs">
-											<div className="h-1.5 w-1.5 rounded-full bg-green-500" />
+											<div className="h-1.5 w-1.5  bg-green-500" />
 											<span>
 												{mode === "schema" ||
 												mode === "jsonpath" ||
@@ -201,7 +201,7 @@ export default function JsonViewer() {
 									)}
 									{mode === "validate" && (
 										<div className="flex items-center gap-1 text-green-600 text-xs">
-											<div className="h-1.5 w-1.5 animate-pulse rounded-full bg-green-500" />
+											<div className="h-1.5 w-1.5 animate-pulse  bg-green-500" />
 											<span>Real-time</span>
 										</div>
 									)}
@@ -235,12 +235,12 @@ export default function JsonViewer() {
 										<TabsList className="grid w-full grid-cols-2 bg-transparent p-0">
 											<TabsTrigger
 												value="jsonpath-pretty"
-												className="rounded-none border-transparent border-b-2 bg-transparent transition-all hover:bg-muted/50 data-[state=active]:border-primary data-[state=active]:border-b-2 data-[state=active]:bg-background data-[state=active]:">
+												className="-none border-transparent border-b-2 bg-transparent transition-all hover:bg-muted/50 data-[state=active]:border-primary data-[state=active]:border-b-2 data-[state=active]:bg-background data-[state=active]:">
 												Pretty Print
 											</TabsTrigger>
 											<TabsTrigger
 												value="jsonpath-table"
-												className="rounded-none border-transparent border-b-2 bg-transparent transition-all hover:bg-muted/50 data-[state=active]:border-primary data-[state=active]:border-b-2 data-[state=active]:bg-background data-[state=active]:">
+												className="-none border-transparent border-b-2 bg-transparent transition-all hover:bg-muted/50 data-[state=active]:border-primary data-[state=active]:border-b-2 data-[state=active]:bg-background data-[state=active]:">
 												Table
 											</TabsTrigger>
 										</TabsList>
@@ -272,11 +272,11 @@ export default function JsonViewer() {
 												value={jsonPathExpression}
 												onChange={(e) => handleJsonPathExpressionChange(e.target.value)}
 												placeholder="Enter JSONPath expression (e.g., $.store.book[*].title)"
-												className="flex-1 rounded-md border border-input bg-background px-3 py-2 font-mono text-sm  transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+												className="flex-1  border border-input bg-background px-3 py-2 font-mono text-sm  transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
 											/>
 											<button
 												onClick={() => handleJsonPathExpressionChange("$")}
-												className="inline-flex items-center justify-center rounded-md border border-input bg-background px-3 py-2 font-medium text-foreground text-sm  transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
+												className="inline-flex items-center justify-center  border border-input bg-background px-3 py-2 font-medium text-foreground text-sm  transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
 												Reset
 											</button>
 										</div>
@@ -292,7 +292,7 @@ export default function JsonViewer() {
 													</div>
 													<button
 														onClick={copyResults}
-														className="inline-flex items-center justify-center rounded-md border border-input bg-background px-3 py-1.5 font-medium text-foreground text-sm  transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+														className="inline-flex items-center justify-center  border border-input bg-background px-3 py-1.5 font-medium text-foreground text-sm  transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
 														title="Copy all results">
 														{copySuccess ? "✅ Copied!" : "📋 Copy All"}
 													</button>
@@ -301,7 +301,7 @@ export default function JsonViewer() {
 											{jsonPathResults.length > 0 ? (
 												<div className="max-h-96 space-y-3 overflow-auto">
 													{jsonPathResults.map((result, index) => (
-														<div key={index} className="rounded-lg border bg-card p-3 ">
+														<div key={index} className=" border bg-card p-3 ">
 															<div className="mb-2 flex items-center justify-between">
 																<span className="font-medium text-muted-foreground text-xs">
 																	Result {index + 1}
@@ -316,7 +316,7 @@ export default function JsonViewer() {
 																	📋
 																</button>
 															</div>
-															<pre className="overflow-x-auto whitespace-pre-wrap rounded bg-muted/50 p-2 text-sm">
+															<pre className="overflow-x-auto whitespace-pre-wrap  bg-muted/50 p-2 text-sm">
 																<code>{JSON.stringify(result, null, 2)}</code>
 															</pre>
 														</div>
@@ -342,7 +342,7 @@ export default function JsonViewer() {
 													</div>
 													<button
 														onClick={copyResults}
-														className="inline-flex items-center justify-center rounded-md border border-input bg-background px-3 py-1.5 font-medium text-foreground text-sm  transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+														className="inline-flex items-center justify-center  border border-input bg-background px-3 py-1.5 font-medium text-foreground text-sm  transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
 														title="Copy all results">
 														{copySuccess ? "✅ Copied!" : "📋 Copy All"}
 													</button>
@@ -350,7 +350,7 @@ export default function JsonViewer() {
 											)}
 											{jsonPathResults.length > 0 ? (
 												<div className="overflow-x-auto">
-													<table className="w-full border-collapse rounded-lg border">
+													<table className="w-full border-collapse  border">
 														<thead>
 															<tr className="bg-muted">
 																<th className="border border-border p-2 text-left font-medium text-sm">
@@ -381,7 +381,7 @@ export default function JsonViewer() {
 																	</td>
 																	<td className="border border-border p-2">
 																		{typeof result === "object" && result !== null ? (
-																			<pre className="max-w-xs overflow-x-auto rounded bg-muted/30 p-1 text-xs">
+																			<pre className="max-w-xs overflow-x-auto  bg-muted/30 p-1 text-xs">
 																				{JSON.stringify(result, null, 2)}
 																			</pre>
 																		) : (
@@ -389,7 +389,7 @@ export default function JsonViewer() {
 																		)}
 																	</td>
 																	<td className="border border-border p-2">
-																		<span className="rounded bg-muted px-2 py-1 font-medium text-xs">
+																		<span className=" bg-muted px-2 py-1 font-medium text-xs">
 																			{typeof result}
 																		</span>
 																	</td>
@@ -434,7 +434,7 @@ export default function JsonViewer() {
 												<TabsTrigger
 													key={tab.value}
 													value={tab.value}
-													className="rounded-none border-transparent border-b-2 bg-transparent transition-all hover:bg-muted/50 data-[state=active]:border-primary data-[state=active]:border-b-2 data-[state=active]:bg-background data-[state=active]:">
+													className="-none border-transparent border-b-2 bg-transparent transition-all hover:bg-muted/50 data-[state=active]:border-primary data-[state=active]:border-b-2 data-[state=active]:bg-background data-[state=active]:">
 													{tab.label}
 												</TabsTrigger>
 											))}

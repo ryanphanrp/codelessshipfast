@@ -40,7 +40,7 @@ const BreadcrumbLink = React.forwardRef<
   return (
     <Comp
       className={cn(
-        "touch-manipulation transition-colors hover:text-foreground focus-visible:rounded focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50",
+        "touch-manipulation transition-colors hover:text-foreground focus-visible: focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50",
         className
       )}
       data-slot="breadcrumb-link"

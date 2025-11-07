@@ -182,7 +182,7 @@ export function JsonViewerTabs({ mode, onModeChange, children }: JsonViewerTabsP
 									<div key={category} className="space-y-2">
 										{/* Category Header */}
 										<div className="flex items-center gap-2 px-2">
-											<div className={`h-1 w-12 rounded-full ${categoryInfo.color}`} />
+											<div className={`h-1 w-12  ${categoryInfo.color}`} />
 											<div className="flex items-center gap-2">
 												<h3 className="font-semibold text-muted-foreground text-xs uppercase tracking-wide">
 													{categoryInfo.name}
@@ -194,7 +194,7 @@ export function JsonViewerTabs({ mode, onModeChange, children }: JsonViewerTabsP
 										</div>
 
 										{/* Category Tabs */}
-										<TabsList className="inline-flex h-10 items-center justify-start rounded-none bg-transparent p-0">
+										<TabsList className="inline-flex h-10 items-center justify-start -none bg-transparent p-0">
 											{tabs.map((tab, index) => {
 												const Icon = tab.icon
 												const isActive = mode === tab.value
@@ -204,12 +204,12 @@ export function JsonViewerTabs({ mode, onModeChange, children }: JsonViewerTabsP
 														<TooltipTrigger asChild>
 															<TabsTrigger
 																value={tab.value}
-																className={`group relative flex h-10 items-center justify-center gap-2 rounded-none border-transparent border-b-2 bg-transparent px-3 py-2 font-medium text-sm transition-all hover:bg-muted/50 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring data-[state=active]:border-primary data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:${index > 0 ? "ml-1" : ""}
+																className={`group relative flex h-10 items-center justify-center gap-2 -none border-transparent border-b-2 bg-transparent px-3 py-2 font-medium text-sm transition-all hover:bg-muted/50 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring data-[state=active]:border-primary data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:${index > 0 ? "ml-1" : ""}
 																`}
 																onKeyDown={handleKeyDown}>
 																{/* Category indicator */}
 																<div
-																	className={`-top-0.5 -translate-x-1/2 absolute left-1/2 h-0.5 w-6 rounded-full opacity-0 transition-opacity group-data-[state=active]:opacity-100${categoryInfo.color}
+																	className={`-top-0.5 -translate-x-1/2 absolute left-1/2 h-0.5 w-6  opacity-0 transition-opacity group-data-[state=active]:opacity-100${categoryInfo.color}
 																`}
 																/>
 

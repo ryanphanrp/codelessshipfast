@@ -40,7 +40,7 @@ export function KeyboardShortcuts({ groups = defaultShortcuts }: KeyboardShortcu
 		<Card className="border-l-2 border-l-purple-500/30">
 			<CardHeader>
 				<CardTitle className="flex items-center gap-2 text-lg">
-					<div className="flex size-8 items-center justify-center rounded border border-purple-500/20 bg-purple-500/5">
+					<div className="flex size-8 items-center justify-center  border border-purple-500/20 bg-purple-500/5">
 						<Keyboard className="size-4 text-purple-600" />
 					</div>
 					Keyboard Shortcuts
@@ -56,9 +56,9 @@ export function KeyboardShortcuts({ groups = defaultShortcuts }: KeyboardShortcu
 								{group.shortcuts.map((shortcut, index) => (
 									<div
 										key={index}
-										className="flex items-center justify-between rounded-lg border border-border/50 p-3 transition-colors hover:bg-accent/50">
+										className="flex items-center justify-between  border border-border/50 p-3 transition-colors hover:bg-accent/50">
 										<span className="text-sm">{shortcut.action}</span>
-										<kbd className="rounded border border-border bg-muted px-3 py-1.5 font-mono text-sm">
+										<kbd className=" border border-border bg-muted px-3 py-1.5 font-mono text-sm">
 											{shortcut.key}
 										</kbd>
 									</div>
@@ -76,7 +76,7 @@ export function KeyboardShortcuts({ groups = defaultShortcuts }: KeyboardShortcu
 export function KeyboardHint({ keys, action }: { keys: string; action?: string }) {
 	return (
 		<div className="flex items-center gap-2 text-muted-foreground text-sm">
-			<kbd className="rounded border border-border bg-muted px-2 py-1 font-mono text-xs">{keys}</kbd>
+			<kbd className=" border border-border bg-muted px-2 py-1 font-mono text-xs">{keys}</kbd>
 			{action && <span>{action}</span>}
 		</div>
 	)

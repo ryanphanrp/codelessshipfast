@@ -27,7 +27,7 @@ function HomePage() {
 						<Button asChild size="lg" className="gap-2">
 							<Link href="/dashboard">
 								Get Started
-								<kbd className="pointer-events-none hidden h-5 select-none items-center gap-1 rounded border border-primary-foreground/20 bg-primary-foreground/10 px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex">
+								<kbd className="pointer-events-none hidden h-5 select-none items-center gap-1  border border-primary-foreground/20 bg-primary-foreground/10 px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex">
 									<span className="text-xs">⌘</span>K
 								</kbd>
 							</Link>
@@ -51,9 +51,9 @@ function HomePage() {
 				</div>
 
 				<div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-					<Card className="group relative rounded-xl border border-l-4 border-l-primary transition-colors hover:border-primary/50">
+					<Card className="group relative  border border-l-4 border-l-primary transition-colors hover:border-primary/50">
 						<CardContent className="pt-6">
-							<div className="mb-4 flex size-14 items-center justify-center rounded-lg border border-primary/20 bg-primary/5 transition-colors group-hover:bg-primary/10">
+							<div className="mb-4 flex size-14 items-center justify-center  border border-primary/20 bg-primary/5 transition-colors group-hover:bg-primary/10">
 								<Code2 className="size-7 text-primary" />
 							</div>
 							<CardTitle className="mb-2 font-semibold">JSON Viewer</CardTitle>
@@ -61,15 +61,15 @@ function HomePage() {
 								Format, validate, and explore JSON with syntax highlighting. Includes tree view, diff, JSONPath queries, and schema generation.
 							</CardDescription>
 							<div className="mt-4 flex items-center gap-2 text-muted-foreground text-xs">
-								<kbd className="rounded border border-border bg-muted px-1.5 py-0.5 font-mono">Ctrl+V</kbd>
+								<kbd className=" border border-border bg-muted px-1.5 py-0.5 font-mono">Ctrl+V</kbd>
 								<span>to paste</span>
 							</div>
 						</CardContent>
 					</Card>
 
-					<Card className="group relative rounded-xl border border-l-4 border-l-cyan-500 transition-colors hover:border-cyan-500/50">
+					<Card className="group relative  border border-l-4 border-l-cyan-500 transition-colors hover:border-cyan-500/50">
 						<CardContent className="pt-6">
-							<div className="mb-4 flex size-14 items-center justify-center rounded-lg border border-cyan-500/20 bg-cyan-500/5 transition-colors group-hover:bg-cyan-500/10">
+							<div className="mb-4 flex size-14 items-center justify-center  border border-cyan-500/20 bg-cyan-500/5 transition-colors group-hover:bg-cyan-500/10">
 								<Palette className="size-7 text-cyan-600" />
 							</div>
 							<CardTitle className="mb-2 font-semibold">Modern UI</CardTitle>
@@ -78,16 +78,16 @@ function HomePage() {
 							</CardDescription>
 							<div className="mt-4 flex items-center gap-2 text-muted-foreground text-xs">
 								<div className="flex items-center gap-1">
-									<div className="size-3 rounded-full border-2 border-primary" />
+									<div className="size-3  border-2 border-primary" />
 									<span className="font-mono">Cyan 700</span>
 								</div>
 							</div>
 						</CardContent>
 					</Card>
 
-					<Card className="group relative rounded-xl border border-l-4 border-l-yellow-500 transition-colors hover:border-yellow-500/50">
+					<Card className="group relative  border border-l-4 border-l-yellow-500 transition-colors hover:border-yellow-500/50">
 						<CardContent className="pt-6">
-							<div className="mb-4 flex size-14 items-center justify-center rounded-lg border border-yellow-500/20 bg-yellow-500/5 transition-colors group-hover:bg-yellow-500/10">
+							<div className="mb-4 flex size-14 items-center justify-center  border border-yellow-500/20 bg-yellow-500/5 transition-colors group-hover:bg-yellow-500/10">
 								<Zap className="size-7 text-yellow-600" />
 							</div>
 							<CardTitle className="mb-2 font-semibold">Lightning Fast</CardTitle>
@@ -95,7 +95,7 @@ function HomePage() {
 								Built on Next.js 15 with Turbopack. Instant hot reloads, optimized bundles, and blazing performance in development and production.
 							</CardDescription>
 							<div className="mt-4 flex items-center gap-2 text-muted-foreground text-xs">
-								<span className="rounded border border-green-500/20 bg-green-500/10 px-2 py-0.5 font-mono text-green-700 dark:text-green-400">
+								<span className=" border border-green-500/20 bg-green-500/10 px-2 py-0.5 font-mono text-green-700 dark:text-green-400">
 									&lt;100ms
 								</span>
 								<span>response time</span>
@@ -103,9 +103,9 @@ function HomePage() {
 						</CardContent>
 					</Card>
 
-					<Card className="group relative rounded-xl border border-l-4 border-l-blue-500 transition-colors hover:border-blue-500/50">
+					<Card className="group relative  border border-l-4 border-l-blue-500 transition-colors hover:border-blue-500/50">
 						<CardContent className="pt-6">
-							<div className="mb-4 flex size-14 items-center justify-center rounded-lg border border-blue-500/20 bg-blue-500/5 transition-colors group-hover:bg-blue-500/10">
+							<div className="mb-4 flex size-14 items-center justify-center  border border-blue-500/20 bg-blue-500/5 transition-colors group-hover:bg-blue-500/10">
 								<Shield className="size-7 text-blue-600" />
 							</div>
 							<CardTitle className="mb-2 font-semibold">Type Safe</CardTitle>
@@ -113,14 +113,14 @@ function HomePage() {
 								Full TypeScript strict mode with comprehensive type definitions. Catch errors at compile time, not runtime.
 							</CardDescription>
 							<div className="mt-4 flex items-center gap-2 text-muted-foreground text-xs">
-								<code className="rounded border border-border bg-muted px-1.5 py-0.5 font-mono">strict: true</code>
+								<code className=" border border-border bg-muted px-1.5 py-0.5 font-mono">strict: true</code>
 							</div>
 						</CardContent>
 					</Card>
 
-					<Card className="group relative rounded-xl border border-l-4 border-l-purple-500 transition-colors hover:border-purple-500/50">
+					<Card className="group relative  border border-l-4 border-l-purple-500 transition-colors hover:border-purple-500/50">
 						<CardContent className="pt-6">
-							<div className="mb-4 flex size-14 items-center justify-center rounded-lg border border-purple-500/20 bg-purple-500/5 transition-colors group-hover:bg-purple-500/10">
+							<div className="mb-4 flex size-14 items-center justify-center  border border-purple-500/20 bg-purple-500/5 transition-colors group-hover:bg-purple-500/10">
 								<Rocket className="size-7 text-purple-600" />
 							</div>
 							<CardTitle className="mb-2 font-semibold">Production Ready</CardTitle>
@@ -128,14 +128,14 @@ function HomePage() {
 								Battle-tested components with Vitest coverage, comprehensive error handling, and production-grade patterns.
 							</CardDescription>
 							<div className="mt-4 flex items-center gap-2 text-muted-foreground text-xs">
-								<span className="rounded border border-border bg-muted px-2 py-0.5 font-mono">v1.0.0</span>
+								<span className=" border border-border bg-muted px-2 py-0.5 font-mono">v1.0.0</span>
 							</div>
 						</CardContent>
 					</Card>
 
-					<Card className="group relative rounded-xl border border-l-4 border-l-orange-500 transition-colors hover:border-orange-500/50">
+					<Card className="group relative  border border-l-4 border-l-orange-500 transition-colors hover:border-orange-500/50">
 						<CardContent className="pt-6">
-							<div className="mb-4 flex size-14 items-center justify-center rounded-lg border border-orange-500/20 bg-orange-500/5 transition-colors group-hover:bg-orange-500/10">
+							<div className="mb-4 flex size-14 items-center justify-center  border border-orange-500/20 bg-orange-500/5 transition-colors group-hover:bg-orange-500/10">
 								<Users className="size-7 text-orange-600" />
 							</div>
 							<CardTitle className="mb-2 font-semibold">Developer First</CardTitle>
@@ -143,7 +143,7 @@ function HomePage() {
 								Keyboard shortcuts, clipboard integration, and instant feedback loops. Built by developers, for developers.
 							</CardDescription>
 							<div className="mt-4 flex items-center gap-2 text-muted-foreground text-xs">
-								<kbd className="rounded border border-border bg-muted px-1.5 py-0.5 font-mono">⌘K</kbd>
+								<kbd className=" border border-border bg-muted px-1.5 py-0.5 font-mono">⌘K</kbd>
 								<span>Quick actions</span>
 							</div>
 						</CardContent>

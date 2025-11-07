@@ -79,14 +79,14 @@ const Dashboard = () => {
 			<div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
 				{quickActions.map((action) => (
 					<Link key={action.href} href={action.href}>
-						<Card className="group h-full rounded-xl border border-l-4 border-l-primary transition-all hover:border-primary/50">
+						<Card className="group h-full  border border-l-4 border-l-primary transition-all hover:border-primary/50">
 							<CardHeader className="space-y-3 pb-4">
 								<div className="flex items-start justify-between">
 									<div
-										className={`flex size-12 items-center justify-center rounded-lg border transition-colors ${action.iconBg}`}>
+										className={`flex size-12 items-center justify-center  border transition-colors ${action.iconBg}`}>
 										<action.icon className={`size-6 ${action.iconColor}`} />
 									</div>
-									<kbd className="rounded border border-border bg-muted px-2 py-1 font-mono text-xs">
+									<kbd className=" border border-border bg-muted px-2 py-1 font-mono text-xs">
 										{action.shortcut}
 									</kbd>
 								</div>
@@ -108,10 +108,10 @@ const Dashboard = () => {
 			{/* Content Grid */}
 			<div className="grid gap-6 md:grid-cols-2">
 				{/* Recent Activity */}
-				<Card className="rounded-xl border border-l-2 border-l-primary/30">
+				<Card className=" border border-l-2 border-l-primary/30">
 					<CardHeader>
 						<CardTitle className="flex items-center gap-2 text-xl">
-							<div className="flex size-8 items-center justify-center rounded border border-primary/20 bg-primary/5">
+							<div className="flex size-8 items-center justify-center  border border-primary/20 bg-primary/5">
 								<Zap className="size-4 text-primary" />
 							</div>
 							Recent Activity
@@ -125,10 +125,10 @@ const Dashboard = () => {
 							{recentTools.map((tool, index) => (
 								<div
 									key={index}
-									className="flex items-center justify-between rounded-lg border border-border/50 p-3 transition-colors hover:bg-accent/50">
+									className="flex items-center justify-between  border border-border/50 p-3 transition-colors hover:bg-accent/50">
 									<div className="flex items-center gap-3">
 										<div
-											className={`size-2 rounded-full ${
+											className={`size-2  ${
 												tool.status === "success"
 													? "bg-green-500"
 													: "bg-red-500"
@@ -151,10 +151,10 @@ const Dashboard = () => {
 				</Card>
 
 				{/* Keyboard Shortcuts */}
-				<Card className="rounded-xl border border-l-2 border-l-purple-500/30">
+				<Card className=" border border-l-2 border-l-purple-500/30">
 					<CardHeader>
 						<CardTitle className="flex items-center gap-2 text-xl">
-							<div className="flex size-8 items-center justify-center rounded border border-purple-500/20 bg-purple-500/5">
+							<div className="flex size-8 items-center justify-center  border border-purple-500/20 bg-purple-500/5">
 								<Keyboard className="size-4 text-purple-600" />
 							</div>
 							Keyboard Shortcuts
@@ -168,11 +168,11 @@ const Dashboard = () => {
 							{keyboardShortcuts.map((shortcut, index) => (
 								<div
 									key={index}
-									className="flex items-center justify-between rounded-lg border border-border/50 p-3">
+									className="flex items-center justify-between  border border-border/50 p-3">
 									<span className="text-muted-foreground text-sm">
 										{shortcut.action}
 									</span>
-									<kbd className="rounded border border-border bg-muted px-3 py-1.5 font-mono text-sm">
+									<kbd className=" border border-border bg-muted px-3 py-1.5 font-mono text-sm">
 										{shortcut.key}
 									</kbd>
 								</div>
@@ -183,7 +183,7 @@ const Dashboard = () => {
 			</div>
 
 			{/* Quick Tips */}
-			<Card className="rounded-xl border border-l-2 border-l-cyan-500/30 bg-gradient-to-br from-background to-accent/20">
+			<Card className=" border border-l-2 border-l-cyan-500/30 bg-gradient-to-br from-background to-accent/20">
 				<CardHeader>
 					<CardTitle className="text-xl">💡 Pro Tips</CardTitle>
 					<CardDescription>
@@ -195,7 +195,7 @@ const Dashboard = () => {
 						<div className="space-y-2">
 							<h4 className="font-medium text-sm">Clipboard Integration</h4>
 							<p className="text-muted-foreground text-sm leading-relaxed">
-								Use <kbd className="rounded border border-border bg-muted px-1.5 py-0.5 font-mono text-xs">Ctrl+V</kbd> to paste directly into any tool. Results are automatically copied to clipboard.
+								Use <kbd className=" border border-border bg-muted px-1.5 py-0.5 font-mono text-xs">Ctrl+V</kbd> to paste directly into any tool. Results are automatically copied to clipboard.
 							</p>
 						</div>
 						<div className="space-y-2">
