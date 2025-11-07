@@ -167,7 +167,7 @@ export function K8sModal({ isOpen, onClose, output, error, isConverting }: K8sMo
 					{isConverting ? (
 						<div className="flex items-center justify-center py-12">
 							<div className="flex items-center space-x-3">
-								<div className="h-6 w-6 animate-spin  border-blue-600 border-b-2"></div>
+								<div className="h-6 w-6 animate-spin  border-primary border-b-2"></div>
 								<span className="text-gray-600 dark:text-gray-400">
 									Converting to K8s format...
 								</span>
@@ -204,7 +204,7 @@ export function K8sModal({ isOpen, onClose, output, error, isConverting }: K8sMo
 								<Button
 									onClick={handleCopy}
 									disabled={!output.trim()}
-									className="flex items-center space-x-2 bg-blue-600 px-4 py-2 font-medium text-sm text-white transition-colors duration-200 hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50">
+									className="flex items-center space-x-2 bg-primary px-4 py-2 font-medium text-sm text-white transition-colors duration-200 hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-50">
 									{copied ? (
 										<>
 											<Check className="h-4 w-4" />
@@ -224,7 +224,7 @@ export function K8sModal({ isOpen, onClose, output, error, isConverting }: K8sMo
 								id="k8s-output"
 								value={editableOutput}
 								onChange={handleTextareaChange}
-								className="h-64 w-full resize-none  border border-gray-300 bg-gray-50 p-4 font-mono text-sm transition-colors duration-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-800"
+								className="h-64 w-full resize-none  border border-gray-300 bg-gray-50 p-4 font-mono text-sm transition-colors duration-200 focus:border-primary focus:ring-2 focus:ring-primary dark:border-gray-600 dark:bg-gray-800"
 								placeholder="K8s environment variables will appear here..."
 								spellCheck={false}
 								aria-label="K8s YAML configuration editor"

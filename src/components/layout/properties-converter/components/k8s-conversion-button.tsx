@@ -24,7 +24,7 @@ export function K8sConversionButton({
 			<Button
 				onClick={handleClick}
 				disabled={disabled || !input.trim() || isConverting}
-				className="h-10 w-full bg-blue-600 font-medium text-white transition-colors duration-200 hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
+				className="h-10 w-full bg-primary font-medium text-white transition-colors duration-200 hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-50"
 				aria-label={
 					isConverting
 						? "Converting to Kubernetes environment format"

@@ -22,10 +22,10 @@ const statusConfig = {
 	},
 	processing: {
 		icon: Loader2,
-		color: "text-blue-600 dark:text-blue-400",
-		bg: "bg-blue-500/10",
-		border: "border-blue-500/20",
-		dot: "bg-blue-500 animate-pulse"
+		color: "text-primary",
+		bg: "bg-primary/10",
+		border: "border-primary/20",
+		dot: "bg-primary animate-pulse"
 	},
 	success: {
 		icon: CheckCircle2,
@@ -50,10 +50,10 @@ const statusConfig = {
 	},
 	info: {
 		icon: Info,
-		color: "text-cyan-600 dark:text-cyan-400",
-		bg: "bg-cyan-500/10",
-		border: "border-cyan-500/20",
-		dot: "bg-cyan-500"
+		color: "text-primary",
+		bg: "bg-primary/10",
+		border: "border-primary/20",
+		dot: "bg-primary"
 	}
 }
 

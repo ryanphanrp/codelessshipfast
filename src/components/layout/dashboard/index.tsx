@@ -12,8 +12,8 @@ const quickActions = [
 		description: "Format and validate JSON instantly",
 		href: "/features/json-viewer",
 		icon: Code2,
-		iconBg: "border-cyan-500/20 bg-cyan-500/5 group-hover:bg-cyan-500/10",
-		iconColor: "text-cyan-600",
+		iconBg: "border-primary/20 bg-primary/5 group-hover:bg-primary/10",
+		iconColor: "text-primary",
 		shortcut: "⌘J"
 	},
 	{
@@ -21,8 +21,8 @@ const quickActions = [
 		description: "Format SQL with placeholders",
 		href: "/features/sql-placeholder",
 		icon: ScrollText,
-		iconBg: "border-blue-500/20 bg-blue-500/5 group-hover:bg-blue-500/10",
-		iconColor: "text-blue-600",
+		iconBg: "border-primary/20 bg-primary/5 group-hover:bg-primary/10",
+		iconColor: "text-primary",
 		shortcut: "⌘S"
 	},
 	{
@@ -183,7 +183,7 @@ const Dashboard = () => {
 			</div>
 
 			{/* Quick Tips */}
-			<Card className=" border border-l-2 border-l-cyan-500/30 bg-gradient-to-br from-background to-accent/20">
+			<Card className=" border border-l-2 border-l-primary/30 bg-gradient-to-br from-background to-accent/20">
 				<CardHeader>
 					<CardTitle className="text-xl">💡 Pro Tips</CardTitle>
 					<CardDescription>

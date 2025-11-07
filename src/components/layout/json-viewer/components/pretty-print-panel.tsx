@@ -78,7 +78,7 @@ export function PrettyPrintPanel({ input, output, error, isProcessing }: PrettyP
 			<div className="p-4">
 				{isProcessing ? (
 					<div className="flex items-center justify-center py-8">
-						<div className="h-6 w-6 animate-spin  border-blue-600 border-b-2"></div>
+						<div className="h-6 w-6 animate-spin  border-primary border-b-2"></div>
 						<span className="ml-2 text-gray-600 text-sm">Processing...</span>
 					</div>
 				) : (

@@ -116,7 +116,7 @@ const TAB_CONFIGS: TabConfig[] = [
 ]
 
 const CATEGORY_COLORS = {
-	format: "bg-blue-50 text-blue-700 border-blue-200",
+	format: "bg-primary/5 text-primary border-primary/20",
 	analyze: "bg-green-50 text-green-700 border-green-200",
 	visualize: "bg-purple-50 text-purple-700 border-purple-200"
 }
@@ -125,7 +125,7 @@ const CATEGORY_INFO = {
 	format: {
 		name: "Format",
 		description: "Structure and organize JSON data",
-		color: "bg-blue-500"
+		color: "bg-primary/50"
 	},
 	analyze: {
 		name: "Analyze",

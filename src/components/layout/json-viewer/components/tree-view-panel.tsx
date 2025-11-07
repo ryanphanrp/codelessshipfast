@@ -29,7 +29,7 @@ function TreeNode({ node, onToggle }: TreeNodeProps) {
 			case "string":
 				return "text-green-600"
 			case "number":
-				return "text-blue-600"
+				return "text-primary"
 			case "boolean":
 				return "text-purple-600"
 			case "null":

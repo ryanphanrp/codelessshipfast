@@ -152,7 +152,7 @@ export function JsonDiffPanel({ input, error, isProcessing }: JsonDiffPanelProps
 			case "removed":
 				return <span className="font-bold text-red-600">-</span>
 			case "modified":
-				return <span className="font-bold text-blue-600">~</span>
+				return <span className="font-bold text-primary">~</span>
 			default:
 				return <span className="font-bold text-gray-400">=</span>
 		}
@@ -165,7 +165,7 @@ export function JsonDiffPanel({ input, error, isProcessing }: JsonDiffPanelProps
 			case "removed":
 				return "bg-red-50 border-red-200"
 			case "modified":
-				return "bg-blue-50 border-blue-200"
+				return "bg-primary/5 border-primary/20"
 			default:
 				return "bg-gray-50 border-gray-200"
 		}
@@ -283,7 +283,7 @@ export function JsonDiffPanel({ input, error, isProcessing }: JsonDiffPanelProps
 									<div className="text-muted-foreground">Removed</div>
 								</div>
 								<div className="text-center">
-									<div className="font-bold text-2xl text-blue-600">{summary.modified}</div>
+									<div className="font-bold text-2xl text-primary">{summary.modified}</div>
 									<div className="text-muted-foreground">Modified</div>
 								</div>
 								<div className="text-center">
@@ -429,7 +429,7 @@ export function JsonDiffPanel({ input, error, isProcessing }: JsonDiffPanelProps
 										or array items
 									</li>
 									<li>
-										<span className="font-bold text-blue-600">~</span> Modified - Changed values
+										<span className="font-bold text-primary">~</span> Modified - Changed values
 									</li>
 									<li>
 										<span className="font-bold text-gray-400">=</span> Unchanged - Identical values

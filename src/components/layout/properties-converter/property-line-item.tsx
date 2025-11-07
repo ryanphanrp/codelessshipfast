@@ -42,7 +42,7 @@ export function PropertyLineItem({ line, lineNumber }: PropertyLineItemProps) {
 				<div className="flex-1 font-mono text-sm">
 					{hasValue ? (
 						<>
-							<span className="font-semibold text-blue-600 dark:text-blue-400">{key}</span>
+							<span className="font-semibold text-primary dark:text-primary">{key}</span>
 							<span className="mx-1 text-muted-foreground">=</span>
 							<span className="text-green-600 dark:text-green-400">{value || '""'}</span>
 						</>

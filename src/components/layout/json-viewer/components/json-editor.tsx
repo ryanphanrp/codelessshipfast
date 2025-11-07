@@ -181,7 +181,7 @@ export function JsonEditor({
 					spellCheck={false}
 					className={cn(
 						"w-full resize-none  border p-3 font-mono text-sm transition-colors",
-						"focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500",
+						"focus:border-transparent focus:outline-none focus:ring-2 focus:ring-primary",
 						"disabled:cursor-not-allowed disabled:opacity-50",
 						// Make textarea transparent when not focused to show syntax highlighting
 						isFocused ? "bg-white text-gray-900" : "bg-transparent text-transparent caret-gray-900",
