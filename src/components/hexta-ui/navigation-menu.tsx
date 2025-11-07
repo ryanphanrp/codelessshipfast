@@ -116,7 +116,7 @@ function NavigationMenuViewport({
     >
       <NavigationMenuPrimitive.Viewport
         className={cn(
-          "data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-90 relative mt-1.5 h-(--radix-navigation-menu-viewport-height) w-full origin-top-center touch-manipulation overflow-hidden rounded-md border bg-popover text-popover-foreground shadow data-[state=closed]:animate-out data-[state=open]:animate-in motion-reduce:animate-none md:w-(--radix-navigation-menu-viewport-width)",
+          "data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-90 relative mt-1.5 h-(--radix-navigation-menu-viewport-height) w-full origin-top-center touch-manipulation overflow-hidden rounded-md border bg-popover text-popover-foreground data-[state=closed]:animate-out data-[state=open]:animate-in motion-reduce:animate-none md:w-(--radix-navigation-menu-viewport-width)",
           className
         )}
         data-slot="navigation-menu-viewport"
@@ -155,7 +155,7 @@ function NavigationMenuIndicator({
       data-slot="navigation-menu-indicator"
       {...props}
     >
-      <div className="relative top-[60%] size-2 rotate-45 rounded-tl-sm bg-border shadow-md" />
+      <div className="relative top-[60%] size-2 rotate-45 rounded-tl-sm bg-border " />
     </NavigationMenuPrimitive.Indicator>
   );
 }

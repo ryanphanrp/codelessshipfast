@@ -137,7 +137,7 @@ export function K8sModal({ isOpen, onClose, output, error, isConverting }: K8sMo
 			{/* Modal */}
 			<div
 				ref={modalRef}
-				className="relative z-10 mx-4 max-h-[80vh] w-full max-w-3xl scale-100 transform rounded-xl border border-gray-200 bg-white opacity-100 shadow-2xl transition-all duration-300 dark:border-gray-700 dark:bg-gray-900"
+				className="relative z-10 mx-4 max-h-[80vh] w-full max-w-3xl  transform rounded-xl border border-gray-200 bg-white opacity-100  transition-all duration-300 dark:border-gray-700 dark:bg-gray-900"
 				role="dialog"
 				aria-modal="true"
 				aria-labelledby="modal-title"

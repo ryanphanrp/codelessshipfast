@@ -15,7 +15,7 @@ const InputGroup = React.forwardRef<
     <div
       aria-disabled={(props as any)["data-disabled"] ? true : undefined}
       className={cn(
-        "group/input-group relative flex w-full touch-manipulation items-center rounded-md border border-input shadow-xs outline-none transition-[color,box-shadow] dark:bg-input/30",
+        "group/input-group relative flex w-full touch-manipulation items-center rounded-md border border-input  outline-none transition-[color,box-shadow] dark:bg-input/30",
         "h-9 min-w-0 has-[>textarea]:h-auto",
 
         // Variants based on alignment.
@@ -91,7 +91,7 @@ const InputGroupAddon = React.forwardRef<
 });
 
 const inputGroupButtonVariants = cva(
-  "flex items-center gap-2 text-sm shadow-none",
+  "flex items-center gap-2 text-sm-none",
   {
     variants: {
       size: {
@@ -151,7 +151,7 @@ function InputGroupInput({
   return (
     <Input
       className={cn(
-        "flex-1 rounded-none border-0 bg-transparent shadow-none focus-visible:ring-0 dark:bg-transparent",
+        "flex-1 rounded-none border-0 bg-transparent-none focus-visible:ring-0 dark:bg-transparent",
         className
       )}
       data-slot="input-group-control"
@@ -167,7 +167,7 @@ function InputGroupTextarea({
   return (
     <Textarea
       className={cn(
-        "flex-1 resize-none rounded-none border-0 bg-transparent py-3 shadow-none focus-visible:ring-0 dark:bg-transparent",
+        "flex-1 resize-none rounded-none border-0 bg-transparent py-3-none focus-visible:ring-0 dark:bg-transparent",
         className
       )}
       data-slot="input-group-control"

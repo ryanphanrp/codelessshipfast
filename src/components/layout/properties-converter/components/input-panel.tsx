@@ -61,7 +61,7 @@ export const InputPanel = memo(function InputPanel({
   }, [onReverse]);
 
   return (
-    <Card className="p-0 shadow-none border-0">
+    <Card className="p-0-none border-0">
       <CardHeader className="pb-3">
         <div className="flex items-center justify-between">
           <CardTitle className="flex items-center gap-2">
@@ -77,7 +77,7 @@ export const InputPanel = memo(function InputPanel({
           />
         </div>
       </CardHeader>
-      <CardContent className="space-y-4 p-0 shadow-none border-0">
+      <CardContent className="space-y-4 p-0-none border-0">
         <Textarea
           value={value}
           onChange={handleChange}

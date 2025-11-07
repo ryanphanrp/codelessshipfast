@@ -204,7 +204,7 @@ export function JsonViewerTabs({ mode, onModeChange, children }: JsonViewerTabsP
 														<TooltipTrigger asChild>
 															<TabsTrigger
 																value={tab.value}
-																className={`group relative flex h-10 items-center justify-center gap-2 rounded-none border-transparent border-b-2 bg-transparent px-3 py-2 font-medium text-sm transition-all hover:bg-muted/50 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring data-[state=active]:border-primary data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm${index > 0 ? "ml-1" : ""}
+																className={`group relative flex h-10 items-center justify-center gap-2 rounded-none border-transparent border-b-2 bg-transparent px-3 py-2 font-medium text-sm transition-all hover:bg-muted/50 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring data-[state=active]:border-primary data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:${index > 0 ? "ml-1" : ""}
 																`}
 																onKeyDown={handleKeyDown}>
 																{/* Category indicator */}

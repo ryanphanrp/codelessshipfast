@@ -15,7 +15,7 @@ const NativeSelect = React.forwardRef<
     >
       <select
         className={cn(
-          "h-9 w-full min-w-0 touch-manipulation appearance-none rounded-md border border-input bg-transparent px-3 py-2 pr-9 text-foreground text-sm tabular-nums shadow-xs outline-none transition-[color,box-shadow] selection:bg-primary selection:text-primary-foreground placeholder:text-muted-foreground disabled:pointer-events-none disabled:cursor-not-allowed dark:bg-input/30 dark:hover:bg-input/50",
+          "h-9 w-full min-w-0 touch-manipulation appearance-none rounded-md border border-input bg-transparent px-3 py-2 pr-9 text-foreground text-sm tabular-nums  outline-none transition-[color,box-shadow] selection:bg-primary selection:text-primary-foreground placeholder:text-muted-foreground disabled:pointer-events-none disabled:cursor-not-allowed dark:bg-input/30 dark:hover:bg-input/50",
           "focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50",
           "aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40",
           className
