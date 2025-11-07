@@ -1,17 +1,21 @@
-"use client"
+import * as React from "react";
+import { cn } from "@/lib/utils";
 
-import { cn } from "@/lib/utils"
+const Skeleton = React.forwardRef<HTMLDivElement, React.ComponentProps<"div">>(
+  function Skeleton({ className, ...props }, ref) {
+    return (
+      <div
+        aria-hidden="true"
+        className={cn(
+          "animate-pulse rounded-md bg-accent motion-reduce:animate-none",
+          className
+        )}
+        data-slot="skeleton"
+        ref={ref}
+        {...props}
+      />
+    );
+  }
+);
 
-function Skeleton({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
-	return (
-		<div
-			className={cn(
-				"animate-pulse rounded-lg bg-gradient-to-r from-muted via-muted/50 to-muted",
-				className
-			)}
-			{...props}
-		/>
-	)
-}
-
-export { Skeleton }
+export { Skeleton };

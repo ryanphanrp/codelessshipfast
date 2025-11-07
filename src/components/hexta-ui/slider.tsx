@@ -1,23 +1,65 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import * as SliderPrimitive from "@radix-ui/react-slider"
-import { cn } from "@/lib/utils"
+import * as SliderPrimitive from "@radix-ui/react-slider";
+import * as React from "react";
+
+import { cn } from "@/lib/utils";
 
 const Slider = React.forwardRef<
-	React.ElementRef<typeof SliderPrimitive.Root>,
-	React.ComponentPropsWithoutRef<typeof SliderPrimitive.Root>
->(({ className, ...props }, ref) => (
-	<SliderPrimitive.Root
-		ref={ref}
-		className={cn("relative flex w-full touch-none select-none items-center", className)}
-		{...props}>
-		<SliderPrimitive.Track className="relative h-2 w-full grow overflow-hidden rounded-full bg-primary/20 shadow-inner">
-			<SliderPrimitive.Range className="absolute h-full bg-gradient-to-r from-primary to-primary/80 shadow-lg transition-all duration-300" />
-		</SliderPrimitive.Track>
-		<SliderPrimitive.Thumb className="block h-5 w-5 rounded-full border-2 border-primary bg-background shadow-lg ring-offset-background transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:scale-110 hover:shadow-xl" />
-	</SliderPrimitive.Root>
-))
-Slider.displayName = SliderPrimitive.Root.displayName
+  React.ComponentRef<typeof SliderPrimitive.Root>,
+  React.ComponentProps<typeof SliderPrimitive.Root>
+>(function Slider(
+  { className, defaultValue, value, min = 0, max = 100, ...props },
+  ref
+) {
+  const _values = React.useMemo(
+    () =>
+      Array.isArray(value)
+        ? value
+        : Array.isArray(defaultValue)
+          ? defaultValue
+          : [min, max],
+    [value, defaultValue, min, max]
+  );
 
-export { Slider }
+  return (
+    <SliderPrimitive.Root
+      aria-disabled={(props as any).disabled ? true : undefined}
+      aria-orientation={(props as any).orientation}
+      className={cn(
+        "relative flex w-full touch-none select-none items-center data-[orientation=vertical]:h-full data-[orientation=vertical]:min-h-44 data-[orientation=vertical]:w-auto data-[orientation=vertical]:flex-col data-disabled:opacity-50",
+        className
+      )}
+      data-slot="slider"
+      defaultValue={defaultValue}
+      max={max}
+      min={min}
+      ref={ref}
+      value={value}
+      {...props}
+    >
+      <SliderPrimitive.Track
+        className={cn(
+          "relative grow overflow-hidden rounded-full bg-muted data-[orientation=horizontal]:h-1.5 data-[orientation=vertical]:h-full data-[orientation=horizontal]:w-full data-[orientation=vertical]:w-1.5"
+        )}
+        data-slot="slider-track"
+      >
+        <SliderPrimitive.Range
+          className={cn(
+            "absolute bg-primary data-[orientation=horizontal]:h-full data-[orientation=vertical]:w-full"
+          )}
+          data-slot="slider-range"
+        />
+      </SliderPrimitive.Track>
+      {Array.from({ length: _values.length }, (_, index) => (
+        <SliderPrimitive.Thumb
+          className="block size-4 shrink-0 touch-manipulation rounded-full border border-primary bg-white p-2 shadow-sm ring-ring/50 transition-[color,box-shadow] hover:ring-4 focus-visible:outline-hidden focus-visible:ring-4 disabled:pointer-events-none data-disabled:opacity-50"
+          data-slot="slider-thumb"
+          key={index}
+        />
+      ))}
+    </SliderPrimitive.Root>
+  );
+});
+
+export { Slider };

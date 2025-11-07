@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/hexta-ui";
 import { Card, CardContent, CardFooter } from "@/components/hexta-ui";
-import { FunctionTextarea } from "@/components/hexta-ui";
+import { Textarea } from "@/components/hexta-ui";
 import { useClipboard } from "@/hooks/use-clipboard";
 import { handleError } from "@/lib/shared";
 import { useState } from "react";
@@ -51,7 +51,7 @@ const SqlPlaceholder = () => {
           <div className="mb-4 grid grid-cols-1 gap-4 md:grid-cols-2">
             <div className="space-y-2">
               <label className="font-medium text-sm">SQL Query</label>
-              <FunctionTextarea
+              <Textarea
                 className="min-h-[120px] font-mono text-sm"
                 placeholder="Paste SQL script with ? placeholders"
                 value={sqlQuery}
@@ -60,7 +60,7 @@ const SqlPlaceholder = () => {
             </div>
             <div className="space-y-2">
               <label className="font-medium text-sm">Parameters</label>
-              <FunctionTextarea
+              <Textarea
                 className="min-h-[120px]  font-mono text-sm"
                 placeholder="Paste parameter list"
                 value={paramText}
@@ -94,7 +94,7 @@ const SqlPlaceholder = () => {
           <CardContent>
             <div className="space-y-2">
               <label className="font-medium text-sm">Result</label>
-              <FunctionTextarea
+              <Textarea
                 className="min-h-[120px] font-mono text-sm"
                 value={filledQuery}
                 readOnly
