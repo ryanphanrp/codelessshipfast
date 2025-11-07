@@ -38,7 +38,7 @@ export const OutputPanel = memo(function OutputPanel({
   }, [content]);
 
   return (
-    <Card className="p-0 shadow-none border-0">
+    <Card className="p-0-none border-0">
       <CardHeader className="pb-3">
         <div className="flex items-center justify-between">
           <CardTitle className="flex items-center gap-2">
@@ -53,7 +53,7 @@ export const OutputPanel = memo(function OutputPanel({
           />
         </div>
       </CardHeader>
-      <CardContent className="space-y-4 p-0 shadow-none border-0">
+      <CardContent className="space-y-4 p-0-none border-0">
         {error ? (
           <div className="rounded border border-red-200 bg-red-50 p-3 text-red-600 text-sm">
             <strong>Error:</strong> {error}

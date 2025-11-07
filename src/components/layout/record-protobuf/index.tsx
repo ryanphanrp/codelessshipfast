@@ -38,7 +38,7 @@ export function RecordProtobuf({ className }: { className?: string }) {
 			</div>
 
 			<div className="grid min-h-[600px] grid-cols-1 lg:grid-cols-2">
-				<Card className="flex flex-col border-none p-0 shadow-none">
+				<Card className="flex flex-col border-none p-0-none">
 					<CardContent className="flex-1 px-0">
 						<div className="flex h-full flex-col space-y-2">
 							<label className="font-medium text-sm">Java Record Input</label>
@@ -54,7 +54,7 @@ export function RecordProtobuf({ className }: { className?: string }) {
 
 				<div className="space-y-6">
 					{cleanedJava && (
-						<Card className="flex flex-col shadow-none">
+						<Card className="flex flex-col-none">
 							<CardContent className="flex-1 px-0">
 								<div className="flex h-full flex-col space-y-4">
 									<label className="font-medium text-sm">Cleaned Java</label>
@@ -70,7 +70,7 @@ export function RecordProtobuf({ className }: { className?: string }) {
 					)}
 
 					{protoCode && (
-						<Card className="flex flex-col shadow-none">
+						<Card className="flex flex-col-none">
 							<CardContent className="flex-1 px-0">
 								<div className="flex h-full flex-col space-y-4">
 									<label className="font-medium text-sm">Protocol Buffer Definition</label>

@@ -46,7 +46,7 @@ const SqlPlaceholder = () => {
 
   return (
     <div className="container mx-auto max-w-4/5 py-6">
-      <Card className="border-none shadow-none">
+      <Card className="border-none-none">
         <CardContent>
           <div className="mb-4 grid grid-cols-1 gap-4 md:grid-cols-2">
             <div className="space-y-2">
@@ -90,7 +90,7 @@ const SqlPlaceholder = () => {
         </CardFooter>
       </Card>
       {filledQuery && (
-        <Card className="border-none shadow-none">
+        <Card className="border-none-none">
           <CardContent>
             <div className="space-y-2">
               <label className="font-medium text-sm">Result</label>

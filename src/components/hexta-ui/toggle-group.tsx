@@ -27,7 +27,7 @@ const ToggleGroup = React.forwardRef<
   return (
     <ToggleGroupPrimitive.Root
       className={cn(
-        "group/toggle-group flex w-fit touch-manipulation items-center gap-[--spacing(var(--gap))] rounded-md data-[spacing=default]:data-[variant=outline]:shadow-xs",
+        "group/toggle-group flex w-fit touch-manipulation items-center gap-[--spacing(var(--gap))] rounded-md data-[spacing=default]:data-[variant=outline]:",
         className
       )}
       data-size={size}

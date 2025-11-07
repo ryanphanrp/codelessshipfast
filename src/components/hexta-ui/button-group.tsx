@@ -46,7 +46,7 @@ const ButtonGroupText = React.forwardRef<
   return (
     <Comp
       className={cn(
-        "flex min-h-9 touch-manipulation items-center gap-2 rounded-md border bg-muted px-4 font-medium text-sm shadow-xs focus-visible:rounded focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50 [&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none",
+        "flex min-h-9 touch-manipulation items-center gap-2 rounded-md border bg-muted px-4 font-medium text-sm  focus-visible:rounded focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50 [&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none",
         className
       )}
       ref={ref}
