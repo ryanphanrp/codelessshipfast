@@ -12,7 +12,8 @@ const quickActions = [
 		description: "Format and validate JSON instantly",
 		href: "/features/json-viewer",
 		icon: Code2,
-		color: "cyan",
+		iconBg: "border-cyan-500/20 bg-cyan-500/5 group-hover:bg-cyan-500/10",
+		iconColor: "text-cyan-600",
 		shortcut: "⌘J"
 	},
 	{
@@ -20,7 +21,8 @@ const quickActions = [
 		description: "Format SQL with placeholders",
 		href: "/features/sql-placeholder",
 		icon: ScrollText,
-		color: "blue",
+		iconBg: "border-blue-500/20 bg-blue-500/5 group-hover:bg-blue-500/10",
+		iconColor: "text-blue-600",
 		shortcut: "⌘S"
 	},
 	{
@@ -28,7 +30,8 @@ const quickActions = [
 		description: "Convert records to protobuf format",
 		href: "/features/record-protobuf",
 		icon: Rabbit,
-		color: "purple",
+		iconBg: "border-purple-500/20 bg-purple-500/5 group-hover:bg-purple-500/10",
+		iconColor: "text-purple-600",
 		shortcut: "⌘R"
 	},
 	{
@@ -36,7 +39,8 @@ const quickActions = [
 		description: "Convert between property formats",
 		href: "/features/properties-converter",
 		icon: Settings2,
-		color: "orange",
+		iconBg: "border-orange-500/20 bg-orange-500/5 group-hover:bg-orange-500/10",
+		iconColor: "text-orange-600",
 		shortcut: "⌘P"
 	}
 ]
@@ -79,8 +83,8 @@ const Dashboard = () => {
 							<CardHeader className="space-y-3 pb-4">
 								<div className="flex items-start justify-between">
 									<div
-										className={`flex size-12 items-center justify-center rounded-lg border border-${action.color}-500/20 bg-${action.color}-500/5 transition-colors group-hover:bg-${action.color}-500/10`}>
-										<action.icon className={`size-6 text-${action.color}-600`} />
+										className={`flex size-12 items-center justify-center rounded-lg border transition-colors ${action.iconBg}`}>
+										<action.icon className={`size-6 ${action.iconColor}`} />
 									</div>
 									<kbd className="rounded border border-border bg-muted px-2 py-1 font-mono text-xs">
 										{action.shortcut}
