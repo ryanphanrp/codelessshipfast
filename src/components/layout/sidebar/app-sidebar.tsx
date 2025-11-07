@@ -90,7 +90,7 @@ export function AppSidebar() {
 														<Link
 															className={cn(
 																"flex items-center gap-2",
-																isActive(item.url) && "bg-accent font-bold text-accent-foreground"
+																isActive(item.url) && "bg-primary/10 font-bold text-primary border-l-2 border-l-primary"
 															)}
 															href={item.url}>
 															<item.icon />
@@ -109,7 +109,7 @@ export function AppSidebar() {
 											<Link
 												className={cn(
 													"flex items-center gap-2",
-													isActive(item.url) && "bg-accent font-bold text-accent-foreground"
+													isActive(item.url) && "bg-primary/10 font-bold text-primary border-l-2 border-l-primary"
 												)}
 												href={item.url}>
 												<item.icon />
