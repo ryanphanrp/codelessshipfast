@@ -1,124 +1,165 @@
 @import "tailwindcss";
 @custom-variant dark (&:is(.dark *));
 
-@import "./themes.css";
-@import "./tailwind.css";
 @import "./customize.css";
 
-*,
-::after,
-::before,
-::backdrop,
-::file-selector-button {
-    border-color: var(--color-gray-200, currentColor);
+:root {
+    --background: oklch(0.9791 0 0);
+    --foreground: oklch(0.52 0.105 223.128);
+    --card: oklch(0.9791 0 0);
+    --card-foreground: oklch(0.52 0.105 223.128);
+    --popover: oklch(0.9791 0 0);
+    --popover-foreground: oklch(0.52 0.105 223.128);
+    --primary: oklch(0.52 0.105 223.128);
+    --primary-foreground: oklch(1 0 0);
+    --secondary: oklch(1 0 0);
+    --secondary-foreground: oklch(0.52 0.105 223.128);
+    --muted: oklch(0.8607 0 0);
+    --muted-foreground: oklch(0.52 0.105 223.128);
+    --accent: oklch(1 0 0);
+    --accent-foreground: oklch(0.52 0.105 223.128);
+    --destructive: oklch(0.629 0.1902 23.0704);
+    --destructive-foreground: oklch(1 0 0);
+    --border: oklch(0.52 0.105 223.128);
+    --input: oklch(0.52 0.105 223.128);
+    --ring: oklch(0.52 0.105 223.128);
+    --chart-1: oklch(0.52 0.105 223.128);
+    --chart-2: oklch(0.715 0.143 215.221);
+    --chart-3: oklch(0.7187 0 0);
+    --chart-4: oklch(0.9189 0 0);
+    --chart-5: oklch(0.559 0 0);
+    --sidebar: oklch(0.9791 0 0);
+    --sidebar-foreground: oklch(0.52 0.105 223.128);
+    --sidebar-primary: oklch(0.52 0.105 223.128);
+    --sidebar-primary-foreground: oklch(1 0 0);
+    --sidebar-accent: oklch(0.9401 0 0);
+    --sidebar-accent-foreground: oklch(0.52 0.105 223.128);
+    --sidebar-border: oklch(0.52 0.105 223.128);
+    --sidebar-ring: oklch(0.52 0.105 223.128);
+    --font-sans: Geist Mono, sans-serif;
+    --font-serif: Playfair Display, serif;
+    --font-mono: Geist Mono, monospace;
+    --radius: 0rem;
+    --shadow-x: 0;
+    --shadow-y: 0;
+    --shadow-blur: 0px;
+    --shadow-spread: 0px;
+    --shadow-opacity: 0;
+    --shadow-color: transparent;
+    --shadow-2xs: 0 0 0px 0px hsl(0 0% 0% / 0);
+    --shadow-xs: 0 0 0px 0px hsl(0 0% 0% / 0);
+    --shadow-sm: 0 0 0px 0px hsl(0 0% 0% / 0), 0 1px 2px -1px hsl(0 0% 0% / 0);
+    --shadow: 0 0 0px 0px hsl(0 0% 0% / 0), 0 1px 2px -1px hsl(0 0% 0% / 0);
+    --shadow-md: 0 0 0px 0px hsl(0 0% 0% / 0), 0 2px 4px -1px hsl(0 0% 0% / 0);
+    --shadow-lg: 0 0 0px 0px hsl(0 0% 0% / 0), 0 4px 6px -1px hsl(0 0% 0% / 0);
+    --shadow-xl: 0 0 0px 0px hsl(0 0% 0% / 0), 0 8px 10px -1px hsl(0 0% 0% / 0);
+    --shadow-2xl: 0 0 0px 0px hsl(0 0% 0% / 0);
+    --tracking-normal: 0em;
+    --spacing: 0.25rem;
 }
 
-body {
-    background-color: var(--background);
-    color: var(--foreground);
+.dark {
+    --background: oklch(0.2077 0.0398 265.7549);
+    --foreground: oklch(0.9299 0.0334 272.7879);
+    --card: oklch(0.2077 0.0398 265.7549);
+    --card-foreground: oklch(0.9299 0.0334 272.7879);
+    --popover: oklch(0.2077 0.0398 265.7549);
+    --popover-foreground: oklch(0.9299 0.0334 272.7879);
+    --primary: oklch(0.52 0.105 223.128);
+    --primary-foreground: oklch(1 0 0);
+    --secondary: oklch(0.302 0.056 229.695);
+    --secondary-foreground: oklch(0.9299 0.0334 272.7879);
+    --muted: oklch(0.302 0.056 229.695);
+    --muted-foreground: oklch(0.8112 0.1013 293.5712);
+    --accent: oklch(0.52 0.105 223.128);
+    --accent-foreground: oklch(0.9299 0.0334 272.7879);
+    --destructive: oklch(0.6368 0.2078 25.3313);
+    --destructive-foreground: oklch(1 0 0);
+    --border: oklch(0.52 0.105 223.128);
+    --input: oklch(0.52 0.105 223.128);
+    --ring: oklch(0.52 0.105 223.128);
+    --chart-1: oklch(0.709 0.1592 293.5412);
+    --chart-2: oklch(0.6056 0.2189 292.7172);
+    --chart-3: oklch(0.5413 0.2466 293.009);
+    --chart-4: oklch(0.4907 0.2412 292.5809);
+    --chart-5: oklch(0.432 0.2106 292.7591);
+    --sidebar: oklch(0.2077 0.0398 265.7549);
+    --sidebar-foreground: oklch(0.9299 0.0334 272.7879);
+    --sidebar-primary: oklch(0.52 0.105 223.128);
+    --sidebar-primary-foreground: oklch(1 0 0);
+    --sidebar-accent: oklch(0.609 0.126 221.723);
+    --sidebar-accent-foreground: oklch(0.9299 0.0334 272.7879);
+    --sidebar-border: oklch(0.52 0.105 223.128);
+    --sidebar-ring: oklch(0.52 0.105 223.128);
+    --font-sans: Roboto, sans-serif;
+    --font-serif: Playfair Display, serif;
+    --font-mono: Fira Code, monospace;
+    --radius: 0.625rem;
+    --shadow-x: 0;
+    --shadow-y: 0;
+    --shadow-blur: 0px;
+    --shadow-spread: 0px;
+    --shadow-opacity: 0;
+    --shadow-color: transparent;
+    --shadow-2xs: 0 0 0px 0px hsl(0 0% 0% / 0);
+    --shadow-xs: 0 0 0px 0px hsl(0 0% 0% / 0);
+    --shadow-sm: 0 0 0px 0px hsl(0 0% 0% / 0), 0 1px 2px -1px hsl(0 0% 0% / 0);
+    --shadow: 0 0 0px 0px hsl(0 0% 0% / 0), 0 1px 2px -1px hsl(0 0% 0% / 0);
+    --shadow-md: 0 0 0px 0px hsl(0 0% 0% / 0), 0 2px 4px -1px hsl(0 0% 0% / 0);
+    --shadow-lg: 0 0 0px 0px hsl(0 0% 0% / 0), 0 4px 6px -1px hsl(0 0% 0% / 0);
+    --shadow-xl: 0 0 0px 0px hsl(0 0% 0% / 0), 0 8px 10px -1px hsl(0 0% 0% / 0);
+    --shadow-2xl: 0 0 0px 0px hsl(0 0% 0% / 0);
 }
 
-@utility container {
-    margin-inline: auto;
-    padding-inline: 2rem;
-    @media (width >= --theme(--breakpoint-sm)) {
-        max-width: none;
-    }
-    @media (width >= 1400px) {
-        max-width: 1400px;
-    }
-}
+@theme inline {
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --color-card: var(--card);
+    --color-card-foreground: var(--card-foreground);
+    --color-popover: var(--popover);
+    --color-popover-foreground: var(--popover-foreground);
+    --color-primary: var(--primary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-secondary: var(--secondary);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-muted: var(--muted);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-accent: var(--accent);
+    --color-accent-foreground: var(--accent-foreground);
+    --color-destructive: var(--destructive);
+    --color-destructive-foreground: var(--destructive-foreground);
+    --color-border: var(--border);
+    --color-input: var(--input);
+    --color-ring: var(--ring);
+    --color-chart-1: var(--chart-1);
+    --color-chart-2: var(--chart-2);
+    --color-chart-3: var(--chart-3);
+    --color-chart-4: var(--chart-4);
+    --color-chart-5: var(--chart-5);
+    --color-sidebar: var(--sidebar);
+    --color-sidebar-foreground: var(--sidebar-foreground);
+    --color-sidebar-primary: var(--sidebar-primary);
+    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+    --color-sidebar-accent: var(--sidebar-accent);
+    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+    --color-sidebar-border: var(--sidebar-border);
+    --color-sidebar-ring: var(--sidebar-ring);
 
-.text-description {
-    @apply text-muted-foreground;
-}
+    --font-sans: var(--font-sans);
+    --font-mono: var(--font-mono);
+    --font-serif: var(--font-serif);
 
-.highlight-underline {
-    @apply hover:decoration-primary cursor-pointer underline underline-offset-4 hover:decoration-2;
-}
+    --radius-sm: calc(var(--radius) - 4px);
+    --radius-md: calc(var(--radius) - 2px);
+    --radius-lg: var(--radius);
+    --radius-xl: calc(var(--radius) + 4px);
 
-/* About */
-.text-write-about {
-    @apply mb-1 text-base;
-}
-
-/* Hide scrollbar for Chrome, Safari and Opera */
-.no-scrollbar::-webkit-scrollbar {
-    display: none;
-}
-
-/* Hide scrollbar for IE, Edge and Firefox */
-.no-scrollbar {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
-}
-
-/* Hide scrollbar globally for all scrollable elements (optional) */
-*::-webkit-scrollbar {
-    width: 0;
-    height: 0;
-}
-
-* {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
-}
-
-/* Developer-friendly typography utilities */
-.text-mono {
-    font-family: var(
-        --font-mono,
-        ui-monospace,
-        "Cascadia Code",
-        "Source Code Pro",
-        Menlo,
-        Consolas,
-        "DejaVu Sans Mono",
-        monospace
-    );
-}
-
-/* Keyboard key styling */
-kbd {
-    @apply inline-flex items-center justify-center  border border-border bg-muted px-2 py-1 font-mono text-xs font-medium;
-    box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.08);
-}
-
-/* Code blocks */
-code {
-    @apply bg-muted px-1.5 py-0.5 font-mono text-sm;
-}
-
-pre code {
-    @apply bg-transparent p-0;
-}
-
-/* Status badge utility */
-.status-badge {
-    @apply inline-flex items-center gap-1.5 border px-2.5 py-0.5 font-mono text-xs font-medium;
-}
-
-/* Text balance for better readability */
-.text-balance {
-    text-wrap: balance;
-}
-
-/* Improved focus states for accessibility */
-*:focus-visible {
-    @apply outline-2 outline-offset-2 outline-primary;
-}
-
-/* Better link styling */
-a {
-    @apply transition-colors;
-}
-
-/* Smooth transitions for interactive elements */
-button,
-[role="button"],
-a,
-input,
-textarea,
-select {
-    @apply transition-colors duration-200;
+    --shadow-2xs: var(--shadow-2xs);
+    --shadow-xs: var(--shadow-xs);
+    --shadow-sm: var(--shadow-sm);
+    --shadow: var(--shadow);
+    --shadow-md: var(--shadow-md);
+    --shadow-lg: var(--shadow-lg);
+    --shadow-xl: var(--shadow-xl);
+    --shadow-2xl: var(--shadow-2xl);
 }
