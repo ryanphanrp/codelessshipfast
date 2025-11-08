@@ -137,7 +137,7 @@ export function StatsPanel({ input, error, isProcessing }: StatsPanelProps) {
 				<Card>
 					<CardContent className="pt-6">
 						<div className="text-center">
-							<div className="font-bold text-2xl text-blue-600">{stats.totalNodes}</div>
+							<div className="font-bold text-2xl text-primary">{stats.totalNodes}</div>
 							<p className="text-muted-foreground text-xs">Total Nodes</p>
 						</div>
 					</CardContent>

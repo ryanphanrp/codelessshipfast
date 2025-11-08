@@ -142,7 +142,7 @@ export default function JsonViewer() {
 						<div className="overflow-hidden  border bg-card ">
 							<div className="flex flex-col gap-4 border-b bg-muted/30 p-4 sm:flex-row sm:items-center sm:justify-between sm:gap-2 sm:p-4">
 								<div className="flex items-center gap-2">
-									<div className="h-2 w-2  bg-blue-500" />
+									<div className="h-2 w-2  bg-primary/50" />
 									<h3 className="font-semibold text-base text-foreground">JSON Input</h3>
 								</div>
 								<div className="flex flex-wrap items-center gap-2">

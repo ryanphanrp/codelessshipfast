@@ -67,10 +67,10 @@ function HomePage() {
 						</CardContent>
 					</Card>
 
-					<Card className="group relative  border border-l-4 border-l-cyan-500 transition-colors hover:border-cyan-500/50">
+					<Card className="group relative  border border-l-4 border-l-primary transition-colors hover:border-primary/50">
 						<CardContent className="pt-6">
-							<div className="mb-4 flex size-14 items-center justify-center  border border-cyan-500/20 bg-cyan-500/5 transition-colors group-hover:bg-cyan-500/10">
-								<Palette className="size-7 text-cyan-600" />
+							<div className="mb-4 flex size-14 items-center justify-center  border border-primary/20 bg-primary/5 transition-colors group-hover:bg-primary/10">
+								<Palette className="size-7 text-primary" />
 							</div>
 							<CardTitle className="mb-2 font-semibold">Modern UI</CardTitle>
 							<CardDescription className="leading-relaxed">
@@ -103,10 +103,10 @@ function HomePage() {
 						</CardContent>
 					</Card>
 
-					<Card className="group relative  border border-l-4 border-l-blue-500 transition-colors hover:border-blue-500/50">
+					<Card className="group relative  border border-l-4 border-l-primary transition-colors hover:border-primary/50">
 						<CardContent className="pt-6">
-							<div className="mb-4 flex size-14 items-center justify-center  border border-blue-500/20 bg-blue-500/5 transition-colors group-hover:bg-blue-500/10">
-								<Shield className="size-7 text-blue-600" />
+							<div className="mb-4 flex size-14 items-center justify-center  border border-primary/20 bg-primary/5 transition-colors group-hover:bg-primary/10">
+								<Shield className="size-7 text-primary" />
 							</div>
 							<CardTitle className="mb-2 font-semibold">Type Safe</CardTitle>
 							<CardDescription className="leading-relaxed">

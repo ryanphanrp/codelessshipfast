@@ -48,7 +48,7 @@ export function EnvVariableItem({ envKey, envValue }: EnvVariableItemProps) {
 			<div className="group flex items-center gap-2  border bg-card p-3 transition-colors hover:bg-accent/50">
 				{/* Key-Value Display */}
 				<div className="flex-1 font-mono text-sm">
-					<span className="font-semibold text-blue-600 dark:text-blue-400">{envKey}</span>
+					<span className="font-semibold text-primary dark:text-primary">{envKey}</span>
 					<span className="mx-2 text-muted-foreground">=</span>
 					<span className="text-green-600 dark:text-green-400">{envValue || '""'}</span>
 				</div>
@@ -62,7 +62,7 @@ export function EnvVariableItem({ envKey, envValue }: EnvVariableItemProps) {
 								variant="outline"
 								size="sm"
 								onClick={() => handleCopy("key")}
-								className="h-7 w-7 p-0 text-blue-600 hover:bg-blue-100 dark:text-blue-400 dark:hover:bg-blue-900/30">
+								className="h-7 w-7 p-0 text-primary hover:bg-primary/10 dark:text-primary dark:hover:bg-primary/30">
 								{copiedItem === "key" ? (
 									<Check className="h-3.5 w-3.5" />
 								) : (
