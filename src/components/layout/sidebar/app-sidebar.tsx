@@ -71,9 +71,9 @@ export function AppSidebar() {
     <Sidebar
       variant="inset"
       collapsible="icon"
-      className="z-0 block border-sidebar-border border-r bg-sidebar-background"
+      className="z-0 p-0 block border-sidebar-border border-r bg-white"
     >
-      <SidebarContent>
+      <SidebarContent className="py-10">
         <SidebarGroup>
           <SidebarGroupLabel
             className={cn("py-10", isCollapsed && "flex justify-center p-2")}
