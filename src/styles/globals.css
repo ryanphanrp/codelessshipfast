@@ -10,98 +10,107 @@
 ::before,
 ::backdrop,
 ::file-selector-button {
-	border-color: var(--color-gray-200, currentColor);
+    border-color: var(--color-gray-200, currentColor);
 }
 
 body {
-	background-color: var(--background);
-	color: var(--foreground);
+    background-color: var(--background);
+    color: var(--foreground);
 }
 
 @utility container {
-	margin-inline: auto;
-	padding-inline: 2rem;
-	@media (width >= --theme(--breakpoint-sm)) {
-		max-width: none;
-	}
-	@media (width >= 1400px) {
-		max-width: 1400px;
-	}
+    margin-inline: auto;
+    padding-inline: 2rem;
+    @media (width >= --theme(--breakpoint-sm)) {
+        max-width: none;
+    }
+    @media (width >= 1400px) {
+        max-width: 1400px;
+    }
 }
 
 .text-description {
-	@apply text-muted-foreground;
+    @apply text-muted-foreground;
 }
 
 .highlight-underline {
-	@apply hover:decoration-primary cursor-pointer underline underline-offset-4 hover:decoration-2;
+    @apply hover:decoration-primary cursor-pointer underline underline-offset-4 hover:decoration-2;
 }
 
 /* About */
 .text-write-about {
-	@apply mb-1 text-base;
+    @apply mb-1 text-base;
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
 .no-scrollbar::-webkit-scrollbar {
-	display: none;
+    display: none;
 }
 
 /* Hide scrollbar for IE, Edge and Firefox */
 .no-scrollbar {
-	-ms-overflow-style: none; /* IE and Edge */
-	scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
 }
 
 /* Hide scrollbar globally for all scrollable elements (optional) */
 *::-webkit-scrollbar {
-	width: 0;
-	height: 0;
+    width: 0;
+    height: 0;
 }
 
 * {
-	-ms-overflow-style: none; /* IE and Edge */
-	scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
 }
 
 /* Developer-friendly typography utilities */
 .text-mono {
-	font-family: var(--font-mono, ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace);
+    font-family: var(
+        --font-mono,
+        ui-monospace,
+        "Cascadia Code",
+        "Source Code Pro",
+        Menlo,
+        Consolas,
+        "DejaVu Sans Mono",
+        monospace
+    );
 }
 
 /* Keyboard key styling */
 kbd {
-	@apply inline-flex items-center justify-center  border border-border bg-muted px-2 py-1 font-mono text-xs font-medium;
-	box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.08);
+    @apply inline-flex items-center justify-center  border border-border bg-muted px-2 py-1 font-mono text-xs font-medium;
+    box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.08);
 }
 
 /* Code blocks */
 code {
-	@apply  bg-muted px-1.5 py-0.5 font-mono text-sm;
+    @apply bg-muted px-1.5 py-0.5 font-mono text-sm;
 }
 
 pre code {
-	@apply bg-transparent p-0;
+    @apply bg-transparent p-0;
 }
 
 /* Status badge utility */
 .status-badge {
-	@apply inline-flex items-center gap-1.5 border px-2.5 py-0.5 font-mono text-xs font-medium;
+    @apply inline-flex items-center gap-1.5 border px-2.5 py-0.5 font-mono text-xs font-medium;
 }
 
 /* Text balance for better readability */
 .text-balance {
-	text-wrap: balance;
+    text-wrap: balance;
 }
 
 /* Improved focus states for accessibility */
 *:focus-visible {
-	@apply outline-2 outline-offset-2 outline-primary;
+    @apply outline-2 outline-offset-2 outline-primary;
 }
 
 /* Better link styling */
 a {
-	@apply transition-colors;
+    @apply transition-colors;
 }
 
 /* Smooth transitions for interactive elements */
@@ -111,5 +120,5 @@ a,
 input,
 textarea,
 select {
-	@apply transition-colors duration-200;
+    @apply transition-colors duration-200;
 }
