@@ -33,9 +33,9 @@
     --sidebar-accent-foreground: oklch(0.52 0.105 223.128);
     --sidebar-border: oklch(0.52 0.105 223.128);
     --sidebar-ring: oklch(0.52 0.105 223.128);
-    --font-sans: Geist Mono, sans-serif;
+    --font-sans: Geist Sans, ui-sans-serif, sans-serif;
     --font-serif: Playfair Display, serif;
-    --font-mono: Geist Mono, monospace;
+    --font-mono: Fira Code, ui-monospace, monospace;
     --radius: 0rem;
     --shadow-x: 0;
     --shadow-y: 1px;
