@@ -169,6 +169,7 @@ export {
 } from "./select"
 export { Switch } from "./switch"
 export { Textarea } from "./textarea"
+export { TextareaWithActions } from "./textarea-with-actions"
 
 // Feedback Components
 export { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "./empty"

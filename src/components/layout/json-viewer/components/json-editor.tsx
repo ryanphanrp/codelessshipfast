@@ -1,9 +1,12 @@
 "use client"
 
 import { cn } from "@/lib/utils"
+import { useClipboard } from "@/hooks/use-clipboard"
 import React, { useCallback, useRef, useEffect, useState } from "react"
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
 import { oneDark, oneLight } from "react-syntax-highlighter/dist/esm/styles/prism"
+import { Copy, ClipboardPaste, Check } from "lucide-react"
+import { Button } from "@/components/hexta-ui"
 
 interface JsonEditorProps {
 	value: string
@@ -32,6 +35,8 @@ export function JsonEditor({
 }: JsonEditorProps) {
 	const textareaRef = useRef<HTMLTextAreaElement>(null)
 	const [isFocused, setIsFocused] = useState(false)
+	const { copyToClipboard, pasteFromClipboard, state } = useClipboard()
+	const [showCopied, setShowCopied] = useState(false)
 
 	// Auto-resize textarea to match content
 	const adjustTextareaHeight = useCallback(() => {
@@ -130,6 +135,34 @@ export function JsonEditor({
 		}
 	}, [value])
 
+	const handleCopy = async (e: React.MouseEvent) => {
+		e.preventDefault()
+		e.stopPropagation()
+
+		const textToCopy = String(value || "")
+		if (!textToCopy.trim()) return
+
+		await copyToClipboard(textToCopy)
+
+		if (state.success) {
+			setShowCopied(true)
+			setTimeout(() => setShowCopied(false), 2000)
+		}
+	}
+
+	const handlePaste = async (e: React.MouseEvent) => {
+		e.preventDefault()
+		e.stopPropagation()
+
+		if (readOnly || disabled) return
+
+		const pastedText = await pasteFromClipboard()
+
+		if (pastedText) {
+			onChange(pastedText)
+		}
+	}
+
 	const syntaxHighlighterStyle = theme === "dark" ? oneDark : oneLight
 
 	return (
@@ -213,6 +246,40 @@ export function JsonEditor({
 					{(navigator.platform.includes("Mac") ? "Cmd" : "Ctrl") + "+F to format"}
 				</div>
 			</div>
+
+			{/* Copy/Paste buttons */}
+			{(value || (!readOnly && !disabled)) && (
+				<div className="absolute top-2 right-2 z-20 flex gap-1">
+					{!readOnly && !disabled && (
+						<Button
+							type="button"
+							variant="outline"
+							size="icon"
+							className="h-7 w-7 bg-background/95 shadow-sm hover:bg-background"
+							onClick={handlePaste}
+							title="Paste from clipboard"
+						>
+							<ClipboardPaste className="h-3.5 w-3.5" />
+						</Button>
+					)}
+					{value && (
+						<Button
+							type="button"
+							variant="outline"
+							size="icon"
+							className="h-7 w-7 bg-background/95 shadow-sm hover:bg-background"
+							onClick={handleCopy}
+							title={showCopied ? "Copied!" : "Copy to clipboard"}
+						>
+							{showCopied ? (
+								<Check className="h-3.5 w-3.5 text-green-600" />
+							) : (
+								<Copy className="h-3.5 w-3.5" />
+							)}
+						</Button>
+					)}
+				</div>
+			)}
 		</div>
 	)
 }
