@@ -1,6 +1,6 @@
 "use client"
 
-import { Button } from "@/components/hexta-ui"
+import { Button, TextareaWithActions } from "@/components/hexta-ui"
 import { Check, Copy, X } from "lucide-react"
 import { useCallback, useEffect, useRef, useState } from "react"
 
@@ -219,7 +219,7 @@ export function K8sModal({ isOpen, onClose, output, error, isConverting }: K8sMo
 								</Button>
 							</div>
 
-							<textarea
+							<TextareaWithActions
 								ref={textareaRef}
 								id="k8s-output"
 								value={editableOutput}

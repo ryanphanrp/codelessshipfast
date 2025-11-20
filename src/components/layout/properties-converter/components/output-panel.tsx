@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/hexta-ui";
-import { Textarea } from "@/components/hexta-ui";
+import { TextareaWithActions } from "@/components/hexta-ui";
 import { ScrollArea } from "@/components/hexta-ui";
 import type { EnvVariable } from "@/types";
 import { FileText } from "lucide-react";
@@ -88,10 +88,11 @@ export const OutputPanel = memo(function OutputPanel({
                 </ScrollArea>
               )}
             {displayMode === "textarea" && (
-              <Textarea
+              <TextareaWithActions
                 value={content}
                 className="min-h-[350px] bg-muted/50 font-mono text-sm"
                 readOnly
+                showPaste={false}
               />
             )}
           </>
