@@ -17,6 +17,9 @@ import {
   Zap,
   ArrowRight,
   Keyboard,
+  History,
+  Copy,
+  Type,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -72,6 +75,42 @@ const keyboardShortcuts = [
   { key: "Ctrl+C", action: "Copy output" },
 ];
 
+const changelog = [
+  {
+    version: "0.2.0",
+    date: "2025-01-20",
+    changes: [
+      {
+        type: "feature",
+        icon: Copy,
+        description: "Added floating copy/paste buttons to all textarea components",
+        iconColor: "text-green-600",
+        iconBg: "border-green-500/20 bg-green-500/5",
+      },
+      {
+        type: "improvement",
+        icon: Type,
+        description: "Changed font from Geist Mono to Geist Sans for better readability",
+        iconColor: "text-blue-600",
+        iconBg: "border-blue-500/20 bg-blue-500/5",
+      },
+    ],
+  },
+  {
+    version: "0.1.0",
+    date: "2025-01-15",
+    changes: [
+      {
+        type: "feature",
+        icon: Zap,
+        description: "Initial release with JSON Viewer, SQL Placeholder, and more",
+        iconColor: "text-primary",
+        iconBg: "border-primary/20 bg-primary/5",
+      },
+    ],
+  },
+];
+
 const Dashboard = () => {
   return (
     <div className="container mx-auto max-w-7xl space-y-8 p-6">
@@ -86,7 +125,7 @@ const Dashboard = () => {
             className="border italic bg-transparent border-primary text-primary"
           >
             <Zap className="mr-1 size-2" />
-            v1.0.0
+            v0.2.0
           </Badge>
         </div>
         <p className="text-muted-foreground text-lg">
@@ -233,6 +272,60 @@ const Dashboard = () => {
                 Preferences are saved automatically.
               </p>
             </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Changelog */}
+      <Card className="border-2 border-primary">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2 text-xl">
+            <div className="flex size-8 items-center justify-center  border border-primary/20 bg-primary/5">
+              <History className="size-4 text-primary" />
+            </div>
+            What's New
+          </CardTitle>
+          <CardDescription>Recent updates and improvements</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-6">
+            {changelog.map((release, releaseIndex) => (
+              <div
+                key={release.version}
+                className={releaseIndex !== 0 ? "border-t border-border pt-6" : ""}
+              >
+                <div className="mb-3 flex items-center gap-2">
+                  <Badge
+                    variant="secondary"
+                    className="border bg-primary/10 border-primary text-primary"
+                  >
+                    v{release.version}
+                  </Badge>
+                  <span className="text-muted-foreground text-xs">
+                    {release.date}
+                  </span>
+                </div>
+                <div className="space-y-2">
+                  {release.changes.map((change, changeIndex) => (
+                    <div
+                      key={changeIndex}
+                      className="flex items-start gap-3  border border-border/50 p-3"
+                    >
+                      <div
+                        className={`flex size-8 shrink-0 items-center justify-center  border ${change.iconBg}`}
+                      >
+                        <change.icon className={`size-4 ${change.iconColor}`} />
+                      </div>
+                      <div className="flex-1">
+                        <p className="text-sm leading-relaxed">
+                          {change.description}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
         </CardContent>
       </Card>
