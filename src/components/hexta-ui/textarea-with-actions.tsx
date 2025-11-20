@@ -89,7 +89,7 @@ const TextareaWithActions = React.forwardRef<
 							type="button"
 							variant="outline"
 							size="icon"
-							className="h-7 w-7 bg-background/95 shadow-sm hover:bg-background"
+							className="h-7 w-7 cursor-pointer bg-background/95 shadow-sm hover:bg-primary hover:text-primary-foreground"
 							onClick={handlePaste}
 							title="Paste from clipboard"
 						>
@@ -101,7 +101,7 @@ const TextareaWithActions = React.forwardRef<
 							type="button"
 							variant="outline"
 							size="icon"
-							className="h-7 w-7 bg-background/95 shadow-sm hover:bg-background"
+							className="h-7 w-7 cursor-pointer bg-background/95 shadow-sm hover:bg-primary hover:text-primary-foreground"
 							onClick={handleCopy}
 							title={showCopied ? "Copied!" : "Copy to clipboard"}
 						>
