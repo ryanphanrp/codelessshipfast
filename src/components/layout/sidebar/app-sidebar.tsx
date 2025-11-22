@@ -4,6 +4,7 @@ import {
   ThemeSwitcher,
   ThemeSwitcherCompact,
 } from "@/components/provider/theme-switcher";
+import { ColorThemeSwitcher } from "@/components/provider/color-theme-switcher";
 import {
   Sidebar,
   SidebarContent,
@@ -144,15 +145,29 @@ export function AppSidebar() {
       <SidebarFooter>
         <div
           className={cn(
-            "flex items-center gap-2 px-2 py-3",
-            isCollapsed ? "justify-center" : "flex-col",
+            "flex items-center gap-3 px-2 py-3",
+            isCollapsed ? "justify-center flex-col" : "flex-col",
           )}
         >
+          {/* Color Theme Switcher */}
+          <div className={cn("w-full", isCollapsed ? "" : "px-2")}>
+            {!isCollapsed && (
+              <p className="mb-2 text-xs text-muted-foreground font-medium">
+                Color Theme
+              </p>
+            )}
+            <ColorThemeSwitcher compact={isCollapsed} />
+          </div>
+
+          {/* Divider */}
+          {!isCollapsed && (
+            <div className="w-full border-t border-border" />
+          )}
+
+          {/* Dark/Light Mode Switcher */}
           {isCollapsed ? (
-            // Show only the switch when collapsed
             <ThemeSwitcherCompact />
           ) : (
-            // Show full theme switcher when expanded
             <ThemeSwitcher className="justify-center" />
           )}
         </div>
