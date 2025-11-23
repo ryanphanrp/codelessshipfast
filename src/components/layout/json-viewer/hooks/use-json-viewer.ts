@@ -1,13 +1,8 @@
-import type { JsonViewerMode } from "@/types"
-import { useCallback, useEffect, useState } from "react"
-import type { JsonNode, JsonValidationResult } from "../types"
-import {
-	jsonToTree,
-	minifyJson,
-	prettyPrintJson,
-	toggleTreeNode,
-	validateJson
-} from "../utils/json-utils"
+import { useCallback, useState } from "react"
+import type { JsonNode } from "../types"
+import { jsonToTree, prettyPrintJson, toggleTreeNode } from "../utils/json-utils"
+
+type JsonViewerMode = "pretty-print" | "tree-view"
 
 export function useJsonViewer() {
 	const [mode, setMode] = useState<JsonViewerMode>("pretty-print")
@@ -15,21 +10,12 @@ export function useJsonViewer() {
 	const [output, setOutput] = useState("")
 	const [error, setError] = useState<string | null>(null)
 	const [isProcessing, setIsProcessing] = useState(false)
-	const [validationResult, setValidationResult] = useState<JsonValidationResult | undefined>()
 	const [treeData, setTreeData] = useState<JsonNode[] | undefined>()
 
 	const clearInput = useCallback(() => {
 		setInput("")
 		setOutput("")
 		setError(null)
-		setValidationResult(undefined)
-		setTreeData(undefined)
-	}, [])
-
-	const clearOutput = useCallback(() => {
-		setOutput("")
-		setError(null)
-		setValidationResult(undefined)
 		setTreeData(undefined)
 	}, [])
 
@@ -45,27 +31,15 @@ export function useJsonViewer() {
 		try {
 			let result = ""
 			let treeResult: JsonNode[] | undefined
-			let validation: JsonValidationResult | undefined
 
 			switch (mode) {
 				case "pretty-print":
 					result = prettyPrintJson(input)
 					break
 
-				case "minify":
-					result = minifyJson(input)
-					break
-
 				case "tree-view":
 					treeResult = jsonToTree(input)
 					result = "Tree view generated successfully"
-					break
-
-				case "validate":
-					validation = validateJson(input)
-					result = validation.isValid
-						? "JSON is valid"
-						: `JSON is invalid: ${validation.errors[0]?.message || "Unknown error"}`
 					break
 
 				default:
@@ -74,13 +48,11 @@ export function useJsonViewer() {
 
 			setOutput(result)
 			setTreeData(treeResult)
-			setValidationResult(validation)
 		} catch (err) {
 			const errorMessage = err instanceof Error ? err.message : "Processing failed"
 			setError(errorMessage)
 			setOutput("")
 			setTreeData(undefined)
-			setValidationResult(undefined)
 		} finally {
 			setIsProcessing(false)
 		}
@@ -95,29 +67,16 @@ export function useJsonViewer() {
 		[treeData]
 	)
 
-	// Auto-process for validation mode (real-time feedback)
-	useEffect(() => {
-		if (mode === "validate" && input.trim()) {
-			const timeoutId = setTimeout(() => {
-				processJson()
-			}, 500) // Debounce for 500ms
-
-			return () => clearTimeout(timeoutId)
-		}
-	}, [input, mode, processJson])
-
 	return {
 		mode,
 		input,
 		output,
 		error,
 		isProcessing,
-		validationResult,
 		treeData,
 		setInput,
 		setMode,
 		clearInput,
-		clearOutput,
 		processJson,
 		toggleNode
 	}
