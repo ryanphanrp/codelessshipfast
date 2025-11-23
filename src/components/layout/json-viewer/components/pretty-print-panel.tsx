@@ -97,7 +97,7 @@ export function PrettyPrintPanel({ input, output, error, isProcessing }: PrettyP
 					</div>
 				) : useVirtualization ? (
 					// Virtualized list for large JSON
-					<div className="max-h-[60vh] border bg-gray-50">
+					<div className="max-h-[60vh] overflow-auto border bg-gray-50">
 						<List
 							defaultHeight={Math.min(600, window.innerHeight * 0.6)}
 							rowCount={lines.length}
@@ -106,8 +106,8 @@ export function PrettyPrintPanel({ input, output, error, isProcessing }: PrettyP
 							rowProps={{ lines }}
 							rowComponent={({ index, lines: rowLines }) => (
 								<div className="flex border-b border-gray-100 px-3 py-0.5 hover:bg-gray-100">
-									<span className="mr-4 w-12 text-right text-gray-400">{index + 1}</span>
-									<span className="flex-1 whitespace-pre text-gray-900">{rowLines[index]}</span>
+									<span className="mr-4 w-12 flex-shrink-0 text-right text-gray-400">{index + 1}</span>
+									<span className="whitespace-pre text-gray-900">{rowLines[index]}</span>
 								</div>
 							)}
 						/>
@@ -118,8 +118,8 @@ export function PrettyPrintPanel({ input, output, error, isProcessing }: PrettyP
 						<pre className="p-3 font-mono text-sm">
 							{lines.map((line, index) => (
 								<div key={index} className="flex hover:bg-gray-100">
-									<span className="mr-4 w-12 text-right text-gray-400">{index + 1}</span>
-									<span className="flex-1 whitespace-pre text-gray-900">{line}</span>
+									<span className="mr-4 w-12 flex-shrink-0 text-right text-gray-400">{index + 1}</span>
+									<span className="whitespace-pre text-gray-900">{line}</span>
 								</div>
 							))}
 						</pre>
