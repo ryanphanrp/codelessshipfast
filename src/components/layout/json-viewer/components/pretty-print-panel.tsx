@@ -97,9 +97,9 @@ export function PrettyPrintPanel({ input, output, error, isProcessing }: PrettyP
 					</div>
 				) : useVirtualization ? (
 					// Virtualized list for large JSON
-					<div className="border bg-gray-50">
+					<div className="max-h-[60vh] border bg-gray-50">
 						<List
-							defaultHeight={600}
+							defaultHeight={Math.min(600, window.innerHeight * 0.6)}
 							rowCount={lines.length}
 							rowHeight={20}
 							className="font-mono text-sm"
@@ -114,7 +114,7 @@ export function PrettyPrintPanel({ input, output, error, isProcessing }: PrettyP
 					</div>
 				) : (
 					// Regular display for smaller JSON
-					<div className="overflow-x-auto border bg-gray-50">
+					<div className="max-h-[60vh] overflow-auto border bg-gray-50">
 						<pre className="p-3 font-mono text-sm">
 							{lines.map((line, index) => (
 								<div key={index} className="flex hover:bg-gray-100">
