@@ -5,6 +5,7 @@ import {
   ThemeSwitcherCompact,
 } from "@/components/provider/theme-switcher";
 import { ColorThemeSwitcher } from "@/components/provider/color-theme-switcher";
+import { FontThemeSwitcher } from "@/components/provider/font-theme-switcher";
 import {
   Sidebar,
   SidebarContent,
@@ -157,6 +158,21 @@ export function AppSidebar() {
               </p>
             )}
             <ColorThemeSwitcher compact={isCollapsed} />
+          </div>
+
+          {/* Divider */}
+          {!isCollapsed && (
+            <div className="w-full border-t border-border" />
+          )}
+
+          {/* Font Theme Switcher */}
+          <div className={cn("w-full", isCollapsed ? "" : "px-2")}>
+            {!isCollapsed && (
+              <p className="mb-2 text-xs text-muted-foreground font-medium">
+                Font Family
+              </p>
+            )}
+            <FontThemeSwitcher compact={isCollapsed} />
           </div>
 
           {/* Divider */}
