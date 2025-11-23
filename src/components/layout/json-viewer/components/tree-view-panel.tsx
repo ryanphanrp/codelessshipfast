@@ -224,20 +224,18 @@ export function TreeViewPanel({ treeData, onToggleNode }: TreeViewPanelProps) {
 			<div className="p-4">
 				{useVirtualization ? (
 					// Virtualized tree for large datasets
-					<div className="max-h-[60vh]">
-						<List
-							defaultHeight={Math.min(600, window.innerHeight * 0.6)}
-							rowCount={visibleNodes.length}
-							rowHeight={32}
-							rowProps={{ visibleNodes }}
-							rowComponent={({ index, visibleNodes: nodes }) => (
-								<div className="select-none">{renderNode(nodes[index], index)}</div>
-							)}
-						/>
-					</div>
+					<List
+						defaultHeight={600}
+						rowCount={visibleNodes.length}
+						rowHeight={32}
+						rowProps={{ visibleNodes }}
+						rowComponent={({ index, visibleNodes: nodes }) => (
+							<div className="select-none">{renderNode(nodes[index], index)}</div>
+						)}
+					/>
 				) : (
 					// Regular tree view for smaller datasets
-					<div className="max-h-[60vh] space-y-1 overflow-auto">
+					<div className="space-y-1">
 						{treeData.map((node, index) => (
 							<TreeNode key={`root-${index}`} node={node} onToggle={onToggleNode || (() => {})} />
 						))}
